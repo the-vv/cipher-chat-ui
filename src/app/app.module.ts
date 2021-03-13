@@ -1,18 +1,47 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// Other imports
+import { AvatarModule } from 'primeng/avatar';
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { ButtonModule } from 'primeng/button';
+import {RippleModule} from 'primeng/ripple';
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { LoginServiceService } from './services/login-service.service';
+import { NotFoundComponent } from './not-found/not-found.component'
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomePageComponent,
+    LoginPageComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    AvatarModule,
+    CardModule,
+    InputTextModule,
+    PasswordModule,
+    ButtonModule,
+    RippleModule
   ],
-  providers: [],
+  providers: [
+    LoginServiceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

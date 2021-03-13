@@ -1,0 +1,78 @@
+<div class="container-fluid main d-flex align-items-center justify-content-center" *ngIf="mode">
+    <div class="">
+        <p-card>
+            <div class="text-center">
+                <p-avatar class="" icon="pi pi-user" styleClass="" class="" size="xlarge" shape="circle"></p-avatar>
+            </div>
+            <div class="display-6 text-center mb-3">Login</div>
+            <form action="" class="mx-lg-5 mx-3 p-lg-3">
+                <div class="mb-3">
+                    <label for="" class="h6">Email</label><br>
+                    <input type="text" id="inputtext" pInputText class="normal-input col-12" placeholder="Email">
+                </div>
+                <div class="mb-3">
+                    <label for="" class="h6">Password</label><br>
+                    <input p-password pInputText [toggleMask]="true" [feedback]="false" class="col-lg-12"
+                        placeholder="Password">
+                </div>
+                <div class="text-center">
+                    <p-button pRipple type="button" label="Login" styleClass="p-button-sm p-button-outlined px-4" class=""></p-button>
+                </div>
+            </form>
+            <div class="socialLogin text-center">
+                <div class="mb-2 h6">Or Continue With</div>
+                <button pButton pRipple type="button" icon="pi pi-google"
+                    class="bg-danger border-0 p-button-rounded p-4 mx-3"></button>
+                <button pButton pRipple type="button" icon="pi pi-facebook"
+                    class="bg-primary border-0 p-button-rounded p-4 mx-3"></button>
+            </div>
+            <hr>
+            <div class="text-center">
+                Don't have an account? <button class="btn btn-link p-0 m-0" (click)="mode=!mode">Create One</button>
+            </div>
+        </p-card>
+        <div class="text-center"></div>
+    </div>
+</div>
+
+<div class="container-fluid main d-flex align-items-center justify-content-center" *ngIf="!mode">
+    <div class="my-4">
+        <p-card>
+            <div class="display-6 text-center mb-2">Sign Up</div>
+            <form action="" class="mx-lg-5 mx-3 p-lg-3">
+                <div class="mb-3">
+                    <label for="" class="h6">Full Name</label><br>
+                    <input type="text" id="inputtext" pInputText class="normal-input col-12">
+                </div>
+                <div class="mb-3">
+                    <label for="" class="h6">Email</label><br>
+                    <input type="text" id="inputtext" pInputText class="normal-input col-12">
+                </div>
+                <div class="mb-3">
+                    <label for="" class="h6">Password</label><br>
+                    <p-password [toggleMask]="true" class="col-12" placeholder="Username"></p-password>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="h6">Confirm Password</label><br>
+                    <p-password [toggleMask]="true" [feedback]="false" class="col-12" placeholder="Username">
+                    </p-password>
+                </div>
+                <div class="text-center">
+                    <p-button pRipple type="button" label="Sign Up" styleClass="p-button-sm p-button-outlined px-4" class=""></p-button>
+                </div>
+            </form>
+            <div class="socialLogin text-center">
+                <div class="mb-2 h6">Or Continue With</div>
+                <button pButton pRipple type="button" icon="pi pi-google"
+                    class="bg-danger border-0 p-button-rounded p-4 mx-3"></button>
+                <button pButton pRipple type="button" icon="pi pi-facebook"
+                    class="bg-primary border-0 p-button-rounded p-4 mx-3"></button>
+            </div>
+            <hr>
+            <div class="text-center">
+                Already have an account?<br><button class="btn btn-link p-0 m-0" (click)="mode=!mode">Log in</button>
+            </div>
+        </p-card>
+        <div class="text-center"></div>
+    </div>
+</div>

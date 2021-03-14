@@ -1,25 +1,27 @@
 <div class="container-fluid main d-flex align-items-center justify-content-center" *ngIf="mode">
-    <div class="">
+    <div class="row">
         <p-card>
             <div class="text-center">
                 <p-avatar class="" icon="pi pi-user" styleClass="" class="" size="xlarge" shape="circle"></p-avatar>
             </div>
             <div class="display-6 text-center mb-3">Login</div>
-            <form action="" class="mx-lg-5 mx-3 p-lg-3">
-                <div class="mb-3">
+            <form action="" class="col-12"  [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                <div class="mb-3 p-1">
                     <label for="" class="h6">Email</label><br>
-                    <input type="text" id="inputtext" pInputText class="normal-input col-12" placeholder="Email">
+                    <input formControlName="email" type="text" id="inputtext" pInputText class="normal-input col-12" placeholder="Email"><br>
+                    <label for="" class="small text-danger" *ngIf="loginForm.touched && lf.email.errors && lf.email.errors.required">Email is equired</label>
+                    <label for="" class="small text-danger" *ngIf="loginForm.touched && lf.email.errors && lf.email.errors.email">Email is invalid</label>
                 </div>
                 <div class="mb-3">
                     <label for="" class="h6">Password</label><br>
-                    <input p-password pInputText [toggleMask]="true" [feedback]="false" class="col-lg-12"
+                    <input formControlName="password" p-password pInputText  [toggleMask]="true" [feedback]="false" class="col-12 normal-input"
                         placeholder="Password">
                 </div>
                 <div class="text-center">
-                    <p-button pRipple type="button" label="Login" styleClass="p-button-sm p-button-outlined px-4" class=""></p-button>
+                    <p-button (click)="onLogin()" pRipple type="button" label="Login" styleClass="p-button-sm p-button-outlined px-4" class=""></p-button>
                 </div>
             </form>
-            <div class="socialLogin text-center">
+            <div class="socialLogin text-center mt-3">
                 <div class="mb-2 h6">Or Continue With</div>
                 <button pButton pRipple type="button" icon="pi pi-google"
                     class="bg-danger border-0 p-button-rounded p-4 mx-3"></button>
@@ -36,32 +38,37 @@
 </div>
 
 <div class="container-fluid main d-flex align-items-center justify-content-center" *ngIf="!mode">
-    <div class="my-4">
+    <div class="row">
         <p-card>
-            <div class="display-6 text-center mb-2">Sign Up</div>
-            <form action="" class="mx-lg-5 mx-3 p-lg-3">
-                <div class="mb-3">
+            <div class="display-6 text-center mb-3">Sign Up</div>
+            <form action="" class="col-12"  [formGroup]="loginForm" (ngSubmit)="onSignup()">
+                <div class="mb-3 p-1">
                     <label for="" class="h6">Full Name</label><br>
-                    <input type="text" id="inputtext" pInputText class="normal-input col-12">
+                    <input formControlName="email" type="text" id="inputtext" pInputText class="normal-input col-12" placeholder="Email"><br>
+                    <label for="" class="small text-danger" *ngIf="loginForm.touched && lf.email.errors && lf.email.errors.required">Email is equired</label>
+                    <label for="" class="small text-danger" *ngIf="loginForm.touched && lf.email.errors && lf.email.errors.email">Email is invalid</label>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 p-1">
                     <label for="" class="h6">Email</label><br>
-                    <input type="text" id="inputtext" pInputText class="normal-input col-12">
+                    <input formControlName="email" type="text" id="inputtext" pInputText class="normal-input col-12" placeholder="Email"><br>
+                    <label for="" class="small text-danger" *ngIf="loginForm.touched && lf.email.errors && lf.email.errors.required">Email is equired</label>
+                    <label for="" class="small text-danger" *ngIf="loginForm.touched && lf.email.errors && lf.email.errors.email">Email is invalid</label>
                 </div>
                 <div class="mb-3">
                     <label for="" class="h6">Password</label><br>
-                    <p-password [toggleMask]="true" class="col-12" placeholder="Username"></p-password>
+                    <input formControlName="password" p-password pInputText  [toggleMask]="true" [feedback]="false" class="col-12 normal-input"
+                        placeholder="Password">
                 </div>
                 <div class="mb-3">
                     <label for="" class="h6">Confirm Password</label><br>
-                    <p-password [toggleMask]="true" [feedback]="false" class="col-12" placeholder="Username">
-                    </p-password>
+                    <input formControlName="password" p-password pInputText  [toggleMask]="true" [feedback]="false" class="col-12 normal-input"
+                        placeholder="Password">
                 </div>
                 <div class="text-center">
-                    <p-button pRipple type="button" label="Sign Up" styleClass="p-button-sm p-button-outlined px-4" class=""></p-button>
+                    <p-button (click)="onSignup()" pRipple type="button" label="SignUp" styleClass="p-button-sm p-button-outlined px-4" class=""></p-button>
                 </div>
             </form>
-            <div class="socialLogin text-center">
+            <div class="socialLogin text-center mt-3">
                 <div class="mb-2 h6">Or Continue With</div>
                 <button pButton pRipple type="button" icon="pi pi-google"
                     class="bg-danger border-0 p-button-rounded p-4 mx-3"></button>
@@ -70,7 +77,7 @@
             </div>
             <hr>
             <div class="text-center">
-                Already have an account?<br><button class="btn btn-link p-0 m-0" (click)="mode=!mode">Log in</button>
+                Already have an account? <button class="btn btn-link p-0 m-0" (click)="mode=!mode">Login now</button>
             </div>
         </p-card>
         <div class="text-center"></div>

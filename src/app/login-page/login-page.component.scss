@@ -2,3 +2,20 @@
     min-height: 100vh;
     background-color: #509250;
 }
+
+@media only screen and (max-width:400px) {
+    .row {
+        width: 90%
+    }
+}
+
+@media only screen and (min-width:501px) {
+    .row {
+        width: 60%
+    }
+}
+
+
+// form{
+//     width: 500px;
+// }

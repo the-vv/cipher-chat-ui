@@ -11,7 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
 
 
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -37,7 +37,8 @@ import { NotFoundComponent } from './not-found/not-found.component'
     InputTextModule,
     PasswordModule,
     ButtonModule,
-    RippleModule
+    RippleModule,
+    ReactiveFormsModule
   ],
   providers: [
     LoginServiceService

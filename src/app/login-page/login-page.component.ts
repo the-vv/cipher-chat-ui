@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
-import {AvatarGroupModule} from 'primeng/avatargroup';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
@@ -11,19 +11,48 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
   mobileView: boolean = false;
   mode: boolean = true //login mode true for login
 
+  loginForm: FormGroup;
+  SignupForm: FormGroup;
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.mobileView = event.target.innerWidth < 500 ? true : false;
   }
 
-  constructor() {
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
     this.mobileView = window.innerWidth < 500 ? true : false;
   }
 
   ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.email, Validators.required]],
+      password: ['']
+    });
+    this.SignupForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      email: ['', [Validators.required, Validators.email]],
+      confirmp: ['', Validators.required]
+    });
   }
 
+  get sf() { return this.SignupForm.controls; }
+  get lf() { return this.loginForm.controls; }
+
   ngAfterViewInit() {
+  }
+
+  onSignup() {
+    console.log(this.SignupForm.value, this.SignupForm.invalid);
+  }
+
+  onLogin() {
+    if(this.loginForm.invalid) {
+      return
+    }
+    
   }
 
 }

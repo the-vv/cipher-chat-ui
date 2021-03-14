@@ -5,20 +5,31 @@
                 <p-avatar class="" icon="pi pi-user" styleClass="" class="" size="xlarge" shape="circle"></p-avatar>
             </div>
             <div class="display-6 text-center mb-3">Login</div>
-            <form action="" class="col-12"  [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <form action="" class="col-12" [formGroup]="loginForm" (ngSubmit)="onLogin()">
                 <div class="mb-3 p-1">
                     <label for="" class="h6">Email</label><br>
-                    <input formControlName="email" type="text" id="inputtext" pInputText class="normal-input col-12" placeholder="Email"><br>
-                    <label for="" class="small text-danger" *ngIf="loginForm.touched && lf.email.errors && lf.email.errors.required">Email is equired</label>
-                    <label for="" class="small text-danger" *ngIf="loginForm.touched && lf.email.errors && lf.email.errors.email">Email is invalid</label>
+                    <input formControlName="email" type="text" id="inputtext" pInputText class="normal-input col-12"
+                        placeholder="Email"><br>
+                    <label for="" class="small text-danger"
+                        *ngIf="lf.email.touched && lf.email.errors && lf.email.errors.required">Email is
+                        equired</label>
+                    <label for="" class="small text-danger"
+                        *ngIf="lf.email.touched && lf.email.errors && lf.email.errors.email">Email is invalid</label>
                 </div>
                 <div class="mb-3">
-                    <label for="" class="h6">Password</label><br>
-                    <input formControlName="password" p-password pInputText  [toggleMask]="true" [feedback]="false" class="col-12 normal-input"
-                        placeholder="Password">
+                    <label for="" class="h6">Password</label>
+                    <div class="p-inputgroup">
+                        <input formControlName="password" p-password pInputText [toggleMask]="true" [feedback]="false"
+                            class="normal-input" placeholder="Password" [type]="lpvmode ? 'password' : text">
+                        <span class="p-inputgroup-addon col-1" (click)="lpvmode = !lpvmode" pRipple>
+                            <i *ngIf="lpvmode" class="pi pi-eye"></i>
+                            <i *ngIf="!lpvmode" class="pi pi-eye-slash"></i>
+                        </span>
+                    </div>
                 </div>
                 <div class="text-center">
-                    <p-button (click)="onLogin()" pRipple type="button" label="Login" styleClass="p-button-sm p-button-outlined px-4" class=""></p-button>
+                    <p-button (click)="onLogin()" pRipple type="button" label="Login"
+                        styleClass="p-button-sm p-button-outlined px-4" class=""></p-button>
                 </div>
             </form>
             <div class="socialLogin text-center mt-3">
@@ -41,31 +52,47 @@
     <div class="row">
         <p-card>
             <div class="display-6 text-center mb-3">Sign Up</div>
-            <form action="" class="col-12"  [formGroup]="loginForm" (ngSubmit)="onSignup()">
+            <form action="" class="col-12" [formGroup]="SignupForm" (ngSubmit)="onSignup()">
                 <div class="mb-3 p-1">
                     <label for="" class="h6">Full Name</label><br>
-                    <input formControlName="email" type="text" id="inputtext" pInputText class="normal-input col-12" placeholder="Email"><br>
-                    <label for="" class="small text-danger" *ngIf="loginForm.touched && lf.email.errors && lf.email.errors.required">Email is equired</label>
-                    <label for="" class="small text-danger" *ngIf="loginForm.touched && lf.email.errors && lf.email.errors.email">Email is invalid</label>
+                    <input formControlName="name" type="text" id="inputtext" pInputText class="normal-input col-12"
+                        placeholder="Name"><br>
+                    <label for="" class="small text-danger"
+                        *ngIf="sf.name.touched && sf.name.errors && sf.name.errors.required">Name is
+                        equired</label>
                 </div>
                 <div class="mb-3 p-1">
                     <label for="" class="h6">Email</label><br>
-                    <input formControlName="email" type="text" id="inputtext" pInputText class="normal-input col-12" placeholder="Email"><br>
-                    <label for="" class="small text-danger" *ngIf="loginForm.touched && lf.email.errors && lf.email.errors.required">Email is equired</label>
-                    <label for="" class="small text-danger" *ngIf="loginForm.touched && lf.email.errors && lf.email.errors.email">Email is invalid</label>
+                    <input formControlName="email" type="text" id="" pInputText class="normal-input col-12"
+                        placeholder="Email"><br>
+                    <label for="" class="small text-danger"
+                        *ngIf="sf.email.touched && sf.email.errors && sf.email.errors.required">Email is
+                        equired</label>
+                    <label for="" class="small text-danger"
+                        *ngIf="sf.email.touched && sf.email.errors && sf.email.errors.email">Email is invalid</label>
                 </div>
                 <div class="mb-3">
                     <label for="" class="h6">Password</label><br>
-                    <input formControlName="password" p-password pInputText  [toggleMask]="true" [feedback]="false" class="col-12 normal-input"
-                        placeholder="Password">
+                    <div class="p-inputgroup">
+                        <input formControlName="password" p-password pInputText [toggleMask]="true" [feedback]="false"
+                            class="normal-input" placeholder="Password" [type]="spvmode1 ? 'password' : text">
+                        <span class="p-inputgroup-addon col-1" (click)="spvmode1 = !spvmode1" pRipple>
+                            <i *ngIf="spvmode1" class="pi pi-eye"></i>
+                            <i *ngIf="!spvmode1" class="pi pi-eye-slash"></i>
+                        </span>
+                    </div>
+                    <password-strength-meter [enableFeedback]="true" [minPasswordLength]=6
+                        [password]="SignupForm.value.password" *ngIf="SignupForm.value.password.length">
+                    </password-strength-meter>
                 </div>
                 <div class="mb-3">
                     <label for="" class="h6">Confirm Password</label><br>
-                    <input formControlName="password" p-password pInputText  [toggleMask]="true" [feedback]="false" class="col-12 normal-input"
-                        placeholder="Password">
+                    <input formControlName="confirmp" p-password pInputText [toggleMask]="true" [feedback]="false"
+                        class="col-12 normal-input" placeholder="Password">
                 </div>
                 <div class="text-center">
-                    <p-button (click)="onSignup()" pRipple type="button" label="SignUp" styleClass="p-button-sm p-button-outlined px-4" class=""></p-button>
+                    <p-button (click)="onSignup()" pRipple type="button" label="SignUp"
+                        styleClass="p-button-sm p-button-outlined px-4" class=""></p-button>
                 </div>
             </form>
             <div class="socialLogin text-center mt-3">

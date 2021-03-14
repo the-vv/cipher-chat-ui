@@ -14,6 +14,10 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
   loginForm: FormGroup;
   SignupForm: FormGroup;
 
+  lpvmode: boolean = true;
+  spvmode1: boolean = true;
+  spvmode2: boolean = true;
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.mobileView = event.target.innerWidth < 500 ? true : false;
@@ -45,14 +49,14 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
   }
 
   onSignup() {
-    console.log(this.SignupForm.value, this.SignupForm.invalid);
+    console.log(this.SignupForm.value);
   }
 
   onLogin() {
-    if(this.loginForm.invalid) {
+    if (this.loginForm.invalid) {
       return
     }
-    
+    console.log(this.loginForm.value);
   }
 
 }

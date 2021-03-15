@@ -50,11 +50,16 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
   }
 
   onSignup() {
+    if(this.SignupForm.value.password != this.SignupForm.value.confirmp || this.SignupForm.invalid) {
+      console.log('INVALID FORM');    
+      return  
+    }
     console.log(this.SignupForm.value);
   }
 
   onLogin() {
     if (this.loginForm.invalid) {
+      console.log('INVALID FORM');    
       return
     }
     console.log(this.loginForm.value);

@@ -5,7 +5,7 @@
                 <p-avatar class="" icon="pi pi-user" styleClass="" class="" size="xlarge" shape="circle"></p-avatar>
             </div>
             <div class="display-6 text-center mb-3">Login</div>
-            <form action="" class="col-12 px-4" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <form action="" class="col-12 px-3" [formGroup]="loginForm" (ngSubmit)="onLogin()">
                 <div class="mb-4 p-1">
                     <span class="p-float-label">
                         <input formControlName="email" type="text" id="inputtext" pInputText class="normal-input col-12"
@@ -22,13 +22,19 @@
                     <div class="p-inputgroup">
                         <span class="p-float-label m-1">
                             <input formControlName="password" id="ipassword" p-password pInputText [toggleMask]="true"
-                                [feedback]="false" class="normal-input" [type]="lpvmode ? 'password' : text">
+                                [feedback]="false" class="normal-input" [type]="lpvmode ? 'password' : text"
+                                [ngClass]="{'ng-dirty':lf.password.touched && lf.password.errors }">
                             <label for="ipassword">Password</label>
                             <span class="p-inputgroup-addon col-1" (click)="lpvmode = !lpvmode" pRipple>
                                 <i *ngIf="lpvmode" class="pi pi-eye"></i>
                                 <i *ngIf="!lpvmode" class="pi pi-eye-slash"></i>
                             </span>
                         </span>
+                    </div>
+                    <div class="m-1">
+                        <label for="" class="small text-danger"
+                            *ngIf="lf.password.touched && lf.password.errors && lf.password.errors.required">Password is
+                            required</label>
                     </div>
                 </div>
                 <div class="text-center">
@@ -64,13 +70,11 @@
                     <span class="p-float-label">
                         <input formControlName="name" type="text" pInputText class="normal-input col-12"
                             [ngClass]="{'ng-dirty':sf.name.touched && sf.name.errors }">
-                        <label for="inputtext">Name</label>
+                        <label for="inputtext">Full Name</label>
                     </span>
                     <label for="" class="small text-danger"
-                        *ngIf="sf.name.touched && sf.name.errors && sf.name.errors.required">name is
+                        *ngIf="sf.name.touched && sf.name.errors && sf.name.errors.required">Name is
                         required</label>
-                    <label for="" class="small text-danger"
-                        *ngIf="sf.name.touched && sf.name.errors && sf.name.errors.name">Name is invalid</label>
                 </div>
                 <div class="mb-4 p-1">
                     <span class="p-float-label">
@@ -90,7 +94,7 @@
                             <input formControlName="password" p-password pInputText [toggleMask]="true"
                                 [feedback]="false" class="normal-input" [type]="spvmode1 ? 'password' : text"
                                 [ngClass]="{'ng-dirty':sf.password.touched && sf.password.errors }">
-                            <label for="inputtext">Confirm Password</label>
+                            <label for="inputtext">Password</label>
                             <span class="p-inputgroup-addon col-1" (click)="spvmode1 = !spvmode1" pRipple>
                                 <i *ngIf="spvmode1" class="pi pi-eye"></i>
                                 <i *ngIf="!spvmode1" class="pi pi-eye-slash"></i>
@@ -103,9 +107,10 @@
                             required</label>
                         <label for="" class="small text-danger"
                             *ngIf="sf.password.touched && sf.password.errors && sf.password.errors.minlength">
-                        Password is too short</label>
+                            Password is too short</label>
                         <password-strength-meter *ngIf="SignupForm.value.password"
-                            [password]="SignupForm.value.password" [enableFeedback]="true" [minPasswordLength]=6></password-strength-meter>
+                            [password]="SignupForm.value.password" [enableFeedback]="true" [minPasswordLength]=6>
+                        </password-strength-meter>
                     </div>
                 </div>
                 <div class="mb-3">

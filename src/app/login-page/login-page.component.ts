@@ -14,6 +14,7 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
   loginForm: FormGroup;
   SignupForm: FormGroup;
 
+  // password visibility modes
   lpvmode: boolean = true;
   spvmode1: boolean = true;
   spvmode2: boolean = true;
@@ -32,7 +33,7 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.email, Validators.required]],
-      password: ['']
+      password: ['', Validators.required]
     });
     this.SignupForm = this.formBuilder.group({
       name: ['', Validators.required],

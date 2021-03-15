@@ -5,25 +5,29 @@
                 <p-avatar class="" icon="pi pi-user" styleClass="" class="" size="xlarge" shape="circle"></p-avatar>
             </div>
             <div class="display-6 text-center mb-3">Login</div>
-            <form action="" class="col-12" [formGroup]="loginForm" (ngSubmit)="onLogin()">
-                <div class="mb-3 p-1">
-                    <label for="" class="h6">Email</label><br>
-                    <input formControlName="email" type="text" id="inputtext" pInputText class="normal-input col-12"
-                        placeholder="Email"><br>
+            <form action="" class="col-12 px-4" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                <div class="mb-4 p-1">
+                    <span class="p-float-label">
+                        <input formControlName="email" type="text" id="inputtext" pInputText class="normal-input col-12"
+                            [ngClass]="{'ng-dirty':lf.email.touched && lf.email.errors }">
+                        <label for="inputtext">Email</label>
+                    </span>
                     <label for="" class="small text-danger"
                         *ngIf="lf.email.touched && lf.email.errors && lf.email.errors.required">Email is
-                        equired</label>
+                        required</label>
                     <label for="" class="small text-danger"
                         *ngIf="lf.email.touched && lf.email.errors && lf.email.errors.email">Email is invalid</label>
                 </div>
                 <div class="mb-3">
-                    <label for="" class="h6">Password</label>
                     <div class="p-inputgroup">
-                        <input formControlName="password" p-password pInputText [toggleMask]="true" [feedback]="false"
-                            class="normal-input" placeholder="Password" [type]="lpvmode ? 'password' : text">
-                        <span class="p-inputgroup-addon col-1" (click)="lpvmode = !lpvmode" pRipple>
-                            <i *ngIf="lpvmode" class="pi pi-eye"></i>
-                            <i *ngIf="!lpvmode" class="pi pi-eye-slash"></i>
+                        <span class="p-float-label m-1">
+                            <input formControlName="password" id="ipassword" p-password pInputText [toggleMask]="true"
+                                [feedback]="false" class="normal-input" [type]="lpvmode ? 'password' : text">
+                            <label for="ipassword">Password</label>
+                            <span class="p-inputgroup-addon col-1" (click)="lpvmode = !lpvmode" pRipple>
+                                <i *ngIf="lpvmode" class="pi pi-eye"></i>
+                                <i *ngIf="!lpvmode" class="pi pi-eye-slash"></i>
+                            </span>
                         </span>
                     </div>
                 </div>
@@ -51,44 +55,85 @@
 <div class="container-fluid main d-flex align-items-center justify-content-center" *ngIf="!mode">
     <div class="row">
         <p-card>
+            <div class="text-center">
+                <p-avatar class="" icon="pi pi-user" styleClass="" class="" size="xlarge" shape="circle"></p-avatar>
+            </div>
             <div class="display-6 text-center mb-3">Sign Up</div>
-            <form action="" class="col-12" [formGroup]="SignupForm" (ngSubmit)="onSignup()">
-                <div class="mb-3 p-1">
-                    <label for="" class="h6">Full Name</label><br>
-                    <input formControlName="name" type="text" id="inputtext" pInputText class="normal-input col-12"
-                        placeholder="Name"><br>
+            <form action="" class="col-12 px-3" [formGroup]="SignupForm" (ngSubmit)="onSignup()">
+                <div class="mb-4 p-1">
+                    <span class="p-float-label">
+                        <input formControlName="name" type="text" pInputText class="normal-input col-12"
+                            [ngClass]="{'ng-dirty':sf.name.touched && sf.name.errors }">
+                        <label for="inputtext">Name</label>
+                    </span>
                     <label for="" class="small text-danger"
-                        *ngIf="sf.name.touched && sf.name.errors && sf.name.errors.required">Name is
-                        equired</label>
+                        *ngIf="sf.name.touched && sf.name.errors && sf.name.errors.required">name is
+                        required</label>
+                    <label for="" class="small text-danger"
+                        *ngIf="sf.name.touched && sf.name.errors && sf.name.errors.name">Name is invalid</label>
                 </div>
-                <div class="mb-3 p-1">
-                    <label for="" class="h6">Email</label><br>
-                    <input formControlName="email" type="text" id="" pInputText class="normal-input col-12"
-                        placeholder="Email"><br>
+                <div class="mb-4 p-1">
+                    <span class="p-float-label">
+                        <input formControlName="email" type="text" pInputText class="normal-input col-12"
+                            [ngClass]="{'ng-dirty':sf.email.touched && sf.email.errors }">
+                        <label for="inputtext">Email</label>
+                    </span>
                     <label for="" class="small text-danger"
                         *ngIf="sf.email.touched && sf.email.errors && sf.email.errors.required">Email is
-                        equired</label>
+                        required</label>
                     <label for="" class="small text-danger"
                         *ngIf="sf.email.touched && sf.email.errors && sf.email.errors.email">Email is invalid</label>
                 </div>
-                <div class="mb-3">
-                    <label for="" class="h6">Password</label><br>
+                <div class="mb-4">
                     <div class="p-inputgroup">
-                        <input formControlName="password" p-password pInputText [toggleMask]="true" [feedback]="false"
-                            class="normal-input" placeholder="Password" [type]="spvmode1 ? 'password' : text">
-                        <span class="p-inputgroup-addon col-1" (click)="spvmode1 = !spvmode1" pRipple>
-                            <i *ngIf="spvmode1" class="pi pi-eye"></i>
-                            <i *ngIf="!spvmode1" class="pi pi-eye-slash"></i>
+                        <span class="p-float-label m-1">
+                            <input formControlName="password" p-password pInputText [toggleMask]="true"
+                                [feedback]="false" class="normal-input" [type]="spvmode1 ? 'password' : text"
+                                [ngClass]="{'ng-dirty':sf.password.touched && sf.password.errors }">
+                            <label for="inputtext">Confirm Password</label>
+                            <span class="p-inputgroup-addon col-1" (click)="spvmode1 = !spvmode1" pRipple>
+                                <i *ngIf="spvmode1" class="pi pi-eye"></i>
+                                <i *ngIf="!spvmode1" class="pi pi-eye-slash"></i>
+                            </span>
                         </span>
                     </div>
-                    <password-strength-meter [enableFeedback]="true" [minPasswordLength]=6
-                        [password]="SignupForm.value.password" *ngIf="SignupForm.value.password.length">
-                    </password-strength-meter>
+                    <div class="m-1">
+                        <label for="" class="small text-danger"
+                            *ngIf="sf.password.touched && sf.password.errors && sf.password.errors.required">Password is
+                            required</label>
+                        <label for="" class="small text-danger"
+                            *ngIf="sf.password.touched && sf.password.errors && sf.password.errors.minlength">
+                        Password is too short</label>
+                        <password-strength-meter *ngIf="SignupForm.value.password"
+                            [password]="SignupForm.value.password" [enableFeedback]="true" [minPasswordLength]=6></password-strength-meter>
+                    </div>
                 </div>
                 <div class="mb-3">
-                    <label for="" class="h6">Confirm Password</label><br>
-                    <input formControlName="confirmp" p-password pInputText [toggleMask]="true" [feedback]="false"
-                        class="col-12 normal-input" placeholder="Password">
+                    <div class="p-inputgroup">
+                        <span class="p-float-label m-1">
+                            <input formControlName="confirmp" p-password pInputText [toggleMask]="true"
+                                [feedback]="false" class="normal-input" [type]="spvmode2 ? 'password' : text"
+                                [ngClass]="{'ng-dirty':sf.confirmp.touched && sf.confirmp.errors }">
+                            <label for="inputtext">Confirm Password</label>
+                            <span class="p-inputgroup-addon col-1" (click)="spvmode2 = !spvmode2" pRipple>
+                                <i *ngIf="spvmode2" class="pi pi-eye"></i>
+                                <i *ngIf="!spvmode2" class="pi pi-eye-slash"></i>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="m-1">
+                        <label for="" class="small text-danger"
+                            *ngIf="sf.confirmp.touched && sf.confirmp.errors && sf.confirmp.errors.required">Confirm
+                            Password is
+                            required</label>
+                        <label for="" class="small text-danger"
+                            *ngIf="sf.confirmp.touched && sf.confirmp.errors && sf.confirmp.errors.minLength">Confirm
+                            Password is
+                            invalid</label>
+                        <label for="" class="small text-danger"
+                            *ngIf="SignupForm.value.password && sf.password.touched && SignupForm.value.confirmp && (SignupForm.value.password != SignupForm.value.confirmp)">Passwords
+                            are not matching</label>
+                    </div>
                 </div>
                 <div class="text-center">
                     <p-button (click)="onSignup()" pRipple type="button" label="SignUp"

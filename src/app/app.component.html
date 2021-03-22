@@ -1,1 +1,20 @@
-<router-outlet></router-outlet>
+<div class="content">
+    <nav class="navbar navbar-light bg-dark text-white px-2">
+        <a class="navbar-brand text-white" routerLink="/"><img src="assets/icon.png" height="40" class="p-mr-2"> Cipher Chat</a>
+        <p-avatar icon="pi pi-user" styleClass="" [size]="mobileView ? '' : 'large'" shape="circle"
+            (click)="visibleSidebar = true"></p-avatar>
+    </nav>
+    <router-outlet></router-outlet>
+</div>
+
+<p-sidebar [(visible)]="visibleSidebar" [position]="mobileView ? 'left' : 'right'" [baseZIndex]="10000">
+    <div class="userDetails ">
+        <div class="userContents">
+            <p-avatar icon="pi pi-user" styleClass="" size="xlarge" shape="circle" (click)="visibleSidebar = true">
+            </p-avatar><br>
+            <h4>No User</h4>
+        </div>
+    </div>
+    <p-menu [model]="sideItems"></p-menu>
+    <!-- <img src="assets/bg.jpg" alt="" class="img-fluid p-0 m-0" style="margin: -10px"> -->
+</p-sidebar>

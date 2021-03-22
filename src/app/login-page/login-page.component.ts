@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -25,7 +26,8 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
   }
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute
   ) {
     this.mobileView = window.innerWidth < 500 ? true : false;
   }
@@ -41,6 +43,16 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
       email: ['', [Validators.required, Validators.email]],
       confirmp: ['', Validators.required]
     });
+    this.route.queryParams
+      .subscribe(params => {
+        if (params.signup == 1) {
+          this.mode = false;
+        }
+        else {
+          this.mode = true;
+        };
+      }
+      );
   }
 
   get sf() { return this.SignupForm.controls; }
@@ -50,16 +62,16 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
   }
 
   onSignup() {
-    if(this.SignupForm.value.password != this.SignupForm.value.confirmp || this.SignupForm.invalid) {
-      console.log('INVALID FORM');    
-      return  
+    if (this.SignupForm.value.password != this.SignupForm.value.confirmp || this.SignupForm.invalid) {
+      console.log('INVALID FORM');
+      return
     }
     console.log(this.SignupForm.value);
   }
 
   onLogin() {
     if (this.loginForm.invalid) {
-      console.log('INVALID FORM');    
+      console.log('INVALID FORM');
       return
     }
     console.log(this.loginForm.value);

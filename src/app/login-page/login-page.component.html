@@ -51,7 +51,7 @@
             </div>
             <hr>
             <div class="text-center">
-                Don't have an account? <button class="btn btn-link p-0 m-0" (click)="mode=!mode">Create One</button>
+                Don't have an account? <a [routerLink]="['/login']" [queryParams]="{signup: 1}">Create One</a>
             </div>
         </p-card>
         <div class="text-center"></div>
@@ -92,7 +92,7 @@
                     <div class="p-inputgroup">
                         <span class="p-float-label m-1">
                             <input formControlName="password" p-password pInputText [toggleMask]="true"
-                                [feedback]="false" class="normal-input" [type]="spvmode1 ? 'password' : text"
+                                [feedback]="false" class="normal-input" [type]="spvmode1 ? 'password' : 'text'"
                                 [ngClass]="{'ng-dirty':sf.password.touched && sf.password.errors }">
                             <label for="inputtext">Password</label>
                             <span class="p-inputgroup-addon col-1" (click)="spvmode1 = !spvmode1" pRipple>
@@ -117,7 +117,7 @@
                     <div class="p-inputgroup">
                         <span class="p-float-label m-1">
                             <input formControlName="confirmp" p-password pInputText [toggleMask]="true"
-                                [feedback]="false" class="normal-input" [type]="spvmode2 ? 'password' : text"
+                                [feedback]="false" class="normal-input" [type]="spvmode2 ? 'password' : 'text'"
                                 [ngClass]="{'ng-dirty':sf.confirmp.touched && sf.confirmp.errors }">
                             <label for="inputtext">Confirm Password</label>
                             <span class="p-inputgroup-addon col-1" (click)="spvmode2 = !spvmode2" pRipple>
@@ -131,10 +131,6 @@
                             *ngIf="sf.confirmp.touched && sf.confirmp.errors && sf.confirmp.errors.required">Confirm
                             Password is
                             required</label>
-                        <label for="" class="small text-danger"
-                            *ngIf="sf.confirmp.touched && sf.confirmp.errors && sf.confirmp.errors.minLength">Confirm
-                            Password is
-                            invalid</label>
                         <label for="" class="small text-danger"
                             *ngIf="SignupForm.value.password && sf.password.touched && SignupForm.value.confirmp && (SignupForm.value.password != SignupForm.value.confirmp)">Passwords
                             are not matching</label>
@@ -154,7 +150,7 @@
             </div>
             <hr>
             <div class="text-center">
-                Already have an account? <button class="btn btn-link p-0 m-0" (click)="mode=!mode">Login now</button>
+                Already have an account? <a [routerLink]="['/login']" [queryParams]="{}">Login now</a>
             </div>
         </p-card>
         <div class="text-center"></div>

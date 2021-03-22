@@ -5,7 +5,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import {NotFoundComponent} from './not-found/not-found.component'
 
 const routes: Routes = [
-  { path: '', component: LoginPageComponent },
+  { path: '', component: HomePageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: '**', component: NotFoundComponent }
 ];
@@ -14,4 +14,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+  
+ }

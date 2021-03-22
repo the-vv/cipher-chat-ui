@@ -1,0 +1,17 @@
+.content {
+    background-color: #509250;
+    min-height      : 100vh;
+}
+
+.userDetails {
+    background-image   : url("../assets/userbg.png");
+    background-position: center;
+    background-repeat  : none;
+    background-size    : cover;
+    height             : 180px;
+    display            : flex;
+    justify-content    : flex-end;
+    flex-direction     : column;
+    padding-left: 10px;
+}
+

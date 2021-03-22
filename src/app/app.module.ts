@@ -9,9 +9,15 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
+import { MenuModule } from 'primeng/menu';
+import { MenubarModule } from 'primeng/menubar';
+import {SidebarModule} from 'primeng/sidebar';
+
+// Materialize
 
 // Other Libraries
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 // Components and services
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,8 +26,11 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginServiceService } from './services/login-service.service';
-import { NotFoundComponent } from './not-found/not-found.component'
+import { NotFoundComponent } from './not-found/not-found.component';
+import { SocketService } from './services/socket.service';
 
+
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 
 @NgModule({
@@ -42,10 +51,15 @@ import { NotFoundComponent } from './not-found/not-found.component'
     ButtonModule,
     RippleModule,
     ReactiveFormsModule,
-    PasswordStrengthMeterModule
+    PasswordStrengthMeterModule,
+    MenuModule,
+    MenubarModule,
+    SocketIoModule.forRoot(config), 
+    SidebarModule 
   ],
   providers: [
-    LoginServiceService
+    LoginServiceService,
+    SocketService
   ],
   bootstrap: [AppComponent]
 })

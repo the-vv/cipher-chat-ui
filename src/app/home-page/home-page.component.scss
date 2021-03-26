@@ -1,0 +1,10 @@
+.main {
+    min-height: calc(100vh - 66px);
+    background-image: url('../../assets/hbg.webp');
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}

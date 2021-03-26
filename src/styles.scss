@@ -1,38 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"); //Bootsrap Icons
 
 .p-avatar {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 
 .p-sidebar {
-    padding:0rem!important;
+  padding: 0rem !important;
 }
 
 .p-menu {
-    width: unset!important;
-    background: unset!important;
-    border: unset!important;
+  width     : unset !important;
+  background: unset !important;
+  border    : unset !important;
 }
+
+
+// Scroll Bar
 
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #3c643c; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: rgb(48, 47, 47); 
-    border-radius: 4px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgb(204, 204, 204); 
-  }
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #3c643c;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background   : rgb(48, 47, 47);
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(204, 204, 204);
+}

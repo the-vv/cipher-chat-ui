@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'app-login-page',
@@ -27,7 +28,8 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private socket: SocketService
   ) {
     this.mobileView = window.innerWidth < 500 ? true : false;
   }
@@ -66,7 +68,8 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
       console.log('INVALID FORM');
       return
     }
-    console.log(this.SignupForm.value);
+    // console.log(this.SignupForm.value);
+    this.socket.sendAuth(this.SignupForm.value, false)
   }
 
   onLogin() {
@@ -74,7 +77,7 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
       console.log('INVALID FORM');
       return
     }
-    console.log(this.loginForm.value);
+    this.socket.sendAuth(this.loginForm.value, true)
   }
 
 }

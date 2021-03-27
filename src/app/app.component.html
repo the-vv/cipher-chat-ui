@@ -26,10 +26,12 @@
                 <p class="p-0 m-0 pl-2">{{socket.User.email}}</p>
             </div>
             <div *ngIf="!socket.User" class="pb-2">
-                <h4 class="p-0 m-0 pl-2">No User</h4>
+                <h4 class="p-0 m-0 pl-2">Hello Stranger</h4>
             </div>
         </div>
     </div>
     <p-menu [model]="sideItems"></p-menu>
     <!-- <img src="assets/bg.jpg" alt="" class="img-fluid p-0 m-0" style="margin: -10px"> -->
 </p-sidebar>
+
+<p-toast position="bottom-center"></p-toast>

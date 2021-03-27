@@ -27,7 +27,12 @@ export class SocketService {
   }
 
   logout() {
-    console.log('Logged Out');    
+    // console.log('Logged Out');   
+    this.User = null 
+  }
+
+  verifyAuth(token: string) {
+    this.socket.emit('verifyAuth', token);
   }
 
   sendAuth(values: any, isLogin: boolean) {

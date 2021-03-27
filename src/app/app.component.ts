@@ -3,6 +3,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { MenuItem } from 'primeng/api';
 import { SocketService } from './services/socket.service';
 import * as rand from 'randomcolor'
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -26,9 +27,16 @@ export class AppComponent implements OnInit {
 
   constructor(
     private primengConfig: PrimeNGConfig,
-    public socket: SocketService
+    public socket: SocketService,
+    private cookieService: CookieService
   ) {
     this.mobileView = window.innerWidth < 500 ? true : false;
+
+    if (cookieService.check('cipherChatAuthToken')) {
+      socket.verifyAuth(this.cookieService.get('cipherChatAuthToken'));
+    } else {
+      // console.log('Not Logegd in');
+    }
   }
 
   ngOnInit() {
@@ -40,6 +48,39 @@ export class AppComponent implements OnInit {
 
     this.primengConfig.ripple = true;
 
+    this.initSidebar();
+
+    this.socket.currentUser.subscribe(user => {
+      if (user.user) {
+        this.cookieService.set('cipherChatAuthToken', user.token)
+        this.sideItems = [
+          {
+            label: 'Account',
+            items: [
+              {
+                label: 'Logout',
+                icon: 'bi bi-box-arrow-left',
+                command: () => {
+                  this.cookieService.delete('cipherChatAuthToken')
+                  this.socket.logout();
+                  this.visibleSidebar = !this.visibleSidebar;
+                  this.initSidebar();
+                }
+              }
+            ]
+          },
+          {
+            label: 'More',
+            items: [
+              { label: 'Settings', icon: 'bi bi-gear' },
+            ]
+          }
+        ];
+      }
+    })
+  }
+
+  initSidebar() {
     this.sideItems = [
       {
         label: 'Account',
@@ -70,20 +111,6 @@ export class AppComponent implements OnInit {
         ]
       }
     ];
-
-    this.socket.currentUser.subscribe(user => {
-      if (user.user) {
-        this.sideItems[0].items = [
-          {
-            label: 'Logut',
-            icon: 'bi bi-box-arrow-left',
-            command: () => {
-              this.socket.logout();
-            }
-          }
-        ]
-      }
-    })
   }
 
 }

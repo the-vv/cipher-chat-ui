@@ -20,6 +20,7 @@ import { MessageService } from 'primeng/api';
 // Other Libraries
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { CookieService } from 'ngx-cookie-service';
 
 // Components and services
 import { ReactiveFormsModule } from '@angular/forms';
@@ -63,7 +64,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
   providers: [
     LoginServiceService,
     SocketService,
-    MessageService
+    MessageService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

@@ -2,8 +2,13 @@
     <nav class="navbar navbar-light bg-dark text-white px-2">
         <a class="navbar-brand text-white" routerLink="/"><img src="assets/icon.png" height="40" class="p-mr-2"> Cipher
             Chat</a>
-        <p-avatar icon="pi pi-user" styleClass="" [size]="mobileView ? '' : 'large'" shape="circle"
-            (click)="visibleSidebar = true"></p-avatar>
+        <p-avatar *ngIf="!socket.User" icon="pi pi-user" styleClass="" [size]="mobileView ? '' : 'large'" shape="circle"
+            (click)="visibleSidebar = true">
+        </p-avatar>
+        <p-avatar *ngIf="socket.User" [label]="socket.User.name.split('')[0]"
+            [style]="{'background-color':randomColor, 'color': '#ffffff'}" [size]="mobileView ? '' : 'large'"
+            shape="circle" (click)="visibleSidebar = true">
+        </p-avatar>
     </nav>
     <router-outlet></router-outlet>
 </div>
@@ -11,9 +16,18 @@
 <p-sidebar [(visible)]="visibleSidebar" [position]="mobileView ? 'left' : 'right'" [baseZIndex]="10000">
     <div class="userDetails ">
         <div class="userContents">
-            <p-avatar icon="pi pi-user" styleClass="" size="xlarge" shape="circle" (click)="visibleSidebar = true">
-            </p-avatar><br>
-            <h4>No User</h4>
+            <p-avatar *ngIf="!socket.User" icon="pi pi-user" styleClass="mb-2" size="xlarge" shape="circle">
+            </p-avatar>
+            <p-avatar *ngIf="socket.User" [label]="socket.User.name.split('')[0]" styleClass="mb-2" size="xlarge"
+                shape="circle" [style]="{'background-color':randomColor, 'color': '#ffffff'}">
+            </p-avatar>
+            <div *ngIf="socket.User" class="text-truncate d-block">
+                <h4 class="p-0 m-0 pl-2">{{socket.User.name}}</h4>
+                <p class="p-0 m-0 pl-2">{{socket.User.email}}</p>
+            </div>
+            <div *ngIf="!socket.User" class="pb-2">
+                <h4 class="p-0 m-0 pl-2">No User</h4>
+            </div>
         </div>
     </div>
     <p-menu [model]="sideItems"></p-menu>

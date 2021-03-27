@@ -26,6 +26,10 @@ export class SocketService {
     })
   }
 
+  logout() {
+    console.log('Logged Out');    
+  }
+
   sendAuth(values: any, isLogin: boolean) {
     if (isLogin) {
       this.socket.emit('loginAuth', values);

@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { MenuItem } from 'primeng/api';
 import { SocketService } from './services/socket.service';
-
+import * as rand from 'randomcolor'
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize(event: any) {
     this.mobileView = event.target.innerWidth < 500 ? true : false;
   }
 
@@ -21,6 +21,8 @@ export class AppComponent implements OnInit {
 
   sideItems: MenuItem[];
   visibleSidebar: boolean;
+
+  randomColor = '';
 
   constructor(
     private primengConfig: PrimeNGConfig,
@@ -30,6 +32,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.randomColor = rand({
+      format: 'rgba',
+      alpha: 0.5
+    })
 
     this.primengConfig.ripple = true;
 
@@ -63,6 +70,20 @@ export class AppComponent implements OnInit {
         ]
       }
     ];
+
+    this.socket.currentUser.subscribe(user => {
+      if (user.user) {
+        this.sideItems[0].items = [
+          {
+            label: 'Logut',
+            icon: 'bi bi-box-arrow-left',
+            command: () => {
+              this.socket.logout();
+            }
+          }
+        ]
+      }
+    })
   }
 
 }

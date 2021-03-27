@@ -11,7 +11,9 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
-import {SidebarModule} from 'primeng/sidebar';
+import { SidebarModule } from 'primeng/sidebar';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 // Materialize
 
@@ -54,12 +56,14 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     PasswordStrengthMeterModule,
     MenuModule,
     MenubarModule,
-    SocketIoModule.forRoot(config), 
-    SidebarModule 
+    SocketIoModule.forRoot(config),
+    SidebarModule,
+    ToastModule
   ],
   providers: [
     LoginServiceService,
-    SocketService
+    SocketService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

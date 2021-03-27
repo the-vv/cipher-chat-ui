@@ -2,6 +2,8 @@ import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SocketService } from '../services/socket.service';
+import { MessageService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-login-page',
@@ -30,7 +32,8 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private socket: SocketService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {
     this.mobileView = window.innerWidth < 500 ? true : false;
   }
@@ -57,11 +60,22 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
       }
       );
     this.socket.currentUser
-    .subscribe(user => {
-      if(user) {
-        this.router.navigate(['/']);
-      }
+      .subscribe(user => {
+        if (user) {
+          this.router.navigate(['/']);
+        }
+      })
+    this.socket.loginStatus.subscribe(data => {
+      this.showError('Error', data.status)
     })
+    this.socket.signupStatus.subscribe(data => {
+      this.showError('Error', data.status)
+    })
+  }
+
+  showError(title: string, message: string) {
+    this.messageService.clear()
+    this.messageService.add({ severity: 'error', summary: title, detail: message, life: 5000 });
   }
 
   get sf() { return this.SignupForm.controls; }

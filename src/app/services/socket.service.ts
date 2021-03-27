@@ -8,15 +8,21 @@ import { User } from '../models/user';
 })
 export class SocketService {
 
-  public currentUser: Observable<User>;
+  public currentUser: Observable<any>;
+  public loginStatus: Observable<any>;
+  public signupStatus: Observable<any>;
+
+  public User: User;
 
   constructor(private socket: Socket) {
     socket.on('connect', () => {
       console.log('Realtime Connection Established');
     })
+    this.loginStatus = socket.fromEvent('loginStatus');
+    this.signupStatus = socket.fromEvent('signupStatus');
     this.currentUser = socket.fromEvent('authSuccess');
-    this.currentUser.toPromise().then(() => {
-      
+    this.currentUser.subscribe((user) => {
+      this.User = user.user;
     })
   }
 

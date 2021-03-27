@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SocketService } from '../services/socket.service';
 
 @Component({
@@ -22,14 +22,15 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
   spvmode2: boolean = true;
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize(event: any) {
     this.mobileView = event.target.innerWidth < 500 ? true : false;
   }
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private socket: SocketService
+    private socket: SocketService,
+    private router: Router
   ) {
     this.mobileView = window.innerWidth < 500 ? true : false;
   }
@@ -55,6 +56,12 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
         };
       }
       );
+    this.socket.currentUser
+    .subscribe(user => {
+      if(user) {
+        this.router.navigate(['/']);
+      }
+    })
   }
 
   get sf() { return this.SignupForm.controls; }

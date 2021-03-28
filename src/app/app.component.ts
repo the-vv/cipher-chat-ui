@@ -4,6 +4,7 @@ import { MenuItem } from 'primeng/api';
 import { SocketService } from './services/socket.service';
 import * as rand from 'randomcolor'
 import { CookieService } from 'ngx-cookie-service';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -25,10 +26,13 @@ export class AppComponent implements OnInit {
 
   randomColor = '';
 
+  tnavbar: boolean = false
+
   constructor(
     private primengConfig: PrimeNGConfig,
     public socket: SocketService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) {
     this.mobileView = window.innerWidth < 500 ? true : false;
 
@@ -40,6 +44,18 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.router.events.subscribe(val => {
+      if (val instanceof NavigationEnd){
+        // console.log(val.url);
+        if(val.url == '/' || val.url.indexOf('/login') >= 0) {
+          this.tnavbar = true;
+        } else {
+          this.tnavbar = false;
+        }
+      }      
+    })
+    
 
     this.randomColor = rand({
       format: 'rgba',

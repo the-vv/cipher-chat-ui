@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
+import { OnDestroy, Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SocketService } from '../services/socket.service';
@@ -10,14 +10,14 @@ import { MessageService } from 'primeng/api';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
-export class LoginPageComponent implements OnInit, AfterViewInit {
+export class LoginPageComponent implements OnInit, OnDestroy {
 
   mobileView: boolean = false;
   mode: boolean = true //login mode true for login
 
   loginForm: FormGroup;
   SignupForm: FormGroup;
-
+ 
   // password visibility modes
   lpvmode: boolean = true;
   spvmode1: boolean = true;
@@ -61,8 +61,9 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
       );
     this.socket.currentUser
       .subscribe(user => {
-        if (user) {
-          this.router.navigate(['/']);
+        if (user) {      
+          console.log(this.socket.redirectUrl);            
+          this.router.navigate([this.socket.redirectUrl ? this.socket.redirectUrl : '/'], {replaceUrl: true});
         }
       })
     this.socket.loginStatus.subscribe(data => {
@@ -81,7 +82,8 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
   get sf() { return this.SignupForm.controls; }
   get lf() { return this.loginForm.controls; }
 
-  ngAfterViewInit() {
+  ngOnDestroy() {
+    
   }
 
   onSignup() {

@@ -1,6 +1,11 @@
 .main {
-    min-height      : 100vh;
-    background-color: #509250;
+    min-height         : calc(100vh);
+    padding-top        : 66px;
+    margin-top         : -66px;
+    background-image   : url("../../assets/vbg1.jpg");
+    background-position: center;
+    background-repeat  : none;
+    background-size    : cover;
 }
 
 @media only screen and (max-width:400px) {
@@ -19,4 +24,35 @@
     .row {
         width: 35%
     }
+}
+
+.p-inputtext, .p-inputgroup-addon {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.login-card {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius   : 30px;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter : blur(7px);
+    color: white
+}
+
+
+.p-button {
+    border          : none;
+    color           : white;
+    transition      : 0.5s ease;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter : blur(7px);
+    border-radius   : 30px;
+}
+
+.p-button:hover,
+.p-button:focus,
+.p-button:active {
+    border          : none !important;
+    background-color: rgba(255, 255, 255, 0.3) !important;
+    color           : white !important;
 }

@@ -13,6 +13,9 @@ export class SocketService {
   public signupStatus: Observable<any>;
 
   public User: User;
+  public isLoggedIn:boolean = false;
+
+  public redirectUrl: string;
 
   constructor(private socket: Socket) {
     socket.on('connect', () => {
@@ -21,14 +24,16 @@ export class SocketService {
     this.loginStatus = socket.fromEvent('loginStatus');
     this.signupStatus = socket.fromEvent('signupStatus');
     this.currentUser = socket.fromEvent('authSuccess');
-    this.currentUser.subscribe((user) => {
+    this.currentUser.subscribe((user) => { //login process
       this.User = user.user;
+      this.isLoggedIn = true;
     })
   }
 
   logout() {
     // console.log('Logged Out');   
     this.User = null 
+    this.isLoggedIn = false;
   }
 
   verifyAuth(token: string) {

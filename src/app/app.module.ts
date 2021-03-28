@@ -31,6 +31,9 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginServiceService } from './services/login-service.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SocketService } from './services/socket.service';
+import { AllChatComponent } from './all-chat/all-chat.component';
+import { PersonWidgetComponent } from './person-widget/person-widget.component';
+import { ChatsScreenComponent } from './chats-screen/chats-screen.component';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -41,7 +44,10 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     AppComponent,
     HomePageComponent,
     LoginPageComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AllChatComponent,
+    PersonWidgetComponent,
+    ChatsScreenComponent
   ],
   imports: [
     BrowserModule,

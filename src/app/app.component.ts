@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
 
   randomColor = '';
 
-  tnavbar: boolean = false
+  tnavbar: boolean = true;
 
   constructor(
     private primengConfig: PrimeNGConfig,
@@ -48,11 +48,11 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd){
         // console.log(val.url);
-        if(val.url == '/' || val.url.indexOf('/login') >= 0) {
-          this.tnavbar = true;
-        } else {
-          this.tnavbar = false;
-        }
+        // if(val.url == '/' || val.url.indexOf('/login') >= 0) {
+        //   this.tnavbar = true;
+        // } else {
+        //   this.tnavbar = false;
+        // }
       }      
     })
     

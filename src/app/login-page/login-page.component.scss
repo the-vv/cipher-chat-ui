@@ -20,23 +20,42 @@
     }
 }
 
-@media only screen and (min-width:1001px) {
+@media only screen and (min-width:701px) {
     .row {
-        width: 35%
+        width: 40%
     }
 }
 
-.p-inputtext, .p-inputgroup-addon {
-    background: rgba(255, 255, 255, 0.1);
+@media only screen and (min-width:1100px) {
+    .row {
+        width: 30%
+    }
+}
+
+.p-inputtext,
+.p-inputgroup-addon {
+    background   : rgba(255, 255, 255, 0.1);
+    border-radius: 30px !important;
+}
+
+.p-inputgroup .p-inputtext {
+    background                : rgba(255, 255, 255, 0.1);
+    border-top-right-radius   : 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+.p-inputgroup-addon {
+    border-top-left-radius   : 0px !important;
+    border-bottom-left-radius: 0px !important;
 }
 
 .login-card {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top     : 20px;
+    padding-bottom  : 20px;
     border-radius   : 30px;
     background-color: rgba(255, 255, 255, 0.2);
     backdrop-filter : blur(7px);
-    color: white
+    color           : white
 }
 
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Message } from '../models/message';
 
 @Component({
   selector: 'app-person-widget',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonWidgetComponent implements OnInit {
 
+  @Input()
+  chat: Message;
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
 
 }

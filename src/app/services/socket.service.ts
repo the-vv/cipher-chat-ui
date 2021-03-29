@@ -11,16 +11,19 @@ export class SocketService {
   public currentUser: Observable<any>;
   public loginStatus: Observable<any>;
   public signupStatus: Observable<any>;
+  public messages: Observable<any>;
+
 
   public User: User;
   public isLoggedIn:boolean = false;
 
   public redirectUrl: string;
 
-  constructor(private socket: Socket) {
+  constructor(public socket: Socket) {
     socket.on('connect', () => {
       console.log('Realtime Connection Established');
     })
+    this.messages = socket.fromEvent('setMessages');
     this.loginStatus = socket.fromEvent('loginStatus');
     this.signupStatus = socket.fromEvent('signupStatus');
     this.currentUser = socket.fromEvent('authSuccess');
@@ -34,6 +37,7 @@ export class SocketService {
     // console.log('Logged Out');   
     this.User = null 
     this.isLoggedIn = false;
+    this.socket.emit('logout', {})
   }
 
   verifyAuth(token: string) {
@@ -47,6 +51,10 @@ export class SocketService {
     else {
       this.socket.emit('signupAuth', values);
     }
+  }
+
+  getMessages() {
+    this.socket.emit('getMessages', this.User)
   }
 
 }

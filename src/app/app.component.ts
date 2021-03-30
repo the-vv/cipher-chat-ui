@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   randomColor = '';
 
   tnavbar: boolean = true;
+  isChatPage: boolean = false;
 
   constructor(
     private primengConfig: PrimeNGConfig,
@@ -48,11 +49,11 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd){
         // console.log(val.url);
-        // if(val.url == '/' || val.url.indexOf('/login') >= 0) {
-        //   this.tnavbar = true;
-        // } else {
-        //   this.tnavbar = false;
-        // }
+        if(val.url.indexOf('/chats') >= 0 && this.socket.isLoggedIn) {
+          this.isChatPage = true;
+        } else {
+          this.isChatPage = false;
+        }
       }      
     })
     

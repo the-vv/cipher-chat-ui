@@ -1,6 +1,25 @@
 <div class="container-fluid main">
     <div class="row">
         <div class="col-lg-4 col-xl-3 col-md-5 chats-window">
+            <div class="row">
+                <div class="col-12 action-bar mb-1 ">
+                    <div class="row d-flex align-items-center justify-content-between" style="height: 100%">
+                        <div class="col-10">
+                            <span class="p-input-icon-left col-12">
+                                <i class="pi pi-search"></i>
+                                <input type="text" pInputText placeholder="Search" />
+                            </span>
+                        </div>
+                        <div class="col-2">
+                            <div class="row">
+                                <button pButton pRipple type="button" icon="pi pi-plus"
+                                    class="p-button-rounded p-button-text p-button-plain mx-auto"
+                                    (click)="askNew = !askNew"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row" *ngFor="let chat of chats">
                 <div class="col-12 mb-1">
                     <app-person-widget [chat]="chat"></app-person-widget>
@@ -11,4 +30,21 @@
             <app-chats-screen></app-chats-screen>
         </div>
     </div>
-</div> 
+</div>
+
+<p-dialog header="Who do you want to chat with" [(visible)]="askNew" [style]="{width: '50vw'}" [modal]='true'
+    maskStyleClass="blur-bg" [breakpoints]="{'780px': '95vw'}" [dismissableMask]="true">
+        <div class="col-12 col-md-10">
+            <span class="p-input-icon-left col-12">
+                <i class="pi pi-search"></i>
+                <input type="text" pInputText placeholder="Type an Email" />
+            </span>
+        </div> 
+        <div class="col-12">
+
+        </div>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-comments" (click)="null" label="Start Messaging" styleClass="p-button-text text-light" disabled="true"> 
+        </p-button>
+    </ng-template>
+</p-dialog>

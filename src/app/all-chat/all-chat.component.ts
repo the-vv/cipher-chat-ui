@@ -8,26 +8,14 @@ import { Message } from '../models/message';
 })
 export class AllChatComponent implements OnInit {
 
+  askNew:boolean = false
+
   chats: Message[] = [
     {
       _id: '12345',
       message: 'this is a long line message fot testing purposes',
       datetime: new Date(),
       from: 'vishnu v',
-      to: 'vv1'
-    },
-    {
-      _id: '12344',
-      message: 'this is a long line message fot testing purposes',
-      datetime: new Date(),
-      from: 'vishnu',
-      to: 'vv'
-    },
-    {
-      _id: '12343',
-      message: 'this is a long line message fot testing purposes',
-      datetime: new Date(),
-      from: 'the-vv',
       to: 'vv1'
     }
   ]

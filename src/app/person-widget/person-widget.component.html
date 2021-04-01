@@ -5,15 +5,15 @@
     <div class="chat-user">
         <div class="row">
             <div class="col-8">
-                <h5 class="p-0 m-0 text-truncate">{{chat.from}}</h5>
-            </div>
-            <div class="col-4 text-truncate small text-end" style="font-size: 0.7em;">
-                {{chat.datetime | date}}
+                <h5 class="p-0 m-0 text-truncate">{{chat.name}}</h5>
+            </div> 
+            <div class="col-4 small text-end" style="font-size: 0.7em;">
+                {{chat.messages[chat.messages.length-1].datetime | date:'h:mm a, d/M/yy' }}
             </div>
         </div>
         <div class="">
             <div class="col-12">
-                <p class="p-0 m-0 text-truncate">{{chat.message}}</p>
+                <p class="p-0 m-0 text-truncate">{{chat.messages[chat.messages.length-1].message}}</p>
             </div>
         </div>
     </div>

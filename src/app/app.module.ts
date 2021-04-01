@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+
 
 // PrimeNG imports
 import { AvatarModule } from 'primeng/avatar';
@@ -67,7 +69,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     SocketIoModule.forRoot(config),
     SidebarModule,
     ToastModule,
-    DialogModule
+    DialogModule,
+    FormsModule
   ],
   providers: [
     LoginServiceService,

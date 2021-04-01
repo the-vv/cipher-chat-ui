@@ -9,14 +9,15 @@ import { Message } from '../models/message';
 export class PersonWidgetComponent implements OnInit {
 
   @Input()
-  chat: Message;
+  chat: any;
 
   @Output()
   onSelect: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {  
+    console.log(this.chat);      
   }
 
 }

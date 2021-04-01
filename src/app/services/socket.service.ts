@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
+import { Message } from '../models/message';
 import { User } from '../models/user';
 
 @Injectable({
@@ -15,7 +16,7 @@ export class SocketService {
 
 
   public User: User;
-  public isLoggedIn:boolean = false;
+  public isLoggedIn: boolean = false;
 
   public redirectUrl: string;
 
@@ -30,12 +31,13 @@ export class SocketService {
     this.currentUser.subscribe((user) => { //login process
       this.User = user.user;
       this.isLoggedIn = true;
+      socket.emit('getMessages', user);
     })
   }
 
   logout() {
     // console.log('Logged Out');   
-    this.User = null 
+    this.User = null
     this.isLoggedIn = false;
     this.socket.emit('logout', {})
   }
@@ -55,6 +57,27 @@ export class SocketService {
 
   getMessages() {
     this.socket.emit('getMessages', this.User)
+  }
+
+  saveMessage(message: Message) {
+    this.socket.emit('newMessage', message, (status) => {
+      console.log(status);      
+    });
+  }
+
+  checkMailExist(email: string) {
+    return new Promise((resolve, reject) => {
+      this.socket.emit('emailCheck', email, (result: any) => {
+        if (result.success) {
+          resolve(result)
+        } else {
+          resolve(false)
+        }
+        if(result.error) {
+          reject(result.status);
+        }
+      })
+    })
   }
 
 }

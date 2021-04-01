@@ -60,9 +60,16 @@ export class SocketService {
   }
 
   saveMessage(message: Message) {
-    this.socket.emit('newMessage', message, (status) => {
-      console.log(status);      
-    });
+    return new Promise((resolve, reject) => {
+      this.socket.emit('newMessage', message, (status: any) => {
+        if (status.success) {
+          resolve(status);
+        }
+        else {
+          reject(status);
+        }
+      });
+    })
   }
 
   checkMailExist(email: string) {
@@ -73,7 +80,7 @@ export class SocketService {
         } else {
           resolve(false)
         }
-        if(result.error) {
+        if (result.error) {
           reject(result.status);
         }
       })

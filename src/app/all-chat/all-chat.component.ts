@@ -18,16 +18,6 @@ export class AllChatComponent implements OnInit {
   newChatButtonIcon: string = 'pi-comments';
   newChatUser: any;
 
-  chats: Message[] = [
-    {
-      _id: '12345',
-      message: 'this is a long line message fot testing purposes',
-      datetime: new Date(),
-      from: 'vishnu v',
-      to: 'vv1'
-    }
-  ]
-
   constructor(
     public socket: SocketService,
     public message: MessagesServiceService

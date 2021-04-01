@@ -13,7 +13,7 @@ export class MessagesServiceService {
   chatList: any[] = [];
 
   constructor(
-    private socket: SocketService
+    public socket: SocketService
   ) {
     this.socket.messages
       .subscribe(messages => {
@@ -26,26 +26,26 @@ export class MessagesServiceService {
 
   addNewChatTo(user: any) {
     let message: Message = {
-      message: this.socket.User.name + ' Started to chat with You',
+      message: 'Added for chat',
       from: this.socket.User._id,
       to: user._id,
       datetime: new Date()
     }
-    this.chatList.push(
-      {
-        user: user,
-        messages: [message]
-      }
-    )
-    this.socket.saveMessage(message);
+    this.socket.saveMessage(message)
+      .then((mess: any) => {
+        console.log(mess.res);
+        this.pushChat(mess.res)
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   addChatLists() {
-    let currUserId = this.socket.User._id;
     this.newMessages.forEach(mess => {
       let otherEndUser: any;
       let clist: any;
-      if (mess.from._id == currUserId) {
+      if (mess.from._id == this.socket.User._id) {
         otherEndUser = mess.to;
       } else {
         otherEndUser = mess.from;
@@ -71,6 +71,35 @@ export class MessagesServiceService {
       }
     })
     console.log(this.chatList);
+  }
+
+  pushChat(mess: any) {
+    let otherEndUser: any;
+    let clist: any;
+    if (mess.from._id == this.socket.User._id) {
+      otherEndUser = mess.to;
+    } else {
+      otherEndUser = mess.from;
+    }
+    let chatAlreadyExsts = -1;
+    let i = 0
+    for (i = 0; i < this.chatList.length; i++) {
+      if (this.chatList[i]._id == otherEndUser._id) {
+        chatAlreadyExsts = i;
+        break;
+      }
+    }
+    if (chatAlreadyExsts >= 0) {
+      this.chatList[i].messages.push(mess);
+    }
+    else {
+      clist = {
+        messages: [mess],
+        _id: otherEndUser._id,
+        name: otherEndUser.name
+      }
+      this.chatList.push(clist)
+    }
   }
 
 }

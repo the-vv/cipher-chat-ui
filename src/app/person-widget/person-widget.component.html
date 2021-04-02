@@ -1,12 +1,13 @@
-<div class="row main">
+<div class="row main ripple" (click)="chatSelected()">
     <div class="chat-avatar">
-        <p-avatar icon="pi pi-user" styleClass="" [size]="'large'" shape="circle"></p-avatar>
+        <p-avatar icon="pi pi-user" styleClass="" [size]="'large'" shape="circle" [label]="chat.name.split('')[0]"
+            [style]="{'background-color':randomColor, 'color': '#ffffff'}"></p-avatar>
     </div>
     <div class="chat-user">
         <div class="row">
             <div class="col-8">
                 <h5 class="p-0 m-0 text-truncate">{{chat.name}}</h5>
-            </div> 
+            </div>
             <div class="col-4 small text-end" style="font-size: 0.7em;">
                 {{chat.messages[chat.messages.length-1].datetime | date:'h:mm a, d/M/yy' }}
             </div>

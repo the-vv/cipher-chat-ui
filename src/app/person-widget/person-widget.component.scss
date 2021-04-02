@@ -10,15 +10,30 @@
 
 .main {
     // height: 20px!important;
-    padding: 5px 0px;
+    padding         : 5px 0px;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter : blur(5px);
-    border-radius: 20px;
-    transition: .2s;
-    cursor: pointer;
-    user-select: none;
+    border-radius   : 20px;
+    transition      : .2s;
+    cursor          : pointer;
+    user-select     : none;
 }
 
 .main:hover {
     transform: scale(1.01);
+}
+
+.ripple {
+    background-position: center;
+    transition         : background 0.5s;
+}
+
+.ripple:hover {
+    background: rgba(255, 255, 255, 0.1) radial-gradient(circle, transparent 1%, rgba(255, 255, 255, 0.2) 1%) center/15000%;
+}
+
+.ripple:active {
+    background-color: rgba(255, 255, 255, 0.15);
+    background-size : 100%;
+    transition      : background 0s;
 }

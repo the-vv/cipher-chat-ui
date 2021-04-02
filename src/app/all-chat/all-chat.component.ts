@@ -17,6 +17,7 @@ export class AllChatComponent implements OnInit {
   newChatError: string = '';
   newChatButtonIcon: string = 'pi-comments';
   newChatUser: any;
+  selectedChat: any;
 
   constructor(
     public socket: SocketService,
@@ -61,6 +62,11 @@ export class AllChatComponent implements OnInit {
     } else {
       console.log('newChat Error');      
     }
+  }
+
+  chatSelected(chat: any) {
+    console.log(chat);    
+    this.selectedChat = chat;
   }
 
 }

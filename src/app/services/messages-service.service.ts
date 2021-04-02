@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { LoginPageComponent } from '../login-page/login-page.component';
 import { Message } from '../models/message';
 import { SocketService } from './socket.service';
 
@@ -65,7 +64,8 @@ export class MessagesServiceService {
         clist = {
           messages: [mess],
           _id: otherEndUser._id,
-          name: otherEndUser.name
+          name: otherEndUser.name,
+          email: otherEndUser.email
         }
         this.chatList.push(clist)
       }

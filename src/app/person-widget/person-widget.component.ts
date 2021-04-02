@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Message } from '../models/message';
+// import { Message } from '../models/message';
+import * as rand from 'randomcolor'
 
 @Component({
   selector: 'app-person-widget',
@@ -12,12 +13,23 @@ export class PersonWidgetComponent implements OnInit {
   chat: any;
 
   @Output()
-  onSelect: EventEmitter<string> = new EventEmitter<string>();
+  onSelect: EventEmitter<any> = new EventEmitter<any>();
+
+  randomColor: string = ''
 
   constructor() { }
 
   ngOnInit(): void {  
-    console.log(this.chat);      
+    console.log(this.chat);          
+    this.randomColor = rand({
+      format: 'rgba',
+      alpha: 1
+    })
+  }
+
+  chatSelected() {
+    // console.log(this.chat);    
+    this.onSelect.emit(this.chat);
   }
 
 }

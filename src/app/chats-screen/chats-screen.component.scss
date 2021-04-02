@@ -13,9 +13,9 @@
 .chat-list {
     height        : calc(100vh - 66px - 50px);
     padding-bottom: 50px;
-    border        : 2px solid red;
+    // border        : 2px solid red;
 }
-
+ 
 .chat-info {
     height: 50px;
     backdrop-filter : blur(5px);
@@ -62,3 +62,22 @@
 .p-inputgroup {
     height: 40px;
 }
+
+.left-bubble, .right-bubble {
+    margin-top: 2px;
+}
+
+.left-bubble {
+    padding-left: 3px
+}
+
+.right-bubble {
+    padding-right: 10px;
+}
+
+.left-bubble .bubble:nth-child(1), .right-bubble .bubble:nth-child(1) {    
+    background: rgba(255, 255, 255, 0.20);
+    padding: 7px 10px 7px 10px;
+    border-radius: 30px;
+}
+ 

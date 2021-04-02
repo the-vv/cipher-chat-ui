@@ -22,12 +22,12 @@
             </div>
             <div class="row" *ngFor="let chat of message.chatList">
                 <div class="col-12 mb-1">
-                    <app-person-widget [chat]="chat" (onSelect)="chatSelected($event)"></app-person-widget>
+                    <app-person-widget [chat]="chat"  (onSelect)="chatSelected($event)"></app-person-widget>
                 </div>
             </div>
         </div>
-        <div class="col-lg-8 col-xl-9 col-md-7 chat-window">
-            <app-chats-screen></app-chats-screen>
+        <div class="col-lg-8 col-xl-9 col-md-7 chat-window p-0 m-0">
+            <app-chats-screen [chat]="selectedChat" [hasSelected]=!!selectedChat></app-chats-screen>
         </div>
     </div>
 </div>

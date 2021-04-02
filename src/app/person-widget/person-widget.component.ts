@@ -20,8 +20,9 @@ export class PersonWidgetComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {  
-    console.log(this.chat);          
+    // console.log(this.chat);          
     this.randomColor = rand({
+      luminosity: 'dark',
       format: 'rgba',
       alpha: 1
     })

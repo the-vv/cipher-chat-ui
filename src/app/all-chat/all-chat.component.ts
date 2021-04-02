@@ -65,7 +65,7 @@ export class AllChatComponent implements OnInit {
   }
 
   chatSelected(chat: any) {
-    console.log(chat);    
+    // console.log(chat);    
     this.selectedChat = chat;
   }
 

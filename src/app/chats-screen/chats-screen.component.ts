@@ -1,4 +1,5 @@
 import { ApplicationRef, ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { MessagesServiceService } from '../services/messages-service.service';
 import { SocketService } from '../services/socket.service';
 
 @Component({
@@ -17,12 +18,19 @@ export class ChatsScreenComponent implements OnInit, OnChanges{
   messages: any[];
   currentUserId: string;
   randomColor: string;
+  messageString: string;
 
   constructor(public socket: SocketService,
-    private change: ApplicationRef) {
+    private message: MessagesServiceService) {
   }
 
   ngOnInit(): void {
+  }
+
+  sendMessage() {
+    console.log(this.messageString);   
+    this.message.sendMessage(this.chat._id, this.messageString)
+    // this.message.addNewChatTo(); 
   }
 
   setRandCOlor() {

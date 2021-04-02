@@ -19,17 +19,34 @@ export class MessagesServiceService {
       .subscribe(messages => {
         this.newMessages = messages;
         this.isMessageReaady = true;
-        this.addChatLists();       
+        this.addChatLists();
       })
   }
 
   getMessages() {
     this.socket.getMessages()
-    .then(mess => {
-      this.newMessages = mess;
-      this.isMessageReaady = true;
-      this.addChatLists();
-    })
+      .then(mess => {
+        this.newMessages = mess;
+        this.isMessageReaady = true;
+        this.addChatLists();
+      })
+  }
+
+  sendMessage(to: any, mess: string) {
+    let message: Message = {
+      message: mess,
+      from: this.socket.User._id,
+      to: to,
+      datetime: new Date()
+    }
+    this.socket.saveMessage(message)
+      .then((mess: any) => {
+        console.log(mess.res);
+        this.pushChat(mess.res)
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   addNewChatTo(user: any) {

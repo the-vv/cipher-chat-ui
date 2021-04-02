@@ -39,8 +39,8 @@
     <div class="chat-input col-12 col-lg-8 col-xl-9 col-md-7 d-flex justify-content-between align-items-center"
         style="padding-left: 10px;padding-right: 10px;">
         <div class="p-inputgroup">
-            <input type="text" pInputText placeholder="Type a message">
-            <button type="button" pButton pRipple icon="pi pi-send" styleClass="p-button-warn"></button>
+            <input type="text" pInputText placeholder="Type a message" [(ngModel)]="messageString">
+            <button type="button" pButton pRipple icon="pi pi-send" styleClass="p-button-warn" (click)="sendMessage()"></button>
         </div>
     </div>
 </div>

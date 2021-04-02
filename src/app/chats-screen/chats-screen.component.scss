@@ -2,28 +2,43 @@
     height: calc(100vh - 66px);
 }
 
+.ofw {
+    overflow-wrap: break-word;
+    word-wrap    : break-word;
+    hyphens      : auto;
+    white-space  : pre-wrap;
+}
+
+
+.bubble-text {
+    vertical-align: top;
+    max-width     : 50vw;
+    display       : inline-block
+}
+
 .chat-input {
     height          : 50px;
     background-color: rgba(255, 255, 255, 0.05);
     backdrop-filter : blur(5px);
     position        : absolute;
     bottom          : 0;
-} 
+}
 
 .chat-list {
-    height        : calc(100vh - 66px - 50px);
-    padding-bottom: 52px;
+    height           : calc(100vh - 66px - 50px);
+    padding-bottom   : 52px;
     // border        : 2px solid red;
 }
- 
+
 .chat-info {
-    height: 50px;
+    height          : 50px;
     backdrop-filter : blur(5px);
     background-color: rgba(255, 255, 255, 0.05);
 }
 
-.user-details, .chat-info {
-    vertical-align: center!important;
+.user-details,
+.chat-info {
+    vertical-align: center !important;
 }
 
 .p-inputtext,
@@ -63,7 +78,8 @@
     height: 40px;
 }
 
-.left-bubble, .right-bubble {
+.left-bubble,
+.right-bubble {
     margin-top: 2px;
 }
 
@@ -75,12 +91,38 @@
     padding-right: 10px;
 }
 
-.left-bubble .bubble:nth-child(1), .right-bubble .bubble:nth-child(1) {    
-    background: rgba(255, 255, 255, 0.20);
-    padding: 7px 10px 7px 10px;
-    border-radius: 30px;
+.bubble {
+    position: relative;
 }
- 
-p-avatar {
-    width: 0.9em!important;
+
+// .datetimel,
+// .datetimer {
+//     position: absolute;
+//     bottom  : -6px;
+//     width   : 100px;
+// }
+
+// .datetimer {
+//     transform: translateX(-100%);
+// }
+
+// .datetimel {
+//     transform: translateX(-49%);
+// }
+
+
+.left-bubble .bubble:nth-child(1) {
+    background            : rgba(255, 255, 255, 0.20);
+    padding               : 10px 10px 10px 10px;
+    border-radius         : 30px;
+    border-top-left-radius: 0px;
+    min-width: 60px;
+}
+
+.right-bubble .bubble:nth-child(1) {
+    background                : rgba(255, 255, 255, 0.20);
+    padding                   : 10px 10px 10px 10px;
+    border-radius             : 30px;
+    border-bottom-right-radius: 0px;
+    min-width: 60px;
 }

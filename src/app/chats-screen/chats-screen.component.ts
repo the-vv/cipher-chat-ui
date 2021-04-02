@@ -1,4 +1,4 @@
-import { ApplicationRef, ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewChecked, ElementRef, ViewChild, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MessagesServiceService } from '../services/messages-service.service';
 import { SocketService } from '../services/socket.service';
 
@@ -7,13 +7,16 @@ import { SocketService } from '../services/socket.service';
   templateUrl: './chats-screen.component.html',
   styleUrls: ['./chats-screen.component.scss']
 })
-export class ChatsScreenComponent implements OnInit, OnChanges{
+export class ChatsScreenComponent implements OnInit, OnChanges {
 
   @Input()
   chat: any;
 
   @Input()
   hasSelected: boolean = false;
+
+  @ViewChild('scrollDown')
+  myScrollContainer: ElementRef;
 
   messages: any[];
   currentUserId: string;
@@ -24,20 +27,34 @@ export class ChatsScreenComponent implements OnInit, OnChanges{
     private message: MessagesServiceService) {
   }
 
-  ngOnInit(): void {
+
+  ngOnInit() {
+    this.scrollToBottom();
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch (err) { }
   }
 
   sendMessage() {
-    console.log(this.messageString);   
-    this.message.sendMessage(this.chat._id, this.messageString)
+    console.log(this.messageString);
+    this.message.sendMessage(this.chat._id, this.messageString);
+    this.messageString = '';
     // this.message.addNewChatTo(); 
   }
 
-  setRandCOlor() {
-    return {'backgroundColor': this.randomColor}
+  setRandColor() {
+    return { 'backgroundColor': this.randomColor }
   }
 
-  ngOnChanges(changes: SimpleChanges) {    
+  ngOnChanges(changes: SimpleChanges) {
+    this.messageString = '';
     if (changes.chat.currentValue != undefined) {
       this.currentUserId = this.socket.User._id;
       this.randomColor = changes.chat.currentValue.color;

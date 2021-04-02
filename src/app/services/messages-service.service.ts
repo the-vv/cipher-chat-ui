@@ -7,9 +7,10 @@ import { SocketService } from './socket.service';
 })
 export class MessagesServiceService {
 
-  newMessages: any[];
+  newMessages: any;
   isMessageReaady: boolean = false;
   chatList: any[] = [];
+  isListening: boolean = false;
 
   constructor(
     public socket: SocketService
@@ -18,9 +19,17 @@ export class MessagesServiceService {
       .subscribe(messages => {
         this.newMessages = messages;
         this.isMessageReaady = true;
-        this.addChatLists();
-        // console.log(this.newMessages);        
+        this.addChatLists();       
       })
+  }
+
+  getMessages() {
+    this.socket.getMessages()
+    .then(mess => {
+      this.newMessages = mess;
+      this.isMessageReaady = true;
+      this.addChatLists();
+    })
   }
 
   addNewChatTo(user: any) {
@@ -41,7 +50,7 @@ export class MessagesServiceService {
   }
 
   addChatLists() {
-    this.newMessages.forEach(mess => {
+    this.newMessages.forEach((mess: any) => {
       let otherEndUser: any;
       let clist: any;
       if (mess.from._id == this.socket.User._id) {

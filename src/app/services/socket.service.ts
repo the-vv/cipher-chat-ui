@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
+import { rejects } from 'node:assert';
 import { Observable } from 'rxjs';
 import { Message } from '../models/message';
 import { User } from '../models/user';
@@ -31,7 +32,8 @@ export class SocketService {
     this.currentUser.subscribe((user) => { //login process
       this.User = user.user;
       this.isLoggedIn = true;
-      socket.emit('getMessages', user);
+      this.getMessages()
+      // socket.emit('getMessages', this.User);
     })
   }
 
@@ -56,7 +58,14 @@ export class SocketService {
   }
 
   getMessages() {
-    this.socket.emit('getMessages', this.User)
+    return new Promise((resolve, reject) => {
+      if(!this.User) {
+        reject({error: 'Not Logged in', success: false})
+      }
+      this.socket.emit('getMessages', this.User, (messages: any) => {
+        resolve(messages)
+      })
+    })
   }
 
   saveMessage(message: Message) {

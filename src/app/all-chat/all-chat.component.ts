@@ -25,6 +25,7 @@ export class AllChatComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.message.getMessages()
   }
 
   checkMail() {

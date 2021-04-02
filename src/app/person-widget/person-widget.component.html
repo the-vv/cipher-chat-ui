@@ -4,7 +4,7 @@
             [style]="{'background-color':randomColor, 'color': '#ffffff'}"></p-avatar>
     </div>
     <div class="chat-user">
-        <div class="row">
+        <div class="row d-flex justify-content-between">
             <div class="col-8">
                 <h5 class="p-0 m-0 text-truncate">{{chat.name}}</h5>
             </div>
@@ -17,5 +17,5 @@
                 <p class="p-0 m-0 text-truncate">{{chat.messages[chat.messages.length-1].message}}</p>
             </div>
         </div>
-    </div>
+    </div> 
 </div>

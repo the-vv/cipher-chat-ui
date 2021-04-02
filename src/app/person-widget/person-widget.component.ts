@@ -30,6 +30,7 @@ export class PersonWidgetComponent implements OnInit {
 
   chatSelected() {
     // console.log(this.chat);    
+    this.chat.color = this.randomColor;
     this.onSelect.emit(this.chat);
   }
 

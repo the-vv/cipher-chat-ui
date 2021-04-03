@@ -10,9 +10,9 @@
                 <p-avatar icon="pi pi-user" styleClass="" [size]="'large'" shape="circle"
                     [label]="chat.name.split('')[0]" [style]="{'color': 'white', 'background-color': randomColor}"
                     [ngStyle]="{'backgroundColor': chat.color, 'borderRadius': '40px'}">
-                </p-avatar> 
+                </p-avatar>
             </div>
-            <div class="user-details col-auto p-0 m-0"> 
+            <div class="user-details col-auto p-0 m-0">
                 <h5 class="p-0 m-0 d-block">{{chat.name}}</h5>
                 <span class="small">{{chat.email}}</span>
             </div>
@@ -22,14 +22,14 @@
         <div class="col-12 singleChat" *ngFor="let mess of messages">
             <div class="left-bubble text-start" *ngIf="mess.to._id == socket.User._id">
                 <div class="d-inline-block bubble ofw">
-                    <p  class="ofw p-0 m-0 bubble-text">{{mess.message}}</p>
+                    <p class="ofw p-0 m-0 bubble-text">{{mess.message}}</p>
                     <span class="small datetimel" style="font-size: 0.6em; margin: 5px; vertical-align: bottom;">
                         {{mess.datetime | date:'h:mm a'}}</span>
                 </div>
             </div>
             <div class="right-bubble text-end" *ngIf="mess.from._id == socket.User._id">
                 <div class="d-inline-block bubble ofw">
-                    <p  class="ofw p-0 m-0 bubble-text">{{mess.message}}</p>
+                    <p class="ofw p-0 m-0 bubble-text">{{mess.message}}</p>
                     <span class="small datetimer" style="font-size: 0.6em; margin: 5px; vertical-align: bottom;">
                         {{mess.datetime | date:'h:mm a'}}</span>
                 </div>
@@ -39,7 +39,7 @@
     <div class="chat-input col-12 col-lg-8 col-xl-9 col-md-7 d-flex justify-content-between align-items-center"
         style="padding-left: 10px;padding-right: 10px;">
         <div class="p-inputgroup">
-            <input type="text" pInputText placeholder="Type a message" [(ngModel)]="messageString">
+            <input type="text" pInputText placeholder="Type a message" [(ngModel)]="messageString"(blur)="onBlur()" (focus)="onFocus()">
             <button type="button" pButton pRipple icon="pi pi-send" styleClass="p-button-warn" (click)="sendMessage()"></button>
         </div>
     </div>

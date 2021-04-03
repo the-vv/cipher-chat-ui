@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
-import { rejects } from 'node:assert';
 import { Observable } from 'rxjs';
 import { Message } from '../models/message';
 import { User } from '../models/user';

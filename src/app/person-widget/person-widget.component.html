@@ -1,4 +1,4 @@
-<div class="row main ripple" (click)="chatSelected()">
+<div class="row main ripple" (click)="chatSelected()" [ngClass]="activeChat ? 'active-chat' : ''">
     <div class="chat-avatar">
         <p-avatar icon="pi pi-user" styleClass="" [size]="'large'" shape="circle" [label]="chat.name.split('')[0]"
             [style]="{'background-color':randomColor, 'color': '#ffffff'}"></p-avatar>

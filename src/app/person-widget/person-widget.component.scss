@@ -23,6 +23,14 @@
     transform: scale(1.01);
 }
 
+.active-chat {
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+.active-chat:hover {
+    background-color: rgba(255, 255, 255, 0.25)!important;
+}
+
 .ripple {
     background-position: center;
     transition         : background 0.5s;

@@ -13,6 +13,9 @@ export class PersonWidgetComponent implements OnInit {
   @Input()
   chat: any;
 
+  @Input()
+  activeChat: boolean
+
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter<any>();
 
@@ -28,13 +31,13 @@ export class PersonWidgetComponent implements OnInit {
       luminosity: 'dark',
       format: 'rgba',
       alpha: 1
-    })
+    })    
   }
 
   chatSelected() {
     // console.log(this.chat);    
     this.chat.color = this.randomColor;
-    this.onSelect.emit(this.chat);
+    this.onSelect.emit(this.chat);    
   }
 
 }

@@ -95,21 +95,9 @@
     position: relative;
 }
 
-// .datetimel,
-// .datetimer {
-//     position: absolute;
-//     bottom  : -6px;
-//     width   : 100px;
-// }
-
-// .datetimer {
-//     transform: translateX(-100%);
-// }
-
-// .datetimel {
-//     transform: translateX(-49%);
-// }
-
+.smooth-scroll {
+    scroll-behavior: smooth;
+}
 
 .left-bubble .bubble:nth-child(1) {
     background            : rgba(255, 255, 255, 0.20);

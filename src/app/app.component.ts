@@ -77,6 +77,7 @@ export class AppComponent implements OnInit {
               {
                 label: 'Logout',
                 icon: 'bi bi-box-arrow-left',
+                routerLink: '/login',
                 command: () => {
                   this.cookieService.delete('cipherChatAuthToken')
                   this.socket.logout();

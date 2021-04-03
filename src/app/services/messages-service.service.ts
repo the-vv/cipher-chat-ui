@@ -19,7 +19,9 @@ export class MessagesServiceService {
       .subscribe(messages => {
         this.newMessages = messages;
         this.isMessageReaady = true;
-        this.addChatLists();
+        this.pushChat(messages);
+        console.log(messages);
+        
       })
   }
 

@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-    <div class="chat-list overflow-auto" #scrollDown>
+    <div class="chat-list overflow-auto" #scrollDown style=" scroll-behavior: smooth;">
         <div class="col-12 singleChat" *ngFor="let mess of messages">
             <div class="left-bubble text-start" *ngIf="mess.to._id == socket.User._id">
                 <div class="d-inline-block bubble ofw">

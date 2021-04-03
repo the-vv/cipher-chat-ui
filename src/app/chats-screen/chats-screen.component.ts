@@ -56,10 +56,10 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   }
 
   ngAfterViewChecked() {
-    if(this.needChange) {
+    // if(this.needChange) {
       this.scrollToBottom();
-      this.needChange = false;
-    }
+      // this.needChange = false;
+    // }
   }
 
   ngAfterViewInit() {    

@@ -20,7 +20,7 @@ export class MessagesServiceService {
         this.newMessages = messages;
         this.isMessageReaady = true;
         this.pushChat(messages);
-        console.log(messages);
+        // console.log(messages);
         
       })
   }
@@ -60,7 +60,7 @@ export class MessagesServiceService {
     }
     this.socket.saveMessage(message)
       .then((mess: any) => {
-        console.log(mess.res);
+        // console.log(mess.res);
         this.pushChat(mess.res)
       })
       .catch(err => {
@@ -98,7 +98,7 @@ export class MessagesServiceService {
         this.chatList.push(clist)
       }
     })
-    console.log(this.chatList);
+    // console.log(this.chatList);
   }
 
   pushChat(mess: any) {
@@ -128,6 +128,16 @@ export class MessagesServiceService {
       }
       this.chatList.push(clist)
     }
+  }
+
+  checkIfAlreadyChatting(email: string): boolean {
+    let chating = false;
+    this.chatList.forEach(chat => {
+      if(chat.email == email) {
+        chating = true;
+      }
+    })
+    return chating;
   }
 
 }

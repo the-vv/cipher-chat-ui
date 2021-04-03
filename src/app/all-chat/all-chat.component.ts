@@ -32,6 +32,10 @@ export class AllChatComponent implements OnInit {
     this.disableNewChat = true;
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(String(this.mailId))) {
+      if(this.message.checkIfAlreadyChatting(this.mailId)) {
+        this.newChatError = 'You are already chatting with this user';
+        return;
+      }
       this.newChatError = 'Checking...'
       this.newChatButtonIcon = 'pi-spin pi-spinner';
       this.socket.checkMailExist(this.mailId)

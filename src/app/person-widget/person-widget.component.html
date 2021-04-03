@@ -5,10 +5,13 @@
     </div>
     <div class="chat-user">
         <div class="row d-flex justify-content-between">
-            <div class="col-8">
-                <h5 class="p-0 m-0 text-truncate">{{chat.name}}</h5>
+            <div class="col-auto">
+                <h5 class="p-0 m-0 text-truncate">
+                    {{chat.name}}
+                    <span *ngIf="socket.User._id == chat._id">(You)</span>
+                </h5>
             </div>
-            <div class="col-4 small text-end" style="font-size: 0.7em;">
+            <div class="col small text-end" style="font-size: 0.7em;">
                 {{chat.messages[chat.messages.length-1].datetime | date:'h:mm a, d/M/yy' }}
             </div>
         </div>

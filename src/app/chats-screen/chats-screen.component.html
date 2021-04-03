@@ -13,14 +13,17 @@
                 </p-avatar>
             </div>
             <div class="user-details col-auto p-0 m-0">
-                <h5 class="p-0 m-0 d-block">{{chat.name}}</h5>
+                <h5 class="p-0 m-0 d-block">
+                    {{chat.name}}
+                    <span *ngIf="socket.User._id == chat._id">(You)</span>
+                </h5>
                 <span class="small">{{chat.email}}</span>
             </div>
         </div>
     </div>
-    <div class="chat-list overflow-auto" [ngClass]="canScrollSmooth ? 'smooth-scroll' : ''" #scrollDown (wheel)="handleScroll()">
+    <div class="chat-list overflow-auto" [ngClass]="canScrollSmooth ? 'smooth-scroll' : ''" #scrollDown (scroll)="handleScroll()"> 
         <div class="col-12 singleChat" *ngFor="let mess of messages">
-            <div class="left-bubble text-start" *ngIf="mess.to._id == socket.User._id">
+            <div class="left-bubble text-start" *ngIf="mess.to._id == socket.User._id && mess.from._id != socket.User._id">
                 <div class="d-inline-block bubble ofw">
                     <p class="ofw p-0 m-0 bubble-text">{{mess.message}}</p>
                     <span class="small datetimel" style="font-size: 0.6em; margin: 5px; vertical-align: bottom;">

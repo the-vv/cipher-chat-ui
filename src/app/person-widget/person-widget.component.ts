@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 // import { Message } from '../models/message';
 import * as rand from 'randomcolor'
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'app-person-widget',
@@ -17,7 +18,9 @@ export class PersonWidgetComponent implements OnInit {
 
   randomColor: string = ''
 
-  constructor() { }
+  constructor(
+    public socket: SocketService
+  ) { }
 
   ngOnInit(): void {  
     // console.log(this.chat);          

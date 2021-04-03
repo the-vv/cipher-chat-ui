@@ -27,6 +27,7 @@
 .chat-list {
     height           : calc(100vh - 66px - 50px);
     padding-bottom   : 52px;
+    position:relative
     // border        : 2px solid red;
 }
 
@@ -113,4 +114,20 @@
     border-radius             : 30px;
     border-bottom-right-radius: 0px;
     min-width: 60px;
+}
+
+.p-button.scroll-down-button {
+    position: absolute;
+    right: 25px;
+    bottom: 60px;
+    border-radius: 30px;
+    backdrop-filter: blur(10px)!important;
+}
+
+.p-button.scroll-down-button:hover,
+.p-button.scroll-down-button:active,
+.p-button.scroll-down-button:focus {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    border    : 1px solid rgba(255, 255, 255, 0.2);
 }

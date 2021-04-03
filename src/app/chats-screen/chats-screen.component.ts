@@ -25,9 +25,16 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     }
   }
 
+  handleScroll() {
+    this.needScroll = this.isUserNearBottom() ? true : false;
+    this.needScroll2 = false;
+  }
 
-  handleScroll(event) {
-    console.log(event, 'hllo');
+  private isUserNearBottom(): boolean {
+    const threshold = 100;
+    const position = this.scrollContainer.nativeElement.scrollTop + this.scrollContainer.nativeElement.offsetHeight;
+    const height = this.scrollContainer.nativeElement.scrollHeight;
+    return position > height - threshold;
   }
 
   onFocus() {
@@ -38,6 +45,11 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     this.isChatSendable = false;
   }
 
+  goToBottom() {
+    this.needScroll = true;
+    this.scrollToBottom();
+  }
+
   messages: any[];
   currentUserId: string;
   randomColor: string;
@@ -45,6 +57,8 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   isChatSendable: boolean = false;
   container: HTMLElement;
   needScroll: boolean = true;
+  needScroll2: boolean = true;
+  canScrollSmooth: boolean = false;
 
   constructor(public socket: SocketService,
     private message: MessagesServiceService) {
@@ -56,7 +70,7 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   }
 
   ngAfterViewChecked() {
-    if (this.needScroll) {
+    if (this.needScroll && this.needScroll2) {
       this.scrollToBottom();
     }
   }
@@ -66,7 +80,9 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
 
   scrollToBottom(): void {
     try {
-      this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
+      if (this.needScroll) {
+        this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
+      }
     } catch (err) { }
   }
 
@@ -74,9 +90,9 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     if (this.messageString.length <= 0) {
       return;
     }
-    this.needScroll = true;
     this.message.sendMessage(this.chat._id, this.messageString);
     this.messageString = '';
+    this.needScroll2 = true;
     // this.message.addNewChatTo(); 
   }
 
@@ -86,13 +102,19 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
 
   ngOnChanges(changes: SimpleChanges) {
     this.messageString = '';
+    this.canScrollSmooth = false;
+    this.needScroll = true;
     if (changes.chat.currentValue != undefined) {
       this.currentUserId = this.socket.User._id;
       this.randomColor = changes.chat.currentValue.color;
       this.messages = changes.chat.currentValue.messages;
-      console.log(changes.chat.currentValue);
-
-      this.needScroll = true;
+      this.needScroll2 = true;
+      if (!this.canScrollSmooth) {
+        setTimeout(() => {
+          this.canScrollSmooth = true;
+        }, 200);
+      }
+      // console.log(changes.chat.currentValue);
     }
   }
 

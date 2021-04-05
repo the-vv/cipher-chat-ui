@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SocketService } from '../services/socket.service';
 import { MessageService } from 'primeng/api';
+import { NgxUiLoaderService } from "ngx-ui-loader"; // Import NgxUiLoaderService
 
 
 @Component({
@@ -33,7 +34,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private socket: SocketService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private ngxService: NgxUiLoaderService
   ) {
     this.mobileView = window.innerWidth < 500 ? true : false;
   }
@@ -64,13 +66,16 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         if (user) {      
           console.log(this.socket.redirectUrl);            
           this.router.navigate([this.socket.redirectUrl ? this.socket.redirectUrl : '/'], {replaceUrl: true});
+          this.ngxService.stop();
         }
       })
     this.socket.loginStatus.subscribe(data => {
-      this.showError('Error', data.status)
+      this.showError('Error', data.status);
+      this.ngxService.stop();
     })
     this.socket.signupStatus.subscribe(data => {
-      this.showError('Error', data.status)
+      this.showError('Error', data.status);
+      this.ngxService.stop();
     })
   }
 
@@ -92,7 +97,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       return
     }
     // console.log(this.SignupForm.value);
-    this.socket.sendAuth(this.SignupForm.value, false)
+    this.socket.sendAuth(this.SignupForm.value, false);    
+    this.ngxService.start();
   }
 
   onLogin() {
@@ -100,7 +106,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       console.log('INVALID FORM');
       return
     }
-    this.socket.sendAuth(this.loginForm.value, true)
+    this.socket.sendAuth(this.loginForm.value, true);
+        this.ngxService.start();
   }
 
 }

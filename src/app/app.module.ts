@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-
 
 // PrimeNG imports
 import { AvatarModule } from 'primeng/avatar';
@@ -24,6 +23,7 @@ import { DialogModule } from 'primeng/dialog';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { CookieService } from 'ngx-cookie-service';
+import { NgxUiLoaderConfig, NgxUiLoaderModule } from "ngx-ui-loader";
 
 // Components and services
 import { ReactiveFormsModule } from '@angular/forms';
@@ -40,6 +40,37 @@ import { ChatsScreenComponent } from './chats-screen/chats-screen.component';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  "bgsColor": "red",
+  "bgsOpacity": 0.2,
+  "bgsPosition": "bottom-right",
+  "bgsSize": 60,
+  "bgsType": "ball-spin-clockwise",
+  "blur": 5,
+  "delay": 0,
+  "fastFadeOut": true,
+  "fgsColor": "#ffffff",
+  "fgsPosition": "center-center",
+  "fgsSize": 60,
+  "fgsType": "three-strings",
+  "gap": 24,
+  "logoPosition": "center-center",
+  "logoSize": 120,
+  "logoUrl": "",
+  "masterLoaderId": "master",
+  "overlayBorderRadius": "0",
+  "overlayColor": "rgba(0,0,0,0.34)",
+  "pbColor": "red",
+  "pbDirection": "ltr",
+  "pbThickness": 3,
+  "hasProgressBar": true,
+  "text": "Loading...",
+  "textColor": "#FFFFFF",
+  "textPosition": "center-center",
+  "maxTime": -1,
+  "minTime": 300
+};
 
 
 @NgModule({
@@ -70,7 +101,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     SidebarModule,
     ToastModule,
     DialogModule,
-    FormsModule
+    FormsModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
   providers: [
     LoginServiceService,
@@ -78,6 +110,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     MessageService,
     CookieService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class AppModule { }

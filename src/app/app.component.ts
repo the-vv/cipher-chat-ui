@@ -3,7 +3,6 @@ import { PrimeNGConfig } from 'primeng/api';
 import { MenuItem } from 'primeng/api';
 import { SocketService } from './services/socket.service';
 import * as rand from 'randomcolor'
-import { CookieService } from 'ngx-cookie-service';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
@@ -32,13 +31,14 @@ export class AppComponent implements OnInit {
   constructor(
     private primengConfig: PrimeNGConfig,
     public socket: SocketService,
-    private cookieService: CookieService,
     private router: Router
   ) {
     this.mobileView = window.innerWidth < 500 ? true : false;
 
-    if (cookieService.check('cipherChatAuthToken')) {
-      socket.verifyAuth(this.cookieService.get('cipherChatAuthToken'));
+    let usr: any = localStorage.getItem('user')
+    if (usr) {
+      usr = JSON.parse(usr)
+      socket.verifyAuth(usr.token);
     } else {
       // console.log('Not Logegd in');
     }
@@ -69,7 +69,7 @@ export class AppComponent implements OnInit {
 
     this.socket.currentUser.subscribe(user => {
       if (user.user) {
-        this.cookieService.set('cipherChatAuthToken', user.token)
+        localStorage.setItem('user', JSON.stringify(user))
         this.sideItems = [
           {
             label: 'Account',
@@ -79,7 +79,7 @@ export class AppComponent implements OnInit {
                 icon: 'bi bi-box-arrow-left',
                 routerLink: '/login',
                 command: () => {
-                  this.cookieService.delete('cipherChatAuthToken')
+                  localStorage.removeItem('user');
                   this.socket.logout();
                   this.visibleSidebar = !this.visibleSidebar;
                   this.initSidebar();

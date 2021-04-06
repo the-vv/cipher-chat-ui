@@ -1,0 +1,203 @@
+[33mcommit 5fa79415a10ccaf3bf8e0ca61732bb62b983e649[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Tue Apr 6 18:06:06 2021 +0530
+
+    changed loader
+
+[33mcommit 700e554c12431214706d76956214e984e3ad92d1[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Mon Apr 5 20:15:40 2021 +0530
+
+    added a ui loader
+
+[33mcommit 262f3ca00d7b32f2e8c9f455d3ee0cc86824ca2a[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sun Apr 4 01:28:33 2021 +0530
+
+    added active chat class
+
+[33mcommit 95bffdae0ce2da50df6245bb6d233e532a125147[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sun Apr 4 01:15:12 2021 +0530
+
+    working as a good chat app
+
+[33mcommit 6659f4890a5eae026f2dcbbdfc71167fb6821810[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sat Apr 3 23:41:17 2021 +0530
+
+    implemented auto scroll
+
+[33mcommit 1403debf60ff03a9e0fd9f33bb0628b73a9f846b[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sat Apr 3 22:41:54 2021 +0530
+
+    before setting up auto scroll
+
+[33mcommit 508a6142025dc75a08e337ed9f6f90b38799daee[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sat Apr 3 16:31:51 2021 +0530
+
+    working realtime chat
+
+[33mcommit 43a23ffac3c909b823216ff96402ccf1a8df4a56[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sat Apr 3 15:21:48 2021 +0530
+
+    before implementing real time
+
+[33mcommit 9a4186d566927d10f5c6369ace4bd5f7a935eaf3[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sat Apr 3 00:45:52 2021 +0530
+
+    basic chatting working
+
+[33mcommit d74cdbc495bc11dca9870dc7652c72f434a03b35[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Fri Apr 2 23:56:51 2021 +0530
+
+    working chat
+
+[33mcommit b5efa2266b8f458590ecc23679d6e84133fb9cb0[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Fri Apr 2 23:37:16 2021 +0530
+
+    before seting up send
+
+[33mcommit d8cf0c9c2bbda5f4426f9e3191e1f83ca31bca27[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Fri Apr 2 22:29:08 2021 +0530
+
+    completing chat header, footer and bubble design
+
+[33mcommit 8b71c2256f70f5886b74a9fcbff2bbd66efd1224[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Fri Apr 2 19:53:36 2021 +0530
+
+    designes chat bubbles
+
+[33mcommit 056210b6a8af0228d41852e9a369bbc6ecd1d79d[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Fri Apr 2 17:19:32 2021 +0530
+
+    before designing bubbles
+
+[33mcommit a2f32c5eb3023e68d6ef3e47923cf8f341e69e55[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Fri Apr 2 14:51:11 2021 +0530
+
+    berofre adding chatscreen design
+
+[33mcommit 06aaf6452009e86d8fe4cb0a0896097bb4bfa095[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Fri Apr 2 02:31:24 2021 +0530
+
+    new chat list working
+
+[33mcommit 13510146ca61d3ec5a6cf5a27fa34d196e391f33[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Fri Apr 2 01:58:58 2021 +0530
+
+    working add new chat
+
+[33mcommit 7dbac7f1e65b85b713407b78fb8393df5779e564[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Wed Mar 31 00:24:53 2021 +0530
+
+    added new chat dialogue
+
+[33mcommit c113dc43dc051cdf37d9572923983fa5d3576ecb[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Tue Mar 30 00:33:39 2021 +0530
+
+    setting up messages
+
+[33mcommit 25c90063d3b0a1a68ad54016cd54a19e221fd5f8[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sun Mar 28 22:57:36 2021 +0530
+
+    displayed date in chat list
+
+[33mcommit beafb2d38604c41ba63676b87e90396af7b8c037[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sun Mar 28 22:49:22 2021 +0530
+
+    rendered chat list
+
+[33mcommit 94670929f20ec25bc29dce94c4c4dc0a8057bbfa[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sun Mar 28 22:15:43 2021 +0530
+
+    added chat name widget with design layout
+
+[33mcommit c2807ba7ab4ff20b7afcb3b0af8bc905cd73ee45[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sun Mar 28 20:47:13 2021 +0530
+
+    some more functional and ui changes
+
+[33mcommit c615f1a67a560f694fecf2246868af97c15d638a[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sun Mar 28 00:22:55 2021 +0530
+
+    working authentication flow with socket.io
+
+[33mcommit 0efef19d547659b04c8183c71969237f31c29e4d[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sat Mar 27 21:44:34 2021 +0530
+
+    working auth flow
+
+[33mcommit 306997793d4ac644ef7014fb896346e08a0f36ab[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sat Mar 27 18:04:33 2021 +0530
+
+    send and recieved auth with user
+
+[33mcommit e38f7d02d602ba87f53b31106c5bdb08a1979140[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sat Mar 27 01:46:03 2021 +0530
+
+    data send to server
+
+[33mcommit 187801392dd7d85c0cd70749118c33687a3c2763[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Mon Mar 22 22:06:28 2021 +0530
+
+    added some mor ui design changes
+
+[33mcommit 4288476b5bc5a72516ba3a79896b08b00fce38ee[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Mon Mar 15 23:27:07 2021 +0530
+
+    form is all good at validation
+
+[33mcommit c3a34a5c6c478570937113ca5409f2cfad82a4c8[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Mon Mar 15 22:35:32 2021 +0530
+
+    forms validation successfull
+
+[33mcommit 30c15b9656be25f1c6e694f0419cbcc20a19bd0c[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Mon Mar 15 01:04:06 2021 +0530
+
+    working on form validation
+
+[33mcommit 539301ff6057fd50e341b9cb945bb1a1e7c69028[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sun Mar 14 23:46:04 2021 +0530
+
+    working login form as reactive form
+
+[33mcommit b08b1044317dfae52d26be33905762d9975036eb[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sat Mar 13 23:44:24 2021 +0530
+
+    setting up Login Page
+
+[33mcommit ab7564ff90b18cd376eaf4f176cfb55c3b7a0e23[m
+Author: vv-2001 <vishnuvinod2772001@gmail.com>
+Date:   Sat Mar 13 13:50:29 2021 +0530
+
+    initial commit

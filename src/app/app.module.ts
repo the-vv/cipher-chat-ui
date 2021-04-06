@@ -22,7 +22,6 @@ import { DialogModule } from 'primeng/dialog';
 // Other Libraries
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { CookieService } from 'ngx-cookie-service';
 import { NgxSpinnerModule } from "ngx-spinner";
 
 // Components and services
@@ -51,7 +50,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     AllChatComponent,
     PersonWidgetComponent,
     ChatsScreenComponent
-  ],
+  ], 
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -76,8 +75,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
   providers: [
     LoginServiceService,
     SocketService,
-    MessageService,
-    CookieService
+    MessageService
   ],
   bootstrap: [AppComponent],
   schemas: [

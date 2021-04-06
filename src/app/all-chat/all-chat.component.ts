@@ -25,7 +25,6 @@ export class AllChatComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('request messages')    
     this.message.getMessages()
   }
 

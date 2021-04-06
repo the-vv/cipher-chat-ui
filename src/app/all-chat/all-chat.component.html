@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-8 col-xl-9 col-md-7 chat-window p-0 m-0">
+        <div class="col-lg-8 col-xl-9 col-md-7 chat-window p-0 m-0" *ngIf="!mobileView">
             <app-chats-screen [chat]="selectedChat" [hasSelected]=!!selectedChat></app-chats-screen>
         </div>
     </div>
@@ -51,3 +51,10 @@
         </p-button>
     </ng-template>
 </p-dialog>
+
+
+<p-sidebar *ngIf="mobileView" [(visible)]="mobileView && selectedChat" [fullScreen]="true"
+[baseZIndex]="10000">
+<!-- <app-chats-screen [chat]="selectedChat" [hasSelected]=!!selectedChat></app-chats-screen> -->
+heelo
+</p-sidebar>

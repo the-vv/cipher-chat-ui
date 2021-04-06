@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Message } from '../models/message';
 import { MessagesServiceService } from '../services/messages-service.service';
 import { SocketService } from '../services/socket.service';
@@ -10,6 +10,12 @@ import { SocketService } from '../services/socket.service';
 })
 export class AllChatComponent implements OnInit {
 
+  
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.mobileView = event.target.innerWidth < 768 ? true : false;
+  }
+
   askNew: boolean = false;
   mailId: string = '';
   emailCheckSpinner: boolean = false;
@@ -18,11 +24,14 @@ export class AllChatComponent implements OnInit {
   newChatButtonIcon: string = 'pi-comments';
   newChatUser: any;
   selectedChat: any;
+  public mobileView: boolean = false;
 
   constructor(
     public socket: SocketService,
     public message: MessagesServiceService
-  ) { }
+  ) {    
+    this.mobileView = window.innerWidth < 768 ? true : false;
+   }
 
   ngOnInit(): void {
     this.message.getMessages()

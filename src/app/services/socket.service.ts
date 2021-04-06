@@ -28,12 +28,17 @@ export class SocketService {
     this.loginStatus = socket.fromEvent('loginStatus');
     this.signupStatus = socket.fromEvent('signupStatus');
     this.currentUser = socket.fromEvent('authSuccess');
-    this.currentUser.subscribe((user) => { //login process
+    this.currentUser.subscribe(this.login)
+  }
+
+  login = (user: any) => {
+    if (!this.isLoggedIn) {
       this.User = user.user;
       this.isLoggedIn = true;
-      this.getMessages()
-      // socket.emit('getMessages', this.User);
-    })
+    }
+    else if (this.User._id != user.user._id) {
+      console.log('Logged In User Error');
+    }
   }
 
   logout() {
@@ -58,8 +63,8 @@ export class SocketService {
 
   getMessages() {
     return new Promise((resolve, reject) => {
-      if(!this.User) {
-        reject({error: 'Not Logged in', success: false})
+      if (!this.User) {
+        reject({ error: 'Not Logged in', success: false })
       }
       this.socket.emit('getMessages', this.User, (messages: any) => {
         resolve(messages)
@@ -94,6 +99,6 @@ export class SocketService {
       })
     })
   }
-  
+
 
 }

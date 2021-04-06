@@ -3,6 +3,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { MenuItem } from 'primeng/api';
 import { SocketService } from './services/socket.service';
 import * as rand from 'randomcolor'
+import { CookieService } from 'ngx-cookie-service';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
@@ -31,13 +32,14 @@ export class AppComponent implements OnInit {
   constructor(
     private primengConfig: PrimeNGConfig,
     public socket: SocketService,
+    private cookieService: CookieService,
     private router: Router
   ) {
     this.mobileView = window.innerWidth < 500 ? true : false;
 
-    let usr: any = localStorage.getItem('user')
-    if (usr) {
-      usr = JSON.parse(usr)
+    if (cookieService.check('user')) {
+      let usr: any = JSON.parse(this.cookieService.get('user'));
+      socket.login(usr); 
       socket.verifyAuth(usr.token);
     } else {
       // console.log('Not Logegd in');
@@ -45,7 +47,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd){
         // console.log(val.url);
@@ -69,7 +70,7 @@ export class AppComponent implements OnInit {
 
     this.socket.currentUser.subscribe(user => {
       if (user.user) {
-        localStorage.setItem('user', JSON.stringify(user))
+        this.cookieService.set('user', JSON.stringify(user))
         this.sideItems = [
           {
             label: 'Account',
@@ -79,7 +80,7 @@ export class AppComponent implements OnInit {
                 icon: 'bi bi-box-arrow-left',
                 routerLink: '/login',
                 command: () => {
-                  localStorage.removeItem('user');
+                  this.cookieService.delete('user')
                   this.socket.logout();
                   this.visibleSidebar = !this.visibleSidebar;
                   this.initSidebar();

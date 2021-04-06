@@ -25,7 +25,7 @@ export class MessagesServiceService {
       })
   }
 
-  getMessages() {
+  getMessages() {  
     this.socket.getMessages()
       .then(mess => {
         this.newMessages = mess;

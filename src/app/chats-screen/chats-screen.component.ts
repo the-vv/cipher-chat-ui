@@ -1,4 +1,8 @@
-import { AfterViewChecked, ElementRef, ViewChild, Component, Input, OnChanges, OnInit, SimpleChanges, HostListener, AfterViewInit } from '@angular/core';
+import {
+  AfterViewChecked, ElementRef, ViewChild, Component,
+  Input, OnChanges, OnInit, SimpleChanges, HostListener,
+  AfterViewInit, Output, EventEmitter
+} from '@angular/core';
 import { MessagesServiceService } from '../services/messages-service.service';
 import { SocketService } from '../services/socket.service';
 
@@ -8,6 +12,9 @@ import { SocketService } from '../services/socket.service';
   styleUrls: ['./chats-screen.component.scss']
 })
 export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked, AfterViewInit {
+
+  @Output()
+  onBack: EventEmitter<any> = new EventEmitter<any>();
 
   @Input()
   chat: any;
@@ -25,13 +32,18 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     }
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.mobileView = event.target.innerWidth < 768 ? true : false;
+  }
+
   handleScroll() {
     this.needScroll = this.isUserNearBottom() ? true : false;
     this.needScroll2 = false;
   }
 
   private isUserNearBottom(): boolean {
-    const threshold = 100;
+    const threshold = 150;
     const position = this.scrollContainer.nativeElement.scrollTop + this.scrollContainer.nativeElement.offsetHeight;
     const height = this.scrollContainer.nativeElement.scrollHeight;
     return position > height - threshold;
@@ -59,20 +71,25 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   needScroll: boolean = true;
   needScroll2: boolean = true;
   canScrollSmooth: boolean = false;
+  public mobileView: boolean = false;
 
   constructor(public socket: SocketService,
     private message: MessagesServiceService) {
   }
 
-
   ngOnInit() {
     this.scrollToBottom();
+    this.mobileView = window.innerWidth < 768 ? true : false;
   }
 
   ngAfterViewChecked() {
     if (this.needScroll && this.needScroll2) {
       this.scrollToBottom();
     }
+  }
+
+  goBack() {
+    this.onBack.emit();
   }
 
   ngAfterViewInit() {

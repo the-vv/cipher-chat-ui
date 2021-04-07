@@ -1,6 +1,6 @@
 <div class="container-fluid main">
     <div class="row">
-        <div class="col-lg-4 col-xl-3 col-md-5 chats-window">
+        <div class="col-lg-4 col-xl-3 col-md-5 chats-window" [hidden]="mobileView && selectedChat">
             <div class="row">
                 <div class="col-12 action-bar mb-1 ">
                     <div class="row d-flex align-items-center justify-content-between" style="height: 100%">
@@ -27,8 +27,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-8 col-xl-9 col-md-7 chat-window p-0 m-0" *ngIf="!mobileView">
-            <app-chats-screen [chat]="selectedChat" [hasSelected]=!!selectedChat></app-chats-screen>
+        <div class="col-lg-8 col-xl-9 col-md-7 chat-window p-0 m-0" [hidden]="mobileView && !selectedChat">
+            <app-chats-screen [chat]="selectedChat" (onBack)="onBack()" [hasSelected]=!!selectedChat></app-chats-screen>
         </div>
     </div>
 </div>
@@ -52,9 +52,9 @@
     </ng-template>
 </p-dialog>
 
-
+<!-- 
 <p-sidebar *ngIf="mobileView" [(visible)]="mobileView && selectedChat" [fullScreen]="true"
 [baseZIndex]="10000">
-<!-- <app-chats-screen [chat]="selectedChat" [hasSelected]=!!selectedChat></app-chats-screen> -->
+<app-chats-screen [chat]="selectedChat" [hasSelected]=!!selectedChat></app-chats-screen>
 heelo
-</p-sidebar>
+</p-sidebar> -->

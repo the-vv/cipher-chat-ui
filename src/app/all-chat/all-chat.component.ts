@@ -83,4 +83,9 @@ export class AllChatComponent implements OnInit {
     this.selectedChat = chat;
   }
 
+  onBack() {
+    this.selectedChat = null;
+    
+  }
+
 }

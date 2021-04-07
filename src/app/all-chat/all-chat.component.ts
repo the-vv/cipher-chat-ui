@@ -39,8 +39,7 @@ export class AllChatComponent implements OnInit {
     this.message.getMessages();
     this.route.queryParams
       .subscribe(params => {
-        console.log('initing params')
-        if (params.vmode != 1 && this.mobileView) {
+        if (params.vmode != 1) {
           this.selectedChat = null
         };
       });

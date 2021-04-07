@@ -16,6 +16,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
+import { SkeletonModule } from 'primeng/skeleton';
 
 // Materialize
 
@@ -71,7 +72,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ToastModule,
     DialogModule,
     FormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    SkeletonModule
   ],
   providers: [
     LoginServiceService,

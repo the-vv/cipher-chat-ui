@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Message } from '../models/message';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessagesServiceService } from '../services/messages-service.service';
 import { SocketService } from '../services/socket.service';
 
@@ -28,13 +28,22 @@ export class AllChatComponent implements OnInit {
 
   constructor(
     public socket: SocketService,
-    public message: MessagesServiceService
+    public message: MessagesServiceService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {    
     this.mobileView = window.innerWidth < 768 ? true : false;
    }
 
   ngOnInit(): void {
-    this.message.getMessages()
+    this.message.getMessages();
+    this.route.queryParams
+      .subscribe(params => {
+        console.log('initing params')
+        if (params.vmode != 1 && this.mobileView) {
+          this.selectedChat = null
+        };
+      });
   }
 
   checkMail() {
@@ -81,11 +90,12 @@ export class AllChatComponent implements OnInit {
   chatSelected(chat: any) {
     // console.log(chat);    
     this.selectedChat = chat;
+    this.router.navigate(['/chats'], {queryParams: {vmode: 1}})
   }
 
   onBack() {
     this.selectedChat = null;
-    
+    this.router.navigate(['/chats'], {queryParams: {}, replaceUrl: true})
   }
 
 }

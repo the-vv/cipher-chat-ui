@@ -39,14 +39,31 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
 
   handleScroll() {
     this.needScroll = this.isUserNearBottom() ? true : false;
+    this.showbutton = !this.needScroll && this.isScrollingToBottom();
     this.needScroll2 = false;
+    this.isScrollingToBottom()
   }
 
-  private isUserNearBottom(): boolean {
+  isUserNearBottom(): boolean {
     const threshold = 150;
     const position = this.scrollContainer.nativeElement.scrollTop + this.scrollContainer.nativeElement.offsetHeight;
     const height = this.scrollContainer.nativeElement.scrollHeight;
     return position > height - threshold;
+  }
+
+  scroll: any;
+  currentPosition: any
+  isScrollingToBottom(): boolean {
+    this.scroll = this.scrollContainer.nativeElement.scrollTop;
+    let show: boolean;
+    if (this.scroll > this.currentPosition) {
+      show = true;
+    }
+    else {
+      show = false;
+    }
+    this.currentPosition = this.scroll;
+    return show;
   }
 
   onFocus() {
@@ -72,6 +89,8 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   needScroll2: boolean = true;
   canScrollSmooth: boolean = false;
   public mobileView: boolean = false;
+  prevChatListLength: number;
+  showbutton: boolean;
 
   constructor(public socket: SocketService,
     private message: MessagesServiceService) {
@@ -83,7 +102,8 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   }
 
   ngAfterViewChecked() {
-    if (this.needScroll && this.needScroll2) {
+    if (this.needScroll && (this.needScroll2 || this.messages?.length != this.prevChatListLength)) {
+      this.prevChatListLength = this.messages?.length
       this.scrollToBottom();
     }
   }

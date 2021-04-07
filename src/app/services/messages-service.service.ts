@@ -16,12 +16,12 @@ export class MessagesServiceService {
     public socket: SocketService
   ) {
     this.socket.messages
-      .subscribe(messages => {
+      .subscribe(messages => {        // recieving new messages and saving it to messages array
         this.newMessages = messages;
         this.isMessageReaady = true;
-        this.pushChat(messages);
-        // console.log(messages);
-        
+        if(messages.from._id != messages.to._id) {
+          this.pushChat(messages); 
+        }
       })
   }
 
@@ -43,7 +43,6 @@ export class MessagesServiceService {
     }
     this.socket.saveMessage(message)
       .then((mess: any) => {
-        console.log(mess.res);
         this.pushChat(mess.res)
       })
       .catch(err => {

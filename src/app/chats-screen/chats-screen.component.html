@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="chat-list overflow-auto" [ngClass]="canScrollSmooth ? 'smooth-scroll' : ''" #scrollDown
-        (scroll)="handleScroll()">
+        (scroll)="handleScroll($event)">
         <div class="col-12 singleChat" *ngFor="let mess of messages">
             <div class="left-bubble text-start"
                 *ngIf="mess.to._id == socket.User._id && mess.from._id != socket.User._id">
@@ -54,5 +54,5 @@
         </div>
     </div>
 </div>
-<button pButton pRipple type="button" *ngIf="!needScroll" icon="pi pi-angle-double-down"
-    class="p-button-rounded p-button-outlined scroll-down-button" (click)="goToBottom()"></button>
+<button pButton pRipple type="button" *ngIf="showbutton" icon="pi pi-angle-double-down" style="color: white"
+    class="p-button-rounded p-button-outlined scroll-down-button p-0" (click)="goToBottom()"></button>

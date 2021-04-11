@@ -44,7 +44,7 @@ export class AllChatComponent implements OnInit {
         };
       });
   }
-
+ 
   checkMail() {
     this.disableNewChat = true;
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -95,6 +95,10 @@ export class AllChatComponent implements OnInit {
   onBack() {
     this.selectedChat = null;
     this.router.navigate(['/chats'], {queryParams: {}, replaceUrl: true})
+  }
+
+  onRightClick(chat: any) {
+    console.log(chat)
   }
 
 }

@@ -1,6 +1,6 @@
 <div class="container-fluid main">
     <div class="row">
-        <div class="col-lg-4 col-xl-3 col-md-5 chats-window overflow-auto" [hidden]="mobileView && selectedChat">
+        <div class="col-lg-4 col-xl-3 col-md-5 chats-window ovf-auto" [hidden]="mobileView && selectedChat">
             <div class="row">
                 <div class="col-12 action-bar mb-1 ">
                     <div class="row d-flex align-items-center justify-content-between" style="height: 100%">
@@ -26,9 +26,9 @@
                 </div>
             </div>   
             <div class="row" *ngFor="let chat of message.chatList"> 
-                <div class="col-12 mb-1">
+                <div class="col-12 mb-1" oncontextmenu="return false;">
                     <app-person-widget [chat]="chat" [activeChat]="selectedChat && chat._id == selectedChat._id"
-                        (onSelect)="chatSelected($event)"></app-person-widget>
+                        (onSelect)="chatSelected($event)" (onContext)="onRightClick($event)"></app-person-widget>
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
 <p-dialog header="Who do you want to chat with" [(visible)]="askNew" [style]="{width: '50vw'}" [modal]='true'
     maskStyleClass="blur-bg" [breakpoints]="{'780px': '95vw'}" [dismissableMask]="true">
     <div class="col-12 col-md-10">
-        <span class="p-input-icon-left col-12">
+        <span class="p-input-icon-left col-12"> 
             <i class="pi pi-search"></i>
             <input (input)="checkMail()" type="text" pInputText placeholder="Type an Email" [(ngModel)]="mailId" />
         </span>

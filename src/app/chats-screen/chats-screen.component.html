@@ -32,14 +32,14 @@
                 <div class="d-inline-block bubble ofw">
                     <p class="ofw p-0 m-0 bubble-text">{{mess.message}}</p>
                     <span class="small datetimel" style="font-size: 0.6em; margin: 5px; vertical-align: bottom;">
-                        {{mess.datetime | date:'h:mm a'}}</span>
+                        {{mess.datetime | date:isToday(mess.datetime) ? 'h:mm a' : 'h:mm a, d/M/yy'}}</span>
                 </div>
             </div>
             <div class="right-bubble text-end" *ngIf="mess.from._id == socket.User._id">
                 <div class="d-inline-block bubble ofw">
                     <p class="ofw p-0 m-0 bubble-text">{{mess.message}}</p>
                     <span class="small datetimer" style="font-size: 0.6em; margin: 5px; vertical-align: bottom;">
-                        {{mess.datetime | date:'h:mm a'}}</span>
+                        {{mess.datetime | date:isToday(mess.datetime) ? 'h:mm a' : 'h:mm a, d/M/yy'}}</span> 
                 </div>
             </div>
         </div>

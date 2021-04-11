@@ -154,5 +154,13 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
       // console.log(changes.chat.currentValue);
     }
   }
+  
+  isToday(d: any): boolean {
+    const today = new Date()
+    let date = new Date(d)
+    return date.getDate() == today.getDate() &&
+      date.getMonth() == today.getMonth() &&
+      date.getFullYear() == today.getFullYear()
+  }
 
 }

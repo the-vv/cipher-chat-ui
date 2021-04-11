@@ -26,6 +26,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { CookieService } from 'ngx-cookie-service';
 import { NgxSpinnerModule } from "ngx-spinner";
 
+
 // Components and services
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -73,7 +74,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     DialogModule,
     FormsModule,
     NgxSpinnerModule,
-    SkeletonModule
+    SkeletonModule,
   ],
   providers: [
     LoginServiceService,

@@ -71,3 +71,25 @@ body, html {
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(5px)!important;
 }
+
+.p-confirm-popup {  
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(5px)!important;
+  border-radius: 20px !important;
+  text-shadow:  2px 2px 5px #000000 !important;
+}
+
+.p-confirm-popup:before, .p-confirm-popup:after {  
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important; 
+}
+
+.p-confirm-popup-accept, .p-confirm-popup-reject {
+  color: white;
+  background: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 5px 5px 10px #00000046 !important;
+  text-shadow:  2px 2px 5px #000000 !important;
+}
+
+.p-confirm-popup-accept span, .p-confirm-popup-reject span {
+  color: white;
+}

@@ -17,6 +17,8 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { SkeletonModule } from 'primeng/skeleton';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {ConfirmationService} from 'primeng/api';
 
 // Materialize
 
@@ -74,13 +76,15 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     DialogModule,
     FormsModule,
     NgxSpinnerModule,
-    SkeletonModule,
+    SkeletonModule, 
+    ConfirmPopupModule   
   ],
   providers: [
     LoginServiceService,
     SocketService,
     MessageService,
-    CookieService
+    CookieService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent],
   schemas: [

@@ -1,4 +1,5 @@
-<div  class="row main ripple" (click)="chatSelected()" [ngClass]="activeChat ? 'active-chat' : ''">
+<span pRipple class="row main " (click)="chatSelected()" [ngClass]="activeChat ? 'active-chat' : ''"
+    (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">
     <div class="chat-avatar">
         <p-avatar icon="pi pi-user" styleClass="" [size]="'large'" shape="circle" [label]="chat.name.split('')[0]"
             [style]="{'background-color':randomColor, 'color': '#ffffff'}"></p-avatar>
@@ -16,10 +17,13 @@
                 date:isToday(chat.messages[chat.messages.length-1].datetime) ? 'h:mm a' : 'd/M/yy' }}
             </div>
         </div>
-        <div class="row d-flex justify-content-between">
-            <div class="col-12">
+        <div class=" d-flex justify-content-between">
+            <div class="col-11">
                 <p class="p-0 m-0 text-truncate">{{chat.messages[chat.messages.length-1].message}}</p>
+            </div>
+            <div class="col-1 p-0">
+                <i pRipple class="pi pi-trash text-warning" (click)="confirm($event); $event.stopPropagation();"></i>
             </div>
         </div>
     </div>
-</div>
+</span>

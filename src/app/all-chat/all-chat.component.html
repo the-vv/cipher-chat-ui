@@ -28,7 +28,7 @@
             <div class="row" *ngFor="let chat of message.chatList"> 
                 <div class="col-12 mb-1" oncontextmenu="return false;">
                     <app-person-widget [chat]="chat" [activeChat]="selectedChat && chat._id == selectedChat._id"
-                        (onSelect)="chatSelected($event)" (onContext)="onRightClick($event)"></app-person-widget>
+                        (onSelect)="chatSelected($event)" (onDelete)="deleteChat($event)" (onContext)="onRightClick($event)"></app-person-widget>
                 </div>
             </div>
         </div>

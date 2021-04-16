@@ -101,4 +101,11 @@ export class AllChatComponent implements OnInit {
     console.log(chat)
   }
 
+  deleteChat(chat: any) {
+    this.message.deleteChat(chat)
+    if(chat._id == this.selectedChat._id) {
+      this.selectedChat = null;
+    }
+  }
+
 }

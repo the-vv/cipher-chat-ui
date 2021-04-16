@@ -19,13 +19,13 @@ export class MessagesServiceService {
       .subscribe(messages => {        // recieving new messages and saving it to messages array
         this.newMessages = messages;
         this.isMessageReaady = true;
-        if(messages.from._id != messages.to._id) {
-          this.pushChat(messages); 
+        if (messages.from._id != messages.to._id) {
+          this.pushChat(messages);
         }
       })
   }
 
-  getMessages() {  
+  getMessages() {
     this.socket.getMessages()
       .then(mess => {
         this.newMessages = mess;
@@ -132,11 +132,26 @@ export class MessagesServiceService {
   checkIfAlreadyChatting(email: string): boolean {
     let chating = false;
     this.chatList.forEach(chat => {
-      if(chat.email == email) {
+      if (chat.email == email) {
         chating = true;
       }
     })
     return chating;
+  }
+
+  deleteChat(c: any) {
+    let idsToDelete = c.messages.map((mes: any) => mes._id);
+    console.log(c)
+    this.socket.deleteMessages(idsToDelete)
+      .then((r) => {
+        console.log(r);
+        this.chatList = this.chatList.filter(val => {
+          return val._id != c._id;
+        })
+      })
+      .catch(err => {
+        console.log('Deletion Errorn\n', err);
+      })
   }
 
 }

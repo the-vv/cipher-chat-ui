@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
+import { promise } from 'selenium-webdriver';
 import { Message } from '../models/message';
 import { User } from '../models/user';
 
@@ -13,7 +14,6 @@ export class SocketService {
   public loginStatus: Observable<any>;
   public signupStatus: Observable<any>;
   public messages: Observable<any>;
-
 
   public User: User;
   public isLoggedIn: boolean = false;
@@ -100,5 +100,16 @@ export class SocketService {
     })
   }
 
+  deleteMessages(mess: any[]) {
+    return new Promise((resolve, reject) => {
+      this.socket.emit('deleteMessages', mess, (result: any) => {
+        if (result) {
+          resolve(result)
+        } else {
+          reject(result)
+        }
+      });
+    })
+  }
 
 }

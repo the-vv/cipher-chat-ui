@@ -26,6 +26,9 @@ export class PersonWidgetComponent implements OnInit {
 
   @Output()
   onContext: EventEmitter<any> = new EventEmitter<any>();
+  
+  @Output()
+  onDelete: EventEmitter<any> = new EventEmitter<any>();
 
   randomColor: string = '';
   displayDelete: boolean = false;
@@ -39,10 +42,10 @@ export class PersonWidgetComponent implements OnInit {
     this.confirmationService.close();
     this.confirmationService.confirm({ 
       target: event.target,
-      message: `Are you sure to delete all the chat to \'${this.socket.User._id == this.chat._id ? 'You' : this.chat.name}\'?`,
+      message: `Are you sure to delete all the chat with \'${this.socket.User._id == this.chat._id ? 'You' : this.chat.name}\'?`,
       icon: 'pi pi-exclamation-triangle', 
       accept: () => {
-        //confirm action
+        this.onDelete.emit(this.chat)
       },
       reject: () => {
         //reject action

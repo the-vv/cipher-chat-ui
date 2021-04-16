@@ -97,6 +97,7 @@ export class MessagesServiceService {
         this.chatList.push(clist)
       }
     })
+    this.sortChatList();
     // console.log(this.chatList);
   }
 
@@ -125,8 +126,9 @@ export class MessagesServiceService {
         _id: otherEndUser._id,
         name: otherEndUser.name
       }
-      this.chatList.push(clist)
+      this.chatList.splice(0, 0, clist);
     }
+    this.sortChatList();
   }
 
   checkIfAlreadyChatting(email: string): boolean {
@@ -152,6 +154,14 @@ export class MessagesServiceService {
       .catch(err => {
         console.log('Deletion Errorn\n', err);
       })
+  }
+
+  sortChatList() {
+    this.chatList.sort((a, b) => {
+      let adate = new Date(a.messages[a.messages.length - 1].datetime)
+      let bdate = new Date(b.messages[b.messages.length - 1].datetime)
+      return +bdate - +adate
+    })
   }
 
 }

@@ -42,7 +42,7 @@ export class PersonWidgetComponent implements OnInit {
     this.confirmationService.close();
     this.confirmationService.confirm({ 
       target: event.target,
-      message: `Are you sure to delete all the chat with \'${this.socket.User._id == this.chat._id ? 'You' : this.chat.name}\'?`,
+      message: `Are you sure to delete all messages with \'${this.socket.User._id == this.chat._id ? 'You' : this.chat.name}\'? This will delete these messages for \'${this.socket.User._id == this.chat._id ? 'You' : this.chat.name}\' also.`,
       icon: 'pi pi-exclamation-triangle', 
       accept: () => {
         this.onDelete.emit(this.chat)

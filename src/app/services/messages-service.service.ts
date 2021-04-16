@@ -124,7 +124,8 @@ export class MessagesServiceService {
       clist = {
         messages: [mess],
         _id: otherEndUser._id,
-        name: otherEndUser.name
+        name: otherEndUser.name,
+        email: otherEndUser.email
       }
       this.chatList.splice(0, 0, clist);
     }
@@ -143,10 +144,8 @@ export class MessagesServiceService {
 
   deleteChat(c: any) {
     let idsToDelete = c.messages.map((mes: any) => mes._id);
-    console.log(c)
     this.socket.deleteMessages(idsToDelete)
-      .then((r) => {
-        console.log(r);
+      .then((_) => {
         this.chatList = this.chatList.filter(val => {
           return val._id != c._id;
         })

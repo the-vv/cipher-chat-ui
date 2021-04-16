@@ -61,7 +61,7 @@ export class AllChatComponent implements OnInit {
           if (res.success) {
             this.disableNewChat = false;
             this.newChatError = 'User available to chat... Yay!';
-            this.newChatUser = res.user
+            this.newChatUser = res.user;
           } else {
             this.disableNewChat = true;
             this.newChatError = 'This user does not have an account on Cipher Chat';
@@ -84,6 +84,9 @@ export class AllChatComponent implements OnInit {
     } else {
       console.log('newChat Error');      
     }
+    this.mailId = ''
+    this.newChatUser = null
+    this.newChatError = null
   }
 
   chatSelected(chat: any) {
@@ -102,10 +105,14 @@ export class AllChatComponent implements OnInit {
   }
 
   deleteChat(chat: any) {
-    this.message.deleteChat(chat)
-    if(chat._id == this.selectedChat._id) {
+    if(chat._id == this.selectedChat?._id) {
       this.selectedChat = null;
     }
+    this.message.deleteChat(chat)
+  }
+
+  rClicked(e: any) {
+    console.log(e)
   }
 
 }

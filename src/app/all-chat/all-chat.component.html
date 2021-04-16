@@ -24,11 +24,21 @@
                 <div class="col-12 mb-1 p-0" *ngFor="let _ of [1,2,3,4,5,6,7,8,9,10]">
                     <p-skeleton width="100%" height="58px" borderRadius="16px" styleClass="blur-bg"></p-skeleton>
                 </div>
-            </div>   
-            <div class="row" *ngFor="let chat of message.chatList"> 
-                <div class="col-12 mb-1" oncontextmenu="return false;">
-                    <app-person-widget [chat]="chat" [activeChat]="selectedChat && chat._id == selectedChat._id"
-                        (onSelect)="chatSelected($event)" (onDelete)="deleteChat($event)" (onContext)="onRightClick($event)"></app-person-widget>
+            </div>
+            <div *ngIf="message.chatList?.length">
+                <div class="row" *ngFor="let chat of message.chatList">
+                    <div class="col-12 mb-1" (contextmenu)="rClicked(chat._id)">
+                        <app-person-widget [chat]="chat" [activeChat]="selectedChat && chat._id == selectedChat._id"
+                            (onSelect)="chatSelected($event)" (onDelete)="deleteChat($event)"
+                            (onContext)="onRightClick($event)"></app-person-widget>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!message.chatList?.length">
+                <div class="row">
+                    <p class="h5 text-center my-4">
+                        You have no chats to show right now<br>Tap the + icon to start chatting
+                    </p> 
                 </div>
             </div>
         </div>
@@ -41,7 +51,7 @@
 <p-dialog header="Who do you want to chat with" [(visible)]="askNew" [style]="{width: '50vw'}" [modal]='true'
     maskStyleClass="blur-bg" [breakpoints]="{'780px': '95vw'}" [dismissableMask]="true">
     <div class="col-12 col-md-10">
-        <span class="p-input-icon-left col-12"> 
+        <span class="p-input-icon-left col-12">
             <i class="pi pi-search"></i>
             <input (input)="checkMail()" type="text" pInputText placeholder="Type an Email" [(ngModel)]="mailId" />
         </span>

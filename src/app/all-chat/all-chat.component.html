@@ -5,9 +5,13 @@
                 <div class="col-12 action-bar mb-1 ">
                     <div class="row d-flex align-items-center justify-content-between" style="height: 100%">
                         <div class="col-10">
-                            <span class="p-input-icon-left col-12">
+                            <span class="p-input-icon-left col-12"
+                                [ngClass]="searchtext.length ? 'p-input-icon-right' : ''">
                                 <i class="pi pi-search"></i>
-                                <input type="text" pInputText placeholder="Search" />
+                                <i class="pi pi-times" style="cursor: pointer;" *ngIf="searchtext.length"
+                                    (click)="searchtext=''"></i>
+                                <input type="text" pInputText placeholder="Search" (input)="onSearch()"
+                                    [(ngModel)]="searchtext" />
                             </span>
                         </div>
                         <div class="col-2">
@@ -25,7 +29,21 @@
                     <p-skeleton width="100%" height="58px" borderRadius="16px" styleClass="blur-bg"></p-skeleton>
                 </div>
             </div>
-            <div *ngIf="message.chatList?.length">
+            <div *ngIf="searchtext">
+                <span class="h6">
+                    <button class="pi pi-arrow-left btn btn-small text-white"
+                        *ngIf="searchtext.length" (click)="searchtext=''"></button>
+                    Search Results for '{{searchtext}}'
+                </span>
+                <div class="row" *ngFor="let chat of message.searchedList">
+                    <div class="col-12 mb-1" (contextmenu)="rClicked(chat._id)">
+                        <app-person-widget [chat]="chat" [activeChat]="selectedChat && chat._id == selectedChat._id"
+                            (onSelect)="chatSelected($event)" (onDelete)="deleteChat($event)"
+                            (onContext)="onRightClick($event)"></app-person-widget>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="message.chatList?.length && !searchtext.length">
                 <div class="row" *ngFor="let chat of message.chatList">
                     <div class="col-12 mb-1" (contextmenu)="rClicked(chat._id)">
                         <app-person-widget [chat]="chat" [activeChat]="selectedChat && chat._id == selectedChat._id"
@@ -37,8 +55,8 @@
             <div *ngIf="!message.chatList?.length">
                 <div class="row">
                     <p class="h5 text-center my-4">
-                        You have no chats to show right now<br>Tap the + icon to start chatting
-                    </p> 
+                        You have no chats to show right now. Tap the + icon to start chatting
+                    </p>
                 </div>
             </div>
         </div>

@@ -24,7 +24,8 @@ export class AllChatComponent implements OnInit {
   newChatButtonIcon: string = 'pi-comments';
   newChatUser: any;
   selectedChat: any;
-  public mobileView: boolean = false;
+  mobileView: boolean = false;
+  searchtext: string = '';
 
   constructor(
     public socket: SocketService,
@@ -113,6 +114,11 @@ export class AllChatComponent implements OnInit {
 
   rClicked(e: any) {
     console.log(e)
+  }
+
+  onSearch() {
+    this.searchtext = this.searchtext.trim();
+    this.searchtext.length && this.message.searchList(this.searchtext)
   }
 
 }

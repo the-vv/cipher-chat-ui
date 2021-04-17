@@ -10,6 +10,7 @@ export class MessagesServiceService {
   newMessages: any;
   isMessageReaady: boolean = false;
   chatList: any[] = [];
+  searchedList: any[] = [];
   isListening: boolean = false;
 
   constructor(
@@ -160,6 +161,26 @@ export class MessagesServiceService {
       let adate = new Date(a.messages[a.messages.length - 1].datetime)
       let bdate = new Date(b.messages[b.messages.length - 1].datetime)
       return +bdate - +adate
+    })
+  }
+
+  searchList(query: string) {
+    this.searchedList = []
+    this.searchedList = this.chatList.filter((val) => {
+      let result = false;
+      query = query.toLowerCase();
+      let tempemail = val.email.toLowerCase();
+      let tempname = val.name.toLowerCase();
+      if (tempemail.indexOf(query) >= 0 || tempname.indexOf(query) >= 0) {
+        result = true;
+      }
+      val.messages.forEach((el: any) => {
+        let tempmess = el.message.toLowerCase()
+        if (tempmess.indexOf(query) >= 0) {
+          result = true
+        }
+      });
+      return result;
     })
   }
 

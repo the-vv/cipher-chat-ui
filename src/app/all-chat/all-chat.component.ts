@@ -1,4 +1,4 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessagesServiceService } from '../services/messages-service.service';
@@ -19,10 +19,10 @@ import { SocketService } from '../services/socket.service';
       ]),
     ])
   ]
-}) 
-export class AllChatComponent implements OnInit { 
+})
+export class AllChatComponent implements OnInit {
 
-  
+
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.mobileView = event.target.innerWidth < 768 ? true : false;
@@ -44,9 +44,9 @@ export class AllChatComponent implements OnInit {
     public message: MessagesServiceService,
     private router: Router,
     private route: ActivatedRoute
-  ) {    
+  ) {
     this.mobileView = window.innerWidth < 768 ? true : false;
-   }
+  }
 
   ngOnInit(): void {
     this.message.getMessages();
@@ -57,12 +57,12 @@ export class AllChatComponent implements OnInit {
         };
       });
   }
- 
+
   checkMail() {
     this.disableNewChat = true;
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(String(this.mailId))) {
-      if(this.message.checkIfAlreadyChatting(this.mailId)) {
+      if (this.message.checkIfAlreadyChatting(this.mailId)) {
         this.newChatError = 'You are already chatting with this user';
         return;
       }
@@ -92,10 +92,10 @@ export class AllChatComponent implements OnInit {
 
   startNewChat() {
     this.askNew = !this.askNew;
-    if(this.newChatUser) {
+    if (this.newChatUser) {
       this.message.addNewChatTo(this.newChatUser);
     } else {
-      console.log('newChat Error');      
+      console.log('newChat Error');
     }
     this.mailId = ''
     this.newChatUser = null
@@ -105,12 +105,12 @@ export class AllChatComponent implements OnInit {
   chatSelected(chat: any) {
     // console.log(chat);    
     this.selectedChat = chat;
-    this.router.navigate(['/chats'], {queryParams: {vmode: 1}})
+    this.router.navigate(['/chats'], { queryParams: { vmode: 1 } })
   }
 
   onBack() {
     this.selectedChat = null;
-    this.router.navigate(['/chats'], {queryParams: {}, replaceUrl: true})
+    this.router.navigate(['/chats'], { queryParams: {}, replaceUrl: true })
   }
 
   onRightClick(chat: any) {
@@ -118,7 +118,7 @@ export class AllChatComponent implements OnInit {
   }
 
   deleteChat(chat: any) {
-    if(chat._id == this.selectedChat?._id) {
+    if (chat._id == this.selectedChat?._id) {
       this.selectedChat = null;
     }
     this.message.deleteChat(chat)

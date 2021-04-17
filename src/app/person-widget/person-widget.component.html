@@ -21,7 +21,7 @@
             <div class="col-11">
                 <p class="p-0 m-0 text-truncate">{{chat.messages[chat.messages.length-1].message}}</p>
             </div>
-            <div class="col-1 p-0" *ngIf="displayDelete">
+            <div class="col-1 p-0">
                 <i pRipple class="pi pi-trash text-warning" (click)="confirm($event); $event.stopPropagation();"></i>
             </div>
         </div>

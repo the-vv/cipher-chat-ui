@@ -1,160 +1,164 @@
-<div class="container-fluid main d-flex align-items-center justify-content-center" *ngIf="mode">
-    <div class="row">
-        <div class="login-card">
-            <div class="text-center">
-                <p-avatar class="" icon="pi pi-user" styleClass="" class="" size="xlarge" shape="circle"></p-avatar>
-            </div>
-            <div class="display-6 text-center mb-3">Login</div>
-            <form action="" class="col-12 px-3" [formGroup]="loginForm" (ngSubmit)="onLogin()">
-                <div class="mb-4 py-1">
-                    <!-- <span class="p-float-label"> -->
-                    <input formControlName="email" type="text" id="inputtext" pInputText class="normal-input col-12"
-                        [ngClass]="{'ng-dirty':lf.email.touched && lf.email.errors }" placeholder="Email">
-                    <!-- <label for="inputtext">Email</label> -->
-                    <!-- </span> -->
-                    <label for="" class="small text-warning"
-                        *ngIf="lf.email.touched && lf.email.errors && lf.email.errors.required">Email is
-                        required</label>
-                    <label for="" class="small text-warning"
-                        *ngIf="lf.email.touched && lf.email.errors && lf.email.errors.email">Email is invalid</label>
+<div class="main" *ngIf="mode">
+    <div class="container-fluid main d-flex align-items-center justify-content-center">
+        <div class="row overflow-auto" style="max-height: calc(100vh - 66px);">
+            <div class="login-card">
+                <div class="text-center">
+                    <p-avatar class="" icon="pi pi-user" styleClass="" class="" size="xlarge" shape="circle"></p-avatar>
                 </div>
-                <div class="mb-3 pt-1">
-                    <div class="p-inputgroup">
-                        <!-- <span class="p-float-label m-1"> -->
-                        <input formControlName="password" id="ipassword" p-password pInputText [toggleMask]="true"
-                            [feedback]="false" class="normal-input" [type]="lpvmode ? 'password' : text"
-                            [ngClass]="{'ng-dirty':lf.password.touched && lf.password.errors }" placeholder="Password">
-                        <!-- <label for="ipassword">Password</label> -->
-                        <span class="p-inputgroup-addon col-1" (click)="lpvmode = !lpvmode" pRipple>
-                            <i *ngIf="lpvmode" class="pi pi-eye"></i>
-                            <i *ngIf="!lpvmode" class="pi pi-eye-slash"></i>
-                        </span>
+                <div class="display-6 text-center mb-3">Login</div>
+                <form action="" class="col-12 px-3" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                    <div class="mb-4 py-1">
+                        <!-- <span class="p-float-label"> -->
+                        <input formControlName="email" type="text" id="inputtext" pInputText class="normal-input col-12"
+                            [ngClass]="{'ng-dirty':lf.email.touched && lf.email.errors }" placeholder="Email">
+                        <!-- <label for="inputtext">Email</label> -->
                         <!-- </span> -->
-                    </div>
-                    <div class="m-1">
-                        <label for="" class="small text-warning"
-                            *ngIf="lf.password.touched && lf.password.errors && lf.password.errors.required">Password is
+                        <label for="" class="small text-warning" 
+                            *ngIf="lf.email.touched && lf.email.errors && lf.email.errors.required">Email is
                             required</label>
+                        <label for="" class="small text-warning"
+                            *ngIf="lf.email.touched && lf.email.errors && lf.email.errors.email">Email is invalid</label>
                     </div>
+                    <div class="mb-3 pt-1">
+                        <div class="p-inputgroup">
+                            <!-- <span class="p-float-label m-1"> -->
+                            <input formControlName="password" id="ipassword" p-password pInputText [toggleMask]="true"
+                                [feedback]="false" class="normal-input" [type]="lpvmode ? 'password' : text"
+                                [ngClass]="{'ng-dirty':lf.password.touched && lf.password.errors }" placeholder="Password">
+                            <!-- <label for="ipassword">Password</label> -->
+                            <span class="p-inputgroup-addon col-1" (click)="lpvmode = !lpvmode" pRipple>
+                                <i *ngIf="lpvmode" class="pi pi-eye"></i>
+                                <i *ngIf="!lpvmode" class="pi pi-eye-slash"></i>
+                            </span>
+                            <!-- </span> -->
+                        </div>
+                        <div class="m-1">
+                            <label for="" class="small text-warning"
+                                *ngIf="lf.password.touched && lf.password.errors && lf.password.errors.required">Password is
+                                required</label>
+                        </div>
+                    </div>
+                    <div class="text-center pt-2">
+                        <button (click)="onLogin()" pButton pRipple type="button" label="Login"
+                            class="p-button-outlined col-6"></button>
+                    </div>
+                </form>
+                <div class="socialLogin text-center mt-3">
+                    <div class="mb-2 h6">Or Continue With</div>
+                    <button pButton pRipple type="button" icon="pi pi-google"
+                        class="bg-danger border-0 p-button-rounded p-4 mx-3"></button>
+                    <button pButton pRipple type="button" icon="pi pi-facebook"
+                        class="bg-primary border-0 p-button-rounded p-4 mx-3"></button>
                 </div>
-                <div class="text-center pt-2">
-                    <button (click)="onLogin()" pButton pRipple type="button" label="Login"
-                        class="p-button-outlined col-6"></button>
+                <hr>
+                <div class="text-center">
+                    Don't have an account? <a class="text-info" [routerLink]="['/login']"
+                        [queryParams]="{ signup: 1 }">Create One</a>
                 </div>
-            </form>
-            <div class="socialLogin text-center mt-3">
-                <div class="mb-2 h6">Or Continue With</div>
-                <button pButton pRipple type="button" icon="pi pi-google"
-                    class="bg-danger border-0 p-button-rounded p-4 mx-3"></button>
-                <button pButton pRipple type="button" icon="pi pi-facebook"
-                    class="bg-primary border-0 p-button-rounded p-4 mx-3"></button>
             </div>
-            <hr>
-            <div class="text-center">
-                Don't have an account? <a class="text-info" [routerLink]="['/login']"
-                    [queryParams]="{ signup: 1 }">Create One</a>
-            </div>
+            <div class="text-center"></div>
         </div>
-        <div class="text-center"></div>
     </div>
 </div>
 
-<div class="container-fluid main d-flex align-items-center justify-content-center" *ngIf="!mode">
-    <div class="row">
-        <div class="login-card">
-            <div class="text-center">
-                <p-avatar class="" icon="pi pi-user" styleClass="" class="" size="xlarge" shape="circle"></p-avatar>
-            </div>
-            <div class="display-6 text-center mb-3">Signup</div>
-            <form action="" class="col-12 px-3" [formGroup]="SignupForm" (ngSubmit)="onSignup()">
-                <div class="mb-4 py-1">
-                    <!-- <span class="p-float-label"> -->
-                    <input formControlName="name" type="text" pInputText class="normal-input col-12"
-                        [ngClass]="{'ng-dirty':sf.name.touched && sf.name.errors }" placeholder="Full Name">
-                    <!-- <label for="inputtext">Full Name</label> -->
-                    <!-- </span> -->
-                    <label for="" class="small text-warning"
-                        *ngIf="sf.name.touched && sf.name.errors && sf.name.errors.required">Name is
-                        required</label>
+<div class="main" *ngIf="!mode">
+    <div class="container-fluid main d-flex align-items-center justify-content-center">
+        <div class="row overflow-auto" style="max-height: calc(100vh - 66px);">
+            <div class="login-card">
+                <div class="text-center">
+                    <p-avatar class="" icon="pi pi-user" styleClass="" class="" size="xlarge" shape="circle"></p-avatar>
                 </div>
-                <div class="mb-4 py-1">
-                    <!-- <span class="p-float-label"> -->
-                    <input formControlName="email" type="text" pInputText class="normal-input col-12"
-                        [ngClass]="{'ng-dirty':sf.email.touched && sf.email.errors }" placeholder="Email">
-                    <!-- <label for="inputtext">Email</label> -->
-                    <!-- </span> -->
-                    <label for="" class="small text-warning"
-                        *ngIf="sf.email.touched && sf.email.errors && sf.email.errors.required">Email is
-                        required</label>
-                    <label for="" class="small text-warning"
-                        *ngIf="sf.email.touched && sf.email.errors && sf.email.errors.email">Email is invalid</label>
-                </div>
-                <div class="mb-4 py-1">
-                    <div class="p-inputgroup">
-                        <!-- <span class="p-float-label m-1"> -->
-                        <input formControlName="password" p-password pInputText [toggleMask]="true" [feedback]="false"
-                            class="normal-input" [type]="spvmode1 ? 'password' : 'text'"
-                            [ngClass]="{'ng-dirty':sf.password.touched && sf.password.errors }" placeholder="Password">
-                        <!-- <label for="inputtext">Password</label> -->
-                        <span class="p-inputgroup-addon col-1" (click)="spvmode1 = !spvmode1" pRipple>
-                            <i *ngIf="spvmode1" class="pi pi-eye"></i>
-                            <i *ngIf="!spvmode1" class="pi pi-eye-slash"></i>
-                        </span>
+                <div class="display-6 text-center mb-3">Signup</div>
+                <form action="" class="col-12 px-3" [formGroup]="SignupForm" (ngSubmit)="onSignup()">
+                    <div class="mb-4 py-1">
+                        <!-- <span class="p-float-label"> -->
+                        <input formControlName="name" type="text" pInputText class="normal-input col-12"
+                            [ngClass]="{'ng-dirty':sf.name.touched && sf.name.errors }" placeholder="Full Name">
+                        <!-- <label for="inputtext">Full Name</label> -->
                         <!-- </span> -->
-                    </div>
-                    <div class="m-1">
                         <label for="" class="small text-warning"
-                            *ngIf="sf.password.touched && sf.password.errors && sf.password.errors.required">Password is
+                            *ngIf="sf.name.touched && sf.name.errors && sf.name.errors.required">Name is
+                            required</label>
+                    </div>
+                    <div class="mb-4 py-1">
+                        <!-- <span class="p-float-label"> -->
+                        <input formControlName="email" type="text" pInputText class="normal-input col-12"
+                            [ngClass]="{'ng-dirty':sf.email.touched && sf.email.errors }" placeholder="Email">
+                        <!-- <label for="inputtext">Email</label> -->
+                        <!-- </span> -->
+                        <label for="" class="small text-warning"
+                            *ngIf="sf.email.touched && sf.email.errors && sf.email.errors.required">Email is
                             required</label>
                         <label for="" class="small text-warning"
-                            *ngIf="sf.password.touched && sf.password.errors && sf.password.errors.minlength">
-                            Password is too short</label>
-                        <password-strength-meter *ngIf="SignupForm.value.password"
-                            [password]="SignupForm.value.password" [enableFeedback]="true" [minPasswordLength]=6>
-                        </password-strength-meter>
+                            *ngIf="sf.email.touched && sf.email.errors && sf.email.errors.email">Email is invalid</label>
                     </div>
-                </div>
-                <div class="mb-3">
-                    <div class="p-inputgroup">
-                        <!-- <span class="p-float-label m-1"> -->
-                        <input formControlName="confirmp" p-password pInputText [toggleMask]="true" [feedback]="false"
-                            class="normal-input" [type]="spvmode2 ? 'password' : 'text'"
-                            [ngClass]="{'ng-dirty':sf.confirmp.touched && sf.confirmp.errors }"
-                            placeholder="Confirm Password">
-                        <!-- <label for="inputtext">Confirm Password</label> -->
-                        <span class="p-inputgroup-addon col-1" (click)="spvmode2 = !spvmode2" pRipple>
-                            <i *ngIf="spvmode2" class="pi pi-eye"></i>
-                            <i *ngIf="!spvmode2" class="pi pi-eye-slash"></i>
-                        </span>
-                        <!-- </span> -->
+                    <div class="mb-4 py-1">
+                        <div class="p-inputgroup">
+                            <!-- <span class="p-float-label m-1"> -->
+                            <input formControlName="password" p-password pInputText [toggleMask]="true" [feedback]="false"
+                                class="normal-input" [type]="spvmode1 ? 'password' : 'text'"
+                                [ngClass]="{'ng-dirty':sf.password.touched && sf.password.errors }" placeholder="Password">
+                            <!-- <label for="inputtext">Password</label> -->
+                            <span class="p-inputgroup-addon col-1" (click)="spvmode1 = !spvmode1" pRipple>
+                                <i *ngIf="spvmode1" class="pi pi-eye"></i>
+                                <i *ngIf="!spvmode1" class="pi pi-eye-slash"></i>
+                            </span>
+                            <!-- </span> -->
+                        </div>
+                        <div class="m-1">
+                            <label for="" class="small text-warning"
+                                *ngIf="sf.password.touched && sf.password.errors && sf.password.errors.required">Password is
+                                required</label>
+                            <label for="" class="small text-warning"
+                                *ngIf="sf.password.touched && sf.password.errors && sf.password.errors.minlength">
+                                Password is too short</label>
+                            <password-strength-meter *ngIf="SignupForm.value.password"
+                                [password]="SignupForm.value.password" [enableFeedback]="true" [minPasswordLength]=6>
+                            </password-strength-meter>
+                        </div>
                     </div>
-                    <div class="m-1">
-                        <label for="" class="small text-warning"
-                            *ngIf="sf.confirmp.touched && sf.confirmp.errors && sf.confirmp.errors.required">Confirm
-                            Password is
-                            required</label>
-                        <label for="" class="small text-warning"
-                            *ngIf="SignupForm.value.password && sf.password.touched && SignupForm.value.confirmp && (SignupForm.value.password != SignupForm.value.confirmp)">Passwords
-                            are not matching</label>
+                    <div class="mb-3">
+                        <div class="p-inputgroup">
+                            <!-- <span class="p-float-label m-1"> -->
+                            <input formControlName="confirmp" p-password pInputText [toggleMask]="true" [feedback]="false"
+                                class="normal-input" [type]="spvmode2 ? 'password' : 'text'"
+                                [ngClass]="{'ng-dirty':sf.confirmp.touched && sf.confirmp.errors }"
+                                placeholder="Confirm Password">
+                            <!-- <label for="inputtext">Confirm Password</label> -->
+                            <span class="p-inputgroup-addon col-1" (click)="spvmode2 = !spvmode2" pRipple>
+                                <i *ngIf="spvmode2" class="pi pi-eye"></i>
+                                <i *ngIf="!spvmode2" class="pi pi-eye-slash"></i>
+                            </span>
+                            <!-- </span> -->
+                        </div>
+                        <div class="m-1">
+                            <label for="" class="small text-warning"
+                                *ngIf="sf.confirmp.touched && sf.confirmp.errors && sf.confirmp.errors.required">Confirm
+                                Password is
+                                required</label>
+                            <label for="" class="small text-warning"
+                                *ngIf="SignupForm.value.password && sf.password.touched && SignupForm.value.confirmp && (SignupForm.value.password != SignupForm.value.confirmp)">Passwords
+                                are not matching</label>
+                        </div>
                     </div>
+                    <div class="text-center pt-2">
+                        <button (click)="onSignup()" pButton pRipple type="button" label="Signup"
+                            class="p-button-outlined col-6"></button>
+                    </div>
+                </form>
+                <div class="socialLogin text-center mt-3">
+                    <div class="mb-2 h6">Or Continue With</div>
+                    <button pButton pRipple type="button" icon="pi pi-google"
+                        class="bg-danger border-0 p-button-rounded p-4 mx-3"></button>
+                    <button pButton pRipple type="button" icon="pi pi-facebook"
+                        class="bg-primary border-0 p-button-rounded p-4 mx-3"></button>
                 </div>
-                <div class="text-center pt-2">
-                    <button (click)="onSignup()" pButton pRipple type="button" label="Signup"
-                        class="p-button-outlined col-6"></button>
+                <hr>
+                <div class="text-center text-white">
+                    Already have an account? <a class="text-info" [routerLink]="['/login']" [queryParams]="{}">Login now</a>
                 </div>
-            </form>
-            <div class="socialLogin text-center mt-3">
-                <div class="mb-2 h6">Or Continue With</div>
-                <button pButton pRipple type="button" icon="pi pi-google"
-                    class="bg-danger border-0 p-button-rounded p-4 mx-3"></button>
-                <button pButton pRipple type="button" icon="pi pi-facebook"
-                    class="bg-primary border-0 p-button-rounded p-4 mx-3"></button>
             </div>
-            <hr>
-            <div class="text-center text-white">
-                Already have an account? <a class="text-info" [routerLink]="['/login']" [queryParams]="{}">Login now</a>
-            </div>
+            <div class="text-center"></div>
         </div>
-        <div class="text-center"></div>
     </div>
 </div>

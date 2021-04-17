@@ -17,8 +17,9 @@
                         <div class="col-2">
                             <div class="row">
                                 <button pButton pRipple type="button" icon="pi pi-plus"
-                                    class="p-button-rounded p-button-text p-button-plain mx-auto"
-                                    (click)="askNew = !askNew"></button>
+                                    class="p-button-rounded p-button-text p-button-plain mx-auto animate__animated"
+                                    (click)="askNew = !askNew"
+                                    [ngClass]="!message.chatList.length && message.isMessageReaady ? 'animate__wobble' : ''"></button>
                             </div>
                         </div>
                     </div>
@@ -31,8 +32,8 @@
             </div>
             <div *ngIf="searchtext">
                 <span class="h6">
-                    <button class="pi pi-arrow-left btn btn-small text-white"
-                        *ngIf="searchtext.length" (click)="searchtext=''"></button>
+                    <button class="pi pi-arrow-left btn btn-small text-white" *ngIf="searchtext.length"
+                        (click)="searchtext=''"></button>
                     Search Results for '{{searchtext}}'
                 </span>
                 <div class="row" *ngFor="let chat of message.searchedList">

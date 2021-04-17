@@ -1,4 +1,4 @@
-<span pRipple class="row main animate__animated animate__bounceInLeft" (click)="chatSelected()" [ngClass]="activeChat ? 'active-chat' : ''"
+<span pRipple class="row main" (click)="chatSelected()" [ngClass]="activeChat ? 'active-chat' : ''"
     (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">
     <div class="chat-avatar">
         <p-avatar icon="pi pi-user" styleClass="" [size]="'large'" shape="circle" [label]="chat.name.split('')[0]"

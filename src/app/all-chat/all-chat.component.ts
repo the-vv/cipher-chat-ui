@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessagesServiceService } from '../services/messages-service.service';
@@ -6,9 +7,20 @@ import { SocketService } from '../services/socket.service';
 @Component({
   selector: 'app-all-chat',
   templateUrl: './all-chat.component.html',
-  styleUrls: ['./all-chat.component.scss']
-})
-export class AllChatComponent implements OnInit {
+  styleUrls: ['./all-chat.component.scss'],
+  animations: [
+    trigger('openClose', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateX(-70%)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
+      ]),
+      transition(':leave', [
+        animate('300ms ease-in', style({ opacity: 0, transform: 'translateX(-70%)' })),
+      ]),
+    ])
+  ]
+}) 
+export class AllChatComponent implements OnInit { 
 
   
   @HostListener('window:resize', ['$event'])

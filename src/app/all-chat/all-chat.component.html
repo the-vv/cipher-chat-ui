@@ -18,7 +18,7 @@
                             <div class="row">
                                 <button pButton pRipple type="button" icon="pi pi-plus"
                                     class="p-button-rounded p-button-text p-button-plain mx-auto animate__animated"
-                                    (click)="askNew = !askNew"
+                                    (click)="askNew = !askNew" style="animation-delay: 1s;"
                                     [ngClass]="!message.chatList.length && message.isMessageReaady ? 'animate__wobble' : ''"></button>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                         (click)="searchtext=''"></button>
                     Search Results for '{{searchtext}}'
                 </span>
-                <div class="row" *ngFor="let chat of message.searchedList">
+                <div class="row" *ngFor="let chat of message.searchedList" @openClose>
                     <div class="col-12 mb-1" (contextmenu)="rClicked(chat._id)">
                         <app-person-widget [chat]="chat" [activeChat]="selectedChat && chat._id == selectedChat._id"
                             (onSelect)="chatSelected($event)" (onDelete)="deleteChat($event)"
@@ -44,8 +44,8 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="message.chatList?.length && !searchtext.length">
-                <div class="row" *ngFor="let chat of message.chatList">
+            <div *ngIf="message.chatList?.length && !searchtext.length" @openClose>
+                <div class="row" *ngFor="let chat of message.chatList" @openClose>
                     <div class="col-12 mb-1" (contextmenu)="rClicked(chat._id)">
                         <app-person-widget [chat]="chat" [activeChat]="selectedChat && chat._id == selectedChat._id"
                             (onSelect)="chatSelected($event)" (onDelete)="deleteChat($event)"

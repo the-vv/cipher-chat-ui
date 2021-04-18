@@ -71,10 +71,12 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
 
   onFocus() {
     this.isChatSendable = true;
+    this.toggleEmoji = false
   }
 
   onBlur() {
     this.isChatSendable = false;
+    this.toggleEmoji = false
   }
 
   goToBottom() {
@@ -108,14 +110,14 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     if (this.needScroll && (this.needScroll2 || this.messages?.length != this.prevChatListLength)) {
       this.prevChatListLength = this.messages?.length
       this.scrollToBottom();
-    }    
+    }
   }
 
   goBack() {
     this.onBack.emit();
   }
 
-  ngAfterViewInit() {    
+  ngAfterViewInit() {
   }
 
   scrollToBottom(): void {
@@ -154,17 +156,24 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
           this.canScrollSmooth = true;
           this.chatInputElament && this.chatInputElament.nativeElement.focus();
         }, 100);
-      }       
+      }
       // console.log(changes.chat.currentValue);
     }
   }
-  
+
   isToday(d: any): boolean {
     const today = new Date()
     let date = new Date(d)
     return date.getDate() == today.getDate() &&
       date.getMonth() == today.getMonth() &&
       date.getFullYear() == today.getFullYear()
+  }
+
+  toggleEmoji: boolean = false;
+  selectedEMoji(event: any) {
+    this.messageString += event.emoji.native;
+    this.toggleEmoji = false;
+    this.chatInputElament && this.chatInputElament.nativeElement.focus();
   }
 
 }

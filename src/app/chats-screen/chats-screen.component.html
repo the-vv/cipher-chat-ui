@@ -47,6 +47,15 @@
     </div>
     <div class="chat-input col-12 col-lg-8 col-xl-9 col-md-7 d-flex justify-content-between align-items-center"
         style="padding-left: 10px;padding-right: 10px;">
+        <div class="emoji">
+            <button pButton pRipple type="button" icon="bi {{!toggleEmoji ? 'bi-emoji-smile' : 'bi-x'}}"
+                style="font-size: 1.4em;" class="p-button-rounded p-button-text p-button-plain ml-2"
+                (click)="toggleEmoji = !toggleEmoji; !toggleEmoji && this.chatInputElament.nativeElement.focus()"></button>
+            <div class="emojiView" *ngIf="toggleEmoji" [style]="{ position: 'absolute', bottom: '50px', left: '5px' }">
+                <emoji-mart [isNative]="false" (emojiClick)="selectedEMoji($event)" [showPreview]="false"
+                    [emojiTooltip]="false" set="facebook"></emoji-mart>
+            </div>
+        </div>
         <div class="p-inputgroup">
             <input type="text" pInputText placeholder="Type a message" [(ngModel)]="messageString" (blur)="onBlur()"
                 (focus)="onFocus()" #autoFocus>

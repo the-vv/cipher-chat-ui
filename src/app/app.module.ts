@@ -28,6 +28,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { CookieService } from 'ngx-cookie-service';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxAnimationsModule } from 'ngx-animations';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 
 // Components and services
@@ -79,7 +80,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     NgxSpinnerModule,
     SkeletonModule, 
     ConfirmPopupModule,
-    NgxAnimationsModule 
+    NgxAnimationsModule,
+    PickerModule
   ],
   providers: [
     LoginServiceService,

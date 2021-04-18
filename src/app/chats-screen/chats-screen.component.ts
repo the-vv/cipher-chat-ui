@@ -71,8 +71,6 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
 
   onFocus() {
     this.isChatSendable = true;
-    console.log('focus');
-    
   }
 
   onBlur() {
@@ -110,7 +108,7 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     if (this.needScroll && (this.needScroll2 || this.messages?.length != this.prevChatListLength)) {
       this.prevChatListLength = this.messages?.length
       this.scrollToBottom();
-    }
+    }    
   }
 
   goBack() {
@@ -154,9 +152,9 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
       if (!this.canScrollSmooth) {
         setTimeout(() => {
           this.canScrollSmooth = true;
-        }, 200);
-      } 
-      this.chatInputElament.nativeElement.focus();
+          this.chatInputElament && this.chatInputElament.nativeElement.focus();
+        }, 100);
+      }       
       // console.log(changes.chat.currentValue);
     }
   }

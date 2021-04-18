@@ -43,6 +43,7 @@ import { SocketService } from './services/socket.service';
 import { AllChatComponent } from './all-chat/all-chat.component';
 import { PersonWidgetComponent } from './person-widget/person-widget.component';
 import { ChatsScreenComponent } from './chats-screen/chats-screen.component';
+import { DecryptPipe } from './decrypt.pipe';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -56,7 +57,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     NotFoundComponent,
     AllChatComponent,
     PersonWidgetComponent,
-    ChatsScreenComponent
+    ChatsScreenComponent,
+    DecryptPipe
   ],
   imports: [
     BrowserModule,

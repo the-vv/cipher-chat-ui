@@ -49,7 +49,7 @@
         style="padding-left: 10px;padding-right: 10px;">
         <div class="p-inputgroup">
             <input type="text" pInputText placeholder="Type a message" [(ngModel)]="messageString" (blur)="onBlur()"
-                (focus)="onFocus()" emoji>
+                (focus)="onFocus()" emoji #autoFocus>
             <button type="button" pButton pRipple icon="pi pi-send" styleClass="p-button-warn" id="send-button"
                 (click)="sendMessage()"></button>
         </div>

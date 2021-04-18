@@ -25,6 +25,9 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   @ViewChild('scrollDown')
   scrollContainer: ElementRef;
 
+  @ViewChild('autoFocus')
+  chatInputElament: ElementRef;
+
   @HostListener('document:keyup', ['$event'])
   handleInput(event: KeyboardEvent) {
     if (event.code == 'Enter' && this.isChatSendable && this.messageString.length > 0) {
@@ -68,6 +71,8 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
 
   onFocus() {
     this.isChatSendable = true;
+    console.log('focus');
+    
   }
 
   onBlur() {
@@ -112,7 +117,7 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     this.onBack.emit();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit() {    
   }
 
   scrollToBottom(): void {
@@ -150,7 +155,8 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
         setTimeout(() => {
           this.canScrollSmooth = true;
         }, 200);
-      }
+      } 
+      this.chatInputElament.nativeElement.focus();
       // console.log(changes.chat.currentValue);
     }
   }

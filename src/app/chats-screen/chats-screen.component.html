@@ -13,7 +13,7 @@
             <div class="col-auto text-center px-0" [ngClass]="mobileView ? 'px-0' : 'px-3'">
                 <p-avatar icon="pi pi-user" styleClass="" [size]="'large'" shape="circle"
                     [label]="chat.name.split('')[0]" [style]="{'color': 'white', 'background-color': randomColor}"
-                    [ngStyle]="{'backgroundColor': chat.color, 'borderRadius': '40px'}">
+                    [ngStyle]="{'backgroundColor': chat.color, 'borderRadius': '40px', 'text-shadow': 'black 0px 0px 10px'}">
                 </p-avatar>
             </div>
             <div class="user-details col p-0 m-0 text-truncate">

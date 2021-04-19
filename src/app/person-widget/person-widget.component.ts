@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 // import { Message } from '../models/message';
-import * as rand from 'randomcolor'
 import { SocketService } from '../services/socket.service';
 import { ConfirmationService } from 'primeng/api';
 
@@ -54,11 +53,11 @@ export class PersonWidgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.randomColor = rand({
-      luminosity: 'dark',
-      format: 'rgba',
-      alpha: 1
-    })
+    // this.randomColor = rand({
+    //   luminosity: 'dark',
+    //   format: 'rgba',
+    //   alpha: 1
+    // })
 
     this.items = [{
       label: 'Options',
@@ -76,7 +75,6 @@ export class PersonWidgetComponent implements OnInit {
   }
 
   chatSelected() {
-    this.chat.color = this.randomColor;
     this.onSelect.emit(this.chat);
   }
 

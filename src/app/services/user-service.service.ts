@@ -34,7 +34,7 @@ export class UserServiceService {
     this.saveIcon = 'pi-spin pi-spinner'
     this.socket.updateUser(this.userDetails)
       .then((d: any) => {
-        this.saveIcon = 'pi-check'
+        this.saveIcon = 'pi-check';
         this.submitted = false;
         this.userDetails = JSON.parse(JSON.stringify(d.user));
         this.originalUser = JSON.parse(JSON.stringify(d));
@@ -51,6 +51,5 @@ export class UserServiceService {
         }
         console.error('Updation Error\n', e)
       })
-    console.log(this.userDetails);
   }
 }

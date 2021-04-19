@@ -6,5 +6,6 @@ export interface Message {
     readonly to: string,
     readonly fromId?: string,
     readonly toId?: string,
-    status?: string
+    status?: string,
+    [props: string]: any
 }

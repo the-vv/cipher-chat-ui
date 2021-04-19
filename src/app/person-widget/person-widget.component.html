@@ -2,7 +2,7 @@
     (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">
     <div class="chat-avatar">
         <p-avatar icon="pi pi-user" styleClass="" [size]="'large'" shape="circle" [label]="chat.name.split('')[0]"
-            [style]="{'background-color':randomColor, 'color': '#ffffff'}"></p-avatar>
+            [style]="{'background-color':chat.color, 'color': '#ffffff', 'text-shadow': 'black 0px 0px 10px'}"></p-avatar>
     </div>
     <div class="chat-user">
         <div class="row d-flex justify-content-between">

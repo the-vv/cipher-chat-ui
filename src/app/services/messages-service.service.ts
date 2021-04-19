@@ -96,16 +96,16 @@ export class MessagesServiceService {
           messages: [mess],
           _id: otherEndUser._id,
           name: otherEndUser.name,
-          email: otherEndUser.email
+          email: otherEndUser.email,
+          color: otherEndUser.settings.color
         }
         this.chatList.push(clist)
       }
     })
     this.sortChatList();
-    // console.log(this.chatList);
   }
 
-  pushChat(mess: any) {
+  pushChat(mess: any) { 
     let otherEndUser: any;
     let clist: any;
     if (mess.from._id == this.socket.User._id) {
@@ -129,7 +129,8 @@ export class MessagesServiceService {
         messages: [mess],
         _id: otherEndUser._id,
         name: otherEndUser.name,
-        email: otherEndUser.email
+        email: otherEndUser.email,
+        color: otherEndUser.settings.color
       }
       this.chatList.splice(0, 0, clist);
     }

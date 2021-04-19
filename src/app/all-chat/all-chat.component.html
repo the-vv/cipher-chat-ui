@@ -17,8 +17,8 @@
                         <div class="col-2">
                             <div class="row">
                                 <button pButton pRipple type="button" icon="pi pi-plus"
-                                    class="p-button-rounded p-button-text p-button-plain mx-auto animate__animated"
-                                    (click)="askNew = !askNew" style="animation-delay: 1s;"
+                                    class="p-button-rounded p-button-text p-button-plain mx-auto animate__animated animate__repeat-3"
+                                    (click)="askNew = !askNew" style="animation-delay: .5s;"
                                     [ngClass]="!message.chatList.length && message.isMessageReaady ? 'animate__wobble' : ''"></button>
                             </div>
                         </div>

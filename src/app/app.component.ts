@@ -5,6 +5,7 @@ import { SocketService } from './services/socket.service';
 import * as rand from 'randomcolor'
 import { CookieService } from 'ngx-cookie-service';
 import { NavigationEnd, Router } from '@angular/router';
+import { UserServiceService } from './services/user-service.service';
 
 @Component({
   selector: 'app-root',
@@ -33,7 +34,8 @@ export class AppComponent implements OnInit {
     private primengConfig: PrimeNGConfig,
     public socket: SocketService,
     private cookieService: CookieService,
-    private router: Router
+    private router: Router,
+    public user: UserServiceService
   ) {
     this.mobileView = window.innerWidth < 500 ? true : false;
 
@@ -91,7 +93,13 @@ export class AppComponent implements OnInit {
           {
             label: 'More',
             items: [
-              { label: 'Settings', icon: 'bi bi-gear' },
+              { label: 'Settings',
+              icon: 'bi bi-gear',
+              command: () => {
+                this.user.askSettings = true;
+                this.visibleSidebar = !this.visibleSidebar;
+              }
+            },
             ]
           }
         ];
@@ -123,12 +131,12 @@ export class AppComponent implements OnInit {
           }
         ]
       },
-      {
-        label: 'More',
-        items: [
-          { label: 'Settings', icon: 'bi bi-gear' },
-        ]
-      }
+      // {
+      //   label: 'More',
+      //   items: [
+      //     { label: 'Settings', icon: 'bi bi-gear' },
+      //   ]
+      // }
     ];
   }
 

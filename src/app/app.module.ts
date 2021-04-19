@@ -19,6 +19,7 @@ import { DialogModule } from 'primeng/dialog';
 import { SkeletonModule } from 'primeng/skeleton';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ConfirmationService} from 'primeng/api';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 // Materialize
 
@@ -44,6 +45,8 @@ import { AllChatComponent } from './all-chat/all-chat.component';
 import { PersonWidgetComponent } from './person-widget/person-widget.component';
 import { ChatsScreenComponent } from './chats-screen/chats-screen.component';
 import { DecryptPipe } from './decrypt.pipe';
+import { UserServiceService } from './services/user-service.service';
+import { SettingsComponent } from './settings/settings.component';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -58,7 +61,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     AllChatComponent,
     PersonWidgetComponent,
     ChatsScreenComponent,
-    DecryptPipe
+    DecryptPipe,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -83,14 +87,16 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     SkeletonModule, 
     ConfirmPopupModule,
     NgxAnimationsModule,
-    PickerModule
+    PickerModule,
+    InputSwitchModule
   ],
   providers: [
     LoginServiceService,
     SocketService,
     MessageService,
     CookieService,
-    ConfirmationService
+    ConfirmationService,
+    UserServiceService
   ],
   bootstrap: [AppComponent],
   schemas: [

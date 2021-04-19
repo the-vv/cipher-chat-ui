@@ -1,0 +1,26 @@
+<div class="text-center" *ngIf="userService.userDetails.settings">
+    <div class="d-block">
+        <p-avatar icon="pi pi-user" styleClass="mb-2" size="xlarge" shape="circle"
+            [label]="userService.userDetails.name?.split('')[0]"
+            [style]="{'background-color':userService.userDetails.settings?.color, 'text-shadow': 'black 0px 0px 10px'}">
+        </p-avatar>
+    </div>
+    <p class="h3 p-0 m-0">
+        <span *ngIf="!userService.editName">
+            {{userService.userDetails.name}}
+            <i pRipple class="pi pi-pencil text-warning" (click)="userService.editName = true" style="cursor: pointer;"></i>
+        </span>
+        <input *ngIf="userService.editName" type="text" pInputText placeholder="Edit name" [(ngModel)]="userService.userDetails.name">
+    </p>
+    <p class="amall">
+        {{userService.userDetails.email}}
+    </p>
+    <div class="col-12 px-2 d-flex justify-content-between">
+        <p>Cipher View Mode</p>
+        <p-inputSwitch [(ngModel)]="userService.userDetails.settings.encryptNames"></p-inputSwitch>
+    </div>
+    <div class="col-12 px-2 d-flex justify-content-between">
+        <p>Cipher View Mode for names</p>
+        <p-inputSwitch [(ngModel)]="userService.userDetails.settings.encryption"></p-inputSwitch>
+    </div>
+</div>

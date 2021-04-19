@@ -42,4 +42,14 @@
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-atom" [fullScreen]="true">
     <p style="color: white"> Loading... </p>
-</ngx-spinner>
+</ngx-spinner> 
+
+<p-dialog header="Account Settings" (onHide)="user.cancelChanges()" [(visible)]="user.askSettings" [style]="{width: '40vw'}" [modal]='true'
+    maskStyleClass="blur-bg" [breakpoints]="{'780px': '95vw'}" [dismissableMask]="true">
+    <app-settings></app-settings>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" label="Save" styleClass="p-button-text text-light"
+            [disabled]="disableNewChat" (click)="user.saveSettings()">
+        </p-button>
+    </ng-template>
+</p-dialog>

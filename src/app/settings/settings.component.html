@@ -8,9 +8,11 @@
     <p class="h3 p-0 m-0">
         <span *ngIf="!userService.editName">
             {{userService.userDetails.name}}
-            <i pRipple class="pi pi-pencil text-warning" (click)="userService.editName = true" style="cursor: pointer;"></i>
+            <i pRipple class="pi pi-pencil text-warning" (click)="userService.editName = true"
+                style="cursor: pointer;"></i>
         </span>
-        <input *ngIf="userService.editName" type="text" pInputText placeholder="Edit name" [(ngModel)]="userService.userDetails.name">
+        <input *ngIf="userService.editName" type="text" pInputText placeholder="Edit name"
+            [(ngModel)]="userService.userDetails.name">
     </p>
     <p class="amall">
         {{userService.userDetails.email}}

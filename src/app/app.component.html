@@ -45,7 +45,7 @@
 </ngx-spinner> 
 
 <p-dialog header="Account Settings" (onHide)="user.cancelChanges()" [(visible)]="user.askSettings" [style]="{width: '40vw'}" [modal]='true'
-    maskStyleClass="blur-bg" [breakpoints]="{'780px': '95vw'}" [dismissableMask]="true">
+    maskStyleClass="blur-bg" [breakpoints]="{'780px': '95vw'}" [dismissableMask]="false">
     <app-settings></app-settings>
     <ng-template pTemplate="footer">
         <p-button icon="pi pi-check" label="Save" styleClass="p-button-text text-light"

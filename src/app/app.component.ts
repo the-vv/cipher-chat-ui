@@ -72,7 +72,7 @@ export class AppComponent implements OnInit {
 
     this.socket.currentUser.subscribe(user => {
       if (user.user) {
-        this.cookieService.set('user', JSON.stringify(user))
+        this.cookieService.set('user', JSON.stringify(user), 2)
         this.sideItems = [
           {
             label: 'Account',

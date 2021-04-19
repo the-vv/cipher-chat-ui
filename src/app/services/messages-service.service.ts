@@ -33,6 +33,9 @@ export class MessagesServiceService {
         this.isMessageReaady = true;
         this.addChatLists();
       })
+      .catch(e => {
+        console.error('Failed to get messages\n', e);        
+      })
   }
 
   sendMessage(to: any, mess: string) {

@@ -17,11 +17,9 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { SkeletonModule } from 'primeng/skeleton';
-import {ConfirmPopupModule} from 'primeng/confirmpopup';
-import {ConfirmationService} from 'primeng/api';
-import {InputSwitchModule} from 'primeng/inputswitch';
-
-// Materialize
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService } from 'primeng/api';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 // Other Libraries
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
@@ -84,7 +82,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     DialogModule,
     FormsModule,
     NgxSpinnerModule,
-    SkeletonModule, 
+    SkeletonModule,
     ConfirmPopupModule,
     NgxAnimationsModule,
     PickerModule,

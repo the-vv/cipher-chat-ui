@@ -10,9 +10,11 @@ export class UserServiceService {
   userDetails: any = {};
   originalUser: any = {};
   editName: boolean = false;
+  submitted: boolean = false;
+  saveIcon: string = 'pi-check';
 
   constructor(
-    private socket: SocketService
+    private socket: SocketService,
   ) {
     this.socket.currentUser.subscribe((user: any) => {
       this.originalUser = JSON.parse(JSON.stringify(user));
@@ -22,11 +24,33 @@ export class UserServiceService {
 
   cancelChanges() {
     this.editName = false;
-    this.userDetails = JSON.parse(JSON.stringify(this.originalUser.user));
+    if (!this.submitted) {
+      this.userDetails = JSON.parse(JSON.stringify(this.originalUser.user));
+    }
   }
 
   saveSettings() {
-    this.askSettings = false;
+    this.submitted = true;
+    this.saveIcon = 'pi-spin pi-spinner'
+    this.socket.updateUser(this.userDetails)
+      .then((d: any) => {
+        this.saveIcon = 'pi-check'
+        this.submitted = false;
+        this.userDetails = JSON.parse(JSON.stringify(d.user));
+        this.originalUser = JSON.parse(JSON.stringify(d));
+        this.editName = false;
+        this.askSettings = false;
+      })
+      .catch((e: any) => {
+        this.saveIcon = 'pi-check'
+        this.submitted = false;
+        this.editName = false;
+        this.askSettings = false;
+        if (!this.submitted) {
+          this.userDetails = JSON.parse(JSON.stringify(this.originalUser.user));
+        }
+        console.error('Updation Error\n', e)
+      })
     console.log(this.userDetails);
   }
 }

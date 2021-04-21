@@ -14,7 +14,11 @@ export class UserServiceService {
   submitted: boolean = false;
   saveIcon: string = 'pi-check';
   publicCryptoKey: string = '';
-  modeIcon: string = ''
+  modeIcon: string = '';
+  verifyUser: boolean = false;
+  verifyPasswordString: string;
+  verifyPasswordError: string;
+  verifyButtonIcon: string = 'pi pi-check-circle'
 
   constructor(
     private socket: SocketService,
@@ -25,7 +29,16 @@ export class UserServiceService {
       this.userDetails = JSON.parse(JSON.stringify(user.user));
     })
   }
-  
+
+  verifyPassword() {
+    console.log(this.verifyPasswordString)
+  }
+
+  onVerify(flag: boolean = false) { 
+    flag || (this.userDetails = JSON.parse(JSON.stringify(this.originalUser.user)));
+    console.log(this.userDetails.settings.encryption)  
+  }
+
   showError(title: string, message: string) {
     this.messageService.clear()
     this.messageService.add({ severity: 'error', summary: title, detail: message, life: 5000 });
@@ -49,20 +62,29 @@ export class UserServiceService {
     }
   }
 
+
+
   updateViewMode() {
     this.modeIcon = 'pi pi-spin pi-spinner'
-    this.socket.updateUser(this.userDetails)
-    .then((d: any) => {
-      this.userDetails = JSON.parse(JSON.stringify(d.user));
-      this.originalUser = JSON.parse(JSON.stringify(d));
+    if (this.userDetails.settings.encryption) {
+      this.socket.updateUser(this.userDetails)
+        .then((d: any) => {
+          this.userDetails = JSON.parse(JSON.stringify(d.user));
+          this.originalUser = JSON.parse(JSON.stringify(d));
+          this.modeIcon = '';
+        })
+        .catch((e: any) => {
+          this.modeIcon = '';
+          console.error('Updation Error\n', e);
+          this.userDetails = JSON.parse(JSON.stringify(this.originalUser.user));
+          this.showError('Error', 'Error while updating details. Please try again')
+        })
+    }
+    else {
+      this.verifyUser = true;
+      this.userDetails.settings.encryption = !this.userDetails.settings.encryption;
       this.modeIcon = '';
-    })
-    .catch((e: any) => {
-      this.modeIcon = '';
-      console.error('Updation Error\n', e);
-      this.userDetails = JSON.parse(JSON.stringify(this.originalUser.user));
-      this.showError('Error', 'Error while updating details. Please try again')
-    })
+    }
   }
 
   saveSettings() {

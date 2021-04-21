@@ -5,7 +5,6 @@
             Chat</a>
         <span class="mr-3">
             <span class="cipherSwitch d-inline" *ngIf="user.userDetails.settings && socket.User">
-                <!-- <span *ngIf="!mobileView">Cipher Mode: </span> -->
                 <p-toggleButton [iconPos]="'right'" (onChange)="user.updateViewMode()" [onLabel]="!mobileView ? 'Cipher Mode: On' : 'On'" [offLabel]="!mobileView ? 'Cipher Mode: Off' : 'Off'" [style]="{'vertical-align': 'center'}"
                  [(ngModel)]="user.userDetails.settings.encryption" [onIcon]="user.modeIcon.length ? user.modeIcon : 'pi pi-check'" [offIcon]="user.modeIcon.length ? user.modeIcon : 'pi pi-times'"></p-toggleButton>
             </span>
@@ -56,8 +55,27 @@
     [dismissableMask]="false">
     <app-settings></app-settings>
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" label="Save changes" styleClass="p-button-text text-light"
+        <p-button icon="pi {{user.saveIcon}}" label="Save changes" styleClass="p-button-text text-light"
             (click)="user.saveSettings()">
+        </p-button>
+    </ng-template>
+</p-dialog>
+
+
+<p-dialog header="Verify it's you to continue" (onHide)="user.onVerify(false)" [(visible)]="user.verifyUser" [style]="{width: '40vw'}" [modal]='true'
+    maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}">
+    <div class="col-12 col-md-10">
+        <span class="p-input-icon-left col-12">
+            <i class="pi pi-check-circle"></i>
+            <input type="text" pInputText placeholder="Type your password" [(ngModel)]="user.verifyPasswordString" />
+        </span>
+    </div>
+    <div style="display: inline-block; margin-left: 10px;" class="small" *ngIf="user.verifyPasswordError">
+        {{user.verifyPasswordError}
+    </div>
+    <ng-template pTemplate="footer">
+        <p-button [icon]="user.verifyButtonIcon" label="Start Messaging" styleClass="p-button-text text-light"
+            (click)="user.verifyPassword()">
         </p-button>
     </ng-template>
 </p-dialog>

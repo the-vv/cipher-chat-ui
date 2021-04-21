@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { SocketService } from './socket.service';
 
 @Injectable({
@@ -13,14 +14,21 @@ export class UserServiceService {
   submitted: boolean = false;
   saveIcon: string = 'pi-check';
   publicCryptoKey: string = '';
+  modeIcon: string = ''
 
   constructor(
     private socket: SocketService,
+    private messageService: MessageService
   ) {
     this.socket.currentUser.subscribe((user: any) => {
       this.originalUser = JSON.parse(JSON.stringify(user));
       this.userDetails = JSON.parse(JSON.stringify(user.user));
     })
+  }
+  
+  showError(title: string, message: string) {
+    this.messageService.clear()
+    this.messageService.add({ severity: 'error', summary: title, detail: message, life: 5000 });
   }
 
   makeRandomKey(length: number) {
@@ -39,6 +47,22 @@ export class UserServiceService {
     if (!this.submitted) {
       this.userDetails = JSON.parse(JSON.stringify(this.originalUser.user));
     }
+  }
+
+  updateViewMode() {
+    this.modeIcon = 'pi pi-spin pi-spinner'
+    this.socket.updateUser(this.userDetails)
+    .then((d: any) => {
+      this.userDetails = JSON.parse(JSON.stringify(d.user));
+      this.originalUser = JSON.parse(JSON.stringify(d));
+      this.modeIcon = '';
+    })
+    .catch((e: any) => {
+      this.modeIcon = '';
+      console.error('Updation Error\n', e);
+      this.userDetails = JSON.parse(JSON.stringify(this.originalUser.user));
+      this.showError('Error', 'Error while updating details. Please try again')
+    })
   }
 
   saveSettings() {
@@ -61,7 +85,8 @@ export class UserServiceService {
         if (!this.submitted) {
           this.userDetails = JSON.parse(JSON.stringify(this.originalUser.user));
         }
-        console.error('Updation Error\n', e)
+        console.error('Updation Error\n', e);
+        this.showError('Error', 'Error while updating details. Please try again')
       })
   }
 }

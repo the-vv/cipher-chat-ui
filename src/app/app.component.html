@@ -4,23 +4,24 @@
         <a class="navbar-brand text-white" routerLink="/"><img src="assets/icon.png" height="40" class=""> Cipher
             Chat</a>
         <span class="mr-3">
-            <span class="cipherSwitch d-inline-block" *ngIf="user.userDetails.settings && socket.User">
-                <span *ngIf="!mobileView">Cipher Mode: </span>
-                <p-inputSwitch [(ngModel)]="user.userDetails.settings.encryption"></p-inputSwitch>
+            <span class="cipherSwitch d-inline" *ngIf="user.userDetails.settings && socket.User">
+                <!-- <span *ngIf="!mobileView">Cipher Mode: </span> -->
+                <p-toggleButton [iconPos]="'right'" (onChange)="user.updateViewMode()" [onLabel]="!mobileView ? 'Cipher Mode: On' : 'On'" [offLabel]="!mobileView ? 'Cipher Mode: Off' : 'Off'" [style]="{'vertical-align': 'center'}"
+                 [(ngModel)]="user.userDetails.settings.encryption" [onIcon]="user.modeIcon.length ? user.modeIcon : 'pi pi-check'" [offIcon]="user.modeIcon.length ? user.modeIcon : 'pi pi-times'"></p-toggleButton>
             </span>
             <p-avatar *ngIf="!socket.User" icon="pi pi-user" styleClass="" [size]="'large'" shape="circle"
                 (click)="visibleSidebar = true">
             </p-avatar>
             <p-avatar *ngIf="socket.User" [label]="socket.User.name.split('')[0]" [style]="{'background-color':socket.User.settings.color, 'color': '#ffffff',
                 'text-shadow': 'black 0px 0px 10px', 'margin-left': '15px'}" [size]="'large'" shape="circle"
-                (click)="visibleSidebar = true">
+                (click)="visibleSidebar = true"> 
             </p-avatar>
         </span>
     </nav>
     <div class="routed-contents  padd-top">
         <router-outlet></router-outlet>
     </div>
-</div>
+</div> 
 
 <p-sidebar [(visible)]="visibleSidebar" [position]="mobileView ? 'left' : 'right'" [baseZIndex]="10000">
     <div class="userDetails ">
@@ -51,7 +52,7 @@
 </ngx-spinner>
 
 <p-dialog header="Account Settings" (onHide)="user.cancelChanges()" [(visible)]="user.askSettings"
-    [style]="{width: '40vw'}" [modal]='true' maskStyleClass="blur-bg" [breakpoints]="{'780px': '95vw'}"
+    [style]="{width: '40vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}"
     [dismissableMask]="false">
     <app-settings></app-settings>
     <ng-template pTemplate="footer">

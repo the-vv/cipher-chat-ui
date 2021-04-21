@@ -64,7 +64,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.socket.currentUser
       .subscribe(user => {
         if (user) {      
-          console.log(this.socket.redirectUrl);    
+          console.log(this.socket.redirectUrl);  
+          console.log(user)  
           this.spinner.hide();        
           this.router.navigate([this.socket.redirectUrl ? this.socket.redirectUrl : '/'], {replaceUrl: true});
         }

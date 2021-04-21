@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Socket } from 'ngx-socket-io';
 import { MessageService } from 'primeng/api';
@@ -24,7 +25,8 @@ export class SocketService {
   constructor(
     public socket: Socket,
     private cookieService: CookieService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
     ) {
     socket.on('connect', () => {
       console.log('Realtime Connection Established');
@@ -45,12 +47,16 @@ export class SocketService {
     this.loginStatus.subscribe(data => {
       this.showError('Error', data.status);
       this.isLoggedIn = false;
-      this.User = null  
+      this.User = null;
+      this.cookieService.delete('user');
+      this.router.navigate(['/login'], {replaceUrl: true});
     })
     this.signupStatus.subscribe(data => {
       this.showError('Error', data.status); 
       this.isLoggedIn = false;
-      this.User = null  
+      this.User = null;
+      this.cookieService.delete('user');
+      this.router.navigate(['/login'], {replaceUrl: true});
     })
   }
 
@@ -65,7 +71,7 @@ export class SocketService {
       this.isLoggedIn = true;
     }
     else if (this.User._id != user.user._id) {
-      console.error('Logged In User Error');
+      console.error('Logged In User Mismatch Error');
     }
   }
 

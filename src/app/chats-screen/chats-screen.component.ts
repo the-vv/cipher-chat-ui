@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import { MessagesServiceService } from '../services/messages-service.service';
 import { SocketService } from '../services/socket.service';
+import { UserServiceService } from '../services/user-service.service';
 
 @Component({
   selector: 'app-chats-screen',
@@ -98,7 +99,9 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   showbutton: boolean;
 
   constructor(public socket: SocketService,
-    private message: MessagesServiceService) {
+    private message: MessagesServiceService,
+    public userService: UserServiceService
+    ) {
   }
 
   ngOnInit() {

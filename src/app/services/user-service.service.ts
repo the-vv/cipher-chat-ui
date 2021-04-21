@@ -12,6 +12,7 @@ export class UserServiceService {
   editName: boolean = false;
   submitted: boolean = false;
   saveIcon: string = 'pi-check';
+  publicCryptoKey: string = '';
 
   constructor(
     private socket: SocketService,
@@ -20,6 +21,17 @@ export class UserServiceService {
       this.originalUser = JSON.parse(JSON.stringify(user));
       this.userDetails = JSON.parse(JSON.stringify(user.user));
     })
+  }
+
+  makeRandomKey(length: number) {
+    let result = [];
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result.push(characters.charAt(Math.floor(Math.random() *
+        charactersLength)));
+    }
+    return result.join('');
   }
 
   cancelChanges() {

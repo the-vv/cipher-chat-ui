@@ -50,25 +50,26 @@ body, html {
 }
 
 .p-dialog {
-  // background: rgba(255, 255, 255, 0.1)!important;
+  background: rgba(0, 0, 0, 0.15)!important;
   border-radius: 30px !important;
 }
 
 .p-dialog .p-dialog-header {
   background: unset!important;
-  border-radius: 30px !important;
+  border-top-left-radius: 30px !important;
+  border-top-right-radius: 30px !important;
   margin: 0px;
 }
 
 
 .p-dialog .p-dialog-content {
   background: unset!important;
-  border-radius: 30px !important;
 }
 
 .p-dialog .p-dialog-footer {
   background: unset!important;
-  border-radius: 30px !important;
+  border-bottom-left-radius: 30px !important;
+  border-bottom-right-radius: 30px !important;
 }
 
 .blur-bg {

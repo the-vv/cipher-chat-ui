@@ -3,6 +3,7 @@ import { MenuItem } from 'primeng/api';
 // import { Message } from '../models/message';
 import { SocketService } from '../services/socket.service';
 import { ConfirmationService } from 'primeng/api';
+import { UserServiceService } from '../services/user-service.service';
 
 
 @Component({
@@ -34,7 +35,8 @@ export class PersonWidgetComponent implements OnInit {
 
   constructor(
     public socket: SocketService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    public userService: UserServiceService
   ) { }
 
   confirm(event: Event) {

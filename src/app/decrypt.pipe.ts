@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import * as crypto from 'crypto-js';
+import { AES } from 'crypto-js';
 import { UserServiceService } from './services/user-service.service';
 
 @Pipe({
@@ -13,8 +13,8 @@ export class DecryptPipe implements PipeTransform {
   }
 
   transform(value: any, encrypt: boolean = false): string {
-    if(encrypt) {
-      return crypto.AES.encrypt(value, this.userService.publicCryptoKey).toString();
+    if (encrypt) {
+      return AES.encrypt(value, this.userService.publicCryptoKey).toString();
     }
     return value;
   }

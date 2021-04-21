@@ -20,6 +20,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 // Other Libraries
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
@@ -86,7 +87,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ConfirmPopupModule,
     NgxAnimationsModule,
     PickerModule,
-    InputSwitchModule
+    InputSwitchModule,
+    ToggleButtonModule
   ],
   providers: [
     LoginServiceService,

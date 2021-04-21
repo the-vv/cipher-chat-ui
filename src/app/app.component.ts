@@ -2,7 +2,6 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { MenuItem } from 'primeng/api';
 import { SocketService } from './services/socket.service';
-import * as rand from 'randomcolor'
 import { CookieService } from 'ngx-cookie-service';
 import { NavigationEnd, Router } from '@angular/router';
 import { UserServiceService } from './services/user-service.service';
@@ -60,12 +59,6 @@ export class AppComponent implements OnInit {
       }      
     })
     
-
-    this.randomColor = rand({
-      format: 'rgba',
-      alpha: 0.5
-    })
-
     this.primengConfig.ripple = true;
 
     this.initSidebar();

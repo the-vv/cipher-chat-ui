@@ -41,6 +41,8 @@ body, html {
 .p-sidebar {
   padding: 0rem !important;
   margin: 0px !important;
+  background: rgba(255, 255, 255, 0.1)!important;
+  backdrop-filter: blur(10px)!important;
 }
 
 .p-menu {
@@ -50,7 +52,7 @@ body, html {
 }
 
 .p-dialog {
-  background: rgba(0, 0, 0, 0.15)!important;
+  background: rgba(255, 255, 255, 0.1)!important;
   border-radius: 30px !important;
 }
 

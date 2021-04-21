@@ -2,7 +2,8 @@
     (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">
     <div class="chat-avatar" style="padding-left: 4px;">
         <p-avatar icon="pi pi-user" styleClass="" [size]="'large'" shape="circle" [label]="chat.name.split('')[0]"
-            [style]="{'background-color':chat.color, 'color': '#ffffff', 'text-shadow': 'black 0px 0px 10px'}"></p-avatar>
+            [style]="{'background-color':chat.color, 'color': '#ffffff', 'text-shadow': 'black 0px 0px 10px'}">
+        </p-avatar>
     </div>
     <div class="chat-user" style="padding-left: 0px;">
         <div class="row d-flex justify-content-between">
@@ -11,7 +12,7 @@
                     {{chat.name | decrypt: userService.userDetails.settings.encryptNames}}
                     <span *ngIf="socket.User._id == chat._id">(You)</span>
                 </h5>
-            </div> 
+            </div>
             <div class="col-2 p-0 small text-center" style="font-size: 0.7em; padding: 0px;">
                 {{chat.messages[chat.messages.length-1].datetime |
                 date:isToday(chat.messages[chat.messages.length-1].datetime) ? 'h:mm a' : 'd/M/yy' }}
@@ -19,8 +20,9 @@
         </div>
         <div class=" d-flex justify-content-between p-0">
             <div class="col-11 p-0">
-                <p class="p-0 m-0 text-truncate">{{chat.messages[chat.messages.length-1].message | decrypt: userService.userDetails.settings.encryption}}</p>
-            </div> 
+                <p class="p-0 m-0 text-truncate">{{chat.messages[chat.messages.length-1].message | decrypt:
+                    userService.userDetails.settings.encryption}}</p>
+            </div>
             <div class="col-1 p-0">
                 <i pRipple class="pi pi-trash text-warning" (click)="confirm($event); $event.stopPropagation();"></i>
             </div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Socket } from 'ngx-socket-io';
+import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { Message } from '../models/message';
 import { User } from '../models/user';
@@ -22,7 +23,8 @@ export class SocketService {
 
   constructor(
     public socket: Socket,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private messageService: MessageService
     ) {
     socket.on('connect', () => {
       console.log('Realtime Connection Established');
@@ -40,6 +42,21 @@ export class SocketService {
         this.cookieService.set('user', JSON.stringify(newUser), 2)
       }
     })
+    this.loginStatus.subscribe(data => {
+      this.showError('Error', data.status);
+      this.isLoggedIn = false;
+      this.User = null  
+    })
+    this.signupStatus.subscribe(data => {
+      this.showError('Error', data.status); 
+      this.isLoggedIn = false;
+      this.User = null  
+    })
+  }
+
+  showError(title: string, message: string) {
+    this.messageService.clear()
+    this.messageService.add({ severity: 'error', summary: title, detail: message, life: 5000 });
   }
 
   login = (user: any) => {

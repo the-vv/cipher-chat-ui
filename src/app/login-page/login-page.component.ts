@@ -70,11 +70,11 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         }
       })
     this.socket.loginStatus.subscribe(data => {
-      this.showError('Error', data.status);   
+      console.log(data);
       this.spinner.hide();        
     })
     this.socket.signupStatus.subscribe(data => {
-      this.showError('Error', data.status);   
+      console.log(data);
       this.spinner.hide();        
     })
   }

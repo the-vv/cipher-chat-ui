@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { Subject } from 'rxjs';
 import { SocketService } from './socket.service';
 
 @Injectable({
@@ -18,7 +19,8 @@ export class UserServiceService {
   verifyUser: boolean = false;
   verifyPasswordString: string;
   verifyPasswordError: string;
-  verifyButtonIcon: string = 'pi pi-check-circle'
+  verifyButtonIcon: string = 'pi pi-check-circle';
+  verificationEvents: Subject<boolean> = new Subject();
 
   constructor(
     private socket: SocketService,
@@ -27,16 +29,35 @@ export class UserServiceService {
     this.socket.currentUser.subscribe((user: any) => {
       this.originalUser = JSON.parse(JSON.stringify(user));
       this.userDetails = JSON.parse(JSON.stringify(user.user));
+      this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
     })
   }
 
   verifyPassword() {
-    console.log(this.verifyPasswordString)
+    if (this.verifyPasswordString?.length) {
+      this.verifyPasswordError = 'Checking...';
+      this.verifyButtonIcon = 'pi pi-spin pi-spinner';
+      this.socket.verifyPassword(this.verifyPasswordString)
+        .then(status => {
+          if (status === true) {
+            this.verificationEvents.next(true)
+          } else if (status === false) {
+            this.verificationEvents.next(false)
+          }
+        })
+        .catch((_) => {
+          this.verificationEvents.next(false)
+        })
+    }
   }
 
-  onVerify(flag: boolean = false) { 
-    flag || (this.userDetails = JSON.parse(JSON.stringify(this.originalUser.user)));
-    console.log(this.userDetails.settings.encryption)  
+  onVerify(flag: boolean = false) {
+    if (!flag) {
+      this.verifyPasswordString = '';
+      this.verifyPasswordError = '';
+      console.log('closed verify');
+      this.verifyButtonIcon = 'pi pi-check-circle';
+    }
   }
 
   showError(title: string, message: string) {
@@ -63,27 +84,50 @@ export class UserServiceService {
   }
 
 
-
   updateViewMode() {
-    this.modeIcon = 'pi pi-spin pi-spinner'
-    if (this.userDetails.settings.encryption) {
+    if (!this.userDetails.settings.encryption) {
+      this.userDetails.settings.encryption = true;
+      this.modeIcon = 'pi-spin pi-spinner'
       this.socket.updateUser(this.userDetails)
         .then((d: any) => {
           this.userDetails = JSON.parse(JSON.stringify(d.user));
           this.originalUser = JSON.parse(JSON.stringify(d));
-          this.modeIcon = '';
+          this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
         })
         .catch((e: any) => {
-          this.modeIcon = '';
           console.error('Updation Error\n', e);
           this.userDetails = JSON.parse(JSON.stringify(this.originalUser.user));
-          this.showError('Error', 'Error while updating details. Please try again')
+          this.showError('Error', 'Error while updating details. Please try again');
+          this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
         })
     }
     else {
       this.verifyUser = true;
-      this.userDetails.settings.encryption = !this.userDetails.settings.encryption;
-      this.modeIcon = '';
+      this.verificationEvents.subscribe(res => {
+        if (res === true) {
+          this.verifyUser = false;
+          this.userDetails.settings.encryption = false;
+          this.modeIcon = 'pi-spin pi-spinner'
+          this.socket.updateUser(this.userDetails)
+            .then((d: any) => {
+              this.userDetails = JSON.parse(JSON.stringify(d.user));
+              this.originalUser = JSON.parse(JSON.stringify(d));
+              this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
+            })
+            .catch((e: any) => {
+              console.error('Updation Error\n', e);
+              this.userDetails = JSON.parse(JSON.stringify(this.originalUser.user));
+              this.showError('Error', 'Error while updating details. Please try again');
+              this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
+            })
+        }
+        else {
+          // this.verifyUser = false;
+          console.log('wrong password');
+          this.verifyPasswordError = 'Wrong Password';
+          this.verifyButtonIcon = 'pi pi-check-circle';
+        }
+      })
     }
   }
 
@@ -97,7 +141,8 @@ export class UserServiceService {
         this.userDetails = JSON.parse(JSON.stringify(d.user));
         this.originalUser = JSON.parse(JSON.stringify(d));
         this.editName = false;
-        this.askSettings = false;
+        this.askSettings = false;        
+        this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
       })
       .catch((e: any) => {
         this.saveIcon = 'pi-check'
@@ -108,7 +153,8 @@ export class UserServiceService {
           this.userDetails = JSON.parse(JSON.stringify(this.originalUser.user));
         }
         console.error('Updation Error\n', e);
-        this.showError('Error', 'Error while updating details. Please try again')
+        this.showError('Error', 'Error while updating details. Please try again');
+        this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
       })
   }
 }

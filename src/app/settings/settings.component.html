@@ -17,12 +17,20 @@
     <p class="amall">
         {{userService.userDetails.email}}
     </p>
-    <div class="col-12 px-2 d-flex justify-content-between">
-        <p>Cipher Mode</p>
-        <p-inputSwitch [(ngModel)]="userService.userDetails.settings.encryption"></p-inputSwitch>
+    <div class="col-12 px-2 d-flex justify-content-between align-items-center">
+        <p class="my-auto">Cipher Mode</p>
+        <!-- <p-inputSwitch [(ngModel)]="userService.userDetails.settings.encryption"></p-inputSwitch> -->
+        <button pButton pRipple type="button" iconPos="right" icon="pi {{userService.modeIcon}}" label=""
+            class="p-button-rounded"
+            [ngClass]="userService.modeIcon == 'pi-check' ? 'p-button-success' : 'p-button-secondary'"
+            (click)="userService.updateViewMode()"></button>
     </div>
-    <div class="col-12 px-2 d-flex justify-content-between">
-        <p>Cipher Mode for names</p>
-        <p-inputSwitch [(ngModel)]="userService.userDetails.settings.encryptNames"></p-inputSwitch>
+    <div class="col-12 px-2 mt-3 d-flex justify-content-between align-items-center">
+        <p class="my-auto">Cipher names also</p>
+        <!-- <p-inputSwitch [(ngModel)]="userService.userDetails.settings.encryptNames"></p-inputSwitch> -->
+        <button pButton pRipple type="button" iconPos="right" icon="pi {{userService.userDetails.settings.encryptNames ? 'pi-check' : 'pi-times'}}" label=""
+            class="p-button-rounded"
+            [ngClass]="userService.userDetails.settings.encryptNames ? 'p-button-success' : 'p-button-secondary'"
+            (click)="userService.userDetails.settings.encryptNames = !userService.userDetails.settings.encryptNames"></button>
     </div>
-</div>  
+</div>

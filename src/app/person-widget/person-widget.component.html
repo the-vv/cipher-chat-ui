@@ -9,7 +9,7 @@
         <div class="row d-flex justify-content-between">
             <div class="col-10 pr-0">
                 <h5 class="p-0 m-0 text-truncate" style="padding-right: 0px;">
-                    {{chat.name | decrypt: userService.userDetails.settings.encryptNames}}
+                    {{chat.name | decrypt: userService.userDetails.settings.encryption && userService.userDetails.settings.encryptNames}}
                     <span *ngIf="socket.User._id == chat._id">(You)</span>
                 </h5>
             </div>

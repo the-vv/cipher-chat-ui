@@ -158,4 +158,17 @@ export class SocketService {
     })
   }
 
+  verifyPassword(password: string) {
+    return new Promise((resolve, reject) => {
+      this.socket.emit('verifyPassword', {password: password, email: this.User.email}, (result: any) => {
+        if (result.success !== null) {
+          resolve(result.success)
+        } else {
+          this.showError('Error', result.error);
+          reject(result.error);
+        }
+      })
+    })
+  }
+
 }

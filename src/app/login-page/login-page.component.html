@@ -8,11 +8,8 @@
                 <div class="display-6 text-center mb-3">Login</div>
                 <form action="" class="col-12 px-3" [formGroup]="loginForm" (ngSubmit)="onLogin()">
                     <div class="mb-4 py-1">
-                        <!-- <span class="p-float-label"> -->
                         <input formControlName="email" type="text" id="inputtext" pInputText class="normal-input col-12"
                             [ngClass]="{'ng-dirty':lf.email.touched && lf.email.errors }" placeholder="Email">
-                        <!-- <label for="inputtext">Email</label> -->
-                        <!-- </span> -->
                         <label for="" class="small text-warning" 
                             *ngIf="lf.email.touched && lf.email.errors && lf.email.errors.required">Email is
                             required</label>
@@ -21,16 +18,13 @@
                     </div>
                     <div class="mb-3 pt-1">
                         <div class="p-inputgroup">
-                            <!-- <span class="p-float-label m-1"> -->
                             <input formControlName="password" id="ipassword" p-password pInputText [toggleMask]="true"
                                 [feedback]="false" class="normal-input" [type]="lpvmode ? 'password' : text"
                                 [ngClass]="{'ng-dirty':lf.password.touched && lf.password.errors }" placeholder="Password">
-                            <!-- <label for="ipassword">Password</label> -->
                             <span class="p-inputgroup-addon col-1" (click)="lpvmode = !lpvmode" pRipple>
                                 <i *ngIf="lpvmode" class="pi pi-eye"></i>
                                 <i *ngIf="!lpvmode" class="pi pi-eye-slash"></i>
                             </span>
-                            <!-- </span> -->
                         </div>
                         <div class="m-1">
                             <label for="" class="small text-warning"
@@ -43,13 +37,13 @@
                             class="p-button-outlined col-6"></button>
                     </div>
                 </form>
-                <div class="socialLogin text-center mt-3">
+                <!-- <div class="socialLogin text-center mt-3">
                     <div class="mb-2 h6">Or Continue With</div>
                     <button pButton pRipple type="button" icon="pi pi-google"
                         class="bg-danger border-0 p-button-rounded p-4 mx-3"></button>
                     <button pButton pRipple type="button" icon="pi pi-facebook"
                         class="bg-primary border-0 p-button-rounded p-4 mx-3"></button>
-                </div>
+                </div> -->
                 <hr>
                 <div class="text-center">
                     Don't have an account? <a class="text-info" [routerLink]="['/login']"
@@ -116,7 +110,7 @@
                                 [password]="SignupForm.value.password" [enableFeedback]="true" [minPasswordLength]=6>
                             </password-strength-meter>
                         </div>
-                    </div>
+                    </div> 
                     <div class="mb-3">
                         <div class="p-inputgroup">
                             <!-- <span class="p-float-label m-1"> -->
@@ -146,13 +140,13 @@
                             class="p-button-outlined col-6"></button>
                     </div>
                 </form>
-                <div class="socialLogin text-center mt-3">
+                <!-- <div class="socialLogin text-center mt-3">
                     <div class="mb-2 h6">Or Continue With</div>
                     <button pButton pRipple type="button" icon="pi pi-google"
                         class="bg-danger border-0 p-button-rounded p-4 mx-3"></button>
                     <button pButton pRipple type="button" icon="pi pi-facebook"
                         class="bg-primary border-0 p-button-rounded p-4 mx-3"></button>
-                </div>
+                </div> -->
                 <hr>
                 <div class="text-center text-white">
                     Already have an account? <a class="text-info" [routerLink]="['/login']" [queryParams]="{}">Login now</a>

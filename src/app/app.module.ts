@@ -21,6 +21,8 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { KnobModule } from 'primeng/knob';
+
 
 // Other Libraries
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
@@ -46,6 +48,7 @@ import { ChatsScreenComponent } from './chats-screen/chats-screen.component';
 import { DecryptPipe } from './decrypt.pipe';
 import { UserServiceService } from './services/user-service.service';
 import { SettingsComponent } from './settings/settings.component';
+import { MstatusPipe } from './mstatus.pipe';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -61,7 +64,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     PersonWidgetComponent,
     ChatsScreenComponent,
     DecryptPipe,
-    SettingsComponent
+    SettingsComponent,
+    MstatusPipe
   ],
   imports: [
     BrowserModule,
@@ -88,7 +92,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     NgxAnimationsModule,
     PickerModule,
     InputSwitchModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    KnobModule
   ],
   providers: [
     LoginServiceService,

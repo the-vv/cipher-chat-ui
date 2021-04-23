@@ -171,4 +171,17 @@ export class SocketService {
     })
   }
 
+  updateMessageStatus(id: string) {
+    return new Promise((resolve, reject) => {
+      this.socket.emit('updateMessageSeen', id, (result: any) => {
+        if (result.success !== null) {
+          resolve(result.success)
+        } else {
+          console.log('Error', result.error);
+          reject(result.error);
+        }
+      })
+    })
+  }
+
 }

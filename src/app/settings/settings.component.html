@@ -34,4 +34,9 @@
             [ngClass]="userService.userDetails.settings.encryptionComplexMode ? 'p-button-success' : 'p-button-secondary'"
             (click)="userService.userDetails.settings.encryptionComplexMode = !userService.userDetails.settings.encryptionComplexMode"></button>
     </div>
-</div>
+    <div class="col-12 px-2 mt-2 d-flex justify-content-between align-items-center">
+        <p class="my-auto">Cipher Delay (in Seconds)</p>
+        <p-knob [(ngModel)]="userService.userDetails.settings.encryptDelay" [size]="44" textColor="white"
+            valueColor="white" rangeColor="SlateGray" [min]="0" [max]="30" step="3"></p-knob>
+    </div>
+</div>  

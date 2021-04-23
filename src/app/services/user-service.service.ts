@@ -93,7 +93,6 @@ export class UserServiceService {
     }
   }
 
-
   updateViewMode() {
     if (!this.userDetails.settings.encryption) {
       this.userDetails.settings.encryption = true;
@@ -113,7 +112,7 @@ export class UserServiceService {
     }
     else {
       this.verifyUser = true;
-      this.verificationEvents.subscribe(res => {
+      let tempSub =  this.verificationEvents.subscribe(res => {
         if (res === true) {
           this.verifyUser = false;
           this.userDetails.settings.encryption = false;
@@ -137,6 +136,7 @@ export class UserServiceService {
           this.verifyPasswordError = 'Wrong Password';
           this.verifyButtonIcon = 'pi pi-check-circle';
         }
+        tempSub.unsubscribe();
       })
     }
   }

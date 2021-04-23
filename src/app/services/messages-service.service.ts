@@ -32,6 +32,7 @@ export class MessagesServiceService {
         this.newMessages = mess;
         this.isMessageReaady = true;
         this.addChatLists();
+        console.log(this.chatList)
       })
       .catch(e => {
         console.error('Failed to get messages\n', e);        
@@ -185,6 +186,23 @@ export class MessagesServiceService {
         }
       });
       return result;
+    })
+  }
+
+  updateMessageSeenStatus(id: string) {
+    this.socket.updateMessageStatus(id)
+    .then((_) => {
+      this.chatList.forEach(el => {
+        el.messages.forEach((element: any) => {
+          if(element._id == id) {
+            element.seen = true;
+            // console.log(element);
+          }
+        });      
+      })
+    })
+    .catch(_ => {
+      console.log('error updaitng message seen')
     })
   }
 

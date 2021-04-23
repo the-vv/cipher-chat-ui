@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AES } from 'crypto-js';
+// import { AES } from 'crypto-js';
 import { UserServiceService } from './services/user-service.service';
 
 @Pipe({
@@ -14,10 +14,31 @@ export class DecryptPipe implements PipeTransform {
 
   transform(value: any, encrypt: boolean = false): string {
     if (encrypt) {
-      return AES.encrypt(value, this.userService.publicCryptoKey).toString();
+      // return AES.encrypt(value, this.userService.publicCryptoKey).toString();
+      return this.encrypt(value, 6)
     }
     return value;
   }
 
+  getMap(legend: any[], shift: number) {
+    return legend.reduce((charsMap, currentChar, charIndex) => {
+      const copy = { ...charsMap };
+      let ind = (charIndex + shift) % legend.length;
+      if (ind < 0) {
+        ind += legend.length;
+      };
+      copy[currentChar] = legend[ind];
+      return copy;
+    }, {});
+  };
+  encrypt(str: string, shift = 0) {
+    const legend = 'abcdefghijklmnopqrstuvwxyz'.split('');
+    const map = this.getMap(legend, shift);
+    return str
+      .toLowerCase()
+      .split('')
+      .map((char: any) => map[char] || char)
+      .join('');
+  }
+
 }
- 

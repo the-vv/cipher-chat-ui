@@ -29,6 +29,7 @@ export class UserServiceService {
     this.socket.currentUser.subscribe((user: any) => {
       this.originalUser = JSON.parse(JSON.stringify(user));
       this.userDetails = JSON.parse(JSON.stringify(user.user));
+      console.log(this.userDetails.settings)
       this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
     })
   }

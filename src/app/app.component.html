@@ -6,11 +6,11 @@
         <span class="mr-3">
             <span class="cipherSwitch d-inline" *ngIf="user.userDetails.settings && socket.User">
                 <button pButton pRipple type="button" iconPos="right" icon="pi {{user.modeIcon}}" [label]="!mobileView ? 'Cipher Mode:' : ''"
-                    class="p-button-rounded" [ngClass]="user.modeIcon == 'pi-check' ? 'p-button-success' : 'p-button-secondary'" (click)="user.updateViewMode()"></button>
+                    class="p-button-rounded" (click)="user.updateViewMode()"></button>
             </span>
             <p-avatar *ngIf="!socket.User" icon="pi pi-user" styleClass="" [size]="'large'" shape="circle"
                 (click)="visibleSidebar = true">
-            </p-avatar>
+            </p-avatar> 
             <p-avatar *ngIf="socket.User" [label]="socket.User.name.split('')[0]" [style]="{'background-color':socket.User.settings.color, 'color': '#ffffff',
                 'text-shadow': 'black 0px 0px 10px', 'margin-left': '15px'}" [size]="'large'" shape="circle"
                 (click)="visibleSidebar = true">
@@ -62,12 +62,12 @@
 </p-dialog>
 
 
-<p-dialog header="Password Varification" (onHide)="user.onVerify(false)" [(visible)]="user.verifyUser"
+<p-dialog header="Password Verification" (onHide)="user.onVerify(false)" [(visible)]="user.verifyUser"
     [style]="{width: '40vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}">
     <div class="col-12 col-md-10">
-        <span class="p-input-icon-left col-12">
+        <span class="p-input-icon-right col-12">
             <i class="pi pi-lock"></i>
-            <input type="text" pInputText placeholder="Type your password" [(ngModel)]="user.verifyPasswordString" />
+            <input type="password" pInputText placeholder="Type your password" [(ngModel)]="user.verifyPasswordString" />
         </span>
     </div>
     <div style="display: inline-block; margin-left: 10px;" class="small text-warning" *ngIf="user.verifyPasswordError">

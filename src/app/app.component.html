@@ -5,16 +5,18 @@
             Chat</a>
         <span class="mr-3">
             <span class="cipherSwitch d-inline" *ngIf="user.userDetails.settings && socket.User">
-                <button pButton pRipple type="button" iconPos="right" icon="pi {{user.modeIcon}}" [label]="!mobileView ? 'Cipher Mode:' : ''"
-                    class="p-button-rounded" (click)="user.updateViewMode()"></button>
+                <button pButton pRipple type="button" iconPos="right" icon="pi {{user.modeIcon}}"
+                    [label]="!mobileView ? 'Cipher Mode:' : ''" class="p-button-rounded" (click)="user.updateViewMode()"
+                    [style]="{'background-color': user.getBgColor(), 'color': user.getBgColor() === '#C5E1A5' ? 'black' : 'white'}"></button>
             </span>
-            <p-avatar *ngIf="!socket.User" icon="pi pi-user" styleClass="" [size]="'large'" shape="circle"
-                (click)="visibleSidebar = true">
-            </p-avatar> 
-            <p-avatar *ngIf="socket.User" [label]="socket.User.name.split('')[0]" [style]="{'background-color':socket.User.settings.color, 'color': '#ffffff',
-                'text-shadow': 'black 0px 0px 10px', 'margin-left': '15px'}" [size]="'large'" shape="circle"
-                (click)="visibleSidebar = true">
-            </p-avatar>
+            <span class="menu-button" (click)="visibleSidebar = true">
+                <p-avatar *ngIf="!socket.User" icon="pi pi-user" styleClass="" [size]="'large'" shape="circle">
+                </p-avatar>
+                <p-avatar *ngIf="socket.User" [label]="socket.User.name.split('')[0]" [style]="{'background-color':socket.User.settings.color, 'color': '#ffffff',
+                'text-shadow': 'black 0px 0px 10px'}" [size]="'large'" shape="circle">
+                </p-avatar>
+                <i class="bi bi-three-dots-vertical" style="font-size: 1.5em;"></i>
+            </span>
         </span>
     </nav>
     <div class="routed-contents  padd-top">
@@ -67,7 +69,8 @@
     <div class="col-12 col-md-10">
         <span class="p-input-icon-right col-12">
             <i class="pi pi-lock"></i>
-            <input type="password" pInputText placeholder="Type your password" [(ngModel)]="user.verifyPasswordString" />
+            <input type="password" pInputText placeholder="Type your password"
+                [(ngModel)]="user.verifyPasswordString" />
         </span>
     </div>
     <div style="display: inline-block; margin-left: 10px;" class="small text-warning" *ngIf="user.verifyPasswordError">

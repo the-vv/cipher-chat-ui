@@ -9,7 +9,7 @@
         <div class="row d-flex justify-content-between">
             <div class="col-10 pr-0">
                 <h5 class="p-0 m-0 text-truncate" style="padding-right: 0px;">
-                    {{chat.name | decrypt: userService.userDetails.settings.encryption && userService.userDetails.settings.encryptNames}}
+                    {{chat.name | decrypt: userService.userDetails.settings.encryption && userService.userDetails.settings.encryptNames : userService.userDetails.settings.encryptionComplexMode}}
                     <span *ngIf="socket.User._id == chat._id">(You)</span>
                 </h5>
             </div>
@@ -21,7 +21,7 @@
         <div class=" d-flex justify-content-between p-0">
             <div class="col-11 p-0">
                 <p class="p-0 m-0 text-truncate">{{chat.messages[chat.messages.length-1].message | decrypt:
-                    userService.userDetails.settings.encryption}}</p>
+                    userService.userDetails.settings.encryption : userService.userDetails.settings.encryptionComplexMode}}</p>
             </div>
             <div class="col-1 p-0 text-center">
                 <i pRipple class="pi pi-trash text-warning" (click)="confirm($event); $event.stopPropagation();"></i>

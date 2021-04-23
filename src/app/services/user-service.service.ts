@@ -34,6 +34,15 @@ export class UserServiceService {
     })
   }
 
+  getBgColor() {
+    if(this.userDetails.settings.encryption) {
+      return '#C5E1A5'
+    }
+    else {
+      return '#ff4081'
+    }
+  }
+
   verifyPassword() {
     if (this.verifyPasswordString?.length) {
       this.verifyPasswordError = 'Checking...';

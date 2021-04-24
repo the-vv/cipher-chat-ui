@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { MessagesServiceService } from './services/messages-service.service';
-import { UserServiceService } from './services/user-service.service';
 
 @Pipe({
   name: 'mstatus'
@@ -8,13 +7,11 @@ import { UserServiceService } from './services/user-service.service';
 export class MstatusPipe implements PipeTransform {
 
   constructor(
-    private message: MessagesServiceService,
-    private User: UserServiceService
+    private message: MessagesServiceService
     ) {
   }
 
-  transform(value: unknown, mid: string, seen: boolean, delay: number): unknown {
-    console.log(this.User.userDetails.settings.encryptDelay)
+  transform(value: string , mid: string, seen: boolean, delay: number): unknown {
     if(!seen) {
       setTimeout(() => {
         this.message.updateMessageSeenStatus(mid);

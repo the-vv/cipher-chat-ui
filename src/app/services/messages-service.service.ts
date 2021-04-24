@@ -24,6 +24,11 @@ export class MessagesServiceService {
           this.pushChat(messages);
         }
       })
+    this.socket.messageReadStatus
+      .subscribe(mess => {
+        console.log(mess)
+        this.updateMessageReadStatus(mess); 
+      })
   }
 
   getMessages() {
@@ -35,7 +40,7 @@ export class MessagesServiceService {
         console.log(this.chatList)
       })
       .catch(e => {
-        console.error('Failed to get messages\n', e);        
+        console.error('Failed to get messages\n', e);
       })
   }
 
@@ -106,7 +111,7 @@ export class MessagesServiceService {
     this.sortChatList();
   }
 
-  pushChat(mess: any) { 
+  pushChat(mess: any) {
     let otherEndUser: any;
     let clist: any;
     if (mess.from._id == this.socket.User._id) {
@@ -191,18 +196,31 @@ export class MessagesServiceService {
 
   updateMessageSeenStatus(id: string) {
     this.socket.updateMessageStatus(id)
-    .then((_) => {
-      this.chatList.forEach(el => {
-        el.messages.forEach((element: any) => {
-          if(element._id == id) {
-            element.seen = true;
-            // console.log(element);
-          }
-        });      
+      .then((_) => {
+        this.chatList.forEach(el => {
+          el.messages.forEach((element: any) => {
+            if (element._id == id) {
+              element.seen = true;
+              // console.log(element);
+            }
+          });
+        })
       })
-    })
-    .catch(_ => {
-      console.log('error updaitng message seen')
+      .catch(_ => {
+        console.log('error updaitng message seen')
+      })
+  }
+
+  updateMessageReadStatus(mess: any) {
+    console.log(mess)
+    this.chatList.forEach(el => {
+      el.messages.forEach((element: any) => {
+        console.log(element)
+        if (element._id == mess._id) {
+          element.read = mess.read; 
+          console.log(element)
+        } 
+      });
     })
   }
 

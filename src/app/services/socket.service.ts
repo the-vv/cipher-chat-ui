@@ -16,6 +16,7 @@ export class SocketService {
   public loginStatus: Observable<any>;
   public signupStatus: Observable<any>;
   public messages: Observable<any>;
+  public messageReadStatus: Observable<any>;
 
   public User: User;
   public isLoggedIn: boolean = false;
@@ -27,20 +28,25 @@ export class SocketService {
     private cookieService: CookieService,
     private messageService: MessageService,
     private router: Router
-    ) {
+  ) {
     socket.on('connect', () => {
       console.log('Realtime Connection Established');
+      if (this.isLoggedIn) {
+        this.socket.emit('verifyAuth', JSON.parse(this.cookieService.get('user')).token);
+        console.log('Verifying on reconnect')
+      }
     })
     this.messages = socket.fromEvent('setMessages');
     this.loginStatus = socket.fromEvent('loginStatus');
     this.signupStatus = socket.fromEvent('signupStatus');
     this.currentUser = socket.fromEvent('authSuccess');
-    this.currentUser.subscribe(this.login);
+    this.messageReadStatus = socket.fromEvent('updateMessages');
+    this.currentUser.subscribe(this.login); 
     socket.on('updatedUser', (user: any) => {
       if (cookieService.check('user')) {
         let usr: any = JSON.parse(this.cookieService.get('user'));
         this.User = user.user;
-        let newUser = {token: usr.token, user: user.user}
+        let newUser = { token: usr.token, user: user.user }
         this.cookieService.set('user', JSON.stringify(newUser), 2)
       }
     })
@@ -49,14 +55,14 @@ export class SocketService {
       this.isLoggedIn = false;
       this.User = null;
       this.cookieService.delete('user');
-      this.router.navigate(['/login'], {replaceUrl: true});
+      this.router.navigate(['/login'], { replaceUrl: true });
     })
     this.signupStatus.subscribe(data => {
-      this.showError('Error', data.status); 
+      this.showError('Error', data.status);
       this.isLoggedIn = false;
       this.User = null;
       this.cookieService.delete('user');
-      this.router.navigate(['/login'], {replaceUrl: true});
+      this.router.navigate(['/login'], { replaceUrl: true });
     })
   }
 
@@ -160,7 +166,7 @@ export class SocketService {
 
   verifyPassword(password: string) {
     return new Promise((resolve, reject) => {
-      this.socket.emit('verifyPassword', {password: password, email: this.User.email}, (result: any) => {
+      this.socket.emit('verifyPassword', { password: password, email: this.User.email }, (result: any) => {
         if (result.success !== null) {
           resolve(result.success)
         } else {

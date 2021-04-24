@@ -26,10 +26,11 @@ export class UserServiceService {
     private socket: SocketService,
     private messageService: MessageService
   ) {
+    this.publicCryptoKey = Math.random().toString(36).substring(2, 9);
     this.socket.currentUser.subscribe((user: any) => {
       this.originalUser = JSON.parse(JSON.stringify(user));
       this.userDetails = JSON.parse(JSON.stringify(user.user));
-      console.log(this.userDetails.settings)
+      // console.log(this.userDetails.settings)
       this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
     })
   }
@@ -73,17 +74,6 @@ export class UserServiceService {
   showError(title: string, message: string) {
     this.messageService.clear()
     this.messageService.add({ severity: 'error', summary: title, detail: message, life: 5000 });
-  }
-
-  makeRandomKey(length: number) {
-    let result = [];
-    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result.push(characters.charAt(Math.floor(Math.random() *
-        charactersLength)));
-    }
-    return result.join('');
   }
 
   cancelChanges() {

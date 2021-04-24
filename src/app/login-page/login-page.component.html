@@ -19,7 +19,7 @@
                     <div class="mb-3 pt-1">
                         <div class="p-inputgroup">
                             <input formControlName="password" id="ipassword" p-password pInputText [toggleMask]="true"
-                                [feedback]="false" class="normal-input" [type]="lpvmode ? 'password' : text"
+                                [feedback]="false" class="normal-input" [type]="lpvmode ? 'password' : 'text'"
                                 [ngClass]="{'ng-dirty':lf.password.touched && lf.password.errors }" placeholder="Password">
                             <span class="p-inputgroup-addon col-1" (click)="lpvmode = !lpvmode" pRipple>
                                 <i *ngIf="lpvmode" class="pi pi-eye"></i>

@@ -37,7 +37,7 @@ export class MessagesServiceService {
         this.newMessages = mess;
         this.isMessageReaady = true;
         this.addChatLists();
-        console.log(this.chatList)
+        // console.log(this.chatList)
       })
       .catch(e => {
         console.error('Failed to get messages\n', e);
@@ -211,14 +211,26 @@ export class MessagesServiceService {
       })
   }
 
-  updateMessageReadStatus(mess: any) {
-    console.log(mess)
+  messageIsRead(mid: string) {
     this.chatList.forEach(el => {
       el.messages.forEach((element: any) => {
-        console.log(element)
+        // console.log('checking', element._id, mid)
+        if (element._id == mid && element.read === false && this.socket.User._id == element.to._id) { 
+          // console.log('read', element.message)         
+          this.socket.updateMessageRead(element._id)
+        } 
+      });
+    })
+  } 
+
+  updateMessageReadStatus(mess: any) {
+    // console.log(mess)
+    this.chatList.forEach(el => {
+      el.messages.forEach((element: any) => {
+        // console.log(element) 
         if (element._id == mess._id) {
           element.read = mess.read; 
-          console.log(element)
+          // console.log(element)
         } 
       });
     })

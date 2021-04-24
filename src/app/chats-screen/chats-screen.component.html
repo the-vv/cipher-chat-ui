@@ -54,7 +54,7 @@
                     <span class="small datetimer text-end"
                         style="font-size: 0.6em; margin: 5px;position: absolute; vertical-align: bottom; width: 100px; right: 3px; bottom: 0; padding-right: 15px;">
                         {{mess.datetime | date:isToday(mess.datetime) ? 'h:mm a' : 'h:mm a, d/M/yy'}}
-                        <i class="bi small" [ngClass]="mess.read ? 'bi-check2-all': 'bi-check2'"
+                        <i class="bi small" [ngClass]="mess.read ? 'bi-check2-circle': 'bi-check2'"
                             style="font-size: 1.25em; vertical-align: bottom;position: absolute; right: 0; margin-bottom: 5px;"></i>
                     </span>
                 </div>  

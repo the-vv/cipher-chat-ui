@@ -17,7 +17,7 @@ export class SocketService {
   public signupStatus: Observable<any>;
   public messages: Observable<any>;
   public messageReadStatus: Observable<any>;
-
+  public isDisconnected: boolean = false;
   public User: User;
   public isLoggedIn: boolean = false;
 
@@ -31,7 +31,7 @@ export class SocketService {
   ) {
     socket.on('connect', () => {
       console.log('Realtime Connection Established');
-      if (this.isLoggedIn) {
+      if (this.isLoggedIn && this.isDisconnected) {
         this.socket.emit('verifyAuth', JSON.parse(this.cookieService.get('user')).token);
         console.log('Verifying on reconnect')
       }
@@ -49,6 +49,10 @@ export class SocketService {
         let newUser = { token: usr.token, user: user.user }
         this.cookieService.set('user', JSON.stringify(newUser), 2)
       }
+    })
+    socket.on('disconnect', ()=> {
+      this.isDisconnected = true;
+      console.log('Disconnected')
     })
     this.loginStatus.subscribe(data => {
       this.showError('Error', data.status);

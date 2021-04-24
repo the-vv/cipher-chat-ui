@@ -8,16 +8,18 @@
 }
 
 .userDetails {
-    background-image   : url("../assets/userbg.png");
-    background-position: center;
-    background-repeat  : none;
-    background-size    : cover;
-    height             : 180px;
-    display            : flex;
-    justify-content    : flex-end;
-    flex-direction     : column;
+    // background-image   : url("../assets/userbg.png");
+    // background-position: center;
+    // background-repeat  : none;
+    // background-size    : cover;
+    // height             : 180px;
     padding-left       : 10px;
-}
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}  
 
 .padd-top {
     padding-top: 66px;

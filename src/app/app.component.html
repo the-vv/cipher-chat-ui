@@ -25,19 +25,19 @@
 </div>
 
 <p-sidebar [(visible)]="visibleSidebar" [position]="mobileView ? 'left' : 'right'" [baseZIndex]="10000">
-    <div class="userDetails ">
-        <div class="userContents">
+    <div class="userDetails d-flex justify-content-center">
+        <div class="userContents text-center">
             <p-avatar *ngIf="!socket.User" icon="pi pi-user" styleClass="mb-2" size="xlarge" shape="circle">
             </p-avatar>
             <p-avatar *ngIf="socket.User" [label]="socket.User.name.split('')[0]" styleClass="mb-2" size="xlarge"
                 shape="circle"
                 [style]="{'background-color':socket.User.settings.color, 'color': '#ffffff', 'text-shadow': 'black 0px 0px 10px'}">
             </p-avatar>
-            <div *ngIf="socket.User" class="text-truncate d-block">
-                <h4 class="p-0 m-0 pl-2">{{socket.User.name}}</h4>
-                <p class="p-0 m-0 pl-2">{{socket.User.email}}</p>
+            <div *ngIf="socket.User" class="text-truncate d-block text-center">
+                <h4 class="p-0 m-0 pl-2 text-center">{{socket.User.name}}</h4>
+                <p class="p-0 m-0 pl-2 text-center">{{socket.User.email}}</p>
             </div>
-            <div *ngIf="!socket.User" class="pb-2">
+            <div *ngIf="!socket.User" class="pb-2 text-center">
                 <h4 class="p-0 m-0 pl-2">Hello Stranger</h4>
             </div>
         </div>

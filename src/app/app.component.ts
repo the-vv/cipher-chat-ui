@@ -5,6 +5,7 @@ import { SocketService } from './services/socket.service';
 import { CookieService } from 'ngx-cookie-service';
 import { NavigationEnd, Router } from '@angular/router';
 import { UserServiceService } from './services/user-service.service';
+import { MessagesServiceService } from './services/messages-service.service';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +35,8 @@ export class AppComponent implements OnInit {
     public socket: SocketService,
     private cookieService: CookieService,
     private router: Router,
-    public user: UserServiceService
+    public user: UserServiceService,
+    public messageService: MessagesServiceService
   ) {
     this.mobileView = window.innerWidth < 500 ? true : false;
 

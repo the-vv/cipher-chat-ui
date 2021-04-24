@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // PrimeNG imports
 import { AvatarModule } from 'primeng/avatar';
@@ -31,6 +32,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxAnimationsModule } from 'ngx-animations';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { FileUploadModule } from 'ng2-file-upload';
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import * as cloudinary from 'cloudinary-core';
 
 
 // Components and services
@@ -49,6 +53,7 @@ import { DecryptPipe } from './decrypt.pipe';
 import { UserServiceService } from './services/user-service.service';
 import { SettingsComponent } from './settings/settings.component';
 import { MstatusPipe } from './mstatus.pipe';
+import { FileuploadComponent } from './fileupload/fileupload.component';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -65,11 +70,13 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ChatsScreenComponent,
     DecryptPipe,
     SettingsComponent,
-    MstatusPipe
+    MstatusPipe,
+    FileuploadComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
     AvatarModule,
     CardModule,
@@ -93,7 +100,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     PickerModule,
     InputSwitchModule,
     ToggleButtonModule,
-    KnobModule
+    KnobModule,
+    FileUploadModule,
+    CloudinaryModule.forRoot(cloudinary, { cloud_name: 'cipherchat' })
   ],
   providers: [
     LoginServiceService,

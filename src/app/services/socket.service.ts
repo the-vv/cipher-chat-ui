@@ -41,7 +41,7 @@ export class SocketService {
     this.signupStatus = socket.fromEvent('signupStatus');
     this.currentUser = socket.fromEvent('authSuccess');
     this.messageReadStatus = socket.fromEvent('updateMessages');
-    this.currentUser.subscribe(this.login); 
+    this.currentUser.subscribe(this.login);
     socket.on('updatedUser', (user: any) => {
       if (cookieService.check('user')) {
         let usr: any = JSON.parse(this.cookieService.get('user'));
@@ -50,7 +50,7 @@ export class SocketService {
         this.cookieService.set('user', JSON.stringify(newUser), 2)
       }
     })
-    socket.on('disconnect', ()=> {
+    socket.on('disconnect', () => {
       this.isDisconnected = true;
       console.log('Disconnected')
     })
@@ -203,6 +203,14 @@ export class SocketService {
           console.log('Error', result.error);
           reject(result.error);
         }
+      })
+    })
+  }
+
+  getSignature(): any {
+    return new Promise((resolve, reject) => {
+      this.socket.emit('getUploadSignature', this.User, (result: any) => {        
+          resolve(result)        
       })
     })
   }

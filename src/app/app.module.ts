@@ -33,8 +33,6 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxAnimationsModule } from 'ngx-animations';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { FileUploadModule } from 'ng2-file-upload';
-import { CloudinaryModule } from '@cloudinary/angular-5.x';
-import * as cloudinary from 'cloudinary-core';
 
 
 // Components and services
@@ -54,6 +52,7 @@ import { UserServiceService } from './services/user-service.service';
 import { SettingsComponent } from './settings/settings.component';
 import { MstatusPipe } from './mstatus.pipe';
 import { FileuploadComponent } from './fileupload/fileupload.component';
+import { MediaService } from './services/media.service';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -102,7 +101,6 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ToggleButtonModule,
     KnobModule,
     FileUploadModule,
-    CloudinaryModule.forRoot(cloudinary, { cloud_name: 'cipherchat' })
   ],
   providers: [
     LoginServiceService,
@@ -110,7 +108,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     MessageService,
     CookieService,
     ConfirmationService,
-    UserServiceService
+    UserServiceService,
+    MediaService
   ],
   bootstrap: [AppComponent],
   schemas: [

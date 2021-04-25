@@ -1,8 +1,6 @@
-import { Component, OnInit, Input, NgZone } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
-import { Cloudinary } from '@cloudinary/angular-5.x';
-import { SocketService } from '../services/socket.service';
+import { Component, OnInit } from '@angular/core';
+import { FileUploader, FileUploaderOptions } from 'ng2-file-upload';
+import { MediaService } from '../services/media.service';
 
 @Component({
   selector: 'app-fileupload',
@@ -16,18 +14,14 @@ export class FileuploadComponent implements OnInit {
   response: string;
 
   constructor(
-    private cloudinary: Cloudinary,
-    private zone: NgZone,
-    private http: HttpClient,
-    private socket: SocketService
+    public media: MediaService
   ) {
-    // this.responses = [];
   }
-
+ 
   ngOnInit(): void {
     // Create the file uploader, wire it to upload to your account
     const uploaderOptions: FileUploaderOptions = {
-      url: `https://api.cloudinary.com/v1_1/cipherchat/image/upload`,
+      url: `http://localhost:3000/upload`,
       // Upload files automatically upon addition to upload queue
       autoUpload: true,
       // Use xhrTransport in favor of iframeTransport
@@ -46,25 +40,29 @@ export class FileuploadComponent implements OnInit {
     this.uploader = new FileUploader(uploaderOptions);
 
     this.uploader.onBuildItemForm = async (fileItem: any, form: FormData) => {
-      // Add Cloudinary unsigned upload preset to the upload form
-      form.append('upload_preset', 'cipherChatImages');
-
       // Add file to upload
       form.append('file', fileItem);
-      form.append("api_key", "333784116198625");
-      // let res = await this.socket.getSignature();
-      // console.log(res)
-      // form.append("timestamp", res.timestamp);
-      // form.append("signature", res.signature);
-
       // Use default "withCredentials" value for CORS requests
       fileItem.withCredentials = false;
       return { fileItem, form };
     }
 
     this.uploader.response.subscribe((res: any) => {
-      console.log(JSON.parse(res))
       this.response = res
+      let jres;
+      try {
+        console.log(JSON.parse(res));
+        jres = JSON.parse(res)
+      }
+      catch {        
+        console.log(res);
+      }
+      finally {
+        if( jres.filename) {
+          console.log('deleting', jres.filename.split('/')[1]);
+
+        }
+      }
     });
 
   }

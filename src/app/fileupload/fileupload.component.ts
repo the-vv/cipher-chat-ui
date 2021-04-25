@@ -20,7 +20,8 @@ export class FileuploadComponent implements OnInit {
 
   public uploader: FileUploader = new FileUploader({
     url: 'http://localhost:3000/upload',
-    itemAlias: 'file'
+    itemAlias: 'file',
+    isHTML5: true
   });
 
   // onUpload(event: any) {
@@ -49,12 +50,27 @@ export class FileuploadComponent implements OnInit {
     this.hasBaseDropZoneOver = e;
   }
 
+  resetUpload() {
+    this.imgUrl = '';
+    this.messageCaption = '';
+    this.uploader.clearQueue();
+  }
+
   ngOnInit() {
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
     };
     this.uploader.onCompleteItem = (item: any, status: any) => {
-      console.log('Uploaded File Details:', item, status);
+      // console.log('Uploaded File Details:', item, status);
+      let res = JSON.parse(status)
+      let details = {
+        url: res.path,
+        pid: res.filename.split('/')[1],
+        caption: this.messageCaption
+      }
+      this.media.uploadedFile(details);
+      this.resetUpload();
+
     };
   }
 

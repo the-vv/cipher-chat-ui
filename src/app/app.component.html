@@ -84,7 +84,7 @@
 </p-dialog>
 
 
-<p-dialog header="Upload Files" [(visible)]="messageService.askUpload" (onHide)="media.cancelUpload.next(true)"
+<p-dialog header="Upload Files" [(visible)]="media.askUpload" (onHide)="media.cancelUpload.next(true)"
     [style]="{width: '60vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}"
     [dismissableMask]="false">
     <app-fileupload></app-fileupload> 

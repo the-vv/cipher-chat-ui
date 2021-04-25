@@ -18,23 +18,33 @@
 
 <div *ngIf="!uploader.queue.length" class="file-upload text-center" ng2FileDrop
     [ngClass]="{'file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader">
-    <span class="mb-3"  (fileOver)="fileOverBase($event)" ng2FileDrop> Choose a file or Drag and drop one here</span>
-    <input type="file"  (fileOver)="fileOverBase($event)" ng2FileDrop class="form-control" name="file" ng2FileSelect [uploader]="uploader" accept="image/*" />
+    <span class="mb-3" (fileOver)="fileOverBase($event)" ng2FileDrop> Choose a file or Drag and drop one here</span>
+    <input type="file" (fileOver)="fileOverBase($event)" ng2FileDrop class="form-control" name="file" ng2FileSelect
+        [uploader]="uploader" accept="image/*" />
 </div>
 <div *ngFor="let item of uploader.queue" class="text-center">
-    <button pButton pRipple type="button" class="p-button-outlined" icon="bi bi-upload" label="Upload" (click)="item.upload()"
-        [disabled]="item.isReady || item.isUploading || item.isSuccess">
+    <button pButton pRipple type="button" class="p-button-outlined" icon="bi bi-upload" label="Send"
+        (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
     </button>
-    <button pButton pRipple type="button" class="p-button-outlined mx-3" icon="bi bi-x-circle" label="Cancel" (click)="item.cancel()"
-        [disabled]="!item.isUploading">
+    <button pButton pRipple type="button" class="p-button-outlined mx-1 mx-md-3" icon="bi bi-x-circle" label="Cancel"
+        (click)="item.cancel()" [disabled]="!item.isUploading">
     </button>
-    <button pButton pRipple type="button" class="p-button-outlined" icon="bi bi-trash" label="Remove" (click)="item.remove()">
+    <button pButton pRipple type="button" class="p-button-outlined" icon="bi bi-trash" label="Remove"
+        (click)="item.remove()">
     </button>
-    <span class="p-input-icon-right col-12">
-        <i class="pi pi-lock"></i>
-        <input type="password" pInputText placeholder="Type your password"
-            [(ngModel)]="user.verifyPasswordString" />
+    <span class="p-input-icon-right col-12 col-md-8 my-2">
+        <i class="bi bi-chat-dots"></i>
+        <input type="text" pInputText placeholder="Enter your caption" [(ngModel)]="messageCaption" />
     </span>
+    <div *ngIf="item.isUploading">
+        <div class="progress my-1 text-center" style="height: 10px">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                [ngStyle]="{ 'width': item.progress + '%'}" [aria-valuenow]="item.progress" aria-valuemin="0"
+                aria-valuemax="100">
+                {{item.progress}}%
+            </div>
+        </div>
+    </div>
     <img [src]="imgUrl || getFileUrl(item._file)" alt="" width="100%">
 </div>
 
@@ -51,7 +61,7 @@
 
 
 
-<!-- <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
+    <!-- <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
     [uploader]="uploader" class="well drop-zone">
     Drop a file or
     

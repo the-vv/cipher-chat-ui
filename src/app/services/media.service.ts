@@ -8,13 +8,13 @@ export class MediaService {
 
   imgUploaded: Subject<any> = new Subject();
   cancelUpload: Subject<boolean> = new Subject();
+  askUpload: boolean = false;
 
   constructor() { }
 
   uploadedFile(details: any) {
-    console.log(details)
-    this.imgUploaded.next(details)
-
+    this.askUpload = false;
+    this.imgUploaded.next(details);
   }
 
 }

@@ -33,7 +33,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxAnimationsModule } from 'ngx-animations';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
-// import { FileUploadModule } from 'ng2-file-upload';
+import { FileUploadModule as ng2FileUploader } from 'ng2-file-upload';
 
 
 // Components and services
@@ -102,6 +102,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ToggleButtonModule,
     KnobModule,
     FileUploadModule,
+    ng2FileUploader
   ],
   providers: [
     LoginServiceService,

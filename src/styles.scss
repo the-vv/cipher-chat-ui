@@ -125,15 +125,30 @@ html {
 
 .p-fileupload,
 .p-fileupload-buttonbar {
-  background-color       : rgba(255, 255, 255, 0.1) !important;
+  background-color       : unset !important;
   border-top-left-radius : 30px !important;
   border-top-right-radius: 30px !important;
 }
 
 .p-fileupload-content,
 .p-fileupload {
-  background-color          : rgba(255, 255, 255, 0.1) !important;
+  background-color          : unset !important;
   border-bottom-left-radius : 30px !important;
   border-bottom-right-radius: 30px !important;
   text-align                : center;
+}
+
+
+.p-fileupload-buttonbar .p-button {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border    : 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 30px;
+}
+
+.p-fileupload-buttonbar .p-button:hover,
+.p-fileupload-buttonbar .p-button:active,
+.p-fileupload-buttonbar .p-button:focus {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border    : 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 30px;
 }

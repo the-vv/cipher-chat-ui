@@ -65,12 +65,17 @@
         style="padding-left: 10px;padding-right: 10px;">
         <div class="emoji">
             <button pButton pRipple type="button" icon="bi {{!toggleEmoji ? 'bi-emoji-smile' : 'bi-x'}}"
-                style="font-size: 1.4em;" class="p-button-rounded p-button-text p-button-plain ml-2"
+                style="font-size: 1.4em;" class="p-button-rounded p-button-text p-button-plain ml-2 text-white"
                 (click)="toggleEmoji = !toggleEmoji; !toggleEmoji && this.chatInputElament.nativeElement.focus()"></button>
             <div class="emojiView" *ngIf="toggleEmoji" [style]="{ position: 'absolute', bottom: '50px', left: '5px' }">
                 <emoji-mart [isNative]="false" (emojiClick)="selectedEMoji($event)" [showPreview]="false"
                     [emojiTooltip]="false" set="facebook"></emoji-mart>
             </div>
+        </div>
+        <div class="image-picker">
+            <button pButton pRipple type="button" icon="bi {{!message.askUpload ? 'bi-image' : 'bi-x'}}"
+                style="font-size: 1.4em;" class="p-button-rounded p-button-text p-button-plain ml-2 text-white"
+                (click)="addPhoto()"></button>
         </div>
         <div class="p-inputgroup">
             <input type="text" pInputText placeholder="Type a message" [(ngModel)]="messageString" (blur)="onBlur()"

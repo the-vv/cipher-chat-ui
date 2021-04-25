@@ -3,6 +3,7 @@ import {
   Input, OnChanges, OnInit, SimpleChanges, HostListener,
   AfterViewInit, Output, EventEmitter
 } from '@angular/core';
+import { MediaService } from '../services/media.service';
 import { MessagesServiceService } from '../services/messages-service.service';
 import { SocketService } from '../services/socket.service';
 import { UserServiceService } from '../services/user-service.service';
@@ -94,14 +95,15 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   needScroll: boolean = true;
   needScroll2: boolean = true;
   canScrollSmooth: boolean = false;
-  public mobileView: boolean = false;
+  mobileView: boolean = false;
   prevChatListLength: number;
   showbutton: boolean;
 
   constructor(public socket: SocketService,
-    private message: MessagesServiceService,
-    public userService: UserServiceService
-    ) {
+    public message: MessagesServiceService,
+    public userService: UserServiceService,
+    public media: MediaService
+  ) {
   }
 
   ngOnInit() {
@@ -178,6 +180,11 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     this.messageString += event.emoji.native;
     this.toggleEmoji = false;
     this.chatInputElament && this.chatInputElament.nativeElement.focus();
+  }
+
+  addPhoto() {
+    this.message.askUpload = true;
+    
   }
 
 }

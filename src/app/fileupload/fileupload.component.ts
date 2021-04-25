@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FileUploader, FileUploaderOptions } from 'ng2-file-upload';
+import { FileUploader } from 'ng2-file-upload';
 import { MediaService } from '../services/media.service';
 
 @Component({
@@ -10,32 +10,52 @@ import { MediaService } from '../services/media.service';
 export class FileuploadComponent implements OnInit {
 
   uploadedFiles: any[] = [];
+  fileOver: boolean = false;
+  hasBaseDropZoneOver: any;
+  messageCaption: string = '';
 
-  constructor() { }
+  constructor(
+    public media: MediaService
+  ) { }
 
-  onUpload(event) {
-    for (let file of event.files) {
-      this.uploadedFiles.push(file);
-    }
-    // let resp = event.originalEvent.body as 
-    console.log('uploaded', event.originalEvent.body);
-  }
+  public uploader: FileUploader = new FileUploader({
+    url: 'http://localhost:3000/upload',
+    itemAlias: 'file'
+  });
 
-
+  // onUpload(event: any) {
+  //   this.imgUrl = event.originalEvent.body.path
+  //   for (let file of event.files) {
+  //     this.uploadedFiles.push(file);
+  //   }
+  //   let details = {
+  //     url: event.originalEvent.body.path,
+  //     pid: event.originalEvent.body.filename.split('/')[1]
+  //   }
+  //   this.media.uploadedFile(details)
+  // }
 
   imgUrl: any = ''
   getFileUrl(event: any) {
-    console.log(event);
-    
+    // console.log(event);    
     const reader = new FileReader();
-    reader.readAsDataURL(event.files[0]);
+    reader.readAsDataURL(event);
     reader.onload = () => {
       this.imgUrl = reader.result
     }
   }
 
-  ngOnInit() {
+  fileOverBase(e: any): void {
+    this.hasBaseDropZoneOver = e;
+  }
 
+  ngOnInit() {
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+    };
+    this.uploader.onCompleteItem = (item: any, status: any) => {
+      console.log('Uploaded File Details:', item, status);
+    };
   }
 
   // hasBaseDropZoneOver: boolean = false;
@@ -96,7 +116,4 @@ export class FileuploadComponent implements OnInit {
   // 
   // }
   // 
-  // fileOverBase(e: any): void {
-  // this.hasBaseDropZoneOver = e;
-  // }
 }

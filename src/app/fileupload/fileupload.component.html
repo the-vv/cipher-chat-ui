@@ -1,20 +1,42 @@
-<p-fileUpload name="file" url="http://localhost:3000/upload" (onUpload)="onUpload($event)" accept="image/*"
+<!-- <p-fileUpload name="file" url="http://localhost:3000/upload" (onUpload)="onUpload($event)" accept="image/*"
     maxFileSize="5242880" (onSelect)="getFileUrl($event)" [fileLimit]="1">
     <ng-template pTemplate="toolbar">
     </ng-template>
-    <ng-template let-file pTemplate="file" >
+    <ng-template let-file pTemplate="file">
         <img [src]="imgUrl" *ngIf="imgUrl" alt="" width="100%">
     </ng-template>
     <ng-template pTemplate="content">
-        Drag and drop a file
-        <ul *ngIf="uploadedFiles.length">
-            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-        </ul>
+        Drag and drop a file here
+        <span *ngIf="uploadedFiles.length">
+            File uploaded successfully with url 
+            <a [href]="imgUrl">{{imgUrl}}</a>
+        </span>
     </ng-template>
-</p-fileUpload>
+</p-fileUpload> -->
 
 
 
+<div *ngIf="!uploader.queue.length" class="file-upload text-center" ng2FileDrop
+    [ngClass]="{'file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader">
+    <span class="mb-3"  (fileOver)="fileOverBase($event)" ng2FileDrop> Choose a file or Drag and drop one here</span>
+    <input type="file"  (fileOver)="fileOverBase($event)" ng2FileDrop class="form-control" name="file" ng2FileSelect [uploader]="uploader" accept="image/*" />
+</div>
+<div *ngFor="let item of uploader.queue" class="text-center">
+    <button pButton pRipple type="button" class="p-button-outlined" icon="bi bi-upload" label="Upload" (click)="item.upload()"
+        [disabled]="item.isReady || item.isUploading || item.isSuccess">
+    </button>
+    <button pButton pRipple type="button" class="p-button-outlined mx-3" icon="bi bi-x-circle" label="Cancel" (click)="item.cancel()"
+        [disabled]="!item.isUploading">
+    </button>
+    <button pButton pRipple type="button" class="p-button-outlined" icon="bi bi-trash" label="Remove" (click)="item.remove()">
+    </button>
+    <span class="p-input-icon-right col-12">
+        <i class="pi pi-lock"></i>
+        <input type="password" pInputText placeholder="Type your password"
+            [(ngModel)]="user.verifyPasswordString" />
+    </span>
+    <img [src]="imgUrl || getFileUrl(item._file)" alt="" width="100%">
+</div>
 
 
 

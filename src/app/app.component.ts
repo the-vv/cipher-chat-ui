@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { NavigationEnd, Router } from '@angular/router';
 import { UserServiceService } from './services/user-service.service';
 import { MessagesServiceService } from './services/messages-service.service';
+import { MediaService } from './services/media.service';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +37,8 @@ export class AppComponent implements OnInit {
     private cookieService: CookieService,
     private router: Router,
     public user: UserServiceService,
-    public messageService: MessagesServiceService
+    public messageService: MessagesServiceService,
+    public media: MediaService
   ) {
     this.mobileView = window.innerWidth < 500 ? true : false;
 

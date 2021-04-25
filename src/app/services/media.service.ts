@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
-import { FileUploader } from 'ng2-file-upload';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MediaService {
 
-  uploader: FileUploader;
-  response: string;
+  imgUploaded: Subject<any> = new Subject();
+  cancelUpload: Subject<boolean> = new Subject();
 
   constructor() { }
+
+  uploadedFile(details: any) {
+    console.log(details)
+    this.imgUploaded.next(details)
+
+  }
+
 }

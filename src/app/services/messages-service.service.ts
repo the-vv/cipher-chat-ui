@@ -12,7 +12,7 @@ export class MessagesServiceService {
   chatList: any[] = [];
   searchedList: any[] = [];
   isListening: boolean = false;
-  askUpload: boolean = true
+  askUpload: boolean = false
 
   constructor(
     public socket: SocketService

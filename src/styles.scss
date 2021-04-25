@@ -4,10 +4,11 @@
 @import '~@ctrl/ngx-emoji-mart/picker';
 
 
-body, html {
+body,
+html {
   overflow: hidden;
-  height: 100vh;
-  width: 100vw;
+  height  : 100vh;
+  width   : 100vw;
 }
 
 // Scroll Bar
@@ -16,7 +17,7 @@ body, html {
 ::-webkit-scrollbar {
   max-width: 8px;
 }
- 
+
 /* Track */
 ::-webkit-scrollbar-track {
   background: #ffffff13;
@@ -39,10 +40,10 @@ body, html {
 }
 
 .p-sidebar {
-  padding: 0rem !important;
-  margin: 0px !important;
-  background: rgba(255, 255, 255, 0.1)!important;
-  backdrop-filter: blur(10px)!important;
+  padding        : 0rem !important;
+  margin         : 0px !important;
+  background     : rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
 }
 
 .p-menu {
@@ -52,67 +53,87 @@ body, html {
 }
 
 .p-dialog {
-  background: rgba(255, 255, 255, 0.1)!important;
+  background   : rgba(255, 255, 255, 0.1) !important;
   border-radius: 30px !important;
 }
 
 .p-dialog .p-dialog-header {
-  background: unset!important;
-  border-top-left-radius: 30px !important;
+  background             : unset !important;
+  border-top-left-radius : 30px !important;
   border-top-right-radius: 30px !important;
-  margin: 0px;
+  margin                 : 0px;
 }
 
 
 .p-dialog .p-dialog-content {
-  background: unset!important;
+  background: unset !important;
 }
 
 .p-dialog .p-dialog-footer {
-  background: unset!important;
-  border-bottom-left-radius: 30px !important;
+  background                : unset !important;
+  border-bottom-left-radius : 30px !important;
   border-bottom-right-radius: 30px !important;
 }
 
 
 .blur-bg-dark {
-  background: rgba(0, 0, 0, 0.2) !important;
-  backdrop-filter: blur(10px)!important;
+  background     : rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: blur(10px) !important;
 }
 
 .blur-bg {
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(10px)!important;
+  background     : rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
 }
 
-.p-confirm-popup {  
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(5px)!important;
-  border-radius: 20px !important;
-  text-shadow:  2px 2px 5px #000000 !important;
-  max-width: 500px!important;
+.p-confirm-popup {
+  background     : rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(5px) !important;
+  border-radius  : 20px !important;
+  text-shadow    : 2px 2px 5px #000000 !important;
+  max-width      : 500px !important;
 }
 
-.p-confirm-popup:before, .p-confirm-popup:after {  
-  border-bottom-color: rgba(255, 255, 255, 0.1) !important; 
+.p-confirm-popup:before,
+.p-confirm-popup:after {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-.p-confirm-popup-accept, .p-confirm-popup-reject {
+.p-confirm-popup-accept,
+.p-confirm-popup-reject {
+  color      : white;
+  background : rgba(255, 255, 255, 0.1) !important;
+  box-shadow : 5px 5px 10px #00000046 !important;
+  text-shadow: 2px 2px 5px #000000 !important;
+}
+
+.p-confirm-popup-accept span,
+.p-confirm-popup-reject span {
   color: white;
-  background: rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 5px 5px 10px #00000046 !important;
-  text-shadow:  2px 2px 5px #000000 !important;
 }
 
-.p-confirm-popup-accept span, .p-confirm-popup-reject span {
-  color: white;
-}
-
-.p-togglebutton	 {
-  background: rgba(255, 255, 255, 0.1)!important;
+.p-togglebutton {
+  background   : rgba(255, 255, 255, 0.1) !important;
   border-radius: 30px !important;
 }
 
-.p-button-icon-left, .p-button-icon-right, .p-button-text	{
-  background: unset!important;
-} 
+.p-button-icon-left,
+.p-button-icon-right,
+.p-button-text {
+  background: unset !important;
+}
+
+.p-fileupload,
+.p-fileupload-buttonbar {
+  background-color       : rgba(255, 255, 255, 0.1) !important;
+  border-top-left-radius : 30px !important;
+  border-top-right-radius: 30px !important;
+}
+
+.p-fileupload-content,
+.p-fileupload {
+  background-color          : rgba(255, 255, 255, 0.1) !important;
+  border-bottom-left-radius : 30px !important;
+  border-bottom-right-radius: 30px !important;
+  text-align                : center;
+}

@@ -23,6 +23,7 @@ import { ConfirmationService } from 'primeng/api';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { KnobModule } from 'primeng/knob';
+import {FileUploadModule} from 'primeng/fileupload';
 
 
 // Other Libraries
@@ -32,7 +33,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxAnimationsModule } from 'ngx-animations';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
-import { FileUploadModule } from 'ng2-file-upload';
+// import { FileUploadModule } from 'ng2-file-upload';
 
 
 // Components and services

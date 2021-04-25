@@ -85,12 +85,12 @@
 
 
 <p-dialog header="Upload Files" (onHide)="user.cancelChanges()" [(visible)]="messageService.askUpload"
-    [style]="{width: '40vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}"
+    [style]="{width: '60vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}"
     [dismissableMask]="false">
     <app-fileupload></app-fileupload>
     <ng-template pTemplate="footer">
         <p-button icon="pi {{user.saveIcon}}" label="Cancel Upload" styleClass="p-button-text text-light"
-            (click)="user.saveSettings()">
+            (click)="null">
         </p-button>
     </ng-template>
 </p-dialog>

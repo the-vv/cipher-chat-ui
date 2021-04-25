@@ -1,10 +1,41 @@
-<div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
-    [uploader]="uploader" class="well my-drop-zone">
-    Base drop zone
+<p-fileUpload name="file" url="http://localhost:3000/upload" (onUpload)="onUpload($event)" accept="image/*"
+    maxFileSize="5242880" (onSelect)="getFileUrl($event)" [fileLimit]="1">
+    <ng-template pTemplate="toolbar">
+    </ng-template>
+    <ng-template let-file pTemplate="file" >
+        <img [src]="imgUrl" *ngIf="imgUrl" alt="" width="100%">
+    </ng-template>
+    <ng-template pTemplate="content">
+        Drag and drop a file
+        <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+        </ul>
+    </ng-template>
+</p-fileUpload>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
+    [uploader]="uploader" class="well drop-zone">
+    Drop a file or
+    
+<input type="file" ng2FileSelect [uploader]="uploader" />
 </div>
 
-Single
-<input type="file" ng2FileSelect [uploader]="uploader" />
 
 <div class="col-md-9" style="margin-bottom: 40px">
 
@@ -50,4 +81,4 @@ Single
                 </td>
             </tr>
         </tbody>
-    </table>
+    </table> -->

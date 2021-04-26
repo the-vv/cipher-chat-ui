@@ -93,8 +93,8 @@
 
 .bubble {
     position          : relative;
-    animation         : slideInUp; //animate.css keyframe
-    animation-duration: .15s;
+    animation         : bounceIn; //animate.css keyframe
+    animation-duration: .3s;
 }
 
 .smooth-scroll {

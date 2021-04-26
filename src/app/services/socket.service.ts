@@ -185,7 +185,7 @@ export class SocketService {
     return new Promise((resolve, reject) => {
       this.socket.emit('updateMessageRead', mid, (result: any) => {
         if (result.success !== null) {
-          resolve(result.success)
+          resolve(result)
         } else {
           console.log('Error', result.error);
           reject(result.error);

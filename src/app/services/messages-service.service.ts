@@ -250,6 +250,10 @@ export class MessagesServiceService {
         if (element._id == mid && element.read === false && this.socket.User._id == element.to._id) { 
           // console.log('read', element.message)         
           this.socket.updateMessageRead(element._id)
+          .then((res: any) => {
+            console.log(res.mess);
+            this.updateMessageReadStatus(res.mess)
+          })
         } 
       });
     })
@@ -262,7 +266,7 @@ export class MessagesServiceService {
         // console.log(element) 
         if (element._id == mess._id) {
           element.read = mess.read; 
-          // console.log(element)
+          console.log(element)
         } 
       });
     })

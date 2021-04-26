@@ -156,13 +156,14 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
       this.currentUserId = this.socket.User._id;
       this.randomColor = changes.chat.currentValue.color;
       this.messages = changes.chat.currentValue.messages;
-      console.log(this.messages)
+      // console.log(this.messages)
       this.needScroll2 = true;
       if (!this.canScrollSmooth) {
         setTimeout(() => {
-          this.canScrollSmooth = true;
           this.chatInputElament && this.chatInputElament.nativeElement.focus();
-        }, 100);
+          this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
+          this.canScrollSmooth = true;
+        }, 500);
       }
       // console.log(changes.chat.currentValue);
     }

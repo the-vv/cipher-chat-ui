@@ -9,23 +9,29 @@
         <div class="row d-flex justify-content-between">
             <div class="col-10 pr-0">
                 <h5 class="p-0 m-0 text-truncate" style="padding-right: 0px;">
-                    {{chat.name | decrypt: userService.userDetails.settings.encryption && userService.userDetails.settings.encryptNames : userService.userDetails.settings.encryptionComplexMode}}
+                    {{chat.name | decrypt: userService.userDetails.settings.encryption &&
+                    userService.userDetails.settings.encryptNames :
+                    userService.userDetails.settings.encryptionComplexMode}}
                     <span *ngIf="socket.User._id == chat._id">(You)</span>
                 </h5>
             </div>
-            <div class="col-2 p-0 small text-center" style="font-size: 0.7em; padding: 0px;">
+            <div class="col-2 p-0 small text-center" style="font-size: 0.7em; padding: 0px; position: inherit;">
+                <span style="position: absolute; left: 0;"><p-badge [value]="3" severity="danger"></p-badge> </span>
                 {{chat.messages[chat.messages.length-1].datetime |
                 date:isToday(chat.messages[chat.messages.length-1].datetime) ? 'h:mm a' : 'd/M/yy' }}
             </div>
         </div>
         <div class=" d-flex justify-content-between p-0">
             <div class="col-10 p-0">
-                <p class="p-0 m-0 text-truncate">{{chat.messages[chat.messages.length-1].message | decrypt:
-                    chat.messages[chat.messages.length-1].seen && userService.userDetails.settings.encryption : userService.userDetails.settings.encryptionComplexMode}}</p>
+                <p class="p-0 m-0 text-truncate"><i class="bi bi-image"
+                        *ngIf="chat.messages[chat.messages.length-1].hasMedia"><b *ngIf="!chat.messages[chat.messages.length-1].message">&ngsp;Photo</b></i> {{chat.messages[chat.messages.length-1].message | decrypt:
+                    chat.messages[chat.messages.length-1].seen && userService.userDetails.settings.encryption :
+                    userService.userDetails.settings.encryptionComplexMode}}
+                </p>
             </div>
             <div class="col-2 p-0 text-center">
-                <i class="bi" [ngClass]="chat.messages[chat.messages.length-1].read ? 'bi-check2-circle': 'bi-check2'"
-                style="font-size: 1em;"></i>
+                <i class="bi " [ngClass]="chat.messages[chat.messages.length-1].read ? 'bi-check2-circle': 'bi-check2'"
+                    style="font-size: 1em;"></i>
                 &nbsp;
                 <i pRipple class="pi pi-trash text-warning" (click)="confirm($event); $event.stopPropagation();"></i>
             </div>

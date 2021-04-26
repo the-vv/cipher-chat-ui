@@ -13,7 +13,7 @@ export class DecryptPipe implements PipeTransform {
   }
 
   transform(value: any, encrypt: boolean = false, mode: boolean = false): string {
-    if (encrypt) {
+    if (encrypt && value.length) {
       if(mode) {
         return AES.encrypt(value, this.userService.publicCryptoKey).toString();
       }

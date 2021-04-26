@@ -23,7 +23,8 @@ import { ConfirmationService } from 'primeng/api';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { KnobModule } from 'primeng/knob';
-import { FileUploadModule } from 'primeng/fileupload';
+// import { FileUploadModule } from 'primeng/fileupload';
+import {BadgeModule} from 'primeng/badge';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DeferModule } from 'primeng/defer';
 
@@ -33,9 +34,10 @@ import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { CookieService } from 'ngx-cookie-service';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { NgxAnimationsModule } from 'ngx-animations';
+// import { NgxAnimationsModule } from 'ngx-animations';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { FileUploadModule as ng2FileUploader } from 'ng2-file-upload';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
 // Components and services
@@ -98,15 +100,17 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     NgxSpinnerModule,
     SkeletonModule,
     ConfirmPopupModule,
-    NgxAnimationsModule,
+    // NgxAnimationsModule,
     PickerModule,
     InputSwitchModule,
     ToggleButtonModule,
     KnobModule,
-    FileUploadModule,
+    // FileUploadModule,
     ng2FileUploader,
     ProgressSpinnerModule,
-    DeferModule
+    DeferModule,
+    LazyLoadImageModule,
+    BadgeModule
   ],
   providers: [
     LoginServiceService,

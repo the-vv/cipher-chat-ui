@@ -34,10 +34,11 @@
         <div class="col-12 singleChat" *ngFor="let mess of messages">
             <div class="left-bubble text-start"
                 *ngIf="mess.to._id == socket.User._id && mess.from._id != socket.User._id">
-                <div class="d-inline-block bubble ofw  animate__faster text-end" style="position: relative;"
+                <div class="d-inline-block bubble ofw  animate__faster" [ngClass]="mess.hasMedia ? 'text-start' : 'text-end'" style="position: relative;"
                     [ngStyle]="{'min-width': isToday(mess.datetime) ? '65px': '100px'}">
                     <div class="media-image" DeferModule *ngIf="mess.hasMedia">
-                        <img [src]="mess.media.url" alt="" class="chat-image">
+                        <img alt="" class="chat-image" defaultImage='../../assets/loader.gif' [lazyLoad]="mess.media.url">
+                        {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
                     <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length">{{mess.message | mstatus: mess._id : mess.seen :
                         userService.userDetails.settings.encryptDelay | decrypt:
@@ -53,7 +54,8 @@
                 <div class="d-inline-block bubble ofw  animate__faster text-start" style="position: relative;"
                     [ngStyle]="{'min-width': isToday(mess.datetime) ? '75px': '120px'}">
                     <div class="media-image" DeferModule *ngIf="mess.hasMedia">
-                        <img [src]="mess.media.url" alt="" class="chat-image">
+                        <img alt="" class="chat-image" defaultImage='../../assets/loader.gif' [lazyLoad]="mess.media.url">
+                        {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
                     <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length">{{mess.message | mstatus: mess._id : mess.seen :
                         userService.userDetails.settings.encryptDelay | decrypt:

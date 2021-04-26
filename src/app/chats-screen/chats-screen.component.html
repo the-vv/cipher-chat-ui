@@ -34,8 +34,12 @@
         <div class="col-12 singleChat" *ngFor="let mess of messages">
             <div class="left-bubble text-start"
                 *ngIf="mess.to._id == socket.User._id && mess.from._id != socket.User._id">
-                <div class="d-inline-block bubble ofw  animate__faster text-end" style="position: relative;" [ngStyle]="{'min-width': isToday(mess.datetime) ? '65px': '100px'}">
-                    <p class="ofw p-0 m-0 bubble-text">{{mess.message | mstatus: mess._id : mess.seen :
+                <div class="d-inline-block bubble ofw  animate__faster text-end" style="position: relative;"
+                    [ngStyle]="{'min-width': isToday(mess.datetime) ? '65px': '100px'}">
+                    <div class="media-image" DeferModule *ngIf="mess.hasMedia">
+                        <img [src]="mess.media.url" alt="" class="chat-image">
+                    </div>
+                    <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length">{{mess.message | mstatus: mess._id : mess.seen :
                         userService.userDetails.settings.encryptDelay | decrypt:
                         mess.seen && userService.userDetails.settings.encryption :
                         userService.userDetails.settings.encryptionComplexMode}}
@@ -46,8 +50,12 @@
                 </div>
             </div>
             <div class="right-bubble text-end" *ngIf="mess.from._id == socket.User._id">
-                <div class="d-inline-block bubble ofw  animate__faster text-start" style="position: relative;" [ngStyle]="{'min-width': isToday(mess.datetime) ? '75px': '120px'}">
-                    <p class="ofw p-0 m-0 bubble-text">{{mess.message | mstatus: mess._id : mess.seen :
+                <div class="d-inline-block bubble ofw  animate__faster text-start" style="position: relative;"
+                    [ngStyle]="{'min-width': isToday(mess.datetime) ? '75px': '120px'}">
+                    <div class="media-image" DeferModule *ngIf="mess.hasMedia">
+                        <img [src]="mess.media.url" alt="" class="chat-image">
+                    </div>
+                    <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length">{{mess.message | mstatus: mess._id : mess.seen :
                         userService.userDetails.settings.encryptDelay | decrypt:
                         mess.seen && userService.userDetails.settings.encryption :
                         userService.userDetails.settings.encryptionComplexMode}}</p>
@@ -57,10 +65,10 @@
                         <i class="bi small" [ngClass]="mess.read ? 'bi-check2-circle': 'bi-check2'"
                             style="font-size: 1.25em; vertical-align: bottom;position: absolute; right: 0; margin-bottom: 5px;"></i>
                     </span>
-                </div>  
+                </div>
             </div>
         </div>
-    </div> 
+    </div>
     <div class="chat-input col-12 col-lg-8 col-xl-9 col-md-7 blur-bg d-flex justify-content-between align-items-center"
         style="padding-left: 10px;padding-right: 10px;">
         <div class="emoji">

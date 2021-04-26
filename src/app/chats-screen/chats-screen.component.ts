@@ -3,7 +3,7 @@ import {
   Input, OnChanges, OnInit, SimpleChanges, HostListener,
   AfterViewInit, Output, EventEmitter
 } from '@angular/core';
-import { Subscriber } from 'rxjs';
+import { Message } from '../models/message';
 import { MediaService } from '../services/media.service';
 import { MessagesServiceService } from '../services/messages-service.service';
 import { SocketService } from '../services/socket.service';
@@ -87,7 +87,7 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     this.scrollToBottom();
   }
 
-  messages: any[];
+  messages: Message[];
   currentUserId: string;
   randomColor: string;
   messageString: string;
@@ -156,7 +156,7 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
       this.currentUserId = this.socket.User._id;
       this.randomColor = changes.chat.currentValue.color;
       this.messages = changes.chat.currentValue.messages;
-      // console.log(this.messages)
+      console.log(this.messages)
       this.needScroll2 = true;
       if (!this.canScrollSmooth) {
         setTimeout(() => {
@@ -186,12 +186,14 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   addPhoto() {
     this.media.askUpload = true;
     let sus = this.media.imgUploaded.subscribe((data: any) => {
-      if(data !== false) {
+      if (data !== false) {
         console.log(data);
+        this.message.sendMediaMessage(this.chat._id, data);
+        this.needScroll2 = true;
       } else {
         console.log('cancelled upload')
       }
-      sus.unsubscribe();      
+      sus.unsubscribe();
     })
   }
 

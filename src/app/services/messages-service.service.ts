@@ -45,12 +45,40 @@ export class MessagesServiceService {
       })
   }
 
+  sendMediaMessage(to: any, mediaData: any) {
+    let message: Message = {
+      message: mediaData.caption,
+      from: this.socket.User._id,
+      to: to,
+      datetime: new Date(),
+      seen: false,
+      read: false,
+      hasMedia: true,
+      media: {
+        mediaType: 'image',
+        pid: mediaData.pid,
+        url: mediaData.url
+      }
+    }
+    console.log(message)
+    this.socket.saveMessage(message)
+      .then((mess: any) => {
+        this.pushChat(mess.res)
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   sendMessage(to: any, mess: string) {
     let message: Message = {
       message: mess,
       from: this.socket.User._id,
       to: to,
-      datetime: new Date()
+      datetime: new Date(),
+      seen: false,
+      read: false,
+      hasMedia: false
     }
     this.socket.saveMessage(message)
       .then((mess: any) => {
@@ -63,10 +91,13 @@ export class MessagesServiceService {
 
   addNewChatTo(user: any) {
     let message: Message = {
-      message: 'Added for chat',
+      message: 'Added for chat 🎉',
       from: this.socket.User._id,
       to: user._id,
-      datetime: new Date()
+      datetime: new Date(),
+      seen: false,
+      read: false,
+      hasMedia: false
     }
     this.socket.saveMessage(message)
       .then((mess: any) => {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
+import { MessageService } from 'primeng/api';
 import { MediaService } from '../services/media.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class FileuploadComponent implements OnInit {
   messageCaption: string = '';
 
   constructor(
-    public media: MediaService
+    public media: MediaService,
+    private messageService: MessageService,
   ) { }
 
   public uploader: FileUploader = new FileUploader({
@@ -23,6 +25,23 @@ export class FileuploadComponent implements OnInit {
     itemAlias: 'file',
     isHTML5: true
   });
+
+  showError(title: string, message: string) {
+    this.messageService.clear()
+    this.messageService.add({ severity: 'error', summary: title, detail: message, life: 5000 });
+  }
+
+  fileSelected() {
+    console.log('file selected')
+    let size = this.uploader.queue[0]._file.size/1024/1024
+    console.log('size is: ', size, 'MB');
+    if(size > 5) {
+      this.showError('Size limit exceeded', 'The image must be less than 5 MB');
+      this.uploader.clearQueue();
+    }
+    // this.getFileUrl(this.uploader.queue[0])
+  }
+
 
   // onUpload(event: any) {
   //   this.imgUrl = event.originalEvent.body.path
@@ -40,6 +59,7 @@ export class FileuploadComponent implements OnInit {
   gettingUrl: boolean = false;
   getFileUrl(event: any) {
     if (!this.gettingUrl) {
+      this.imgUrl = '';
       this.gettingUrl = true;
       // console.log('getting url');
       this.imgUrl = ''

@@ -140,15 +140,28 @@ html {
 
 
 .p-fileupload-buttonbar .p-button {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border    : 1px solid rgba(255, 255, 255, 0.2) !important;
+  background   : rgba(255, 255, 255, 0.05) !important;
+  border       : 1px solid rgba(255, 255, 255, 0.2) !important;
   border-radius: 30px;
 }
 
 .p-fileupload-buttonbar .p-button:hover,
 .p-fileupload-buttonbar .p-button:active,
 .p-fileupload-buttonbar .p-button:focus {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border    : 1px solid rgba(255, 255, 255, 0.2) !important;
+  background   : rgba(255, 255, 255, 0.1) !important;
+  border       : 1px solid rgba(255, 255, 255, 0.2) !important;
   border-radius: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  .p-toast-bottom-center {
+    left: 50% !important;
+    width: 20rem !important;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .p-toast-bottom-center {
+    left: 47% !important;
+  }
 }

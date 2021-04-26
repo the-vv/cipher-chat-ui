@@ -1,11 +1,18 @@
+import { User } from "./user";
+
 export interface Message {
     readonly _id?: string,
-    readonly datetime?: Date,
-    readonly message: string,
-    readonly from: string,
-    readonly to: string,
-    readonly fromId?: string,
-    readonly toId?: string,
-    status?: string,
-    [props: string]: any
+    message: String,
+    datetime: Date,
+    from: String | User,
+    to: String | User,
+    seen: Boolean,
+    read: Boolean,
+    hasMedia: Boolean,
+    media?: {
+        mediaType: String,
+        pid: String,
+        url: String
+    }
 }
+ 

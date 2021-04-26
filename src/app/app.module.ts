@@ -23,8 +23,9 @@ import { ConfirmationService } from 'primeng/api';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { KnobModule } from 'primeng/knob';
-import {FileUploadModule} from 'primeng/fileupload';
-import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DeferModule } from 'primeng/defer';
 
 
 // Other Libraries
@@ -104,7 +105,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     KnobModule,
     FileUploadModule,
     ng2FileUploader,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    DeferModule
   ],
   providers: [
     LoginServiceService,

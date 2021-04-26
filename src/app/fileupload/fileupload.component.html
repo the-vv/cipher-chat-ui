@@ -16,10 +16,10 @@
 
 
 
-<div *ngIf="!uploader.queue.length" class="file-upload text-center" ng2FileDrop
+<div *ngIf="!uploader.queue.length" class="file-upload text-center" ng2FileDrop 
     [ngClass]="{'file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader">
     <p class="h3" (fileOver)="fileOverBase($event)" ng2FileDrop>Click to choose a file or drop one here</p>
-    <input type="file" (fileOver)="fileOverBase($event)" ng2FileDrop class="form-control" name="file" ng2FileSelect
+    <input type="file" (fileOver)="fileOverBase($event)" (onFileSelected)="fileSelected()" ng2FileDrop class="form-control" name="file" ng2FileSelect
         [uploader]="uploader" accept="image/*" />
 </div>
 <div *ngIf="uploader.queue.length" class="text-center">

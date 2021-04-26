@@ -1,7 +1,14 @@
 export interface User {
-    readonly name: string,
-    readonly email: string,
-    readonly _id: string,
-    photo?: string,
-    [props: string]: any
+    _id?: string,
+    name: string,
+    email: string,
+    password?: string,
+    settings: {
+        encryption?: boolean,
+        encryptNames?: boolean,
+        encryptionComplexMode?: boolean,
+        newUser?: boolean,
+        encryptDelay?: Number,
+        color: string,
+    }
 }

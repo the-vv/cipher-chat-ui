@@ -24,6 +24,7 @@
     "angular-password-strength-meter": "^3.0.1",
     "array.prototype.move": "0.0.4",
     "crypto-js": "^4.0.0",
+    "ng-image-fullscreen-view": "^2.0.0",
     "ng-lazyload-image": "^9.1.0",
     "ng2-file-upload": "^1.4.0",
     "ngx-animations": "^5.0.4",

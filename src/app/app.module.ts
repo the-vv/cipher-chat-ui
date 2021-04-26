@@ -38,6 +38,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { FileUploadModule as ng2FileUploader } from 'ng2-file-upload';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
 
 
 // Components and services
@@ -110,7 +111,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ProgressSpinnerModule,
     DeferModule,
     LazyLoadImageModule,
-    BadgeModule
+    BadgeModule,
+    NgImageFullscreenViewModule
   ],
   providers: [
     LoginServiceService,

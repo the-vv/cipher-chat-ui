@@ -215,4 +215,7 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
       }
     }
 }
+
+imgShow = false;
+imagesArray: any[] = [];
 }

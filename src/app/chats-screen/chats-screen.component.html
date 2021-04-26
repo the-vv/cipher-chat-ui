@@ -34,13 +34,15 @@
         <div class="col-12 singleChat" *ngFor="let mess of messages">
             <div class="left-bubble text-start"
                 *ngIf="mess.to._id == socket.User._id && mess.from._id != socket.User._id">
-                <div class="d-inline-block bubble ofw animate__faster" [ngClass]="mess.hasMedia ? '' : 'text-end'" style="position: relative;"
-                    [ngStyle]="{'min-width': isToday(mess.datetime) ? '65px': '100px'}">
+                <div class="d-inline-block bubble ofw animate__faster" [ngClass]="mess.hasMedia ? '' : 'text-end'"
+                    style="position: relative;" [ngStyle]="{'min-width': isToday(mess.datetime) ? '65px': '100px'}">
                     <div class="media-image" *ngIf="mess.hasMedia">
-                        <img alt="" class="chat-image" defaultImage='../../assets/loader.gif' [lazyLoad]="mess.media.url">
+                        <img alt="" class="chat-image" defaultImage='../../assets/loader.gif'
+                            [lazyLoad]="mess.media.url" (click)="imagesArray = [{image: mess.media.url}];imgShow = true">
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
-                    <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length">{{mess.message | mstatus: mess._id : mess.seen :
+                    <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length">{{mess.message | mstatus: mess._id :
+                        mess.seen :
                         userService.userDetails.settings.encryptDelay | decrypt:
                         mess.seen && userService.userDetails.settings.encryption :
                         userService.userDetails.settings.encryptionComplexMode}}
@@ -50,14 +52,16 @@
                         {{mess.datetime | date:isToday(mess.datetime) ? 'h:mm a' : 'h:mm a, d/M/yy'}}</span>
                 </div>
             </div>
-            <div class="right-bubble text-end" *ngIf="mess.from._id == socket.User._id">
+            <div class="right-bubble text-end" *ngIf="mess.from._id == socket.User._id" (click)="imgShow = true">
                 <div class="d-inline-block bubble ofw  animate__faster text-start" style="position: relative;"
                     [ngStyle]="{'min-width': isToday(mess.datetime) ? '75px': '120px'}">
                     <div class="media-image" *ngIf="mess.hasMedia">
-                        <img alt="" class="chat-image" defaultImage='../../assets/loader.gif' [lazyLoad]="mess.media.url">
+                        <img alt="" class="chat-image" defaultImage='../../assets/loader.gif'
+                            [lazyLoad]="mess.media.url" (click)="imagesArray = [{image: mess.media.url}];imgShow = true">
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
-                    <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length">{{mess.message | mstatus: mess._id : mess.seen :
+                    <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length">{{mess.message | mstatus: mess._id :
+                        mess.seen :
                         userService.userDetails.settings.encryptDelay | decrypt:
                         mess.seen && userService.userDetails.settings.encryption :
                         userService.userDetails.settings.encryptionComplexMode}}</p>
@@ -88,8 +92,8 @@
                 (click)="addPhoto()"></button>
         </div>
         <div class="p-inputgroup">
-            <input type="text" pInputText placeholder="Type a message" [(ngModel)]="messageString" (paste)="onPaste($event)" (blur)="onBlur()"
-                (focus)="onFocus()" #autoFocus>
+            <input type="text" pInputText placeholder="Type a message" [(ngModel)]="messageString"
+                (paste)="onPaste($event)" (blur)="onBlur()" (focus)="onFocus()" #autoFocus>
             <button type="button" pButton pRipple icon="pi pi-send" styleClass="p-button-warn" id="send-button"
                 (click)="sendMessage()"></button>
         </div>
@@ -97,3 +101,6 @@
 </div>
 <button pButton pRipple type="button" *ngIf="showbutton" icon="pi pi-angle-double-down" style="color: white"
     class="p-button-rounded p-button-outlined scroll-down-button p-0" (click)="goToBottom()"></button>
+
+<ng-image-fullscreen-view [images]="imagesArray" [imageIndex]="0" [show]="imgShow"
+    (close)="imgShow = !imgShow"></ng-image-fullscreen-view>

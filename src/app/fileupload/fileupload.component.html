@@ -16,32 +16,32 @@
 
 
 
-<div *ngIf="!uploader.queue.length" class="file-upload text-center" ng2FileDrop 
-    [ngClass]="{'file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader">
+<div *ngIf="!media.uploader.queue.length" class="file-upload text-center" ng2FileDrop 
+    [ngClass]="{'file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="media.uploader">
     <p class="h3" (fileOver)="fileOverBase($event)" ng2FileDrop>Click to choose a file or drop one here</p>
     <input type="file" (fileOver)="fileOverBase($event)" (onFileSelected)="fileSelected()" ng2FileDrop class="form-control" name="file" ng2FileSelect
-        [uploader]="uploader" accept="image/*" />
+        [uploader]="media.uploader" accept="image/*" />
 </div>
-<div *ngIf="uploader.queue.length" class="text-center">
+<div *ngIf="media.uploader.queue.length" class="text-center">
     <button pButton pRipple type="button" class="p-button-outlined" icon="bi bi-upload" label="Send"
-        (click)="uploader.queue[0].upload()" [disabled]="uploader.queue[0].isReady || uploader.queue[0].isUploading || uploader.queue[0].isSuccess">
+        (click)="media.uploader.queue[0].upload()" [disabled]="media.uploader.queue[0].isReady || media.uploader.queue[0].isUploading || media.uploader.queue[0].isSuccess">
     </button>
     <button pButton pRipple type="button" class="p-button-outlined mx-1 mx-md-3" icon="bi bi-x-circle" label="Cancel"
-        (click)="uploader.queue[0].cancel()" [disabled]="!uploader.queue[0].isUploading">
+        (click)="media.uploader.queue[0].cancel()" [disabled]="!media.uploader.queue[0].isUploading">
     </button>
     <button pButton pRipple type="button" class="p-button-outlined" icon="bi bi-trash" label="Remove"
-        (click)="uploader.queue[0].remove(); imgUrl = ''; gettingUrl = false">
+        (click)="media.uploader.queue[0].remove(); imgUrl = ''; gettingUrl = false">
     </button>
     <span class="p-input-icon-right col-12 col-md-8 my-2">
         <i class="bi bi-chat-dots"></i>
         <input type="text" pInputText placeholder="Enter your caption" [(ngModel)]="messageCaption" />
     </span>
-    <div *ngIf="uploader.queue[0].isUploading"> 
+    <div *ngIf="media.uploader.queue[0].isUploading"> 
         <div class="progress my-1 text-center" style="height: 10px">
             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                [ngStyle]="{ 'width': uploader.queue[0].progress + '%'}" [aria-valuenow]="uploader.queue[0].progress" aria-valuemin="0"
+                [ngStyle]="{ 'width': media.uploader.queue[0].progress + '%'}" [aria-valuenow]="media.uploader.queue[0].progress" aria-valuemin="0"
                 aria-valuemax="100">
-                {{uploader.queue[0].progress}}%
+                {{media.uploader.queue[0].progress}}%
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@
         <div class="spinner-border text-light mt-3" *ngIf="!imgUrl" role="status" style="width: 3rem; height: 3rem;">
             <span class="visually-hidden">Loading...</span>
         </div>
-        <img [src]="imgUrl || getFileUrl(uploader.queue[0]._file)" alt="" width="100%">
+        <img [src]="imgUrl || getFileUrl(media.uploader.queue[0]._file)" alt="" width="100%">
     </div>
 </div>
 

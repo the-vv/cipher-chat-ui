@@ -198,4 +198,21 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     })
   }
 
+  onPaste(e: any ) {
+    const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+    let blob = null;
+    for (const item of items) {
+      if (item.type.indexOf('image') === 0) {
+        blob = item.getAsFile();
+        let size = blob.size/1024/1024;
+        if(size > 5) {
+          this.socket.showError('Size limit exceeded', 'The image must be less than 5 MB');
+        }
+        else {
+          this.addPhoto();
+          this.media.uploader.addToQueue([blob]);
+        }
+      }
+    }
+}
 }

@@ -34,9 +34,9 @@
         <div class="col-12 singleChat" *ngFor="let mess of messages">
             <div class="left-bubble text-start"
                 *ngIf="mess.to._id == socket.User._id && mess.from._id != socket.User._id">
-                <div class="d-inline-block bubble ofw  animate__faster" [ngClass]="mess.hasMedia ? 'text-start' : 'text-end'" style="position: relative;"
+                <div class="d-inline-block bubble ofw animate__faster" [ngClass]="mess.hasMedia ? '' : 'text-end'" style="position: relative;"
                     [ngStyle]="{'min-width': isToday(mess.datetime) ? '65px': '100px'}">
-                    <div class="media-image" DeferModule *ngIf="mess.hasMedia">
+                    <div class="media-image" *ngIf="mess.hasMedia">
                         <img alt="" class="chat-image" defaultImage='../../assets/loader.gif' [lazyLoad]="mess.media.url">
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
@@ -53,7 +53,7 @@
             <div class="right-bubble text-end" *ngIf="mess.from._id == socket.User._id">
                 <div class="d-inline-block bubble ofw  animate__faster text-start" style="position: relative;"
                     [ngStyle]="{'min-width': isToday(mess.datetime) ? '75px': '120px'}">
-                    <div class="media-image" DeferModule *ngIf="mess.hasMedia">
+                    <div class="media-image" *ngIf="mess.hasMedia">
                         <img alt="" class="chat-image" defaultImage='../../assets/loader.gif' [lazyLoad]="mess.media.url">
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
@@ -88,7 +88,7 @@
                 (click)="addPhoto()"></button>
         </div>
         <div class="p-inputgroup">
-            <input type="text" pInputText placeholder="Type a message" [(ngModel)]="messageString" (blur)="onBlur()"
+            <input type="text" pInputText placeholder="Type a message" [(ngModel)]="messageString" (paste)="onPaste($event)" (blur)="onBlur()"
                 (focus)="onFocus()" #autoFocus>
             <button type="button" pButton pRipple icon="pi pi-send" styleClass="p-button-warn" id="send-button"
                 (click)="sendMessage()"></button>

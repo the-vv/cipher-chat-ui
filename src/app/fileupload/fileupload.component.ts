@@ -20,11 +20,11 @@ export class FileuploadComponent implements OnInit {
     private messageService: MessageService,
   ) { }
 
-  public uploader: FileUploader = new FileUploader({
-    url: 'http://localhost:3000/upload',
-    itemAlias: 'file',
-    isHTML5: true
-  });
+  // public uploader: FileUploader = new FileUploader({
+  //   url: 'http://localhost:3000/upload',
+  //   itemAlias: 'file',
+  //   isHTML5: true
+  // });
 
   showError(title: string, message: string) {
     this.messageService.clear()
@@ -33,11 +33,11 @@ export class FileuploadComponent implements OnInit {
 
   fileSelected() {
     console.log('file selected')
-    let size = this.uploader.queue[0]._file.size/1024/1024
+    let size = this.media.uploader.queue[0]._file.size/1024/1024
     console.log('size is: ', size, 'MB');
     if(size > 5) {
       this.showError('Size limit exceeded', 'The image must be less than 5 MB');
-      this.uploader.clearQueue();
+      this.media.uploader.clearQueue();
     }
     // this.getFileUrl(this.uploader.queue[0])
   }
@@ -79,14 +79,14 @@ export class FileuploadComponent implements OnInit {
     this.imgUrl = '';
     this.gettingUrl = false;
     this.messageCaption = '';
-    this.uploader.clearQueue();
+    this.media.uploader.clearQueue();
   }
 
   ngOnInit() {
-    this.uploader.onAfterAddingFile = (file) => {
+    this.media.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
     };
-    this.uploader.onCompleteItem = (item: any, status: any) => {
+    this.media.uploader.onCompleteItem = (item: any, status: any) => {
       // console.log('Uploaded File Details:', item, status);
       let res: any; 
       try {
@@ -104,7 +104,7 @@ export class FileuploadComponent implements OnInit {
     }; 
     this.media.cancelUpload.subscribe((val: Boolean) => {
       if (val === true) {
-        this.uploader.cancelAll();
+        this.media.uploader.cancelAll();
         this.resetUpload();
         this.media.uploadedFile(false);
       }

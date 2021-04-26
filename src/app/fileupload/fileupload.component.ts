@@ -36,13 +36,18 @@ export class FileuploadComponent implements OnInit {
   //   this.media.uploadedFile(details)
   // }
 
-  imgUrl: any = ''
+  imgUrl: any = '';
+  gettingUrl: boolean = false;
   getFileUrl(event: any) {
-    // console.log(event);    
-    const reader = new FileReader();
-    reader.readAsDataURL(event);
-    reader.onload = () => {
-      this.imgUrl = reader.result
+    if (!this.gettingUrl) {
+      this.gettingUrl = true;
+      // console.log('getting url');
+      this.imgUrl = ''
+      const reader = new FileReader();
+      reader.readAsDataURL(event);
+      reader.onload = () => {
+        this.imgUrl = reader.result
+      }
     }
   }
 
@@ -52,6 +57,7 @@ export class FileuploadComponent implements OnInit {
 
   resetUpload() {
     this.imgUrl = '';
+    this.gettingUrl = false;
     this.messageCaption = '';
     this.uploader.clearQueue();
   }
@@ -62,16 +68,27 @@ export class FileuploadComponent implements OnInit {
     };
     this.uploader.onCompleteItem = (item: any, status: any) => {
       // console.log('Uploaded File Details:', item, status);
-      let res = JSON.parse(status)
-      let details = {
-        url: res.path,
-        pid: res.filename.split('/')[1],
-        caption: this.messageCaption
+      let res: any; 
+      try {
+        res = JSON.parse(status);
+        let details = {
+          url: res.path,
+          pid: res.filename.split('/')[1],
+          caption: this.messageCaption
+        }
+        this.media.uploadedFile(details);
+        this.resetUpload();
+      } catch (e) {
+        console.log(status, 'Error Uploading')
       }
-      this.media.uploadedFile(details);
-      this.resetUpload();
-
-    };
+    }; 
+    this.media.cancelUpload.subscribe((val: Boolean) => {
+      if (val === true) {
+        this.uploader.cancelAll();
+        this.resetUpload();
+        this.media.uploadedFile(false);
+      }
+    })
   }
 
   // hasBaseDropZoneOver: boolean = false;

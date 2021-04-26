@@ -24,6 +24,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { KnobModule } from 'primeng/knob';
 import {FileUploadModule} from 'primeng/fileupload';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 
 // Other Libraries
@@ -102,7 +103,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ToggleButtonModule,
     KnobModule,
     FileUploadModule,
-    ng2FileUploader
+    ng2FileUploader,
+    ProgressSpinnerModule
   ],
   providers: [
     LoginServiceService,

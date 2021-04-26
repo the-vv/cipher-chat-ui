@@ -18,34 +18,39 @@
 
 <div *ngIf="!uploader.queue.length" class="file-upload text-center" ng2FileDrop
     [ngClass]="{'file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader">
-    <span class="mb-3" (fileOver)="fileOverBase($event)" ng2FileDrop> Choose a file or Drag and drop one here</span>
+    <p class="h3" (fileOver)="fileOverBase($event)" ng2FileDrop>Click to choose a file or drop one here</p>
     <input type="file" (fileOver)="fileOverBase($event)" ng2FileDrop class="form-control" name="file" ng2FileSelect
         [uploader]="uploader" accept="image/*" />
 </div>
-<div *ngFor="let item of uploader.queue" class="text-center">
+<div *ngIf="uploader.queue.length" class="text-center">
     <button pButton pRipple type="button" class="p-button-outlined" icon="bi bi-upload" label="Send"
-        (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+        (click)="uploader.queue[0].upload()" [disabled]="uploader.queue[0].isReady || uploader.queue[0].isUploading || uploader.queue[0].isSuccess">
     </button>
     <button pButton pRipple type="button" class="p-button-outlined mx-1 mx-md-3" icon="bi bi-x-circle" label="Cancel"
-        (click)="item.cancel()" [disabled]="!item.isUploading">
+        (click)="uploader.queue[0].cancel()" [disabled]="!uploader.queue[0].isUploading">
     </button>
     <button pButton pRipple type="button" class="p-button-outlined" icon="bi bi-trash" label="Remove"
-        (click)="item.remove()">
+        (click)="uploader.queue[0].remove(); imgUrl = ''; gettingUrl = false">
     </button>
     <span class="p-input-icon-right col-12 col-md-8 my-2">
         <i class="bi bi-chat-dots"></i>
         <input type="text" pInputText placeholder="Enter your caption" [(ngModel)]="messageCaption" />
     </span>
-    <div *ngIf="item.isUploading">
+    <div *ngIf="uploader.queue[0].isUploading"> 
         <div class="progress my-1 text-center" style="height: 10px">
             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                [ngStyle]="{ 'width': item.progress + '%'}" [aria-valuenow]="item.progress" aria-valuemin="0"
+                [ngStyle]="{ 'width': uploader.queue[0].progress + '%'}" [aria-valuenow]="uploader.queue[0].progress" aria-valuemin="0"
                 aria-valuemax="100">
-                {{item.progress}}%
+                {{uploader.queue[0].progress}}%
             </div>
         </div>
     </div>
-    <img [src]="imgUrl || getFileUrl(item._file)" alt="" width="100%">
+    <div class="col-12">
+        <div class="spinner-border text-light mt-3" *ngIf="!imgUrl" role="status" style="width: 3rem; height: 3rem;">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <img [src]="imgUrl || getFileUrl(uploader.queue[0]._file)" alt="" width="100%">
+    </div>
 </div>
 
 
@@ -61,7 +66,7 @@
 
 
 
-    <!-- <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
+<!-- <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
     [uploader]="uploader" class="well drop-zone">
     Drop a file or
     

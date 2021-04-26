@@ -186,7 +186,11 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   addPhoto() {
     this.media.askUpload = true;
     let sus = this.media.imgUploaded.subscribe((data: any) => {
-      console.log(data);
+      if(data !== false) {
+        console.log(data);
+      } else {
+        console.log('cancelled upload')
+      }
       sus.unsubscribe();      
     })
   }

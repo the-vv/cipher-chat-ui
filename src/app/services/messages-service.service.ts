@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Message } from '../models/message';
+import { RestApiService } from './restApis.service';
 import { SocketService } from './socket.service';
 
 @Injectable({
@@ -15,7 +16,8 @@ export class MessagesServiceService {
   askUpload: boolean = false
 
   constructor(
-    public socket: SocketService
+    public socket: SocketService,
+    private rest: RestApiService
   ) {
     this.socket.messages
       .subscribe(messages => {        // recieving new messages and saving it to messages array
@@ -27,8 +29,8 @@ export class MessagesServiceService {
       })
     this.socket.messageReadStatus
       .subscribe(mess => {
-        console.log(mess)
-        this.updateMessageReadStatus(mess); 
+        // console.log(mess)
+        this.updateMessageReadStatus(mess);
       })
   }
 
@@ -187,15 +189,19 @@ export class MessagesServiceService {
 
   deleteChat(c: any) {
     let idsToDelete = c.messages.map((mes: any) => mes._id);
-    this.socket.deleteMessages(idsToDelete)
-      .then((_) => {
-        this.chatList = this.chatList.filter(val => {
-          return val._id != c._id;
-        })
-      })
-      .catch(err => {
-        console.log('Deletion Errorn\n', err);
-      })
+    let pidsToDelete = c.messages
+      .filter((val: any) => val.hasMedia)
+      .map((val: any) => val.media.pid);
+    console.log(pidsToDelete)
+    // this.socket.deleteMessages(idsToDelete)
+    //   .then((_) => {
+    //     this.chatList = this.chatList.filter(val => {
+    //       return val._id != c._id;
+    //     })
+    //   })
+    //   .catch(err => {
+    //     console.log('Deletion Errorn\n', err);
+    //   })
   }
 
   sortChatList() {
@@ -247,17 +253,17 @@ export class MessagesServiceService {
     this.chatList.forEach(el => {
       el.messages.forEach((element: any) => {
         // console.log('checking', element._id, mid)
-        if (element._id == mid && element.read === false && this.socket.User._id == element.to._id) { 
+        if (element._id == mid && element.read === false && this.socket.User._id == element.to._id) {
           // console.log('read', element.message)         
           this.socket.updateMessageRead(element._id)
-          .then((res: any) => {
-            // console.log(res.mess);
-            this.updateMessageReadStatus(res.mess)
-          })
-        } 
+            .then((res: any) => {
+              // console.log(res.mess);
+              this.updateMessageReadStatus(res.mess)
+            })
+        }
       });
     })
-  } 
+  }
 
   updateMessageReadStatus(mess: any) {
     // console.log(mess)
@@ -265,9 +271,9 @@ export class MessagesServiceService {
       el.messages.forEach((element: any) => {
         // console.log(element) 
         if (element._id == mess._id) {
-          element.read = mess.read; 
+          element.read = mess.read;
           // console.log(element)
-        } 
+        }
       });
     })
   }

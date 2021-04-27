@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FileUploader } from 'ng2-file-upload';
 import { MessageService } from 'primeng/api';
 import { MediaService } from '../services/media.service';
 
@@ -20,12 +19,6 @@ export class FileuploadComponent implements OnInit {
     private messageService: MessageService,
   ) { }
 
-  // public uploader: FileUploader = new FileUploader({
-  //   url: 'http://localhost:3000/upload',
-  //   itemAlias: 'file',
-  //   isHTML5: true
-  // });
-
   showError(title: string, message: string) {
     this.messageService.clear()
     this.messageService.add({ severity: 'error', summary: title, detail: message, life: 5000 });
@@ -41,19 +34,6 @@ export class FileuploadComponent implements OnInit {
     }
     // this.getFileUrl(this.uploader.queue[0])
   }
-
-
-  // onUpload(event: any) {
-  //   this.imgUrl = event.originalEvent.body.path
-  //   for (let file of event.files) {
-  //     this.uploadedFiles.push(file);
-  //   }
-  //   let details = {
-  //     url: event.originalEvent.body.path,
-  //     pid: event.originalEvent.body.filename.split('/')[1]
-  //   }
-  //   this.media.uploadedFile(details)
-  // }
 
   imgUrl: any = '';
   gettingUrl: boolean = false;
@@ -99,7 +79,7 @@ export class FileuploadComponent implements OnInit {
         this.media.uploadedFile(details);
         this.resetUpload();
       } catch (e) {
-        console.log(status, 'Error Uploading')
+        console.log(status, 'Error Uploading');
       }
     }; 
     this.media.cancelUpload.subscribe((val: Boolean) => {
@@ -110,63 +90,4 @@ export class FileuploadComponent implements OnInit {
       }
     })
   }
-
-  // hasBaseDropZoneOver: boolean = false;
-  // uploader: FileUploader;
-  // response: string;
-  // 
-  // constructor(
-  // public media: MediaService
-  // ) {
-  // }
-  //  
-  // ngOnInit(): void {
-  // Create the file uploader, wire it to upload to your account
-  // const uploaderOptions: FileUploaderOptions = {
-  // url: `http://localhost:3000/upload`,
-  // Upload files automatically upon addition to upload queue
-  // autoUpload: true,
-  // Use xhrTransport in favor of iframeTransport
-  // isHTML5: true,
-  // Calculate progress independently for each uploaded file
-  // removeAfterUpload: true,
-  // XHR request headers
-  // headers: [
-  // {
-  // name: 'X-Requested-With',
-  // value: 'XMLHttpRequest'
-  // }
-  // ]
-  // };
-  // 
-  // this.uploader = new FileUploader(uploaderOptions);
-  // 
-  // this.uploader.onBuildItemForm = async (fileItem: any, form: FormData) => {
-  // Add file to upload
-  // form.append('file', fileItem);
-  // Use default "withCredentials" value for CORS requests
-  // fileItem.withCredentials = false;
-  // return { fileItem, form };
-  // }
-  // 
-  // this.uploader.response.subscribe((res: any) => {
-  // this.response = res
-  // let jres;
-  // try {
-  // console.log(JSON.parse(res));
-  // jres = JSON.parse(res)
-  // }
-  // catch {        
-  // console.log(res);
-  // }
-  // finally {
-  // if( jres?.filename) {
-  // console.log('deleting', jres.filename.split('/')[1]);
-  // 
-  // }
-  // }
-  // });
-  // 
-  // }
-  // 
 }

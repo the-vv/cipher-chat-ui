@@ -23,7 +23,7 @@ import { ConfirmationService } from 'primeng/api';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { KnobModule } from 'primeng/knob';
-import {BadgeModule} from 'primeng/badge';
+import { BadgeModule } from 'primeng/badge';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DeferModule } from 'primeng/defer';
 
@@ -38,7 +38,7 @@ import { FileUploadModule as ng2FileUploader } from 'ng2-file-upload';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
 import { GalleryModule } from 'ng-gallery';
-import { LightboxModule } from  'ng-gallery/lightbox';
+import { LightboxModule } from 'ng-gallery/lightbox';
 
 
 // Components and services
@@ -47,7 +47,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { LoginServiceService } from './services/login-service.service';
+import { RestApiService } from './services/restApis.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SocketService } from './services/socket.service';
 import { AllChatComponent } from './all-chat/all-chat.component';
@@ -115,7 +115,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     LightboxModule
   ],
   providers: [
-    LoginServiceService,
+    RestApiService,
     SocketService,
     MessageService,
     CookieService,

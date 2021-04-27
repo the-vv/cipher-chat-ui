@@ -155,6 +155,18 @@ export class SocketService {
       });
     })
   }
+  
+  deleteImages(images: string[]) {
+    return new Promise((resolve, reject) => {
+      this.socket.emit('deleteImages', images, (result: any) => {
+        if (result) {
+          resolve(result)
+        } else {
+          reject(result)
+        }
+      });
+    })
+  }
 
   updateUser(user: any) {
     return new Promise((resolve, reject) => {
@@ -207,12 +219,5 @@ export class SocketService {
     })
   }
 
-  getSignature(): any {
-    return new Promise((resolve, reject) => {
-      this.socket.emit('getUploadSignature', this.User, (result: any) => {        
-          resolve(result)        
-      })
-    })
-  }
 
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,10 @@ export class MediaService {
   cancelUpload: Subject<boolean> = new Subject();
   askUpload: boolean = false;
 
+  private url = environment.production ? '/upload' : 'http://localhost:3000/upload';
+
   public uploader: FileUploader = new FileUploader({
-    url: 'http://localhost:3000/upload',
+    url: this.url,
     itemAlias: 'file',
     isHTML5: true
   });

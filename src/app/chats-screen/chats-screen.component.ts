@@ -98,7 +98,9 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   canScrollSmooth: boolean = false;
   mobileView: boolean = false;
   prevChatListLength: number;
+  prevChatListLength2: number;
   showbutton: boolean;
+  chatImages: any[] = [];
 
   constructor(public socket: SocketService,
     public message: MessagesServiceService,
@@ -112,7 +114,27 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     this.mobileView = window.innerWidth < 768 ? true : false;
   }
 
+  findImageIndex(pid: string): number {
+    for(let i = 0; i < this.chatImages.length; i++) {
+      if(this.chatImages[i].pid === pid) {
+        return i;
+      }
+    }
+  }
+
   ngAfterViewChecked() {
+    if (this.messages?.length != this.prevChatListLength2) {
+      console.log('new mesage');
+      let images = new Set();
+      this.messages.forEach(el => {
+        if (el.hasMedia) {
+          images.add({ image: el.media.url, caption: el.message, pid: el.media.pid })
+        }
+      }) 
+      this.chatImages = [...images];
+      console.log(this.chatImages)
+      this.prevChatListLength2 = this.messages?.length
+    }
     if (this.needScroll && (this.needScroll2 || this.messages?.length != this.prevChatListLength)) {
       this.prevChatListLength = this.messages?.length
       this.scrollToBottom();
@@ -124,6 +146,7 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   }
 
   ngAfterViewInit() {
+
   }
 
   scrollToBottom(): void {
@@ -156,7 +179,6 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
       this.currentUserId = this.socket.User._id;
       this.randomColor = changes.chat.currentValue.color;
       this.messages = changes.chat.currentValue.messages;
-      // console.log(this.messages)
       this.needScroll2 = true;
       if (!this.canScrollSmooth) {
         setTimeout(() => {
@@ -198,14 +220,14 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     })
   }
 
-  onPaste(e: any ) {
+  onPaste(e: any) {
     const items = (e.clipboardData || e.originalEvent.clipboardData).items;
     let blob = null;
     for (const item of items) {
       if (item.type.indexOf('image') === 0) {
         blob = item.getAsFile();
-        let size = blob.size/1024/1024;
-        if(size > 5) {
+        let size = blob.size / 1024 / 1024;
+        if (size > 5) {
           this.socket.showError('Size limit exceeded', 'The image must be less than 5 MB');
         }
         else {
@@ -214,8 +236,8 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
         }
       }
     }
-}
+  }
 
-imgShow = false;
-imagesArray: any[] = [];
+  imgShow = false;
+  imagesArray: any[] = [];
 }

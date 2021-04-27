@@ -52,7 +52,7 @@
                         {{mess.datetime | date:isToday(mess.datetime) ? 'h:mm a' : 'h:mm a, d/M/yy'}}</span>
                 </div>
             </div>
-            <div class="right-bubble text-end" *ngIf="mess.from._id == socket.User._id" (click)="imgShow = true">
+            <div class="right-bubble text-end" *ngIf="mess.from._id == socket.User._id">
                 <div class="d-inline-block bubble ofw  animate__faster text-start" style="position: relative;"
                     [ngStyle]="{'min-width': isToday(mess.datetime) ? '75px': '120px'}">
                     <div class="media-image" *ngIf="mess.hasMedia">

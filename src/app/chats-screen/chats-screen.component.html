@@ -38,7 +38,8 @@
                     style="position: relative;" [ngStyle]="{'min-width': isToday(mess.datetime) ? '65px': '100px'}">
                     <div class="media-image" *ngIf="mess.hasMedia">
                         <img alt="" class="chat-image" defaultImage='../../assets/loader.gif'
-                            [lazyLoad]="mess.media.url" (click)="imagesArray = [{image: mess.media.url}];imgShow = true">
+                            [lazyLoad]="mess.media.url"
+                            (click)="lightbox.open(findImageIndex(mess.media.url), 'lightbox', {panelClass: 'fullscreen'})">
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
                     <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length">{{mess.message | mstatus: mess._id :
@@ -57,7 +58,8 @@
                     [ngStyle]="{'min-width': isToday(mess.datetime) ? '75px': '120px'}">
                     <div class="media-image" *ngIf="mess.hasMedia">
                         <img alt="" class="chat-image" defaultImage='../../assets/loader.gif'
-                            [lazyLoad]="mess.media.url" (click)="imagesArray = [{image: mess.media.url}];imgShow = true">
+                            [lazyLoad]="mess.media.url"
+                            (click)="lightbox.open(findImageIndex(mess.media.url), 'lightbox', {panelClass: 'fullscreen'})">
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
                     <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length">{{mess.message | mstatus: mess._id :
@@ -73,7 +75,7 @@
                     </span>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
     <div class="chat-input col-12 col-lg-8 col-xl-9 col-md-7 blur-bg d-flex justify-content-between align-items-center"
         style="padding-left: 10px;padding-right: 10px;">
@@ -102,5 +104,5 @@
 <button pButton pRipple type="button" *ngIf="showbutton" icon="pi pi-angle-double-down" style="color: white"
     class="p-button-rounded p-button-outlined scroll-down-button p-0" (click)="goToBottom()"></button>
 
-<ng-image-fullscreen-view [images]="imagesArray" [imageIndex]="0" [show]="imgShow"
-    (close)="imgShow = !imgShow"></ng-image-fullscreen-view>
+<ng-image-fullscreen-view [images]="imagesArray" [imageIndex]="0" [show]="imgShow" (close)="imgShow = !imgShow">
+</ng-image-fullscreen-view>

@@ -3,6 +3,8 @@ import {
   Input, OnChanges, OnInit, SimpleChanges, HostListener,
   AfterViewInit, Output, EventEmitter
 } from '@angular/core';
+import { Gallery, GalleryItem, ImageItem, ImageSize, ThumbnailsPosition } from 'ng-gallery';
+import { Lightbox } from 'ng-gallery/lightbox';
 import { Message } from '../models/message';
 import { MediaService } from '../services/media.service';
 import { MessagesServiceService } from '../services/messages-service.service';
@@ -105,26 +107,39 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   constructor(public socket: SocketService,
     public message: MessagesServiceService,
     public userService: UserServiceService,
-    public media: MediaService
+    public media: MediaService,
+    public gallery: Gallery,
+    public lightbox: Lightbox
   ) {
   }
 
   ngOnInit() {
     this.scrollToBottom();
     this.mobileView = window.innerWidth < 768 ? true : false;
+    const lightboxRef = this.gallery.ref('lightbox');
+    // Add custom gallery config to the lightbox (optional)
+    lightboxRef.setConfig({
+      imageSize: ImageSize.Contain,
+      thumbPosition: ThumbnailsPosition.Bottom
+    }); 
+    this.gallery.ref('lightbox').setConfig({
+      // dots: true,
+      // zoomOut: -1 
+    });
   }
 
-  findImageIndex(pid: string): number {
+  findImageIndex(url: string): number {
     for(let i = 0; i < this.chatImages.length; i++) {
-      if(this.chatImages[i].pid === pid) {
+      if(this.items[i].data.src === url) {
         return i;
       }
     }
   }
 
+  items: GalleryItem[];
   ngAfterViewChecked() {
+    let lightboxRef = this.gallery.ref('lightbox')
     if (this.messages?.length != this.prevChatListLength2) {
-      console.log('new mesage');
       let images = new Set();
       this.messages.forEach(el => {
         if (el.hasMedia) {
@@ -132,7 +147,11 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
         }
       }) 
       this.chatImages = [...images];
-      console.log(this.chatImages)
+      this.items = this.chatImages.map(item =>
+        new ImageItem({ src: item.image, thumb: item.image })
+      );
+      lightboxRef.load(this.items);
+      this.gallery.ref('lightbox').load(this.items);
       this.prevChatListLength2 = this.messages?.length
     }
     if (this.needScroll && (this.needScroll2 || this.messages?.length != this.prevChatListLength)) {

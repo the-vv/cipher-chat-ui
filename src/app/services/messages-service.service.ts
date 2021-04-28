@@ -56,10 +56,11 @@ export class MessagesServiceService {
       seen: false,
       read: false,
       hasMedia: true,
-      media: {
+      media: { 
         mediaType: 'image',
         pid: mediaData.pid,
-        url: mediaData.url
+        url: mediaData.url,
+        thumb: mediaData?.thumb
       }
     }
     console.log(message)

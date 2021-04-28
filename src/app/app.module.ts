@@ -60,6 +60,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { MstatusPipe } from './mstatus.pipe';
 import { FileuploadComponent } from './fileupload/fileupload.component';
 import { MediaService } from './services/media.service';
+import { TourNgxBootstrapModule } from 'ngx-ui-tour-ngx-bootstrap';
+import { TourService } from './services/tour.service';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -114,7 +116,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     NgImageFullscreenViewModule,
     GalleryModule,
     LightboxModule,
-    FileSaverModule
+    FileSaverModule,
+    TourNgxBootstrapModule.forRoot() 
   ],
   providers: [
     RestApiService,
@@ -123,7 +126,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     CookieService,
     ConfirmationService,
     UserServiceService,
-    MediaService
+    MediaService,
+    TourService
   ],
   bootstrap: [AppComponent],
   schemas: [

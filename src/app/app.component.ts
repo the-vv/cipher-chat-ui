@@ -7,6 +7,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { UserServiceService } from './services/user-service.service';
 import { MessagesServiceService } from './services/messages-service.service';
 import { MediaService } from './services/media.service';
+import { TourService } from './services/tour.service';
 
 @Component({
   selector: 'app-root',
@@ -38,7 +39,8 @@ export class AppComponent implements OnInit {
     private router: Router,
     public user: UserServiceService,
     public messageService: MessagesServiceService,
-    public media: MediaService
+    public media: MediaService,
+    public tourService: TourService
   ) {
     this.mobileView = window.innerWidth < 500 ? true : false;
 

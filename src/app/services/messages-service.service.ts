@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { exception } from 'node:console';
 import { Message } from '../models/message';
 import { RestApiService } from './restApis.service';
 import { SocketService } from './socket.service';

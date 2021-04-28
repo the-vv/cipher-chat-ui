@@ -8,6 +8,7 @@ import { SocketService } from './socket.service';
 })
 export class UserServiceService {
 
+  visibleSidebar: boolean = false;
   askSettings: boolean = false;
   userDetails: any = {};
   originalUser: any = {};

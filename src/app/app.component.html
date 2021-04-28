@@ -3,13 +3,13 @@
         [ngClass]="{'bg-dark':!tnavbar}">
         <a class="navbar-brand text-white" routerLink="/"><img src="assets/icon.png" height="40" class=""> Cipher
             Chat</a>
-        <span class="mr-3">
+        <span class="mr-3" >
             <span class="cipherSwitch d-inline" *ngIf="user.userDetails.settings && socket.User">
-                <button pButton pRipple type="button" iconPos="right" icon="pi {{user.modeIcon}}"
+                <button pButton pRipple type="button" iconPos="right" icon="pi {{user.modeIcon}}" tourAnchor="cipherButton"
                     [label]="!mobileView ? 'Cipher Mode:' : ''" class="p-button-rounded" (click)="user.updateViewMode()"
                     [style]="{'background-color': user.getBgColor(), 'color': user.getBgColor() === '#C5E1A5' ? 'black' : 'white'}"></button>
             </span>
-            <span class="menu-button" (click)="visibleSidebar = true">
+            <span class="menu-button" (click)="user.visibleSidebar = true">
                 <p-avatar *ngIf="!socket.User" icon="pi pi-user" styleClass="" [size]="'large'" shape="circle">
                 </p-avatar>
                 <p-avatar *ngIf="socket.User" [label]="socket.User.name.split('')[0]" [style]="{'background-color':socket.User.settings.color, 'color': '#ffffff',
@@ -24,8 +24,8 @@
     </div>
 </div>
 
-<p-sidebar [(visible)]="visibleSidebar" [position]="mobileView ? 'left' : 'right'" [baseZIndex]="10000">
-    <div class="userDetails d-flex justify-content-center">
+<p-sidebar [(visible)]="user.visibleSidebar" [position]="mobileView ? 'left' : 'right'" [baseZIndex]="10000">
+    <div class="userDetails d-flex justify-content-center" tourAnchor="sideMenu">
         <div class="userContents text-center">
             <p-avatar *ngIf="!socket.User" icon="pi pi-user" styleClass="mb-2" size="xlarge" shape="circle">
             </p-avatar>
@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-    <p-menu [model]="sideItems"></p-menu>
+    <p-menu [model]="sideItems" tourAnchor="SideMenuItems"></p-menu>
     <!-- <img src="assets/bg.jpg" alt="" class="img-fluid p-0 m-0" style="margin: -10px"> -->
 </p-sidebar>
 
@@ -52,7 +52,7 @@
     <p style="color: white"> Loading... </p>
 </ngx-spinner>
 
-<p-dialog header="Account Settings" (onHide)="user.cancelChanges()" [(visible)]="user.askSettings"
+<p-dialog header="Account Settings" tourAnchor="settingsPage" (onHide)="user.cancelChanges()" [(visible)]="user.askSettings"
     [style]="{width: '40vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}"
     [dismissableMask]="false">
     <app-settings></app-settings>
@@ -94,3 +94,5 @@
     </p-button>     
     </ng-template>
 </p-dialog>
+
+<tour-step-template style="position: fixed; z-index: 12000;"></tour-step-template>

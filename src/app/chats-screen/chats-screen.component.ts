@@ -199,6 +199,8 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
       this.randomColor = changes.chat.currentValue.color;
       this.messages = changes.chat.currentValue.messages;
       this.needScroll2 = true;
+      console.log(this.messages);
+      
       if (!this.canScrollSmooth) {
         setTimeout(() => {
           this.chatInputElament && this.chatInputElament.nativeElement.focus();

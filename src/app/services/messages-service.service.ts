@@ -60,12 +60,15 @@ export class MessagesServiceService {
         mediaType: mediaData.type,
         pid: mediaData.pid,
         url: mediaData.url,
-        thumb: mediaData.thumb ? mediaData.thumb : null
+        thumb: mediaData.thumb ? mediaData.thumb : null,
+        name: mediaData.name,
+        size: mediaData.size
       }
     }
     console.log(message)
     this.socket.saveMessage(message)
       .then((mess: any) => {
+        console.log(mess.res);        
         this.pushChat(mess.res)
       })
       .catch(err => {

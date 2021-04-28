@@ -36,15 +36,30 @@
                 *ngIf="mess.to._id == socket.User._id && mess.from._id != socket.User._id">
                 <div class="d-inline-block bubble ofw animate__faster" [ngClass]="mess.hasMedia ? '' : 'text-end'"
                     style="position: relative;"
-                    [ngStyle]="{'min-width': isToday(mess.datetime) ? '65px': '100px', width: mess.hasMedia && mess.media.mediaType != 'image' ? '200px' : 'auto'}">
+                    [ngStyle]="{'min-width': isToday(mess.datetime) ? '65px': '100px', width: mess.hasMedia && mess.media.mediaType != 'image' ? '300px' : 'auto'}">
                     <div class="media-image" *ngIf="mess.hasMedia && mess.media.mediaType == 'image'">
                         <img alt="" class="chat-image" defaultImage='../../assets/loader.gif'
                             [lazyLoad]="mess.media.url"
                             (click)="lightbox.open(findImageIndex(mess.media.url), 'lightbox', {panelClass: 'fullscreen'})">
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
-                    <div class="media-image" *ngIf="mess.hasMedia && mess.media.mediaType != 'image'">
-                        has an attatchment
+                    <div class="row" *ngIf="mess.hasMedia && mess.media.mediaType != 'image'">
+                        <a [href]="mess.media.url"
+                            [download]="mess.media.name + '.' + mess.media.name?.split('.')[mess.media.name?.split('.').length-1]"
+                             class="text-white text-decoration-none bold">
+                            <div class="attatchment px-2 d-flex justify-content-between">
+                                <div class="col-10 p-2">
+                                    <span class="d-block text-truncate"
+                                        style="font-weight: bold;">{{mess.media.name}}</span>
+                                    <span class="d-block text-truncate" style="font-weight: bold;">{{mess.media.size}},
+                                        {{mess.media.name?.split('.')[mess.media.name?.split('.').length-1]}}</span>
+                                </div>
+                                <div class="col-2 d-flex align-items-center justify-content-center">
+                                    <button pButton pRipple type="button" icon="bi bi-download"
+                                        class="p-button-rounded download"></button>
+                                </div>
+                            </div>
+                        </a>
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
                     <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length">{{mess.message | mstatus: mess._id :
@@ -60,21 +75,27 @@
             </div>
             <div class="right-bubble text-end" *ngIf="mess.from._id == socket.User._id">
                 <div class="d-inline-block bubble ofw  animate__faster text-start" style="position: relative;"
-                    [ngStyle]="{'min-width': isToday(mess.datetime) ? '75px': '120px', width: mess.hasMedia && mess.media.mediaType != 'image' ? '200px' : 'auto'}">
+                    [ngStyle]="{'min-width': isToday(mess.datetime) ? '75px': '120px', width: mess.hasMedia && mess.media.mediaType != 'image' ? '300px' : 'auto'}">
                     <div class="media-image" *ngIf="mess.hasMedia && mess.media.mediaType == 'image'">
                         <img alt="" class="chat-image" defaultImage='../../assets/loader.gif'
                             [lazyLoad]="mess.media.url"
                             (click)="lightbox.open(findImageIndex(mess.media.url), 'lightbox', {panelClass: 'fullscreen'})">
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
-                    <div class="media-image" *ngIf="mess.hasMedia && mess.media.mediaType != 'image'">
-                        <a [href]="mess.media.url" download target="_blank">
-                            <div class="col-9">
-                                <span>line1</span>
-                                <span>line2</span>
-                            </div>
-                            <div class="col-3">
-                                down
+                    <div class="row" *ngIf="mess.hasMedia && mess.media.mediaType != 'image'">
+                        <a [href]="mess.media.url" class="text-white text-decoration-none bold"
+                        [download]="mess.media.name + '.' + mess.media.name?.split('.')[mess.media.name?.split('.').length-1]">
+                            <div class="attatchment px-2 d-flex justify-content-between">
+                                <div class="col-10 p-2">
+                                    <span class="d-block text-truncate"
+                                        style="font-weight: bold;">{{mess.media.name}}</span>
+                                    <span class="d-block text-truncate" style="font-weight: bold;">{{mess.media.size}},
+                                        {{mess.media.name?.split('.')[mess.media.name?.split('.').length-1]}}</span>
+                                </div>
+                                <div class="col-2 d-flex align-items-center justify-content-center">
+                                    <button pButton pRipple type="button" icon="bi bi-download"
+                                        class="p-button-rounded download"></button>
+                                </div>
                             </div>
                         </a>
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}

@@ -150,3 +150,26 @@
     padding: 0px;
     max-width     : 50vw;
 }
+
+.attatchment {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius  : 30px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+ 
+.p-button.download {
+    border          : 1px solid rgba(255, 255, 255, 0.2);
+    color           : white;
+    transition      : 0.5s ease;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter : blur(7px);
+    border-radius   : 30px;
+}
+
+.p-button.download:hover,
+.p-button.download:focus {
+    border          : none !important;
+    background-color: rgba(255, 255, 255, 0.3) !important;
+    color           : white !important;
+}

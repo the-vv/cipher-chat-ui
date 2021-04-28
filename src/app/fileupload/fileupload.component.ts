@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { Message } from '../models/message';
 import { MediaService } from '../services/media.service';
 
 @Component({
@@ -13,6 +14,9 @@ export class FileuploadComponent implements OnInit {
   fileOver: boolean = false;
   hasBaseDropZoneOver: any;
   messageCaption: string = '';
+  fileSize: String;
+  fileFormat: string;
+  fileName: string
 
   constructor(
     public media: MediaService,
@@ -24,8 +28,17 @@ export class FileuploadComponent implements OnInit {
     this.messageService.add({ severity: 'error', summary: title, detail: message, life: 5000 });
   }
 
+  setFileInfo() {
+    this.fileFormat = this.media.uploader.queue[0]._file.name.split('.')[this.media.uploader.queue[0]._file.name.split('.').length - 1];
+    this.fileName = this.media.uploader.queue[0]._file.name;
+    this.fileSize = this.getFileSize(this.media.uploader.queue[0]._file.size);
+    console.log(this.fileFormat, this.fileSize, this.fileName);
+    
+  }
+
   fileDropped(event: any) {
-    console.log(event);
+    this.setFileInfo();
+    // console.log(event);
     let size = event[0].size / 1024 / 1024
     console.log('size is: ', size, 'MB');
     if (size > 5) {
@@ -35,7 +48,8 @@ export class FileuploadComponent implements OnInit {
   }
 
   fileSelected() {
-    console.log(this.media.uploader.queue[0]._file)
+    this.setFileInfo();
+    // console.log(this.media.uploader.queue[0]._file)
     let size = this.media.uploader.queue[0]._file.size / 1024 / 1024
     console.log('size is: ', size, 'MB');
     if (size > 5) {
@@ -68,10 +82,10 @@ export class FileuploadComponent implements OnInit {
       }
     }
   }
- 
+
   getFileSize(bytes: number): string {
     let mb = bytes / 1024 / 1024;
-    if(mb < 1) {
+    if (mb < 1) {
       return String(Number(mb * 1024).toFixed(2)) + ' KB'
     }
     return String(Number(mb).toFixed(2)) + ' MB'
@@ -85,8 +99,11 @@ export class FileuploadComponent implements OnInit {
     this.imgUrl = '';
     this.isFile = false;
     this.gettingUrl = false;
-    this.messageCaption = flag ? this.messageCaption :'';
+    this.messageCaption = flag ? this.messageCaption : '';
     this.media.uploader.clearQueue();
+    this.fileFormat = '';
+    this.fileName = '';
+    this.fileSize = ''
   }
 
   ngOnInit() {
@@ -103,7 +120,9 @@ export class FileuploadComponent implements OnInit {
           url: res.url,
           pid: res.fileId,
           caption: this.messageCaption,
-          type: res.fileType
+          type: res.fileType,
+          name: this.fileName,
+          size: this.fileSize
         }
         // console.log(details)
         this.media.uploadedFile(details);

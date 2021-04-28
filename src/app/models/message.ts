@@ -13,6 +13,8 @@ export interface Message {
         mediaType: String,
         pid: String,
         url: String,
-        thumb?: String
+        thumb?: String,
+        size?: String,
+        name?: string
     }
 }

@@ -62,10 +62,10 @@
                 <div class="col-10">
                     <span class="text-start d-block">
                         Type:
-                        {{media.uploader.queue[0]._file.name.split('.')[media.uploader.queue[0]._file.name.split('.').length-1]}}
+                        {{fileFormat}}
                         file</span>
-                    <span class="text-truncate text-start d-block">Name: {{media.uploader.queue[0]._file.name}}</span>
-                    <span class="text-start d-block">Size: {{getFileSize(media.uploader.queue[0]._file.size)}}</span>
+                    <span class="text-truncate text-start d-block">Name: {{fileName}}</span>
+                    <span class="text-start d-block">Size: {{fileSize}}</span>
                 </div>      
         </div>
     </div>

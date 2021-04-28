@@ -42,7 +42,7 @@ export class FileuploadComponent implements OnInit {
     let size = event[0].size / 1024 / 1024
     console.log('size is: ', size, 'MB');
     if (size > 5) {
-      this.showError('Size limit exceeded', 'The image must be less than 5 MB');
+      this.showError('Size limit exceeded', 'The file must be less than 5 MB');
       this.media.uploader.clearQueue();
     }
   }
@@ -53,7 +53,7 @@ export class FileuploadComponent implements OnInit {
     let size = this.media.uploader.queue[0]._file.size / 1024 / 1024
     console.log('size is: ', size, 'MB');
     if (size > 5) {
-      this.showError('Size limit exceeded', 'The image must be less than 5 MB');
+      this.showError('Size limit exceeded', 'The file must be less than 5 MB');
       this.media.uploader.clearQueue();
     }
     // this.getFileUrl(this.uploader.queue[0])
@@ -108,7 +108,7 @@ export class FileuploadComponent implements OnInit {
 
   ngOnInit() {
     this.media.uploader.onAfterAddingFile = (file) => {
-      file.withCredentials = false;
+      file.withCredentials = true;
     };
     this.media.uploader.onCompleteItem = (item: any, status: any) => {
       // console.log('Uploaded File Details:', item, status);

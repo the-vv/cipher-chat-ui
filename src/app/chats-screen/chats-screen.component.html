@@ -45,11 +45,14 @@
                     </div>
                     <div class="row" *ngIf="mess.hasMedia && mess.media.mediaType != 'image'">
                         <a fileSaver [fileName]="mess.media.name" [url]="mess.media.url"
-                            class="text-white text-decoration-none bold" style="cursor: pointer;"
-                            (error)="userService.showError('Download Error', 'Unable to download file')"
-                            (success)="userService.showError('Downloaded', 'File Downloaded Successfully', true)">
+                            class="text-white text-decoration-none bold" style="cursor: pointer;" (click)="downloadStart(mess.media.url)"
+                            (error)="userService.showError('Download Error', 'Unable to download file'); downloadEnd()"
+                            (success)="userService.showError('Downloaded', 'File Downloaded Successfully', true); downloadEnd()">
                             <div class="attatchment px-2 d-flex justify-content-between">
-                                <div class="col-10 p-2">
+                                <div class="col-1 d-flex align-items-center">
+                                    <i [ngClass]="mess.media.url == downloadingUrl ? 'pi pi-spin pi-spinner' : 'bi bi-paperclip'" class="h2" style="vertical-align: middle; margin-bottom: 0px;"></i> 
+                                </div> 
+                                <div class="col-9 p-2">
                                     <span class="d-block text-truncate">
                                         {{mess.media.name}}
                                     </span>
@@ -90,11 +93,14 @@
                     </div>
                     <div class="row" *ngIf="mess.hasMedia && mess.media.mediaType != 'image'">
                         <a class="text-white text-decoration-none bold" fileSaver [fileName]="mess.media.name"
-                            [url]="mess.media.url" style="cursor: pointer;"
-                            (error)="userService.showError('Download Error', 'Unable to download file')"
-                            (success)="userService.showError('Downloaded', 'File Downloaded Successfully', true)">
+                            [url]="mess.media.url" style="cursor: pointer;" (click)="downloadStart(mess.media.url)"
+                            (error)="userService.showError('Download Error', 'Unable to download file'); downloadEnd()"
+                            (success)="userService.showError('Downloaded', 'File Downloaded Successfully', true); downloadEnd()">
                             <div class="attatchment px-2 d-flex justify-content-between">
-                                <div class="col-10 p-2">
+                                <div class="col-1 d-flex align-items-center border-right">
+                                    <i [ngClass]="mess.media.url == downloadingUrl ? 'pi pi-spin pi-spinner' : 'bi bi-paperclip'" class="h2" style="vertical-align: middle; margin-bottom: 0px;"></i>
+                                </div> 
+                                <div class="col-9 p-2">
                                     <span class="d-block text-truncate">
                                         {{mess.media.name}}
                                     </span>

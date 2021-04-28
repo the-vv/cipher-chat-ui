@@ -26,9 +26,9 @@
         </div>
         <div class=" d-flex justify-content-between p-0">
             <div class="col-10 p-0">
-                <p class="p-0 m-0 text-truncate"><i class="bi bi-image"
+                <p class="p-0 m-0 text-truncate"><i class="bi bi-paperclip"
                         *ngIf="chat.messages[chat.messages.length-1].hasMedia"><b
-                            *ngIf="!chat.messages[chat.messages.length-1].message">&ngsp;Photo</b></i>
+                            *ngIf="!chat.messages[chat.messages.length-1].message">Media</b></i>
                     {{chat.messages[chat.messages.length-1].message | decrypt:
                     chat.messages[chat.messages.length-1].seen && userService.userDetails.settings.encryption :
                     userService.userDetails.settings.encryptionComplexMode}}

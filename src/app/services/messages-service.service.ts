@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { exception } from 'node:console';
 import { Message } from '../models/message';
 import { RestApiService } from './restApis.service';
 import { SocketService } from './socket.service';
@@ -56,7 +57,7 @@ export class MessagesServiceService {
       seen: false,
       read: false,
       hasMedia: true,
-      media: { 
+      media: {
         mediaType: mediaData.type,
         pid: mediaData.pid,
         url: mediaData.url,
@@ -68,7 +69,7 @@ export class MessagesServiceService {
     console.log(message)
     this.socket.saveMessage(message)
       .then((mess: any) => {
-        console.log(mess.res);        
+        console.log(mess.res);
         this.pushChat(mess.res)
       })
       .catch(err => {
@@ -197,6 +198,16 @@ export class MessagesServiceService {
       .filter((val: any) => val.hasMedia)
       .map((val: any) => val.media.pid);
     console.log(pidsToDelete)
+    Promise.all([this.socket.deleteMessages(idsToDelete), this.rest.deleteIMages(pidsToDelete).toPromise()])
+      .then((values: any[]) => {
+        console.log(values)
+        this.chatList = this.chatList.filter(val => {
+          return val._id != c._id;
+        })
+      })
+      .catch((err: any) => {
+        console.log('Chat delete error\n', err)
+      })
     // this.socket.deleteMessages(idsToDelete)
     //   .then((_) => {
     //     this.chatList = this.chatList.filter(val => {

@@ -103,6 +103,10 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   prevChatListLength2: number;
   showbutton: boolean;
   chatImages: any[] = [];
+  imgShow = false;
+  imagesArray: any[] = [];
+  atatchmenticon: string = 'bi bi-paperclip';
+  downloadingUrl: string = '';
 
   constructor(public socket: SocketService,
     public message: MessagesServiceService,
@@ -259,6 +263,12 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     }
   }
 
-  imgShow = false;
-  imagesArray: any[] = [];
+  downloadStart(url: string) {
+    this.downloadingUrl = url;
+  }
+
+  downloadEnd() {
+    this.downloadingUrl = '';
+  }
+
 }

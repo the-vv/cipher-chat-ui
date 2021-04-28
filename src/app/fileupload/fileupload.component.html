@@ -19,8 +19,9 @@
 <div *ngIf="!media.uploader.queue.length" class="file-upload text-center" ng2FileDrop
     [ngClass]="{'file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="media.uploader">
     <p class="h3" (fileOver)="fileOverBase($event)" ng2FileDrop>Click to choose a file or drop one here</p>
-    <input type="file" (fileOver)="fileOverBase($event)" (onFileSelected)="fileSelected()" ng2FileDrop
-        class="form-control" name="file" ng2FileSelect [uploader]="media.uploader" accept="image/*" />
+    <input type="file" (fileOver)="fileOverBase($event)" (onFileSelected)="fileSelected()"
+        (onFileDrop)="fileDropped($event)" ng2FileDrop class="form-control" name="file" ng2FileSelect
+        [uploader]="media.uploader" accept="*" />
 </div>
 <div *ngIf="media.uploader.queue.length" class="text-center">
     <button pButton pRipple type="button" class="p-button-outlined" icon="bi bi-upload" label="Send"
@@ -54,14 +55,21 @@
         </div>
         <img [src]="imgUrl || getFileUrl(media.uploader.queue[0]._file)"
             *ngIf="media.uploader.queue[0]._file.type.split('/')[0] === 'image'" alt="" width="100%">
-        <div *ngIf="media.uploader.queue[0]._file.type.split('/')[0] !== 'image'" alt=""
-            class="attatchment d-flex justify-content-evenly h6 row">
-            <span class="col-auto"><i class="bi bi-paperclip"></i> File: </span>
-            <span class="col text-truncate">{{media.uploader.queue[0]._file.name}}</span>
-            <span class="col-auto">Size: {{getFileSize(media.uploader.queue[0]._file.size)}}</span>
+        <div *ngIf="media.uploader.queue[0]._file.type.split('/')[0] !== 'image'" alt="" class="row attatchment py-3 ">
+                <div class="col-2 d-flex align-items-center justify-content-center">
+                    <i class="bi bi-paperclip display-2"></i>
+                </div>
+                <div class="col-10">
+                    <span class="text-start d-block">
+                        Type:
+                        {{media.uploader.queue[0]._file.name.split('.')[media.uploader.queue[0]._file.name.split('.').length-1]}}
+                        file</span>
+                    <span class="text-truncate text-start d-block">Name: {{media.uploader.queue[0]._file.name}}</span>
+                    <span class="text-start d-block">Size: {{getFileSize(media.uploader.queue[0]._file.size)}}</span>
+                </div>      
         </div>
     </div>
-</div>
+</div> 
 
 
 

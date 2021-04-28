@@ -84,12 +84,12 @@
 </p-dialog>
 
 
-<p-dialog header="Upload Image" [(visible)]="media.askUpload" (onHide)="media.cancelUpload.next(true)" [closable]="false"
+<p-dialog header="Upload file" [(visible)]="media.askUpload" (onHide)="media.cancelUpload.next(true)" [closable]="false"
     [style]="{width: '60vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}"
     [dismissableMask]="false">
     <app-fileupload></app-fileupload> 
     <ng-template pTemplate="footer">   
-        <p-button icon="b bi-x-circle" label="Cancel sending" styleClass="p-button-text text-light"
+        <p-button icon="b bi-x-circle" label="Cancel" styleClass="p-button-text text-light"
         (click)="media.cancelUpload.next(true); media.askUpload = false;">
     </p-button>     
     </ng-template>

@@ -57,10 +57,10 @@ export class MessagesServiceService {
       read: false,
       hasMedia: true,
       media: { 
-        mediaType: 'image',
+        mediaType: mediaData.type,
         pid: mediaData.pid,
         url: mediaData.url,
-        thumb: mediaData?.thumb
+        thumb: mediaData.thumb ? mediaData.thumb : null
       }
     }
     console.log(message)

@@ -225,11 +225,11 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     this.chatInputElament && this.chatInputElament.nativeElement.focus();
   }
 
-  addPhoto() {
+  addFile() {
     this.media.askUpload = true;
     let sus = this.media.imgUploaded.subscribe((data: any) => {
       if (data !== false) {
-        console.log(data);
+        // console.log(data);
         this.message.sendMediaMessage(this.chat._id, data);
         this.needScroll2 = true;
       } else {
@@ -250,7 +250,7 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
           this.socket.showError('Size limit exceeded', 'The image must be less than 5 MB');
         }
         else {
-          this.addPhoto();
+          this.addFile();
           this.media.uploader.addToQueue([blob]);
         }
       }

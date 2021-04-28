@@ -35,11 +35,16 @@
             <div class="left-bubble text-start"
                 *ngIf="mess.to._id == socket.User._id && mess.from._id != socket.User._id">
                 <div class="d-inline-block bubble ofw animate__faster" [ngClass]="mess.hasMedia ? '' : 'text-end'"
-                    style="position: relative;" [ngStyle]="{'min-width': isToday(mess.datetime) ? '65px': '100px'}">
-                    <div class="media-image" *ngIf="mess.hasMedia">
+                    style="position: relative;"
+                    [ngStyle]="{'min-width': isToday(mess.datetime) ? '65px': '100px', width: mess.hasMedia && mess.media.mediaType != 'image' ? '200px' : 'auto'}">
+                    <div class="media-image" *ngIf="mess.hasMedia && mess.media.mediaType == 'image'">
                         <img alt="" class="chat-image" defaultImage='../../assets/loader.gif'
                             [lazyLoad]="mess.media.url"
                             (click)="lightbox.open(findImageIndex(mess.media.url), 'lightbox', {panelClass: 'fullscreen'})">
+                        {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
+                    </div>
+                    <div class="media-image" *ngIf="mess.hasMedia && mess.media.mediaType != 'image'">
+                        has an attatchment
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
                     <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length">{{mess.message | mstatus: mess._id :
@@ -55,11 +60,23 @@
             </div>
             <div class="right-bubble text-end" *ngIf="mess.from._id == socket.User._id">
                 <div class="d-inline-block bubble ofw  animate__faster text-start" style="position: relative;"
-                    [ngStyle]="{'min-width': isToday(mess.datetime) ? '75px': '120px'}">
-                    <div class="media-image" *ngIf="mess.hasMedia">
+                    [ngStyle]="{'min-width': isToday(mess.datetime) ? '75px': '120px', width: mess.hasMedia && mess.media.mediaType != 'image' ? '200px' : 'auto'}">
+                    <div class="media-image" *ngIf="mess.hasMedia && mess.media.mediaType == 'image'">
                         <img alt="" class="chat-image" defaultImage='../../assets/loader.gif'
                             [lazyLoad]="mess.media.url"
                             (click)="lightbox.open(findImageIndex(mess.media.url), 'lightbox', {panelClass: 'fullscreen'})">
+                        {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
+                    </div>
+                    <div class="media-image" *ngIf="mess.hasMedia && mess.media.mediaType != 'image'">
+                        <a [href]="mess.media.url" download target="_blank">
+                            <div class="col-9">
+                                <span>line1</span>
+                                <span>line2</span>
+                            </div>
+                            <div class="col-3">
+                                down
+                            </div>
+                        </a>
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
                     <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length">{{mess.message | mstatus: mess._id :
@@ -89,9 +106,9 @@
             </div>
         </div>
         <div class="image-picker">
-            <button pButton pRipple type="button" icon="bi {{!media.askUpload ? 'bi-image' : 'bi-x'}}"
+            <button pButton pRipple type="button" icon="bi {{!media.askUpload ? 'bi-paperclip' : 'bi-x'}}"
                 style="font-size: 1.4em;" class="p-button-rounded p-button-text p-button-plain ml-2 text-white"
-                (click)="addPhoto()"></button>
+                (click)="addFile()"></button>
         </div>
         <div class="p-inputgroup">
             <input type="text" pInputText placeholder="Type a message" [(ngModel)]="messageString"

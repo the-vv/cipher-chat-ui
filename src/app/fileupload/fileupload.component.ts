@@ -24,8 +24,18 @@ export class FileuploadComponent implements OnInit {
     this.messageService.add({ severity: 'error', summary: title, detail: message, life: 5000 });
   }
 
+  fileDropped(event: any) {
+    console.log(event);
+    let size = event[0].size / 1024 / 1024
+    console.log('size is: ', size, 'MB');
+    if (size > 5) {
+      this.showError('Size limit exceeded', 'The image must be less than 5 MB');
+      this.media.uploader.clearQueue();
+    }
+  }
+
   fileSelected() {
-    console.log('file selected')
+    console.log(this.media.uploader.queue[0]._file)
     let size = this.media.uploader.queue[0]._file.size / 1024 / 1024
     console.log('size is: ', size, 'MB');
     if (size > 5) {
@@ -39,7 +49,7 @@ export class FileuploadComponent implements OnInit {
   imgUrl: ArrayBuffer | string = '';
   gettingUrl: boolean = false;
   getFileUrl(event: any) {
-    console.log(event);    
+    // console.log(event);    
     if (!this.gettingUrl) {
       if (event.type.split('/')[0] === 'image') {
         this.isFile = false;
@@ -60,8 +70,7 @@ export class FileuploadComponent implements OnInit {
   }
  
   getFileSize(bytes: number): string {
-    let mb = bytes / 1024 / 1024
-    console.log(mb) 
+    let mb = bytes / 1024 / 1024;
     if(mb < 1) {
       return String(Number(mb * 1024).toFixed(2)) + ' KB'
     }
@@ -89,12 +98,14 @@ export class FileuploadComponent implements OnInit {
       let res: any;
       try {
         res = JSON.parse(status);
+        // console.log(res)
         let details = {
           url: res.url,
           pid: res.fileId,
           caption: this.messageCaption,
-          thumb: res.thumbnailUrl
+          type: res.fileType
         }
+        // console.log(details)
         this.media.uploadedFile(details);
         this.resetUpload();
       } catch (e) {

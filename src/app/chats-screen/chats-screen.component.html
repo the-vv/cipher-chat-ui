@@ -44,15 +44,21 @@
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
                     <div class="row" *ngIf="mess.hasMedia && mess.media.mediaType != 'image'">
-                        <a [href]="mess.media.url"
-                            [download]="mess.media.name + '.' + mess.media.name?.split('.')[mess.media.name?.split('.').length-1]"
-                             class="text-white text-decoration-none bold">
+                        <a fileSaver [fileName]="mess.media.name" [url]="mess.media.url"
+                            class="text-white text-decoration-none bold" style="cursor: pointer;"
+                            (error)="userService.showError('Download Error', 'Unable to download file')"
+                            (success)="userService.showError('Downloaded', 'File Downloaded Successfully', true)">
                             <div class="attatchment px-2 d-flex justify-content-between">
                                 <div class="col-10 p-2">
-                                    <span class="d-block text-truncate"
-                                        style="font-weight: bold;">{{mess.media.name}}</span>
-                                    <span class="d-block text-truncate" style="font-weight: bold;">{{mess.media.size}},
-                                        {{mess.media.name?.split('.')[mess.media.name?.split('.').length-1]}}</span>
+                                    <span class="d-block text-truncate">
+                                        {{mess.media.name}}
+                                    </span>
+                                    <span class="d-block text-truncate small">
+                                        <i>
+                                            {{mess.media.size}},
+                                            {{mess.media.name?.split('.')[mess.media.name?.split('.').length-1].toUpperCase()}}
+                                        </i>
+                                    </span>
                                 </div>
                                 <div class="col-2 d-flex align-items-center justify-content-center">
                                     <button pButton pRipple type="button" icon="bi bi-download"
@@ -83,14 +89,21 @@
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
                     <div class="row" *ngIf="mess.hasMedia && mess.media.mediaType != 'image'">
-                        <a [href]="mess.media.url" class="text-white text-decoration-none bold"
-                        [download]="mess.media.name + '.' + mess.media.name?.split('.')[mess.media.name?.split('.').length-1]">
+                        <a class="text-white text-decoration-none bold" fileSaver [fileName]="mess.media.name"
+                            [url]="mess.media.url" style="cursor: pointer;"
+                            (error)="userService.showError('Download Error', 'Unable to download file')"
+                            (success)="userService.showError('Downloaded', 'File Downloaded Successfully', true)">
                             <div class="attatchment px-2 d-flex justify-content-between">
                                 <div class="col-10 p-2">
-                                    <span class="d-block text-truncate"
-                                        style="font-weight: bold;">{{mess.media.name}}</span>
-                                    <span class="d-block text-truncate" style="font-weight: bold;">{{mess.media.size}},
-                                        {{mess.media.name?.split('.')[mess.media.name?.split('.').length-1]}}</span>
+                                    <span class="d-block text-truncate">
+                                        {{mess.media.name}}
+                                    </span>
+                                    <span class="d-block text-truncate small">
+                                        <i>
+                                            {{mess.media.size}},
+                                            {{mess.media.name?.split('.')[mess.media.name?.split('.').length-1].toUpperCase()}}
+                                        </i>
+                                    </span>
                                 </div>
                                 <div class="col-2 d-flex align-items-center justify-content-center">
                                     <button pButton pRipple type="button" icon="bi bi-download"

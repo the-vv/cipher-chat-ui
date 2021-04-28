@@ -71,11 +71,11 @@ export class UserServiceService {
     }
   }
 
-  showError(title: string, message: string) {
+  showError(title: string, message: string, nonError: boolean = false) {
     this.messageService.clear()
-    this.messageService.add({ severity: 'error', summary: title, detail: message, life: 5000 });
+    this.messageService.add({ severity: nonError ? 'success' : 'error', summary: title, detail: message, life: 5000 });
   }
-
+ 
   cancelChanges() {
     this.editName = false;
     if (!this.submitted) {

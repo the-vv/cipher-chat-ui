@@ -39,6 +39,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
+import { FileSaverModule } from 'ngx-filesaver';
 
 
 // Components and services
@@ -112,7 +113,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     BadgeModule,
     NgImageFullscreenViewModule,
     GalleryModule,
-    LightboxModule
+    LightboxModule,
+    FileSaverModule
   ],
   providers: [
     RestApiService,

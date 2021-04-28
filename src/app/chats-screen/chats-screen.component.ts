@@ -142,7 +142,7 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     if (this.messages?.length != this.prevChatListLength2) {
       let images = new Set();
       this.messages.forEach(el => {
-        if (el.hasMedia) {
+        if (el.hasMedia && el.media.mediaType === 'image') {
           images.add({ image: el.media.url, caption: el.message, pid: el.media.pid })
         }
       }) 

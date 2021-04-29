@@ -1,42 +1,44 @@
 <div class="text-center" *ngIf="userService.userDetails.settings">
-    <div class="d-block">
-        <p-avatar icon="pi pi-user" styleClass="mb-2" size="xlarge" shape="circle"
-            [label]="userService.userDetails.name?.split('')[0]"
-            [style]="{'background-color':userService.userDetails.settings?.color, 'text-shadow': 'black 0px 0px 10px'}">
-        </p-avatar>
-    </div>
-    <p class="p-0 m-0">
-        <span class="h3" *ngIf="!userService.editName">
-            {{userService.userDetails.name}}
-            <i pRipple class="pi pi-pencil text-warning" (click)="userService.editName = true"
-                style="cursor: pointer;"></i>
-        </span>
-        <span *ngIf="userService.editName">
-            <input type="text" class="" pInputText placeholder="Edit name" [(ngModel)]="userService.userDetails.name">
-        </span>
-    </p>
-    <p class="small">
-        {{userService.userDetails.email}}
-    </p>
-    <div class="col-12 px-2 d-flex justify-content-between align-items-center">
-        <p class="my-auto">Cipher Names Also</p>
-        <button pButton pRipple type="button" iconPos="right"
-            icon="pi {{userService.userDetails.settings.encryptNames ? 'pi-check' : 'pi-times'}}" label=""
-            class="p-button-rounded"
-            [ngClass]="userService.userDetails.settings.encryptNames ? 'p-button-success' : 'p-button-secondary'"
-            (click)="userService.userDetails.settings.encryptNames = !userService.userDetails.settings.encryptNames"></button>
-    </div>
-    <div class="col-12 px-2 mt-2 d-flex justify-content-between align-items-center">
-        <p class="my-auto">Use Complex Cipher Method</p>
-        <button pButton pRipple type="button" iconPos="right"
-            icon="pi {{userService.userDetails.settings.encryptionComplexMode ? 'pi-check' : 'pi-times'}}" label=""
-            class="p-button-rounded"
-            [ngClass]="userService.userDetails.settings.encryptionComplexMode ? 'p-button-success' : 'p-button-secondary'"
-            (click)="userService.userDetails.settings.encryptionComplexMode = !userService.userDetails.settings.encryptionComplexMode"></button>
-    </div>
-    <div class="col-12 px-2 mt-2 d-flex justify-content-between align-items-center">
-        <p class="my-auto">Cipher Delay (in Seconds)</p>
-        <p-knob [(ngModel)]="userService.userDetails.settings.encryptDelay" [size]="44" textColor="white"
-            valueColor="white" rangeColor="SlateGray" [min]="0" [max]="30" step="3"></p-knob>
+    <div tourAnchor="settingsPage">
+        <div class="d-block">
+            <p-avatar icon="pi pi-user" styleClass="mb-2" size="xlarge" shape="circle"
+                [label]="userService.userDetails.name?.split('')[0]"
+                [style]="{'background-color':userService.userDetails.settings?.color, 'text-shadow': 'black 0px 0px 10px'}">
+            </p-avatar>
+        </div>
+        <p class="p-0 m-0">
+            <span class="h3" *ngIf="!userService.editName">
+                {{userService.userDetails.name}}
+                <i pRipple class="pi pi-pencil text-warning" (click)="userService.editName = true"
+                    style="cursor: pointer;"></i>
+            </span>
+            <span *ngIf="userService.editName">
+                <input type="text" class="" pInputText placeholder="Edit name" [(ngModel)]="userService.userDetails.name">
+            </span>
+        </p>
+        <p class="small">
+            {{userService.userDetails.email}}
+        </p>
+        <div class="col-12 px-2 d-flex justify-content-between align-items-center">
+            <p class="my-auto">Cipher Names Also</p>
+            <button pButton pRipple type="button" iconPos="right"
+                icon="pi {{userService.userDetails.settings.encryptNames ? 'pi-check' : 'pi-times'}}" label=""
+                class="p-button-rounded"
+                [ngClass]="userService.userDetails.settings.encryptNames ? 'p-button-success' : 'p-button-secondary'"
+                (click)="userService.userDetails.settings.encryptNames = !userService.userDetails.settings.encryptNames"></button>
+        </div>
+        <div class="col-12 px-2 mt-2 d-flex justify-content-between align-items-center">
+            <p class="my-auto">Use Complex Cipher Method</p>
+            <button pButton pRipple type="button" iconPos="right"
+                icon="pi {{userService.userDetails.settings.encryptionComplexMode ? 'pi-check' : 'pi-times'}}" label=""
+                class="p-button-rounded"
+                [ngClass]="userService.userDetails.settings.encryptionComplexMode ? 'p-button-success' : 'p-button-secondary'"
+                (click)="userService.userDetails.settings.encryptionComplexMode = !userService.userDetails.settings.encryptionComplexMode"></button>
+        </div>
+        <div class="col-12 px-2 mt-2 d-flex justify-content-between align-items-center">
+            <p class="my-auto">Cipher Delay (in Seconds)</p>
+            <p-knob [(ngModel)]="userService.userDetails.settings.encryptDelay" [size]="44" textColor="white"
+                valueColor="white" rangeColor="SlateGray" [min]="0" [max]="30" step="3"></p-knob>
+        </div>
     </div>
 </div>  

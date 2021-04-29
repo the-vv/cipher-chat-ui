@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   public mobileView: boolean = false;
 
   sideItems: MenuItem[];
-  visibleSidebar: boolean;
+  // visibleSidebar: boolean;
 
   randomColor = '';
 
@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
                 command: () => {
                   this.cookieService.delete('user')
                   this.socket.logout();
-                  this.visibleSidebar = !this.visibleSidebar;
+                  this.user.visibleSidebar = !this.user.visibleSidebar;
                   this.initSidebar();
                 }
               }
@@ -96,7 +96,7 @@ export class AppComponent implements OnInit {
               icon: 'bi bi-gear',
               command: () => {
                 this.user.askSettings = true;
-                this.visibleSidebar = !this.visibleSidebar;
+                this.user.visibleSidebar = !this.user.visibleSidebar;
               }
             },
             ]
@@ -116,7 +116,7 @@ export class AppComponent implements OnInit {
             icon: 'bi bi-box-arrow-in-right',
             routerLink: '/login',
             command: () => {
-              this.visibleSidebar = !this.visibleSidebar;
+              this.user.visibleSidebar = !this.user.visibleSidebar;
             }
           },
           {
@@ -125,7 +125,7 @@ export class AppComponent implements OnInit {
             routerLink: '/login',
             queryParams: { signup: '1' },
             command: () => {
-              this.visibleSidebar = !this.visibleSidebar;
+              this.user.visibleSidebar = !this.user.visibleSidebar;
             }
           }
         ]

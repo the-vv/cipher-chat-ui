@@ -3,10 +3,11 @@
         [ngClass]="{'bg-dark':!tnavbar}">
         <a class="navbar-brand text-white" routerLink="/"><img src="assets/icon.png" height="40" class=""> Cipher
             Chat</a>
-        <span class="mr-3" >
+        <span class="mr-3">
             <span class="cipherSwitch d-inline" *ngIf="user.userDetails.settings && socket.User">
-                <button pButton pRipple type="button" iconPos="right" icon="pi {{user.modeIcon}}" tourAnchor="cipherButton"
-                    [label]="!mobileView ? 'Cipher Mode:' : ''" class="p-button-rounded" (click)="user.updateViewMode()"
+                <button pButton pRipple type="button" iconPos="right" icon="pi {{user.modeIcon}}"
+                    tourAnchor="cipherButton" [label]="!mobileView ? 'Cipher Mode:' : ''" class="p-button-rounded"
+                    (click)="user.updateViewMode()"
                     [style]="{'background-color': user.getBgColor(), 'color': user.getBgColor() === '#C5E1A5' ? 'black' : 'white'}"></button>
             </span>
             <span class="menu-button" (click)="user.visibleSidebar = true">
@@ -52,9 +53,9 @@
     <p style="color: white"> Loading... </p>
 </ngx-spinner>
 
-<p-dialog header="Account Settings" tourAnchor="settingsPage" (onHide)="user.cancelChanges()" [(visible)]="user.askSettings"
-    [style]="{width: '40vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}"
-    [dismissableMask]="false">
+<p-dialog header="Account Settings"(onHide)="user.cancelChanges()"
+    [(visible)]="user.askSettings" [style]="{width: '40vw'}" [modal]='true' maskStyleClass="blur-bg-dark"
+    [breakpoints]="{'780px': '95vw'}" [dismissableMask]="false">
     <app-settings></app-settings>
     <ng-template pTemplate="footer">
         <p-button icon="pi {{user.saveIcon}}" label="Save changes" styleClass="p-button-text text-light"
@@ -87,12 +88,23 @@
 <p-dialog header="Upload file" [(visible)]="media.askUpload" (onHide)="media.cancelUpload.next(true)" [closable]="false"
     [style]="{width: '60vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}"
     [dismissableMask]="false">
-    <app-fileupload></app-fileupload> 
-    <ng-template pTemplate="footer">   
+    <app-fileupload></app-fileupload>
+    <ng-template pTemplate="footer">
         <p-button icon="b bi-x-circle" label="Cancel" styleClass="p-button-text text-light"
-        (click)="media.cancelUpload.next(true); media.askUpload = false;">
-    </p-button>     
+            (click)="media.cancelUpload.next(true); media.askUpload = false;">
+        </p-button>
     </ng-template>
 </p-dialog>
 
-<tour-step-template style="position: fixed; z-index: 12000;"></tour-step-template>
+<tour-step-template style="position: fixed; z-index: 12000;">
+    <ng-template let-step="step">
+        <p class="tour-step-content">{{step?.content}}</p>
+        <div class="tour-step-navigation">
+            <button *ngIf="tourService.hasPrev(step)" class="btn btn-sm btn-default" (click)="tourService.prev(step)">«
+                {{step?.prevBtnTitle}}</button>
+            <button *ngIf="tourService.hasNext(step)" class="btn btn-sm btn-default"
+                (click)="tourService.next(step)">{{step?.nextBtnTitle}} »</button>
+            <button class="btn btn-sm btn-default" (click)="tourService.end()">{{step?.endBtnTitle}}</button>
+        </div>
+    </ng-template>
+</tour-step-template>

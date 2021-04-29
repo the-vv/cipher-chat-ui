@@ -3,7 +3,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap');
 @import '~@ctrl/ngx-emoji-mart/picker';
 
-
 body,
 html {
   overflow: hidden;
@@ -13,25 +12,28 @@ html {
 
 // Scroll Bar
 
-/* width */
-::-webkit-scrollbar {
-  max-width: 8px;
-}
+@media only screen and (min-width: 600px) {
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #ffffff13;
-}
+  /* width */
+  ::-webkit-scrollbar {
+    max-width: 8px;
+  }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background   : rgba(255, 255, 255, 0.24);
-  border-radius: 4px;
-}
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #ffffff13;
+  }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(204, 204, 204, 0.884);
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background   : rgba(255, 255, 255, 0.24);
+    border-radius: 4px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(204, 204, 204, 0.884);
+  }
 }
 
 /* OVERRIDED STYLES */
@@ -155,7 +157,7 @@ html {
 
 @media only screen and (max-width: 600px) {
   .p-toast-bottom-center {
-    left: 50% !important;
+    left : 50% !important;
     width: 20rem !important;
   }
 }
@@ -168,4 +170,26 @@ html {
 
 .popover {
   z-index: 13000 !important;
+}
+
+
+.ql-toolbar.ql-snow {
+  background             : rgba(255, 255, 255, 0.5) !important;
+  border                 : 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-top-left-radius : 30px;
+  border-top-right-radius: 30px;
+  color                  : white;
+}
+
+.ql-editor.ql-blank::before {
+  color: white !important;
+}
+
+.ql-snow .ql-editor pre.ql-syntax {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border    : 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.ql-snow a {
+  color: #66a8ff !important;
 }

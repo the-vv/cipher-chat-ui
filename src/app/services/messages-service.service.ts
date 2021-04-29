@@ -13,7 +13,9 @@ export class MessagesServiceService {
   chatList: any[] = [];
   searchedList: any[] = [];
   isListening: boolean = false;
-  askUpload: boolean = false
+  askUpload: boolean = false;
+  showComposer: boolean = true;
+  composerContent: string = '';
 
   constructor(
     public socket: SocketService,
@@ -30,11 +32,15 @@ export class MessagesServiceService {
     this.socket.messageReadStatus
       .subscribe(mess => {
         // console.log(mess)
-        this.updateMessageReadStatus(mess);
+        this.updateMessageReadStatus(mess); 
       })
   }
 
-  getMessages() {
+  composerData(event: any) {
+    console.log(event.html)
+  }
+
+  getMessages() {   
     this.socket.getMessages()
       .then(mess => {
         this.newMessages = mess;
@@ -42,7 +48,7 @@ export class MessagesServiceService {
         this.addChatLists();
         // console.log(this.chatList)
       })
-      .catch(e => {
+      .catch(e => {  
         console.error('Failed to get messages\n', e);
       })
   }

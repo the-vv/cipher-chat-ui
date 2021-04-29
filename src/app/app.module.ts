@@ -62,6 +62,7 @@ import { FileuploadComponent } from './fileupload/fileupload.component';
 import { MediaService } from './services/media.service';
 import { TourNgxBootstrapModule } from 'ngx-ui-tour-ngx-bootstrap';
 import { TourService } from './services/tour.service';
+import { QuillModule } from 'ngx-quill';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -117,7 +118,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     GalleryModule,
     LightboxModule,
     FileSaverModule,
-    TourNgxBootstrapModule.forRoot() 
+    TourNgxBootstrapModule.forRoot(),
+    QuillModule.forRoot()
   ],
   providers: [
     RestApiService,

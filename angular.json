@@ -53,9 +53,12 @@
               "src/styles.scss",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/mdc-dark-indigo/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/quill/dist/quill.snow.css",
+              "node_modules/quill/dist/quill.core.css"
             ],
             "scripts": [
+              "node_modules/quill/dist/quill.core.js"
             ]
           },
           "configurations": {

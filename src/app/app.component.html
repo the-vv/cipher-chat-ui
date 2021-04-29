@@ -53,9 +53,9 @@
     <p style="color: white"> Loading... </p>
 </ngx-spinner>
 
-<p-dialog header="Account Settings"(onHide)="user.cancelChanges()"
-    [(visible)]="user.askSettings" [style]="{width: '40vw'}" [modal]='true' maskStyleClass="blur-bg-dark"
-    [breakpoints]="{'780px': '95vw'}" [dismissableMask]="false">
+<p-dialog header="Account Settings" (onHide)="user.cancelChanges()" [(visible)]="user.askSettings"
+    [style]="{width: '40vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}"
+    [dismissableMask]="false">
     <app-settings></app-settings>
     <ng-template pTemplate="footer">
         <p-button icon="pi {{user.saveIcon}}" label="Save changes" styleClass="p-button-text text-light"
@@ -85,10 +85,11 @@
 </p-dialog>
 
 
-<p-dialog header="Compose Message" [(visible)]="messageService.showComposer" (onHide)="media.cancelUpload.next(true)" [closable]="false"
-    [style]="{width: '90vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}"
-    [dismissableMask]="false">
-    <quill-editor [(ngModel)]="messageService.composerContent" (onContentChanged)="messageService.composerData($event)" [styles]="{ 
+<p-dialog header="Compose Message" [(visible)]="messageService.showComposer" (onHide)="media.cancelUpload.next(true)"
+    [closable]="false" [style]="{width: '90vw'}" [modal]='true' maskStyleClass="blur-bg-dark"
+    [breakpoints]="{'780px': '95vw'}" [dismissableMask]="false">
+    <quill-editor [(ngModel)]="messageService.composerContent" [modules]="modules" (onContentChanged)="messageService.composerData($event)"
+        [styles]="{ 
         background   : 'rgba(255, 255, 255, 0.1',
         border       : '1px solid rgba(255, 255, 255, 0.2',
         borderBottomLeftRadius: '30px',

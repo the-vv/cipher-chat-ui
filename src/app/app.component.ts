@@ -8,6 +8,9 @@ import { UserServiceService } from './services/user-service.service';
 import { MessagesServiceService } from './services/messages-service.service';
 import { MediaService } from './services/media.service';
 import { TourService } from './services/tour.service';
+import * as ImageResize from 'quill-image-resize-module';
+import Quill from 'quill';
+Quill.register('modules/imageResize', ImageResize);
 
 @Component({
   selector: 'app-root',
@@ -32,6 +35,8 @@ export class AppComponent implements OnInit {
   tnavbar: boolean = true;
   isChatPage: boolean = false;
 
+  modules: any
+
   constructor(
     private primengConfig: PrimeNGConfig,
     public socket: SocketService,
@@ -46,7 +51,7 @@ export class AppComponent implements OnInit {
 
     if (cookieService.check('user')) {
       let usr: any = JSON.parse(this.cookieService.get('user'));
-      socket.login(usr); 
+      socket.login(usr);
       socket.verifyAuth(usr.token);
     } else {
       // console.log('Not Logegd in');
@@ -55,16 +60,27 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.router.events.subscribe(val => {
-      if (val instanceof NavigationEnd){
+      if (val instanceof NavigationEnd) {
         // console.log(val.url);
-        if(val.url.indexOf('/chats') >= 0 && this.socket.isLoggedIn) {
+        if (val.url.indexOf('/chats') >= 0 && this.socket.isLoggedIn) {
           this.isChatPage = true;
         } else {
           this.isChatPage = false;
         }
-      }      
+      }
+      this.modules = {
+        ImageResize: {
+          handleStyles: {
+             displaySize: true,
+             backgroundColor: "black",
+             border: "none",
+             color: "white",
+          },
+          modules: ["Resize", "DisplaySize", "Toolbar"],
+       }
+      }
     })
-    
+ 
     this.primengConfig.ripple = true;
 
     this.initSidebar();
@@ -92,13 +108,14 @@ export class AppComponent implements OnInit {
           {
             label: 'More',
             items: [
-              { label: 'Settings',
-              icon: 'bi bi-gear',
-              command: () => {
-                this.user.askSettings = true;
-                this.user.visibleSidebar = !this.user.visibleSidebar;
-              }
-            },
+              {
+                label: 'Settings',
+                icon: 'bi bi-gear',
+                command: () => {
+                  this.user.askSettings = true;
+                  this.user.visibleSidebar = !this.user.visibleSidebar;
+                }
+              },
             ]
           }
         ];

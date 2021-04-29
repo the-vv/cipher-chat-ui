@@ -37,7 +37,11 @@ export class MessagesServiceService {
   }
 
   composerData(event: any) {
-    console.log(event.html)
+    console.log(event)
+    if(new Blob([event.html]).size / 1024 / 1024 > 5) {
+      event.editor.history.undo();
+      this.socket.showError('Size Limit Exceeded', 'You have exceeded the 5 MB limit of composer.');
+    }
   }
 
   getMessages() {   

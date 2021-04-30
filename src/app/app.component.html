@@ -85,7 +85,7 @@
 </p-dialog>
 
 
-<p-dialog header="Compose Message" [(visible)]="messageService.showComposer" (onHide)="media.cancelUpload.next(true)"
+<p-dialog header="Compose Message" [(visible)]="messageService.showComposer"
     [closable]="false" [style]="{width: '90vw'}" [modal]='true' maskStyleClass="blur-bg-dark"
     [breakpoints]="{'780px': '95vw'}" [dismissableMask]="false">
     <quill-editor [(ngModel)]="messageService.composerContent" [modules]="modules"
@@ -99,8 +99,11 @@
         paddingBottom: '30px'
       }"></quill-editor>
     <ng-template pTemplate="footer">
-        <p-button icon="b bi-x-circle" label="Cancel" styleClass="p-button-text text-light"
-            (click)="messageService.composedMessage.next(false);">
+        <p-button label="Close" styleClass="p-button-text text-light"
+            (click)="messageService.composedMessage.next(false); messageService.showComposer = false">
+        </p-button>        
+        <p-button label="Send" styleClass="p-button-text text-light" [icon]="messageService.sendingComposed ? 'pi pi-spin pi-spinner' : ''" [disabled]="messageService.composerContent?.length < 1"
+            (click)="messageService.composerContent?.length && messageService.sendComposed()">
         </p-button>
     </ng-template>
 </p-dialog>

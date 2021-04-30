@@ -45,13 +45,15 @@
                     </div>
                     <div class="row" *ngIf="mess.hasMedia && mess.media.mediaType != 'image'">
                         <a fileSaver [fileName]="mess.media.name" [url]="mess.media.url"
-                            class="text-white text-decoration-none bold" style="cursor: pointer;" (click)="downloadStart(mess.media.url)"
+                            class="text-white text-decoration-none bold" style="cursor: pointer;"
+                            (click)="downloadStart(mess.media.url)"
                             (error)="userService.showError('Download Error', 'Unable to download file'); downloadEnd()"
                             (success)="userService.showError('Downloaded', 'File Downloaded Successfully', true); downloadEnd()">
                             <div class="attatchment px-2 d-flex justify-content-between">
                                 <div class="col-1 d-flex align-items-center">
-                                    <i [ngClass]="mess.media.url == downloadingUrl ? 'pi pi-spin pi-spinner' : 'bi bi-paperclip'" class="h2" style="vertical-align: middle; margin-bottom: 0px;"></i> 
-                                </div> 
+                                    <i [ngClass]="mess.media.url == downloadingUrl ? 'pi pi-spin pi-spinner' : 'bi bi-paperclip'"
+                                        class="h2" style="vertical-align: middle; margin-bottom: 0px;"></i>
+                                </div>
                                 <div class="col-9 p-2">
                                     <span class="d-block text-truncate">
                                         {{mess.media.name}}
@@ -71,7 +73,15 @@
                         </a>
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
-                    <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length">{{mess.message | mstatus: mess._id :
+                    <div class="composedViewer text-center" *ngIf="mess.isComposed">
+                        <div class="view-composed px-4 py-3">
+                            <h5 class="m-0 d-block py-0">Composed Message</h5>
+                            <button pButton pRipple type="button" icon="bi bi-eye" label="View Message"
+                                class="p-button-rounded vcompose d-block mt-2 px-4"></button>
+                        </div>
+                    </div> 
+                    <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length && !mess.isComposed">{{mess.message |
+                        mstatus: mess._id :
                         mess.seen :
                         userService.userDetails.settings.encryptDelay | decrypt:
                         mess.seen && userService.userDetails.settings.encryption :
@@ -98,8 +108,9 @@
                             (success)="userService.showError('Downloaded', 'File Downloaded Successfully', true); downloadEnd()">
                             <div class="attatchment px-2 d-flex justify-content-between">
                                 <div class="col-1 d-flex align-items-center border-right">
-                                    <i [ngClass]="mess.media.url == downloadingUrl ? 'pi pi-spin pi-spinner' : 'bi bi-paperclip'" class="h2" style="vertical-align: middle; margin-bottom: 0px;"></i>
-                                </div> 
+                                    <i [ngClass]="mess.media.url == downloadingUrl ? 'pi pi-spin pi-spinner' : 'bi bi-paperclip'"
+                                        class="h2" style="vertical-align: middle; margin-bottom: 0px;"></i>
+                                </div>
                                 <div class="col-9 p-2">
                                     <span class="d-block text-truncate">
                                         {{mess.media.name}}
@@ -119,7 +130,15 @@
                         </a>
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
-                    <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length">{{mess.message | mstatus: mess._id :
+                    <div class="composedViewer text-center" *ngIf="mess.isComposed">
+                        <div class="view-composed px-4 py-3">
+                            <h5 class="m-0 d-block py-0">Composed Message</h5>
+                            <button pButton pRipple type="button" icon="bi bi-eye" label="View Message"
+                                class="p-button-rounded vcompose d-block mt-2 px-4"></button>
+                        </div>
+                    </div> 
+                    <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length && !mess.isComposed">{{mess.message |
+                        mstatus: mess._id :
                         mess.seen :
                         userService.userDetails.settings.encryptDelay | decrypt:
                         mess.seen && userService.userDetails.settings.encryption :
@@ -145,15 +164,19 @@
                     [emojiTooltip]="false" set="facebook"></emoji-mart>
             </div>
         </div>
-        <div class="image-picker">
+        <div class="file=-picker">
             <button pButton pRipple type="button" icon="bi {{!media.askUpload ? 'bi-paperclip' : 'bi-x'}}"
                 style="font-size: 1.4em;" class="p-button-rounded p-button-text p-button-plain ml-2 text-white"
                 (click)="addFile()"></button>
         </div>
+        <div class="fab">
+            <button pButton pRipple type="button" icon="bi bi-card-text" style="font-size: 1.4em;"
+                class="p-button-rounded p-button-text p-button-plain ml-2 text-white" (click)="compose()"></button>
+        </div>
         <div class="p-inputgroup">
             <input type="text" pInputText placeholder="Type a message" [(ngModel)]="messageString"
                 (paste)="onPaste($event)" (blur)="onBlur()" (focus)="onFocus()" #autoFocus>
-            <button type="button" pButton pRipple icon="pi pi-send" styleClass="p-button-warn" id="send-button"
+            <button type="button" pButton pRipple [icon]="sendingMessage ? 'pi pi-spin pi-spinner' : 'pi pi-send'" styleClass="p-button-warn" id="send-button"
                 (click)="sendMessage()"></button>
         </div>
     </div>

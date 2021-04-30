@@ -154,7 +154,7 @@
 .attatchment {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius  : 30px;
-    background: rgba(255, 255, 255, 0.1);
+    // background: rgba(255, 255, 255, 0.1);
 }
 
  
@@ -162,14 +162,37 @@
     border          : 1px solid rgba(255, 255, 255, 0.2);
     color           : white;
     transition      : 0.5s ease;
-    background-color: rgba(255, 255, 255, 0.05) !important;
-    backdrop-filter : blur(7px);
+    background-color: rgba(255, 255, 255, 0.25) !important;
+    // backdrop-filter : blur(7px);
     border-radius   : 30px;
 }
 
 .p-button.download:hover,
 .p-button.download:focus {
-    border          : none !important;
-    background-color: rgba(255, 255, 255, 0.3) !important;
+    // border          : none !important;
+    background-color: rgba(255, 255, 255, 0.4) !important;
     color           : white !important;
+}
+
+
+.p-button.vcompose {
+    border          : 1px solid rgba(255, 255, 255, 0.2);
+    color           : white;
+    transition      : 0.5s ease;
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    // backdrop-filter : blur(7px);
+    border-radius   : 30px;
+}
+ 
+.p-button.vcompose:hover,
+.p-button.vcompose:focus {
+    // border          : none !important;
+    background-color: rgba(255, 255, 255, 0.4) !important;
+    color           : white !important;
+}
+
+.view-composed {    
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius  : 30px;
+    // background: rgba(255, 255, 255, 0.1);
 }

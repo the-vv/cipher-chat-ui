@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import { Gallery, GalleryItem, ImageItem, ImageSize, ThumbnailsPosition } from 'ng-gallery';
 import { Lightbox } from 'ng-gallery/lightbox';
+import { BehaviorSubject } from 'rxjs';
 import { Message } from '../models/message';
 import { MediaService } from '../services/media.service';
 import { MessagesServiceService } from '../services/messages-service.service';
@@ -107,6 +108,8 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   imagesArray: any[] = [];
   atatchmenticon: string = 'bi bi-paperclip';
   downloadingUrl: string = '';
+  openFab: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  sendingMessage: boolean = false;
 
   constructor(public socket: SocketService,
     public message: MessagesServiceService,
@@ -125,7 +128,7 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     lightboxRef.setConfig({
       imageSize: ImageSize.Contain,
       thumbPosition: ThumbnailsPosition.Bottom
-    }); 
+    });
     this.gallery.ref('lightbox').setConfig({
       // dots: true,
       // zoomOut: -1 
@@ -133,8 +136,8 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   }
 
   findImageIndex(url: string): number {
-    for(let i = 0; i < this.chatImages.length; i++) {
-      if(this.items[i].data.src === url) {
+    for (let i = 0; i < this.chatImages.length; i++) {
+      if (this.items[i].data.src === url) {
         return i;
       }
     }
@@ -149,7 +152,7 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
         if (el.hasMedia && el.media.mediaType === 'image') {
           images.add({ image: el.media.url, caption: el.message, pid: el.media.pid })
         }
-      }) 
+      })
       this.chatImages = [...images];
       this.items = this.chatImages.map(item =>
         new ImageItem({ src: item.image, thumb: item.image })
@@ -184,7 +187,14 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     if (this.messageString.length <= 0) {
       return;
     }
-    this.message.sendMessage(this.chat._id, this.messageString);
+    this.sendingMessage = true;
+    this.message.sendMessage(this.chat._id, this.messageString)
+    .then(() => {
+      this.sendingMessage = false;
+    })
+    .catch(() => {
+      this.sendingMessage = false;
+    });;
     this.messageString = '';
     this.needScroll2 = true;
     // this.message.addNewChatTo(); 
@@ -204,7 +214,7 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
       this.messages = changes.chat.currentValue.messages;
       this.needScroll2 = true;
       console.log(this.messages);
-      
+
       if (!this.canScrollSmooth) {
         setTimeout(() => {
           this.chatInputElament && this.chatInputElament.nativeElement.focus();
@@ -269,6 +279,16 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
 
   downloadEnd() {
     this.downloadingUrl = '';
+  }
+
+  compose() {
+    this.message.getComposedMessage(this.chat._id)
+    .then(() => {
+      console.log('composed send successfully');
+    })
+    .catch(() => {
+      console.log('error sending compose')
+    })
   }
 
 }

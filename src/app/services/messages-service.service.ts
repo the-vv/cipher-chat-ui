@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { promise } from 'selenium-webdriver';
+import { Subject } from 'rxjs';
 import { Message } from '../models/message';
 import { RestApiService } from './restApis.service';
 import { SocketService } from './socket.service';
@@ -18,7 +17,8 @@ export class MessagesServiceService {
   askUpload: boolean = false;
   showComposer: boolean = false;
   composerContent: string = '';
-  composedMessage: Subject<Boolean> = new Subject()
+  composedMessage: Subject<Boolean> = new Subject();
+  sendingComposed: boolean = false;
 
   constructor(
     public socket: SocketService,
@@ -39,16 +39,33 @@ export class MessagesServiceService {
       })
   }
 
-  getComposedMessage() {
+  getComposedMessage(to: string): Promise<void> {
     this.showComposer = true;
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       let sub = this.composedMessage.subscribe(val => {
         if (val === true) {
-          this.showComposer = false;
-          sub.unsubscribe();
           let value = this.composerContent;
-          this.composerContent = null
-          resolve(value);
+          sub.unsubscribe();
+          if (value?.length) {
+            console.log(value)
+            this.sendingComposed = true;
+            this.sendMessage(to, value, true)
+              .then(() => {
+                this.showComposer = false;
+                this.sendingComposed = false;
+                this.composerContent = null;
+                resolve()
+              })
+              .catch(() => {
+                this.showComposer = false;
+                this.sendingComposed = false;
+                this.composerContent = null;
+                reject()
+              })
+          }
+          else {
+            console.log('empty compose')
+          }
         }
         else {
           this.showComposer = false;
@@ -113,7 +130,7 @@ export class MessagesServiceService {
       });
   }
 
-  sendMessage(to: any, mess: string) {
+  sendMessage(to: any, mess: string, composed: boolean = false) {
     let message: Message = {
       message: mess,
       from: this.socket.User._id,
@@ -121,15 +138,21 @@ export class MessagesServiceService {
       datetime: new Date(),
       seen: false,
       read: false,
-      hasMedia: false
+      hasMedia: false,
+      isComposed: composed
     }
-    this.socket.saveMessage(message)
-      .then((mess: any) => {
-        this.pushChat(mess.res)
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    return new Promise<void>((resolve, reject) => {
+      this.socket.saveMessage(message)
+        .then((mess: any) => {
+          this.pushChat(mess.res)
+          resolve()
+        })
+        .catch(err => {
+          this.socket.showError('Error Sending', 'Error sending the message, Please try again later')
+          console.log(err);
+          reject(err)
+        });
+    })
   }
 
   addNewChatTo(user: any) {
@@ -234,7 +257,12 @@ export class MessagesServiceService {
       .filter((val: any) => val.hasMedia)
       .map((val: any) => val.media.pid);
     console.log(pidsToDelete)
-    Promise.all([this.socket.deleteMessages(idsToDelete), this.rest.deleteIMages(pidsToDelete).toPromise()])
+    Promise.all(
+      [
+        this.socket.deleteMessages(idsToDelete),
+        pidsToDelete.length && this.rest.deleteIMages(pidsToDelete).toPromise()
+      ]
+    )
       .then((values: any[]) => {
         console.log(values)
         this.chatList = this.chatList.filter(val => {
@@ -244,15 +272,6 @@ export class MessagesServiceService {
       .catch((err: any) => {
         console.log('Chat delete error\n', err)
       })
-    // this.socket.deleteMessages(idsToDelete)
-    //   .then((_) => {
-    //     this.chatList = this.chatList.filter(val => {
-    //       return val._id != c._id;
-    //     })
-    //   })
-    //   .catch(err => {
-    //     console.log('Deletion Errorn\n', err);
-    //   })
   }
 
   sortChatList() {

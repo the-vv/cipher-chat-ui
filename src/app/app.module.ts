@@ -41,7 +41,6 @@ import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
 import { FileSaverModule } from 'ngx-filesaver';
 
-
 // Components and services
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -119,7 +118,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     LightboxModule,
     FileSaverModule,
     TourNgxBootstrapModule.forRoot(),
-    QuillModule.forRoot()
+    QuillModule.forRoot(),
   ],
   providers: [
     RestApiService,

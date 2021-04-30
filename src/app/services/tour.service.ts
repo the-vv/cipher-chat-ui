@@ -56,7 +56,7 @@ export class TourService {
     this.socket.currentUser.subscribe((user: any) => {
       if (user.user.settings.newUser) {
         console.log('starting tour');
-        this.tourService.start()
+        // this.tourService.start()
       }
     });
     this.tourService.end$.subscribe(() => {

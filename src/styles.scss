@@ -193,3 +193,28 @@ html {
 .ql-snow a {
   color: #66a8ff !important;
 }
+
+.ql-snow .ql-tooltip, .ql-snow .ql-tooltip input[type=text] {
+  left: unset!important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border    : 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white!important;
+  box-shadow: unset!important;
+  border-radius: 10px!important;
+}
+
+.ql-snow .ql-tooltip input[type=text] {
+  outline: none!important;
+}
+
+.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-options {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border    : 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white!important;
+  border-radius: 10px;
+  backdrop-filter: blur(5px) !important;
+}
+
+.ql-snow .ql-picker-options .ql-picker-item:hover {
+  color: black!important
+}

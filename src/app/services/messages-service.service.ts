@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { promise } from 'selenium-webdriver';
 import { Message } from '../models/message';
 import { RestApiService } from './restApis.service';
 import { SocketService } from './socket.service';
@@ -14,8 +16,9 @@ export class MessagesServiceService {
   searchedList: any[] = [];
   isListening: boolean = false;
   askUpload: boolean = false;
-  showComposer: boolean = true;
+  showComposer: boolean = false;
   composerContent: string = '';
+  composedMessage: Subject<Boolean> = new Subject()
 
   constructor(
     public socket: SocketService,
@@ -32,19 +35,43 @@ export class MessagesServiceService {
     this.socket.messageReadStatus
       .subscribe(mess => {
         // console.log(mess)
-        this.updateMessageReadStatus(mess); 
+        this.updateMessageReadStatus(mess);
       })
   }
 
+  getComposedMessage() {
+    this.showComposer = true;
+    return new Promise((resolve, reject) => {
+      let sub = this.composedMessage.subscribe(val => {
+        if (val === true) {
+          this.showComposer = false;
+          sub.unsubscribe();
+          let value = this.composerContent;
+          this.composerContent = null
+          resolve(value);
+        }
+        else {
+          this.showComposer = false;
+          this.composerContent = null
+          sub.unsubscribe();
+          reject();
+        }
+      })
+    })
+  }
+
+  sendComposed() {
+    this.composedMessage.next(true)
+  }
+
   composerData(event: any) {
-    console.log(event)
-    if(new Blob([event.html]).size / 1024 / 1024 > 5) {
+    if (new Blob([event.html]).size / 1024 / 1024 > 5) {
       event.editor.history.undo();
-      this.socket.showError('Size Limit Exceeded', 'You have exceeded the 5 MB limit of composer.');
+      this.socket.showError('Size Limit Exceeded', 'The last action has prevented because it exceeded the 5 MB limit of composer.');
     }
   }
 
-  getMessages() {   
+  getMessages() {
     this.socket.getMessages()
       .then(mess => {
         this.newMessages = mess;
@@ -52,7 +79,7 @@ export class MessagesServiceService {
         this.addChatLists();
         // console.log(this.chatList)
       })
-      .catch(e => {  
+      .catch(e => {
         console.error('Failed to get messages\n', e);
       })
   }

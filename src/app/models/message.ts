@@ -9,6 +9,7 @@ export interface Message {
     seen: Boolean,
     read: Boolean,
     hasMedia: Boolean,
+    isComposed?: Boolean,
     media?: {
         mediaType: String,
         pid: String,

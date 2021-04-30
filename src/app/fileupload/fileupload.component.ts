@@ -129,6 +129,8 @@ export class FileuploadComponent implements OnInit {
         this.resetUpload();
       } catch (e) {
         console.log(status, 'Error Uploading');
+        this.media.uploader.cancelAll();
+        this.showError('Error uploading', 'Error uploading image, Please try again later')
       }
     };
     this.media.cancelUpload.subscribe((val: Boolean) => {

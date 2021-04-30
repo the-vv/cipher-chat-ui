@@ -26,6 +26,8 @@ import { KnobModule } from 'primeng/knob';
 import { BadgeModule } from 'primeng/badge';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DeferModule } from 'primeng/defer';
+import {DropdownModule} from 'primeng/dropdown';
+
 
 // Other Libraries
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
@@ -119,6 +121,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     FileSaverModule,
     TourNgxBootstrapModule.forRoot(),
     QuillModule.forRoot(),
+    DropdownModule
   ],
   providers: [
     RestApiService,

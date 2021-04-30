@@ -83,9 +83,9 @@
         </p-button>
     </ng-template>
 </p-dialog>
+ 
 
-
-<p-dialog header="Compose Message" [(visible)]="messageService.showComposer"
+<p-dialog header="Message Composer" [(visible)]="messageService.showComposer"
     [closable]="false" [style]="{width: '90vw'}" [modal]='true' maskStyleClass="blur-bg-dark"
     [breakpoints]="{'780px': '95vw'}" [dismissableMask]="false">
     <quill-editor [(ngModel)]="messageService.composerContent" [modules]="modules"

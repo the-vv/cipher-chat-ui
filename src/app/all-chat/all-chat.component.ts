@@ -38,6 +38,7 @@ export class AllChatComponent implements OnInit {
   selectedChat: any;
   mobileView: boolean = false;
   searchtext: string = '';
+  quickChatOptions: any;
 
   constructor(
     public socket: SocketService,

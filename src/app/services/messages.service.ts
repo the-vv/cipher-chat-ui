@@ -99,6 +99,7 @@ export class MessagesService {
       })
       .catch(e => {
         console.error('Failed to get messages\n', e);
+        this.socket.showError('Error', 'Error getting your messages, please try again later')
       })
   }
 

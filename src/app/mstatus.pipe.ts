@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { MessagesServiceService } from './services/messages-service.service';
+import { MessagesService } from './services/messages.service';
 
 @Pipe({
   name: 'mstatus'
@@ -7,7 +7,7 @@ import { MessagesServiceService } from './services/messages-service.service';
 export class MstatusPipe implements PipeTransform {
 
   constructor(
-    private message: MessagesServiceService
+    private message: MessagesService
   ) {
   }
 

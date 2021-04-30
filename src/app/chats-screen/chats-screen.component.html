@@ -74,15 +74,17 @@
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
                     <div class="composedViewer text-center" *ngIf="mess.isComposed">
-                        <div class="view-composed px-4 py-3">
+                        <div class="view-composed px-4 pb-2 pt-3"> 
                             <h5 class="m-0 d-block py-0">Composed Message</h5>
                             <button pButton pRipple type="button" icon="bi bi-eye" label="View Message"
-                                class="p-button-rounded vcompose d-block mt-2 px-4"></button>
+                                class="p-button-rounded vcompose d-block mt-2 px-4"
+                                (click)="message.showComposedViewer = true;message.composedViewerContent=mess.message"></button>
+                                {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                         </div>
-                    </div> 
+                    </div>
                     <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length && !mess.isComposed">{{mess.message |
                         mstatus: mess._id :
-                        mess.seen :
+                        mess.seen : 
                         userService.userDetails.settings.encryptDelay | decrypt:
                         mess.seen && userService.userDetails.settings.encryption :
                         userService.userDetails.settings.encryptionComplexMode}}
@@ -131,12 +133,14 @@
                         {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                     </div>
                     <div class="composedViewer text-center" *ngIf="mess.isComposed">
-                        <div class="view-composed px-4 py-3">
+                        <div class="view-composed px-4  pb-2 pt-3">
                             <h5 class="m-0 d-block py-0">Composed Message</h5>
                             <button pButton pRipple type="button" icon="bi bi-eye" label="View Message"
-                                class="p-button-rounded vcompose d-block mt-2 px-4"></button>
+                                class="p-button-rounded vcompose d-block mt-2 px-4"
+                                (click)="message.showComposedViewer = true;message.composedViewerContent=mess.message"></button>
+                                {{'' | mstatus: mess._id : mess.seen : userService.userDetails.settings.encryptDelay}}
                         </div>
-                    </div> 
+                    </div>
                     <p class="ofw p-0 m-0 bubble-text" *ngIf="mess.message.length && !mess.isComposed">{{mess.message |
                         mstatus: mess._id :
                         mess.seen :
@@ -176,8 +180,8 @@
         <div class="p-inputgroup">
             <input type="text" pInputText placeholder="Type a message" [(ngModel)]="messageString"
                 (paste)="onPaste($event)" (blur)="onBlur()" (focus)="onFocus()" #autoFocus>
-            <button type="button" pButton pRipple [icon]="sendingMessage ? 'pi pi-spin pi-spinner' : 'pi pi-send'" styleClass="p-button-warn" id="send-button"
-                (click)="sendMessage()"></button>
+            <button type="button" pButton pRipple [icon]="sendingMessage ? 'pi pi-spin pi-spinner' : 'pi pi-send'"
+                styleClass="p-button-warn" id="send-button" (click)="sendMessage()"></button>
         </div>
     </div>
 </div>

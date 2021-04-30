@@ -7,7 +7,7 @@ import { SocketService } from './socket.service';
 @Injectable({
   providedIn: 'root'
 })
-export class MessagesServiceService {
+export class MessagesService {
 
   newMessages: any;
   isMessageReaady: boolean = false;
@@ -19,6 +19,8 @@ export class MessagesServiceService {
   composerContent: string = '';
   composedMessage: Subject<Boolean> = new Subject();
   sendingComposed: boolean = false;
+  showComposedViewer: boolean = false;
+  composedViewerContent: string = '';
 
   constructor(
     public socket: SocketService,
@@ -82,9 +84,9 @@ export class MessagesServiceService {
   }
 
   composerData(event: any) {
-    if (new Blob([event.html]).size / 1024 / 1024 > 5) {
+    if (new Blob([event.html]).size / 1024 / 1024 > 1) {
       event.editor.history.undo();
-      this.socket.showError('Size Limit Exceeded', 'The last action has prevented because it exceeded the 5 MB limit of composer.');
+      this.socket.showError('Size Limit Exceeded', 'The last action is prevented because it exceedes the 1 MB limit of composer.');
     }
   }
 

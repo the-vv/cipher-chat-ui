@@ -1,7 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MessagesServiceService } from '../services/messages-service.service';
+import { MessagesService } from '../services/messages.service';
 import { SocketService } from '../services/socket.service';
 
 @Component({
@@ -41,7 +41,7 @@ export class AllChatComponent implements OnInit {
 
   constructor(
     public socket: SocketService,
-    public message: MessagesServiceService,
+    public message: MessagesService,
     private router: Router,
     private route: ActivatedRoute
   ) {

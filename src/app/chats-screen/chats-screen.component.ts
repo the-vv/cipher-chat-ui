@@ -8,7 +8,7 @@ import { Lightbox } from 'ng-gallery/lightbox';
 import { BehaviorSubject } from 'rxjs';
 import { Message } from '../models/message';
 import { MediaService } from '../services/media.service';
-import { MessagesServiceService } from '../services/messages-service.service';
+import { MessagesService } from '../services/messages.service';
 import { SocketService } from '../services/socket.service';
 import { UserServiceService } from '../services/user-service.service';
 
@@ -112,7 +112,7 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   sendingMessage: boolean = false;
 
   constructor(public socket: SocketService,
-    public message: MessagesServiceService,
+    public message: MessagesService,
     public userService: UserServiceService,
     public media: MediaService,
     public gallery: Gallery,

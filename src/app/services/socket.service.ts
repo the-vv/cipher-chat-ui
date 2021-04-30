@@ -59,6 +59,7 @@ export class SocketService {
       this.isLoggedIn = false;
       this.User = null;
       this.cookieService.delete('user');
+      localStorage.removeItem('tourCount');
       this.router.navigate(['/login'], { replaceUrl: true });
     })
     this.signupStatus.subscribe(data => {
@@ -66,6 +67,7 @@ export class SocketService {
       this.isLoggedIn = false;
       this.User = null;
       this.cookieService.delete('user');
+      localStorage.removeItem('tourCount');
       this.router.navigate(['/login'], { replaceUrl: true });
     })
   }

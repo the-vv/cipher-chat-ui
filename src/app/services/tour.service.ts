@@ -52,7 +52,8 @@ export class TourService {
       content: 'Start your first chat by clicking the + button',
       title: 'Start messaging',
       enableBackdrop: true,
-      placement: 'bottom'
+      placement: 'bottom',
+      route: '/chats'
     }
   ]
 

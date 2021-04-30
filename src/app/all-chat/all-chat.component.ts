@@ -29,7 +29,7 @@ export class AllChatComponent implements OnInit {
   }
 
   askNew: boolean = false;
-  mailId: string = '';
+  mailId: string;
   emailCheckSpinner: boolean = false;
   disableNewChat: boolean = true;
   newChatError: string = '';
@@ -57,6 +57,10 @@ export class AllChatComponent implements OnInit {
           this.selectedChat = null
         };
       });
+    this.quickChatOptions = [
+      {name: 'You', email: this.socket.User.email},
+      {name: 'Developer', email: 'vishnuvinod2772001@gmail.com'},
+    ]
   }
 
   checkMail() {

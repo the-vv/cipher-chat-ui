@@ -97,7 +97,8 @@ export class AppComponent implements OnInit {
                 icon: 'bi bi-box-arrow-left',
                 routerLink: '/login',
                 command: () => {
-                  this.cookieService.delete('user')
+                  this.cookieService.delete('user');
+                  localStorage.removeItem('tourCount');
                   this.socket.logout();
                   this.user.visibleSidebar = !this.user.visibleSidebar;
                   this.initSidebar();

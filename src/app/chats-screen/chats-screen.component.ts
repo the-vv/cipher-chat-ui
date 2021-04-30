@@ -10,6 +10,7 @@ import { Message } from '../models/message';
 import { MediaService } from '../services/media.service';
 import { MessagesService } from '../services/messages.service';
 import { SocketService } from '../services/socket.service';
+import { TourService } from '../services/tour.service';
 import { UserServiceService } from '../services/user-service.service';
 
 @Component({
@@ -116,7 +117,8 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     public userService: UserServiceService,
     public media: MediaService,
     public gallery: Gallery,
-    public lightbox: Lightbox
+    public lightbox: Lightbox,
+    private tour: TourService
   ) {
   }
 
@@ -208,13 +210,16 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     this.messageString = '';
     this.canScrollSmooth = false;
     this.needScroll = true;
-    if (changes.chat.currentValue != undefined) {
+    if (changes.chat.currentValue != undefined) { 
       this.currentUserId = this.socket.User._id;
       this.randomColor = changes.chat.currentValue.color;
       this.messages = changes.chat.currentValue.messages;
       this.needScroll2 = true;
-      console.log(this.messages);
-
+      if(this.userService.userDetails.settings.newUser) {
+        setTimeout(() => {
+          this.tour.checkSecondTour()
+        }, 1000);
+      }
       if (!this.canScrollSmooth) {
         setTimeout(() => {
           this.chatInputElament && this.chatInputElament.nativeElement.focus();

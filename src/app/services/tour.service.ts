@@ -11,6 +11,7 @@ export class TourService {
 
   onSidebar: boolean = false;
   currentStep: string = '';
+  newUser: boolean;
 
   anchoIds: string[] = [
     'cipherButton',
@@ -58,25 +59,37 @@ export class TourService {
   constructor(
     private user: UserServiceService,
     private socket: SocketService,
-    private tourService: NgxbTourService
+    private tourService: NgxbTourService,
+    private tourService2: NgxbTourService
   ) {
     this.tourService.initialize(this.steps);
-    this.socket.currentUser.subscribe((user: any) => {
+    this.socket.currentUser.subscribe((user) => {
+      this.newUser = user.user.settings.newUser;
       if (user.user.settings.newUser) {
         console.log('starting tour');
-        this.tourService.start()
+        let tourCount = localStorage.getItem('tourCount');
+        if (!tourCount || Number(tourCount) < 1) {
+          this.tourService.start()
+          this.tourService.end$.subscribe(() => {
+            console.log('tour end');
+            localStorage.setItem('tourCount', '1')
+          })
+        }
       }
     });
-    this.tourService.end$.subscribe(() => {
-      console.log('tour end');
-    })
   }
 
   hasNext(step: INgxbStepOption) {
+    if(this.anchoIds.indexOf(step.anchorId) < 0) {
+      return false;
+    }
     return this.anchoIds.indexOf(step.anchorId) < this.anchoIds.length - 1
   }
 
   hasPrev(step: INgxbStepOption) {
+    if(this.anchoIds.indexOf(step.anchorId) < 0) {
+      return false;
+    }
     return this.anchoIds.indexOf(step.anchorId) >= 1
   }
 
@@ -85,45 +98,45 @@ export class TourService {
   }
 
   prev(step: INgxbStepOption) {
-    if(step.anchorId == this.anchoIds[1]) {
+    if (step.anchorId == this.anchoIds[1]) {
       this.user.visibleSidebar = false;
       setTimeout(() => {
         this.tourService.prev()
       }, 100);
-    } 
-    else if(step.anchorId == this.anchoIds[3]) {
-      this.user.visibleSidebar = true;
-      this.user.askSettings = false; 
-      setTimeout(() => {
-        this.tourService.prev()
-      }, 300); 
     }
-    else if(step.anchorId == this.anchoIds[4]) {
-      this.user.visibleSidebar = false;
-      this.user.askSettings = true; 
+    else if (step.anchorId == this.anchoIds[3]) {
+      this.user.visibleSidebar = true;
+      this.user.askSettings = false;
       setTimeout(() => {
         this.tourService.prev()
-      }, 500); 
+      }, 300);
+    }
+    else if (step.anchorId == this.anchoIds[4]) {
+      this.user.visibleSidebar = false;
+      this.user.askSettings = true;
+      setTimeout(() => {
+        this.tourService.prev()
+      }, 500);
     }
     else {
       this.tourService.prev();
     }
   }
   next(step: INgxbStepOption) {
-    if(step.anchorId == this.anchoIds[0] || step.anchorId == this.anchoIds[1]) {
+    if (step.anchorId == this.anchoIds[0] || step.anchorId == this.anchoIds[1]) {
       this.user.visibleSidebar = true;
       setTimeout(() => {
-        this.tourService.next() 
+        this.tourService.next()
       }, step.anchorId == this.anchoIds[0] ? 500 : 0);
     }
-    else if(step.anchorId == this.anchoIds[2]) {
+    else if (step.anchorId == this.anchoIds[2]) {
       this.user.askSettings = true;
       this.user.visibleSidebar = false;
       setTimeout(() => {
         this.tourService.next();
       }, 500);
     }
-    else if(step.anchorId == this.anchoIds[3]) {
+    else if (step.anchorId == this.anchoIds[3]) {
       this.user.askSettings = false;
       this.user.visibleSidebar = false;
       setTimeout(() => {
@@ -133,6 +146,32 @@ export class TourService {
     else {
       this.tourService.next();
       this.user.visibleSidebar = false;
-    } 
+    }
   }
+
+  checkSecondTour() {
+    console.log('Second Tour')
+    let tourCount = localStorage.getItem('tourCount');
+    if (this.newUser === true && tourCount && Number(tourCount) < 2) {
+      console.log('inited second Tour')
+      this.tourService2.initialize(
+        [
+          {
+            anchorId: 'composeButton',
+            content: 'Use the message composer to create a messages with different formatting settings',
+            title: 'Introducing Message Composer',
+            enableBackdrop: true
+          }
+        ]
+      );
+      this.tourService2.start();
+      this.tourService2.end$.subscribe(() => {
+        this.user.userDetails.settings.newUser = false;
+        this.user.saveSettings();
+        console.log('tour end');
+        localStorage.setItem('tourCount', '2');
+      })
+    }
+  }
+
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Subject, Subscription } from 'rxjs';
+import { User } from '../models/user';
 import { SocketService } from './socket.service';
 
 @Injectable({
@@ -10,7 +11,7 @@ export class UserServiceService {
 
   visibleSidebar: boolean = false;
   askSettings: boolean = false;
-  userDetails: any = {};
+  userDetails: User;
   originalUser: any = {};
   editName: boolean = false;
   submitted: boolean = false;
@@ -156,7 +157,7 @@ export class UserServiceService {
           this.userDetails = JSON.parse(JSON.stringify(this.originalUser.user));
         }
         console.error('Updation Error\n', e);
-        this.showError('Error', 'Error while updating details. Please try again');
+        this.showError('Error', 'Error while updating user info. Please try again later');
         this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
       })
   }

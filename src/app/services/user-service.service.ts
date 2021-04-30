@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { SocketService } from './socket.service';
 
 @Injectable({
@@ -22,6 +22,7 @@ export class UserServiceService {
   verifyPasswordError: string;
   verifyButtonIcon: string = 'pi pi-check-circle';
   verificationEvents: Subject<boolean> = new Subject();
+  verifySubscription: Subscription;
 
   constructor(
     private socket: SocketService,
@@ -69,6 +70,7 @@ export class UserServiceService {
       this.verifyPasswordError = '';
       console.log('closed verify');
       this.verifyButtonIcon = 'pi pi-check-circle';
+      this.verifySubscription.unsubscribe();
     }
   }
 
@@ -103,7 +105,7 @@ export class UserServiceService {
     }
     else {
       this.verifyUser = true;
-      let tempSub =  this.verificationEvents.subscribe(res => {
+      this.verifySubscription =  this.verificationEvents.subscribe(res => {
         if (res === true) {
           this.verifyUser = false;
           this.userDetails.settings.encryption = false;
@@ -113,6 +115,7 @@ export class UserServiceService {
               this.userDetails = JSON.parse(JSON.stringify(d.user));
               this.originalUser = JSON.parse(JSON.stringify(d));
               this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
+              this.verifySubscription.unsubscribe();
             })
             .catch((e: any) => {
               console.error('Updation Error\n', e);
@@ -127,7 +130,6 @@ export class UserServiceService {
           this.verifyPasswordError = 'Wrong Password';
           this.verifyButtonIcon = 'pi pi-check-circle';
         }
-        tempSub.unsubscribe();
       })
     }
   }

@@ -113,7 +113,7 @@
     [dismissableMask]="false">
     <app-fileupload></app-fileupload>
     <ng-template pTemplate="footer">
-        <p-button icon="b bi-x-circle" label="Cancel" styleClass="p-button-text text-light"
+        <p-button label="Cancel" styleClass="p-button-text text-light"
             (click)="media.cancelUpload.next(true); media.askUpload = false;">
         </p-button>
     </ng-template>
@@ -139,7 +139,10 @@
                 {{step?.prevBtnTitle}}</button>
             <button *ngIf="tourService.hasNext(step)" class="btn btn-sm btn-default"
                 (click)="tourService.next(step)">{{step?.nextBtnTitle}} »</button>
-            <button class="btn btn-sm btn-default" (click)="tourService.end()">{{step?.endBtnTitle}}</button>
+            <button class="btn btn-sm btn-default" (click)="tourService.end()">
+                <!-- {{step?.endBtnTitle}} -->
+                Exit
+            </button>
         </div>
     </ng-template>
 </tour-step-template>

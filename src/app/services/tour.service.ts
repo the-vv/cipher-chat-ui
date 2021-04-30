@@ -16,7 +16,8 @@ export class TourService {
     'cipherButton',
     'sideMenu',
     'SideMenuItems',
-    'settingsPage'
+    'settingsPage',
+    'newChatButton'
   ]
 
   steps: INgxbStepOption[] = [
@@ -43,6 +44,13 @@ export class TourService {
       content: 'Change account related info and you can also change Cipher Mode Options here. This settings will be applied to all your devices',
       title: 'Account Settings',
       enableBackdrop: true,
+      placement: 'top'
+    },
+    {
+      anchorId: this.anchoIds[4],
+      content: 'Start your first chat by clicking the + button',
+      title: 'Start messaging',
+      enableBackdrop: true,
       placement: 'bottom'
     }
   ]
@@ -56,7 +64,7 @@ export class TourService {
     this.socket.currentUser.subscribe((user: any) => {
       if (user.user.settings.newUser) {
         console.log('starting tour');
-        // this.tourService.start()
+        this.tourService.start()
       }
     });
     this.tourService.end$.subscribe(() => {
@@ -82,6 +90,20 @@ export class TourService {
       setTimeout(() => {
         this.tourService.prev()
       }, 100);
+    } 
+    else if(step.anchorId == this.anchoIds[3]) {
+      this.user.visibleSidebar = true;
+      this.user.askSettings = false; 
+      setTimeout(() => {
+        this.tourService.prev()
+      }, 300); 
+    }
+    else if(step.anchorId == this.anchoIds[4]) {
+      this.user.visibleSidebar = false;
+      this.user.askSettings = true; 
+      setTimeout(() => {
+        this.tourService.prev()
+      }, 500); 
     }
     else {
       this.tourService.prev();
@@ -96,6 +118,13 @@ export class TourService {
     }
     else if(step.anchorId == this.anchoIds[2]) {
       this.user.askSettings = true;
+      this.user.visibleSidebar = false;
+      setTimeout(() => {
+        this.tourService.next();
+      }, 500);
+    }
+    else if(step.anchorId == this.anchoIds[3]) {
+      this.user.askSettings = false;
       this.user.visibleSidebar = false;
       setTimeout(() => {
         this.tourService.next();

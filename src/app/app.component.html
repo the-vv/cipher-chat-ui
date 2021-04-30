@@ -118,10 +118,10 @@
         </p-button>
     </ng-template>
 </p-dialog>
-
+ 
 
 <p-dialog header="Composed Message" [(visible)]="messageService.showComposedViewer" (onHide)="messageService.composedViewerContent = ''" [closable]="false"
-    [style]="{width: '60vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}"
+    [style]="{width: '80vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '100vw'}"
     [dismissableMask]="false">
     <quill-view-html [content]="messageService.composedViewerContent" theme="snow"></quill-view-html>
     <ng-template pTemplate="footer">

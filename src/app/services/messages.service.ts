@@ -49,7 +49,6 @@ export class MessagesService {
           let value = this.composerContent;
           sub.unsubscribe();
           if (value?.length) {
-            console.log(value)
             this.sendingComposed = true;
             this.sendMessage(to, value, true)
               .then(() => {

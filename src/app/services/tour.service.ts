@@ -151,7 +151,6 @@ export class TourService {
   }
 
   checkSecondTour() {
-    console.log('Second Tour')
     let tourCount = localStorage.getItem('tourCount');
     if (this.newUser === true && tourCount && Number(tourCount) < 2) {
       console.log('inited second Tour')

@@ -61,6 +61,11 @@ export class AllChatComponent implements OnInit {
       {name: 'You', email: this.socket.User.email},
       {name: 'Developer', email: 'vishnuvinod2772001@gmail.com'},
     ]
+    this.socket.ChatListChanges.subscribe((id: string) => {
+      if(this.selectedChat?._id == id) {
+        this.selectedChat = null
+      }
+    })
   }
 
   checkMail() {

@@ -36,9 +36,13 @@ export class MessagesService {
       })
     this.socket.messageReadStatus
       .subscribe(mess => {
-        // console.log(mess)
         this.updateMessageReadStatus(mess);
       })
+    this.socket.ChatListChanges.subscribe((id: string) => {
+      this.chatList = this.chatList.filter(el => {
+        return el._id != id
+      })
+    }) 
   }
 
   getComposedMessage(to: string): Promise<void> {
@@ -254,6 +258,7 @@ export class MessagesService {
   }
 
   deleteChat(c: any) {
+    let otherEnduser = c._id
     let idsToDelete = c.messages.map((mes: any) => mes._id);
     let pidsToDelete = c.messages
       .filter((val: any) => val.hasMedia)
@@ -261,7 +266,7 @@ export class MessagesService {
     console.log(pidsToDelete)
     Promise.all(
       [
-        this.socket.deleteMessages(idsToDelete),
+        this.socket.deleteMessages(idsToDelete, otherEnduser),
         pidsToDelete.length && this.rest.deleteIMages(pidsToDelete).toPromise()
       ]
     )

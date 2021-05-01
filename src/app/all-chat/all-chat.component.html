@@ -6,9 +6,9 @@
                     <div class="row d-flex align-items-center justify-content-between" style="height: 100%">
                         <div class="col-10">
                             <span class="p-input-icon-left col-12"
-                                [ngClass]="searchtext.length ? 'p-input-icon-right' : ''">
+                                [ngClass]="searchtext?.length ? 'p-input-icon-right' : ''">
                                 <i class="pi pi-search"></i>
-                                <i class="pi pi-times" style="cursor: pointer;" *ngIf="searchtext.length"
+                                <i class="pi pi-times" style="cursor: pointer;" *ngIf="searchtext?.length"
                                     (click)="searchtext=''"></i>
                                 <input type="text" pInputText placeholder="Search" (input)="onSearch()"
                                     [(ngModel)]="searchtext" />
@@ -32,7 +32,7 @@
             </div>
             <div *ngIf="searchtext">
                 <span class="h6">
-                    <button class="pi pi-arrow-left btn btn-small text-white" *ngIf="searchtext.length"
+                    <button class="pi pi-arrow-left btn btn-small text-white" *ngIf="searchtext?.length"
                         (click)="searchtext=''"></button>
                     Search Results for '{{searchtext}}'
                 </span>
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="message.chatList?.length && !searchtext.length" @openClose>
+            <div *ngIf="message.chatList?.length && !searchtext?.length" @openClose>
                 <div class="row" *ngFor="let chat of message.chatList" @openClose>
                     <div class="col-12 mb-1" (contextmenu)="rClicked(chat._id)">
                         <app-person-widget [chat]="chat" [activeChat]="selectedChat && chat._id == selectedChat._id"

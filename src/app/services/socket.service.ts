@@ -17,6 +17,7 @@ export class SocketService {
   public signupStatus: Observable<any>;
   public messages: Observable<any>;
   public messageReadStatus: Observable<any>;
+  public ChatListChanges: Observable<any>;
   public isDisconnected: boolean = false;
   public User: User;
   public isLoggedIn: boolean = false;
@@ -41,6 +42,7 @@ export class SocketService {
     this.signupStatus = socket.fromEvent('signupStatus');
     this.currentUser = socket.fromEvent('authSuccess');
     this.messageReadStatus = socket.fromEvent('updateMessages');
+    this.ChatListChanges = socket.fromEvent('deletedChatList');
     this.currentUser.subscribe(this.login);
     socket.on('updatedUser', (user: any) => {
       if (cookieService.check('user')) {
@@ -146,9 +148,9 @@ export class SocketService {
     })
   }
 
-  deleteMessages(mess: any[]) {
+  deleteMessages(mess: any[], end: string) {
     return new Promise((resolve, reject) => {
-      this.socket.emit('deleteMessages', mess, (result: any) => {
+      this.socket.emit('deleteMessages', {mess, _id: end}, (result: any) => {
         if (result) {
           resolve(result)
         } else {

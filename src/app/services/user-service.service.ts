@@ -155,6 +155,7 @@ export class UserServiceService {
         this.editName = false;
         this.askSettings = false;        
         this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
+        console.log('User settings updated')
       })
       .catch((e: any) => {
         this.saveIcon = 'pi-check'
@@ -192,10 +193,13 @@ export class UserServiceService {
       this.verifyingOtp = false;
       this.showError('Verified Successfully', 'Account has been verified successfully', true);
       this.verifyErroValue = ''
+      this.userDetails.settings.verified = true;
+      this.saveSettings();
+      this.resetVerifyAccount();
+      console.log('verfied otp')
     })
     .catch(() => {
       this.verifyingOtp = false;
-      this.showError('Verified Successfully', 'Account has been verified successfully', true);
       this.verifyErroValue = 'OTP is incorrect, Please try again';
     })
   }

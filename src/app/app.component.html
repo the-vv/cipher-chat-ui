@@ -146,14 +146,22 @@
         <div class="p-input-icon-right col-9">
             <input type="number" pInputText placeholder="Enter OTP" [(ngModel)]="user.vefiryOTPValue" />
         </div>
-        <div class="col-3">
-            <button pButton pRipple type="button" icon="{{user.verifyingOtp ? 'pi pi-spin pi-spinner' : 'pi pi-check-circle'}}"
+        <div class="col-3" style="padding-left: 0px;">
+            <button pButton pRipple type="button"
+                icon="{{user.verifyingOtp ? 'pi pi-spin pi-spinner' : 'pi pi-check-circle'}}"
                 style="height: 40px; width: 100%;" (click)="user.verifyOtp()" label="Verify" id="confirmButton"
                 class="p-button-rounded"></button>
         </div>
-        <div class="col-12 mt-2" style="font-size: 0.9em;">
-            Verify email has been send to {{user.userDetails.email}}.
+        <div class="col-12 mt-2" style="font-size: 0.9em;" *ngIf="!user.verifyErroValue">
+            An OTP has been send to {{user.userDetails.email}}.
             Please check your inbox
+        </div>
+        <div class="col-12 mt-2" style="font-size: 0.9em;" *ngIf="user.verifyErroValue">
+            {{user.verifyErroValue}}
+        </div>
+        <div class="col-12" style="color:rgb(118, 177, 245)">
+            Didn't recieved email? <span style="text-decoration: underline; cursor: pointer;"
+                (click)="user.sendVerifyEmail()">Resend it</span>
         </div>
     </span>
     <ng-template pTemplate="footer">

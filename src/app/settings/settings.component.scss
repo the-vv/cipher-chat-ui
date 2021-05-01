@@ -19,3 +19,18 @@
     background   : rgba(255, 255, 255, 0.1);
     border-radius: 30px !important;
 }
+
+
+.p-button#confirmationButton {
+    color           : white;
+    transition      : 0.5s ease;
+    background-color: rgba(255, 255, 255, .2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.p-button#confirmationButton:hover,
+.p-button#confirmationButton:focus {
+    // border          : none !important;
+    background-color: rgba(255, 255, 255, 0.3) !important;
+    color           : white !important;
+}

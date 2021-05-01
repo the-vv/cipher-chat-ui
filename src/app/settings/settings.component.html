@@ -13,13 +13,25 @@
                     style="cursor: pointer;"></i>
             </span>
             <span *ngIf="userService.editName">
-                <input type="text" class="" pInputText placeholder="Edit name" [(ngModel)]="userService.userDetails.name">
+                <input type="text" class="" pInputText placeholder="Edit name"
+                    [(ngModel)]="userService.userDetails.name">
             </span>
         </p>
         <p class="small">
             {{userService.userDetails.email}}
         </p>
-        <div class="col-12 px-2 d-flex justify-content-between align-items-center">
+        <div class="col-12 px-2 mt-2 d-flex justify-content-between align-items-center">
+            <p class="my-auto">Verified Account</p>
+            <!-- <button pButton pRipple type="button" id="confirmationButton" label="Verify" class="p-button-rounded"
+                (click)="userService.showVerifyAccount = true"
+                *ngIf="!userService.userDetails.settings.verified"></button> -->
+            <button *ngIf="!userService.userDetails.settings.verified" pButton pRipple type="button" iconPos="right"
+                icon="pi pi-times" label="" class="p-button-rounded" [ngClass]="'p-button-secondary'"
+                (click)="userService.showVerifyAccount = true"></button>
+            <button *ngIf="userService.userDetails.settings.verified" pButton pRipple type="button" iconPos="right"
+                icon="pi pi-check" label="" class="p-button-rounded" [ngClass]="'p-button-success'"></button>
+        </div>
+        <div class="col-12 px-2 mt-2 d-flex justify-content-between align-items-center">
             <p class="my-auto">Cipher Names Also</p>
             <button pButton pRipple type="button" iconPos="right"
                 icon="pi {{userService.userDetails.settings.encryptNames ? 'pi-check' : 'pi-times'}}" label=""
@@ -40,5 +52,11 @@
             <p-knob [(ngModel)]="userService.userDetails.settings.encryptDelay" [size]="44" textColor="white"
                 valueColor="white" rangeColor="SlateGray" [min]="0" [max]="30" step="3"></p-knob>
         </div>
+        <!-- <div class="col-12 mt-2 d-flex justify-content-between align-items-center">
+            <p class="my-auto">Verfication Status</p>
+            <button pButton pRipple type="button" (click)="userService.showVerifyAccount = true"
+                label="Verify" class="p-button-rounded"
+                *ngIf="userService.verifyEmailSend === false"></button>
+        </div> -->
     </div>
-</div>  
+</div>

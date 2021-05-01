@@ -58,9 +58,8 @@ export class AllChatComponent implements OnInit {
         };
       });
     this.quickChatOptions = [
-      {name: 'Quick Chat', email: ''},
       {name: 'You', email: this.socket.User.email},
-      // {name: 'Developer', email: 'vishnuvinod2772001@gmail.com'},
+      {name: 'Developer', email: 'cipherchatapp@gmail.com'},
     ]
     this.socket.ChatListChanges.subscribe((id: string) => {
       if(this.selectedChat?._id == id) {
@@ -70,7 +69,7 @@ export class AllChatComponent implements OnInit {
   }
 
   checkMail() {
-    if(!this.mailId.length) {
+    if(!this.mailId?.length) {
       this.newChatUser = null
       this.newChatError = ''
       return

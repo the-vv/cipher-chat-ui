@@ -241,8 +241,9 @@ export class SocketService {
 
   verifyOtp(otp: number) {
     return new Promise((resolve, reject) => {
-      this.socket.emit('verifyOtp', otp, (result: any) => {
+      this.socket.emit('verifyOtp', otp, (result: boolean) => {
         if(result === true) {
+          console.log('Otp Verified correctly')
           resolve(true);
         }
         else {

@@ -31,9 +31,10 @@
                 </div>
             </div>
             <div *ngIf="searchtext">
-                <span class="h6">
+                <span class="h6 text-truncate d-block">
                     <button class="pi pi-arrow-left btn btn-small text-white" *ngIf="searchtext?.length"
-                        (click)="searchtext=''"></button>
+                        (click)="searchtext=''">
+                    </button>
                     Search Results for '{{searchtext}}'
                 </span>
                 <div class="row" *ngFor="let chat of message.searchedList" @openClose>
@@ -70,7 +71,7 @@
 <p-dialog header="Who do you want to chat with" [(visible)]="askNew" [style]="{width: '50vw'}" [modal]='true'
     maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}" [dismissableMask]="true">
     <div class="row" style="height: 100px">
-        <div class="col-12 col-md-8 " style="padding-right: 5px;">
+        <div class="col-12 col-md-9 " style="padding-right: 5px;">
             <span class="p-input-icon-left col-12">
                 <i class="pi pi-search"></i>
                 <input (input)="checkMail()" type="text" pInputText placeholder="Type an Email" [(ngModel)]="mailId" />
@@ -80,9 +81,9 @@
                 {{newChatError}}
             </div>
         </div>
-        <div class="col-12 col-md-4" style="padding-left: 0px;">
-            <p-dropdown [options]="quickChatOptions" [(ngModel)]="mailId" (onChange)="mailId?.length && checkMail()" [showClear]="true"
-                optionLabel="name" optionValue="email" placeholder="Quick Chat">
+        <div class="col-12 col-md-3" style="padding-left: 0px;">
+            <p-dropdown [options]="quickChatOptions" [(ngModel)]="mailId" (onChange)="checkMail()"
+                optionLabel="name" optionValue="email" placeholder="Quick Chat" (onHide)="checkMail()">
             </p-dropdown>
         </div>
     </div> 
@@ -92,4 +93,4 @@
         </p-button>
     </ng-template>
 </p-dialog>
-<p-confirmPopup></p-confirmPopup>
+<p-confirmPopup></p-confirmPopup> 

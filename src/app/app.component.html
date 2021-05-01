@@ -83,11 +83,11 @@
         </p-button>
     </ng-template>
 </p-dialog>
- 
 
-<p-dialog header="Message Composer" [(visible)]="messageService.showComposer"
-    [closable]="false" [style]="{width: '90vw'}" [modal]='true' maskStyleClass="blur-bg-dark"
-    [breakpoints]="{'780px': '95vw'}" [dismissableMask]="false">
+
+<p-dialog header="Message Composer" [(visible)]="messageService.showComposer" [closable]="false"
+    [style]="{width: '90vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}"
+    [dismissableMask]="false">
     <quill-editor [(ngModel)]="messageService.composerContent" [modules]="modules"
         (onContentChanged)="messageService.composerData($event)" [styles]="{ 
         background   : 'rgba(255, 255, 255, 0.1)',
@@ -101,8 +101,10 @@
     <ng-template pTemplate="footer">
         <p-button label="Close" styleClass="p-button-text text-light"
             (click)="messageService.composedMessage.next(false); messageService.showComposer = false">
-        </p-button>        
-        <p-button label="Send" styleClass="p-button-text text-light" [icon]="messageService.sendingComposed ? 'pi pi-spin pi-spinner' : ''" [disabled]="messageService.composerContent?.length < 1"
+        </p-button>
+        <p-button label="Send" styleClass="p-button-text text-light"
+            [icon]="messageService.sendingComposed ? 'pi pi-spin pi-spinner' : ''"
+            [disabled]="messageService.composerContent?.length < 1"
             (click)="messageService.composerContent?.length && messageService.sendComposed()">
         </p-button>
     </ng-template>
@@ -118,11 +120,11 @@
         </p-button>
     </ng-template>
 </p-dialog>
- 
 
-<p-dialog header="Composed Message" [(visible)]="messageService.showComposedViewer" (onHide)="messageService.composedViewerContent = ''" [closable]="false"
-    [style]="{width: '80vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '100vw'}"
-    [dismissableMask]="false">
+
+<p-dialog header="Composed Message" [(visible)]="messageService.showComposedViewer"
+    (onHide)="messageService.composedViewerContent = ''" [closable]="false" [style]="{width: '80vw'}" [modal]='true'
+    maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '100vw'}" [dismissableMask]="false">
     <quill-view-html [content]="messageService.composedViewerContent" theme="snow"></quill-view-html>
     <ng-template pTemplate="footer">
         <p-button label="Close" styleClass="p-button-text text-light"
@@ -130,7 +132,36 @@
         </p-button>
     </ng-template>
 </p-dialog>
- 
+
+
+<p-dialog header="Verify Account" [(visible)]="user.showVerifyAccount" (onHide)="user.resetVerifyAccount()"
+    [closable]="true" [style]="{width: '50vw'}" [modal]='true' maskStyleClass="blur-bg-dark"
+    [breakpoints]="{'780px': '100vw'}" [dismissableMask]="false">
+    <p>
+        Verify your account now. otherwise all your messages and media will be deleted after 2 days.
+    </p>
+    <button pButton pRipple type="button" (click)="user.sendVerifyEmail()" label="Send Confirmation Email"
+        id="confirmButton" class="p-button-rounded" *ngIf="user.verifyEmailSend === false"></button>
+    <span *ngIf="user.verifyEmailSend" class="text-warning row">
+        <div class="p-input-icon-right col-9">
+            <input type="number" pInputText placeholder="Enter OTP" [(ngModel)]="user.vefiryOTPValue" />
+        </div>
+        <div class="col-3">
+            <button pButton pRipple type="button" icon="{{user.verifyingOtp ? 'pi pi-spin pi-spinner' : 'pi pi-check-circle'}}"
+                style="height: 40px; width: 100%;" (click)="user.verifyOtp()" label="Verify" id="confirmButton"
+                class="p-button-rounded"></button>
+        </div>
+        <div class="col-12 mt-2" style="font-size: 0.9em;">
+            Verify email has been send to {{user.userDetails.email}}.
+            Please check your inbox
+        </div>
+    </span>
+    <ng-template pTemplate="footer">
+        <p-button label="Skip for now" styleClass="p-button-text text-light" (click)="user.showVerifyAccount = false">
+        </p-button>
+    </ng-template>
+</p-dialog>
+
 <tour-step-template style="position: fixed; z-index: 12000;">
     <ng-template let-step="step">
         <p class="tour-step-content">{{step?.content}}</p>

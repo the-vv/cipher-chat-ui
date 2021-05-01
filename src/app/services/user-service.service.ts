@@ -24,7 +24,12 @@ export class UserServiceService {
   verifyButtonIcon: string = 'pi pi-check-circle';
   verificationEvents: Subject<boolean> = new Subject();
   verifySubscription: Subscription;
-
+  showVerifyAccount: boolean = false;
+  verifyEmailSend: boolean = false;
+  vefiryOTPValue: string;
+  verifyingOtp: boolean = false;
+  verifyErroValue: string = '';
+ 
   constructor(
     private socket: SocketService,
     private messageService: MessageService
@@ -35,6 +40,9 @@ export class UserServiceService {
       this.userDetails = JSON.parse(JSON.stringify(user.user));
       // console.log(this.userDetails.settings)
       this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
+      if(!this.userDetails.settings.verified) {
+        this.showVerifyAccount = true
+      }
     })
   }
 
@@ -161,4 +169,42 @@ export class UserServiceService {
         this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
       })
   }
+
+  sendVerifyEmail() {
+    this.verifyEmailSend = true;
+    if(this.userDetails._id) {
+      this.socket.sendConfirmationMail()
+      .then(() => {
+        console.log('verfy email send')
+      })
+      .catch(() => {
+        this.verifyingOtp = false;
+        this.showError('Error Sending Email', 'Error sending confirmation email, Please try again later');
+      })
+    }
+  }
+
+  verifyOtp() {
+    this.verifyingOtp = true;
+    this.socket.verifyOtp(parseInt(this.vefiryOTPValue))
+    .then(() => {
+      this.showVerifyAccount = false;
+      this.verifyingOtp = false;
+      this.showError('Verified Successfully', 'Account has been verified successfully', true);
+      this.verifyErroValue = ''
+    })
+    .catch(() => {
+      this.verifyingOtp = false;
+      this.showError('Verified Successfully', 'Account has been verified successfully', true);
+      this.verifyErroValue = 'OTP is incorrect, Please try again';
+    })
+  }
+
+  resetVerifyAccount() {
+    this.showVerifyAccount = false;
+    this.verifyingOtp = false;
+    this.verifyErroValue = '';
+    this.verifyEmailSend = false;
+  }
+
 }

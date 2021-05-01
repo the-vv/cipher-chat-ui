@@ -2,20 +2,20 @@ import { User } from "./user";
 
 export interface Message {
     readonly _id?: string,
-    message: String,
+    message: string,
     datetime: Date,
-    from: String | User,
-    to: String | User,
-    seen: Boolean,
-    read: Boolean,
-    hasMedia: Boolean,
-    isComposed?: Boolean,
+    from: string | User,
+    to: string | User,
+    seen: boolean,
+    read: boolean,
+    hasMedia: boolean,
+    isComposed?: boolean,
     media?: {
-        mediaType: String,
-        pid: String,
-        url: String,
-        thumb?: String,
-        size?: String,
+        mediaType: string,
+        pid: string,
+        url: string,
+        thumb?: string,
+        size?: string,
         name?: string
     }
 }

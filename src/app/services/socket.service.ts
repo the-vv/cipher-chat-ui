@@ -1,3 +1,4 @@
+import { CompileShallowModuleMetadata } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -223,5 +224,32 @@ export class SocketService {
     })
   }
 
+  sendConfirmationMail() {
+    return new Promise< any>((resolve, reject) => {
+      this.socket.emit('sendVerifyEmail', this.User, (result: any) => {
+        if(result.success === true) {
+          console.log(result.info)
+          resolve(true); 
+        }
+        else {
+          console.log(result.error)
+          reject(result.error);
+        }
+      })
+    })
+  }
+
+  verifyOtp(otp: number) {
+    return new Promise((resolve, reject) => {
+      this.socket.emit('verifyOtp', otp, (result: any) => {
+        if(result === true) {
+          resolve(true);
+        }
+        else {
+          reject(false);
+        }
+      })
+    })
+  }
 
 }

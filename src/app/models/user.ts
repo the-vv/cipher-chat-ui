@@ -10,5 +10,6 @@ export interface User {
         newUser?: boolean,
         encryptDelay?: Number,
         color: string,
+        verified: boolean
     }
 }

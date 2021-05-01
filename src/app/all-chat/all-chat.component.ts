@@ -58,8 +58,9 @@ export class AllChatComponent implements OnInit {
         };
       });
     this.quickChatOptions = [
+      {name: 'Quick Chat', email: ''},
       {name: 'You', email: this.socket.User.email},
-      {name: 'Developer', email: 'vishnuvinod2772001@gmail.com'},
+      // {name: 'Developer', email: 'vishnuvinod2772001@gmail.com'},
     ]
     this.socket.ChatListChanges.subscribe((id: string) => {
       if(this.selectedChat?._id == id) {
@@ -69,6 +70,11 @@ export class AllChatComponent implements OnInit {
   }
 
   checkMail() {
+    if(!this.mailId.length) {
+      this.newChatUser = null
+      this.newChatError = ''
+      return
+    }
     this.disableNewChat = true;
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(String(this.mailId))) {
@@ -102,7 +108,7 @@ export class AllChatComponent implements OnInit {
 
   startNewChat() {
     this.askNew = !this.askNew;
-    if (this.newChatUser) {
+    if (this.newChatUser && this.mailId.length) {
       this.message.addNewChatTo(this.newChatUser);
     } else {
       console.log('newChat Error');

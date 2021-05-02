@@ -23,7 +23,7 @@
                         style="color: rgb(0, 217, 255)" pTooltip="Verified Account" tooltipPosition="top"
                         showDelay="500"></i>
                     <i class="bi bi-patch-exclamation" *ngIf="!userService.userDetails.settings.verified"
-                        style="color: rgb(255, 0, 0)" pTooltip="Account not verified" tooltipPosition="top"
+                        style="color: rgb(252, 106, 106)" pTooltip="Account not verified" tooltipPosition="top"
                         showDelay="500"></i>
                     {{userService.userDetails.name | decrypt: userService.userDetails.settings.encryption &&
                     userService.userDetails.settings.encryptNames :
@@ -63,7 +63,8 @@
                     [ngClass]="chat.messages[chat.messages.length-1].read ? 'bi-check2-circle': 'bi-check2'"
                     style="font-size: 1em;"></i>
                 &nbsp;
-                <i pRipple class="pi pi-trash text-warning" (click)="confirm($event); $event.stopPropagation();"></i>
+                <i pRipple class="pi pi-trash text-warning" (click)="confirm($event); $event.stopPropagation();"
+                pTooltip="Delete this chat" tooltipPosition="left" showDelay="500"></i>
             </div>
         </div>
     </div>

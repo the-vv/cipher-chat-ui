@@ -29,7 +29,7 @@ export class UserServiceService {
   vefiryOTPValue: string;
   verifyingOtp: boolean = false;
   verifyErroValue: string = '';
- 
+
   constructor(
     private socket: SocketService,
     private messageService: MessageService
@@ -40,14 +40,14 @@ export class UserServiceService {
       this.userDetails = JSON.parse(JSON.stringify(user.user));
       // console.log(this.userDetails.settings)
       this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
-      if(!this.userDetails.settings.verified && parseInt(localStorage.getItem('tourCount')) > 0) {
+      if ((!this.userDetails.settings.verified && parseInt(localStorage.getItem('tourCount')) > 0) || (!this.userDetails.settings.verified && !this.userDetails.settings.newUser)) {
         this.showVerifyAccount = true
       }
     })
   }
 
   getBgColor() {
-    if(this.userDetails.settings.encryption) {
+    if (this.userDetails.settings.encryption) {
       return '#C5E1A5'
     }
     else {
@@ -87,7 +87,7 @@ export class UserServiceService {
     this.messageService.clear()
     this.messageService.add({ severity: nonError ? 'success' : 'error', summary: title, detail: message, life: 5000 });
   }
- 
+
   cancelChanges() {
     this.editName = false;
     if (!this.submitted) {
@@ -114,7 +114,7 @@ export class UserServiceService {
     }
     else {
       this.verifyUser = true;
-      this.verifySubscription =  this.verificationEvents.subscribe(res => {
+      this.verifySubscription = this.verificationEvents.subscribe(res => {
         if (res === true) {
           this.verifyUser = false;
           this.userDetails.settings.encryption = false;
@@ -153,7 +153,7 @@ export class UserServiceService {
         this.userDetails = JSON.parse(JSON.stringify(d.user));
         this.originalUser = JSON.parse(JSON.stringify(d));
         this.editName = false;
-        this.askSettings = false;        
+        this.askSettings = false;
         this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
         // console.log('User settings updated')
       })
@@ -173,35 +173,35 @@ export class UserServiceService {
 
   sendVerifyEmail() {
     this.verifyEmailSend = true;
-    if(this.userDetails._id) {
+    if (this.userDetails._id) {
       this.socket.sendConfirmationMail()
-      .then(() => {
-        // console.log('verfy email send')
-      })
-      .catch(() => {
-        this.verifyingOtp = false;
-        this.showError('Error Sending Email', 'Error sending confirmation email, Please try again later');
-      })
+        .then(() => {
+          // console.log('verfy email send')
+        })
+        .catch(() => {
+          this.verifyingOtp = false;
+          this.showError('Error Sending Email', 'Error sending confirmation email, Please try again later');
+        })
     }
   }
 
   verifyOtp() {
     this.verifyingOtp = true;
     this.socket.verifyOtp(parseInt(this.vefiryOTPValue))
-    .then(() => {
-      this.showVerifyAccount = false;
-      this.verifyingOtp = false;
-      this.showError('Verified Successfully', 'Account has been verified successfully', true);
-      this.verifyErroValue = ''
-      this.userDetails.settings.verified = true;
-      this.saveSettings();
-      this.resetVerifyAccount();
-      // console.log('verfied otp')
-    })
-    .catch(() => {
-      this.verifyingOtp = false;
-      this.verifyErroValue = 'OTP is incorrect, Please try again';
-    })
+      .then(() => {
+        this.showVerifyAccount = false;
+        this.verifyingOtp = false;
+        this.showError('Verified Successfully', 'Account has been verified successfully', true);
+        this.verifyErroValue = ''
+        this.userDetails.settings.verified = true;
+        this.saveSettings();
+        this.resetVerifyAccount();
+        // console.log('verfied otp')
+      })
+      .catch(() => {
+        this.verifyingOtp = false;
+        this.verifyErroValue = 'OTP is incorrect, Please try again';
+      })
   }
 
   resetVerifyAccount() {

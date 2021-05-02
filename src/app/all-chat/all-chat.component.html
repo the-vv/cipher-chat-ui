@@ -17,6 +17,7 @@
                         <div class="col-2">
                             <div class="row">
                                 <button pButton pRipple type="button" icon="pi pi-plus" tourAnchor="newChatButton"
+                                pTooltip="Add new chat" tooltipPosition="left" showDelay="500"
                                     class="p-button-rounded p-button-text p-button-plain mx-auto animate__animated animate__repeat-2"
                                     (click)="askNew = !askNew" style="animation-delay: .5s;"
                                     [ngClass]="!message.chatList.length && message.isMessageReaady ? 'animate__wobble' : ''"></button>
@@ -71,7 +72,7 @@
 <p-dialog header="Who do you want to chat with" [(visible)]="askNew" [style]="{width: '50vw'}" [modal]='true'
     maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}" [dismissableMask]="true">
     <div class="row" style="height: 100px">
-        <div class="col-9 " style="padding-right: 5px;">
+        <div class="col-8 col-md-9" style="padding-right: 5px;">
             <span class="p-input-icon-left col-12">
                 <i class="pi pi-search"></i>
                 <input (input)="checkMail()" type="text" pInputText placeholder="Type an Email" [(ngModel)]="mailId" />
@@ -81,7 +82,7 @@
                 {{newChatError}}
             </div>
         </div>
-        <div class="col-3" style="padding-left: 0px;">
+        <div class="col-4 col-md-3" style="padding-left: 0px;">
             <p-dropdown [options]="quickChatOptions" [(ngModel)]="mailId" (onChange)="checkMail()"
                 optionLabel="name" optionValue="email" placeholder="Quick Chat" (onHide)="checkMail()">
             </p-dropdown>

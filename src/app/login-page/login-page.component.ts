@@ -64,18 +64,18 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.socket.currentUser
       .subscribe(user => {
         if (user) {      
-          console.log(this.socket.redirectUrl);  
-          console.log(user)  
+          // console.log(this.socket.redirectUrl);  
+          // console.log(user)  
           this.spinner.hide();        
           this.router.navigate([this.socket.redirectUrl ? this.socket.redirectUrl : '/'], {replaceUrl: true});
         }
       })
     this.socket.loginStatus.subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.spinner.hide();        
     })
     this.socket.signupStatus.subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.spinner.hide();        
     })
   }
@@ -94,7 +94,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   onSignup() {
     if (this.SignupForm.value.password != this.SignupForm.value.confirmp || this.SignupForm.invalid) {
-      console.log('INVALID FORM');
+      // console.log('INVALID FORM');
       return
     }
     this.spinner.show();
@@ -104,7 +104,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   onLogin() {
     if (this.loginForm.invalid) {
-      console.log('INVALID FORM');
+      // console.log('INVALID FORM');
       return
     }
     this.spinner.show();

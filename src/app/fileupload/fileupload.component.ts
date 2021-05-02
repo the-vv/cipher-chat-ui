@@ -32,7 +32,7 @@ export class FileuploadComponent implements OnInit {
     this.fileFormat = this.media.uploader.queue[0]._file.name.split('.')[this.media.uploader.queue[0]._file.name.split('.').length - 1];
     this.fileName = this.media.uploader.queue[0]._file.name;
     this.fileSize = this.getFileSize(this.media.uploader.queue[0]._file.size);
-    console.log(this.fileFormat, this.fileSize, this.fileName);
+    // console.log(this.fileFormat, this.fileSize, this.fileName);
     
   }
 
@@ -40,7 +40,7 @@ export class FileuploadComponent implements OnInit {
     this.setFileInfo();
     // console.log(event);
     let size = event[0].size / 1024 / 1024
-    console.log('size is: ', size, 'MB');
+    // console.log('size is: ', size, 'MB');
     if (size > 5) {
       this.showError('Size limit exceeded', 'The file must be less than 5 MB');
       this.media.uploader.clearQueue();
@@ -51,7 +51,7 @@ export class FileuploadComponent implements OnInit {
     this.setFileInfo();
     // console.log(this.media.uploader.queue[0]._file)
     let size = this.media.uploader.queue[0]._file.size / 1024 / 1024
-    console.log('size is: ', size, 'MB');
+    // console.log('size is: ', size, 'MB');
     if (size > 5) {
       this.showError('Size limit exceeded', 'The file must be less than 5 MB');
       this.media.uploader.clearQueue();
@@ -128,7 +128,7 @@ export class FileuploadComponent implements OnInit {
         this.media.uploadedFile(details);
         this.resetUpload();
       } catch (e) {
-        console.log(status, 'Error Uploading');
+        // console.log(status, 'Error Uploading');
         this.media.uploader.cancelAll();
         this.showError('Error uploading', 'Error uploading image, Please try again later')
       }

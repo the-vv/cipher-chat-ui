@@ -147,7 +147,7 @@
     [closable]="true" [style]="{width: '50vw'}" [modal]='true' maskStyleClass="blur-bg-dark"
     [breakpoints]="{'780px': '100vw'}" [dismissableMask]="true">
     <p>
-        Verify your account now. otherwise all your messages and media will be deleted after 2 days.
+        Verify your account now. Otherwise all your messages and media will be deleted after 2 days.
     </p>
     <button pButton pRipple type="button" (click)="user.sendVerifyEmail()" label="Send Confirmation Email"
         id="confirmButton" class="p-button-rounded" *ngIf="user.verifyEmailSend === false"></button>
@@ -163,7 +163,8 @@
         </div>
         <div class="col-12 mt-2" style="font-size: 0.9em;" *ngIf="!user.verifyErroValue">
             An OTP has been send to {{user.userDetails.email}}.
-            Please check your inbox
+            Please check your inbox. Also check your
+            spam folder if OTP not found in inbox
         </div>
         <div class="col-12 mt-2" style="font-size: 0.9em;" *ngIf="user.verifyErroValue">
             {{user.verifyErroValue}}

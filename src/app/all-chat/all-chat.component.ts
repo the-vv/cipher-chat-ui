@@ -110,7 +110,7 @@ export class AllChatComponent implements OnInit, OnDestroy {
     if (this.newChatUser && this.mailId.length) {
       this.message.addNewChatTo(this.newChatUser);
     } else {
-      console.log('newChat Error');
+      // console.log('newChat Error');
     }
     this.mailId = ''
     this.newChatUser = null
@@ -129,7 +129,7 @@ export class AllChatComponent implements OnInit, OnDestroy {
   }
 
   onRightClick(chat: any) {
-    console.log(chat)
+    // console.log(chat)
   }
 
   deleteChat(chat: any) {
@@ -140,7 +140,7 @@ export class AllChatComponent implements OnInit, OnDestroy {
   }
 
   rClicked(e: any) {
-    console.log(e)
+    // console.log(e)
   }
 
   onSearch() {
@@ -149,7 +149,7 @@ export class AllChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('chat destroyed')
+    // console.log('chat destroyed')
     this.message.chatList = [];
   }
 

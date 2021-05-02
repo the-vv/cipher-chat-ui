@@ -32,10 +32,10 @@ export class SocketService {
     private router: Router
   ) {
     socket.on('connect', () => {
-      console.log('Realtime Connection Established');
+      // console.log('Realtime Connection Established');
       if (this.isLoggedIn && this.isDisconnected) {
         this.socket.emit('verifyAuth', JSON.parse(this.cookieService.get('user')).token);
-        console.log('Verifying on reconnect')
+        // console.log('Verifying on reconnect')
       }
     })
     this.messages = socket.fromEvent('setMessages');
@@ -204,7 +204,7 @@ export class SocketService {
         if (result.success !== null) {
           resolve(result)
         } else {
-          console.log('Error', result.error);
+          // console.log('Error', result.error);
           reject(result.error);
         }
       })
@@ -217,7 +217,7 @@ export class SocketService {
         if (result.success !== null) {
           resolve(result.success)
         } else {
-          console.log('Error', result.error);
+          // console.log('Error', result.error);
           reject(result.error);
         }
       })
@@ -228,11 +228,11 @@ export class SocketService {
     return new Promise< any>((resolve, reject) => {
       this.socket.emit('sendVerifyEmail', this.User, (result: any) => {
         if(result.success === true) {
-          console.log(result.info)
+          // console.log(result.info)
           resolve(true); 
         }
         else {
-          console.log(result.error)
+          // console.log(result.error)
           reject(result.error);
         }
       })
@@ -243,7 +243,7 @@ export class SocketService {
     return new Promise((resolve, reject) => {
       this.socket.emit('verifyOtp', otp, (result: boolean) => {
         if(result === true) {
-          console.log('Otp Verified correctly')
+          // console.log('Otp Verified correctly')
           resolve(true);
         }
         else {

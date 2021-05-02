@@ -40,7 +40,7 @@ export class UserServiceService {
       this.userDetails = JSON.parse(JSON.stringify(user.user));
       // console.log(this.userDetails.settings)
       this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
-      if(!this.userDetails.settings.verified) {
+      if(!this.userDetails.settings.verified && parseInt(localStorage.getItem('tourCount')) > 0) {
         this.showVerifyAccount = true
       }
     })
@@ -77,7 +77,7 @@ export class UserServiceService {
     if (!flag) {
       this.verifyPasswordString = '';
       this.verifyPasswordError = '';
-      console.log('closed verify');
+      // console.log('closed verify');
       this.verifyButtonIcon = 'pi pi-check-circle';
       this.verifySubscription.unsubscribe();
     }
@@ -135,7 +135,7 @@ export class UserServiceService {
         }
         else {
           // this.verifyUser = false;
-          console.log('wrong password');
+          // console.log('wrong password');
           this.verifyPasswordError = 'Wrong Password';
           this.verifyButtonIcon = 'pi pi-check-circle';
         }
@@ -155,7 +155,7 @@ export class UserServiceService {
         this.editName = false;
         this.askSettings = false;        
         this.modeIcon = this.userDetails.settings.encryption ? 'pi-check' : 'pi-times';
-        console.log('User settings updated')
+        // console.log('User settings updated')
       })
       .catch((e: any) => {
         this.saveIcon = 'pi-check'
@@ -176,7 +176,7 @@ export class UserServiceService {
     if(this.userDetails._id) {
       this.socket.sendConfirmationMail()
       .then(() => {
-        console.log('verfy email send')
+        // console.log('verfy email send')
       })
       .catch(() => {
         this.verifyingOtp = false;
@@ -196,7 +196,7 @@ export class UserServiceService {
       this.userDetails.settings.verified = true;
       this.saveSettings();
       this.resetVerifyAccount();
-      console.log('verfied otp')
+      // console.log('verfied otp')
     })
     .catch(() => {
       this.verifyingOtp = false;

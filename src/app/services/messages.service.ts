@@ -69,7 +69,7 @@ export class MessagesService {
               })
           }
           else {
-            console.log('empty compose')
+            // console.log('empty compose')
           }
         }
         else {
@@ -125,14 +125,14 @@ export class MessagesService {
         size: mediaData.size
       }
     }
-    console.log(message)
+    // console.log(message)
     this.socket.saveMessage(message)
       .then((mess: any) => {
-        console.log(mess.res);
+        // console.log(mess.res);
         this.pushChat(mess.res)
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   }
 
@@ -155,7 +155,7 @@ export class MessagesService {
         })
         .catch(err => {
           this.socket.showError('Error Sending', 'Error sending the message, Please try again later')
-          console.log(err);
+          // console.log(err);
           reject(err)
         });
     })
@@ -177,7 +177,7 @@ export class MessagesService {
         this.pushChat(mess.res)
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
       });
   }
 
@@ -207,7 +207,8 @@ export class MessagesService {
           _id: otherEndUser._id,
           name: otherEndUser.name,
           email: otherEndUser.email,
-          color: otherEndUser.settings.color
+          color: otherEndUser.settings.color,
+          verified: otherEndUser.settings.verified
         }
         this.chatList.push(clist)
       }
@@ -240,7 +241,8 @@ export class MessagesService {
         _id: otherEndUser._id,
         name: otherEndUser.name,
         email: otherEndUser.email,
-        color: otherEndUser.settings.color
+        color: otherEndUser.settings.color,
+        verified: otherEndUser.settings.verified
       }
       this.chatList.splice(0, 0, clist);
     }
@@ -263,7 +265,7 @@ export class MessagesService {
     let pidsToDelete = c.messages
       .filter((val: any) => val.hasMedia)
       .map((val: any) => val.media.pid);
-    console.log(pidsToDelete)
+    // console.log(pidsToDelete)
     Promise.all(
       [
         this.socket.deleteMessages(idsToDelete, otherEnduser),
@@ -271,13 +273,13 @@ export class MessagesService {
       ]
     )
       .then((values: any[]) => {
-        console.log(values)
+        // console.log(values)
         this.chatList = this.chatList.filter(val => {
           return val._id != c._id;
         })
       })
       .catch((err: any) => {
-        console.log('Chat delete error\n', err)
+        // console.log('Chat delete error\n', err)
       })
   }
 
@@ -322,7 +324,7 @@ export class MessagesService {
         })
       })
       .catch(_ => {
-        console.log('error updaitng message seen')
+        // console.log('error updaitng message seen')
       })
   }
 

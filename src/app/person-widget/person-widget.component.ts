@@ -62,13 +62,13 @@ export class PersonWidgetComponent implements OnInit {
           label: 'Delete Chat',
           icon: 'pi ppi-trash',
           command: () => {
-            console.log('delete', this.chat.name);
+            // console.log('delete', this.chat.name);
           }
         }
       ]
     }
     ];
-    console.log(this.chat)
+    // console.log(this.chat)
   }
 
   chatSelected() {

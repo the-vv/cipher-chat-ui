@@ -67,12 +67,15 @@ export class TourService {
     this.socket.currentUser.subscribe((user) => {
       this.newUser = user.user.settings.newUser;
       if (user.user.settings.newUser) {
-        console.log('starting tour');
+        // console.log('starting tour');
         let tourCount = localStorage.getItem('tourCount');
-        if (!tourCount || Number(tourCount) < 1) {
+        if (!tourCount || Number(tourCount) < 1) {          
           this.tourService.start()
           this.tourService.end$.subscribe(() => {
-            console.log('tour end');
+            // console.log('tour end');
+            if(!this.user.userDetails.settings.verified) {
+              this.user.showVerifyAccount = true;
+            }
             localStorage.setItem('tourCount', '1')
           })
         }
@@ -153,7 +156,7 @@ export class TourService {
   checkSecondTour() {
     let tourCount = localStorage.getItem('tourCount');
     if (this.newUser === true && tourCount && Number(tourCount) < 2) {
-      console.log('inited second Tour')
+      // console.log('inited second Tour')
       this.tourService2.initialize(
         [
           {
@@ -168,7 +171,7 @@ export class TourService {
       this.tourService2.end$.subscribe(() => {
         this.user.userDetails.settings.newUser = false;
         this.user.saveSettings();
-        console.log('tour end');
+        // console.log('tour end');
         localStorage.setItem('tourCount', '2');
       })
     }

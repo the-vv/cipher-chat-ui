@@ -100,6 +100,7 @@ export class AppComponent implements OnInit {
                   this.cookieService.delete('user');
                   localStorage.removeItem('tourCount');
                   this.socket.logout();
+                  this.messageService.chatList = []
                   this.user.visibleSidebar = !this.user.visibleSidebar;
                   this.initSidebar();
                 }

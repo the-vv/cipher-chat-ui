@@ -8,8 +8,24 @@
     <div class="chat-user" style="padding-left: 0px;">
         <div class="row d-flex justify-content-between">
             <div class="col-10 pr-0">
-                <h5 class="p-0 m-0 text-truncate" style="padding-right: 0px;">
+                <h5 class="p-0 m-0 text-truncate" style="padding-right: 0px;" *ngIf="socket.User._id != chat._id">
+                    <i class="bi bi-patch-check" *ngIf="chat.messages[chat.messages.length-1].from.settings.verified"
+                        style="color: rgb(0, 217, 255)"></i>
+                    <i class="bi bi-patch-exclamation" *ngIf="!chat.messages[chat.messages.length-1].from.settings.verified"
+                        style="color: rgb(252, 106, 106)" pTooltip="Account not verified" tooltipPosition="top"
+                        showDelay="500"></i>
                     {{chat.name | decrypt: userService.userDetails.settings.encryption &&
+                    userService.userDetails.settings.encryptNames :
+                    userService.userDetails.settings.encryptionComplexMode}}
+                </h5>
+                <h5 class="p-0 m-0 text-truncate" style="padding-right: 0px;" *ngIf="socket.User._id == chat._id">
+                    <i class="bi bi-patch-check" *ngIf="userService.userDetails.settings.verified"
+                        style="color: rgb(0, 217, 255)" pTooltip="Verified Account" tooltipPosition="top"
+                        showDelay="500"></i>
+                    <i class="bi bi-patch-exclamation" *ngIf="!userService.userDetails.settings.verified"
+                        style="color: rgb(255, 0, 0)" pTooltip="Account not verified" tooltipPosition="top"
+                        showDelay="500"></i>
+                    {{userService.userDetails.name | decrypt: userService.userDetails.settings.encryption &&
                     userService.userDetails.settings.encryptNames :
                     userService.userDetails.settings.encryptionComplexMode}}
                     <span *ngIf="socket.User._id == chat._id">(You)</span>

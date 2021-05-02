@@ -27,6 +27,7 @@ import { BadgeModule } from 'primeng/badge';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DeferModule } from 'primeng/defer';
 import {DropdownModule} from 'primeng/dropdown';
+import {TooltipModule} from 'primeng/tooltip';
 
 
 // Other Libraries
@@ -121,7 +122,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     FileSaverModule,
     TourNgxBootstrapModule.forRoot(),
     QuillModule.forRoot(),
-    DropdownModule
+    DropdownModule,
+    TooltipModule
   ],
   providers: [
     RestApiService,

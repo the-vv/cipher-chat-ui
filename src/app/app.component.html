@@ -7,10 +7,11 @@
             <span class="cipherSwitch d-inline" *ngIf="user.userDetails?.settings && socket.User">
                 <button pButton pRipple type="button" iconPos="right" icon="pi {{user.modeIcon}}"
                     tourAnchor="cipherButton" [label]="!mobileView ? 'Cipher Mode:' : ''" class="p-button-rounded"
-                    (click)="user.updateViewMode()"
+                    (click)="user.updateViewMode()" pTooltip="Cipher Mode toogle" tooltipPosition="top" showDelay="500"
                     [style]="{'background-color': user.getBgColor(), 'color': user.getBgColor() === '#C5E1A5' ? 'black' : 'white'}"></button>
             </span>
-            <span class="menu-button" (click)="user.visibleSidebar = true">
+            <span class="menu-button" (click)="user.visibleSidebar = true" pTooltip="Account Menu"
+                tooltipPosition="left" showDelay="500">
                 <p-avatar *ngIf="!socket.User" icon="pi pi-user" styleClass="" [size]="'large'" shape="circle">
                 </p-avatar>
                 <p-avatar *ngIf="socket.User" [label]="socket.User.name.split('')[0]" [style]="{'background-color':socket.User.settings.color, 'color': '#ffffff',
@@ -35,7 +36,15 @@
                 [style]="{'background-color':socket.User.settings.color, 'color': '#ffffff', 'text-shadow': 'black 0px 0px 10px'}">
             </p-avatar>
             <div *ngIf="socket.User" class="text-truncate d-block text-center">
-                <h4 class="p-0 m-0 pl-2 text-center">{{socket.User.name}}</h4>
+                <h4 class="p-0 m-0 pl-2 text-center">
+                    <i class="bi bi-patch-check" *ngIf="user.userDetails?.settings.verified"
+                        style="color: rgb(0, 217, 255)" pTooltip="Verified Account" tooltipPosition="top"
+                        showDelay="500"></i>
+                    <i class="bi bi-patch-exclamation" *ngIf="!user.userDetails?.settings.verified"
+                        style="color: rgb(255, 0, 0)" pTooltip="Account not verified" tooltipPosition="top"
+                        showDelay="500"></i>
+                    {{socket.User.name}}
+                </h4>
                 <p class="p-0 m-0 pl-2 text-center">{{socket.User.email}}</p>
             </div>
             <div *ngIf="!socket.User" class="pb-2 text-center">
@@ -115,8 +124,8 @@
     [dismissableMask]="false">
     <app-fileupload></app-fileupload>
     <ng-template pTemplate="footer">
-        <p-button label="Cancel" styleClass="p-button-text text-light"
-            (click)="media.cancelUpload.next(true); media.askUpload = false;">
+        <p-button label="Cancel" styleClass="p-button-text text-light" pTooltip="Cancel uploads and close"
+            tooltipPosition="top" showDelay="500" (click)="media.cancelUpload.next(true); media.askUpload = false;">
         </p-button>
     </ng-template>
 </p-dialog>
@@ -136,7 +145,7 @@
 
 <p-dialog header="Verify Account" [(visible)]="user.showVerifyAccount" (onHide)="user.resetVerifyAccount()"
     [closable]="true" [style]="{width: '50vw'}" [modal]='true' maskStyleClass="blur-bg-dark"
-    [breakpoints]="{'780px': '100vw'}" [dismissableMask]="false">
+    [breakpoints]="{'780px': '100vw'}" [dismissableMask]="true">
     <p>
         Verify your account now. otherwise all your messages and media will be deleted after 2 days.
     </p>

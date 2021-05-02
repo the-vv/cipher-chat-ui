@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessagesService } from '../services/messages.service';
 import { SocketService } from '../services/socket.service';
@@ -20,7 +20,7 @@ import { SocketService } from '../services/socket.service';
     ])
   ]
 })
-export class AllChatComponent implements OnInit {
+export class AllChatComponent implements OnInit, OnDestroy {
 
 
   @HostListener('window:resize', ['$event'])
@@ -146,6 +146,11 @@ export class AllChatComponent implements OnInit {
   onSearch() {
     this.searchtext = this.searchtext.trim();
     this.searchtext.length && this.message.searchList(this.searchtext)
+  }
+
+  ngOnDestroy() {
+    console.log('chat destroyed')
+    this.message.chatList = [];
   }
 
 }

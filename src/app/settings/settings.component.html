@@ -8,11 +8,15 @@
         </div>
         <p class="p-0 m-0">
             <span class="h3" *ngIf="!userService.editName">
+                <i class="bi bi-patch-check" *ngIf="userService.userDetails.settings.verified"
+                    style="color: rgb(0, 217, 255)"  pTooltip="Verified Account" tooltipPosition="top" showDelay="500"></i>
+                <i class="bi bi-patch-exclamation" *ngIf="!userService.userDetails.settings.verified"
+                style="color: rgb(255, 0, 0)"  pTooltip="Account not verified" tooltipPosition="top" showDelay="500"></i>
                 {{userService.userDetails.name}}
                 <i pRipple class="pi pi-pencil text-warning" (click)="userService.editName = true"
-                    style="cursor: pointer;"></i>
+                    style="cursor: pointer;"  pTooltip="Edit your name" tooltipPosition="top" showDelay="500"></i>
             </span>
-            <span *ngIf="userService.editName">
+            <span *ngIf="userService.editName"> 
                 <input type="text" class="" pInputText placeholder="Edit name"
                     [(ngModel)]="userService.userDetails.name">
             </span>

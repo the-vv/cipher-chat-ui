@@ -55,12 +55,6 @@ export class PersonWidgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.randomColor = rand({
-    //   luminosity: 'dark',
-    //   format: 'rgba',
-    //   alpha: 1
-    // })
-
     this.items = [{
       label: 'Options',
       items: [
@@ -74,6 +68,7 @@ export class PersonWidgetComponent implements OnInit {
       ]
     }
     ];
+    console.log(this.chat)
   }
 
   chatSelected() {

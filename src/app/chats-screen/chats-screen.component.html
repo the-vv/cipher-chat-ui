@@ -176,17 +176,20 @@
     <div class="chat-input col-12 col-lg-8 col-xl-9 col-md-7 blur-bg d-flex justify-content-between align-items-center"
         style="padding-left: 2px;padding-right: 10px;">
         <div class="file-picker">
-            <button pButton pRipple type="button" icon="bi {{!media.askUpload ? 'bi-paperclip' : 'bi-x'}}"
+            <button pButton pRipple type="button" icon="bi {{!media.askUpload ? 'bi-paperclip' : 'bi-x'}}" pTooltip="Attatch files"
+            tooltipPosition="top" showDelay="500"
                 style="font-size: 1.4em;" class="p-button-rounded p-button-text p-button-plain ml-2 text-white"
                 (click)="addFile()"></button>
         </div>
         <div class="fab">
-            <button tourAnchor="composeButton" pButton pRipple type="button" icon="bi bi-card-text"
+            <button tourAnchor="composeButton" pButton pRipple type="button" icon="bi bi-card-text" pTooltip="Compose a message"
+            tooltipPosition="top" showDelay="500"
                 style="font-size: 1.4em;" class="p-button-rounded p-button-text p-button-plain ml-2 text-white"
                 (click)="compose()"></button>
         </div>
         <div class="emoji">
-            <button pButton pRipple type="button" icon="bi {{!toggleEmoji ? 'bi-emoji-smile' : 'bi-x'}}"
+            <button pButton pRipple type="button" icon="bi {{!toggleEmoji ? 'bi-emoji-smile' : 'bi-x'}}" pTooltip="Add emojies"
+            tooltipPosition="top" showDelay="500"
                 style="font-size: 1.4em;" class="p-button-rounded p-button-text p-button-plain ml-2 text-white"
                 (click)="toggleEmoji = !toggleEmoji; !toggleEmoji && this.chatInputElament.nativeElement.focus()"></button>
             <div class="emojiView" *ngIf="toggleEmoji" [style]="{ position: 'absolute', bottom: '50px', left: '5px' }">

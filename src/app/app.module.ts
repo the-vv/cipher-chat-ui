@@ -65,9 +65,10 @@ import { TourNgxBootstrapModule } from 'ngx-ui-tour-ngx-bootstrap';
 import { TourService } from './services/tour.service';
 import { QuillModule } from 'ngx-quill';
 import { MessagesService } from './services/messages.service';
+import { environment } from 'src/environments/environment';
 
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const config: SocketIoConfig = { url: environment.production ? '' : 'http://localhost:3000', options: {} };
 
 
 @NgModule({

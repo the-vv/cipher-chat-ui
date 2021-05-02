@@ -142,6 +142,17 @@
     </ng-template>
 </p-dialog>
 
+<p-dialog header="Notice" [(visible)]="socket.showNotice"
+    (onHide)="socket.showNotice = false;" [closable]="true" [style]="{width: '80vw'}" [modal]='true'
+    maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '100vw'}" [dismissableMask]="true">
+    <div class="notice" [innerHTML]="socket.NoticeContent"></div>
+    <ng-template pTemplate="footer">
+        <p-button label="Close" styleClass="p-button-text text-light"
+            (click)="socket.showNotice = false;">
+        </p-button>
+    </ng-template>
+</p-dialog>
+
 
 <p-dialog header="Verify Account" [(visible)]="user.showVerifyAccount" (onHide)="user.resetVerifyAccount()"
     [closable]="true" [style]="{width: '50vw'}" [modal]='true' maskStyleClass="blur-bg-dark"

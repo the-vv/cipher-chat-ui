@@ -71,7 +71,7 @@
 <p-dialog header="Who do you want to chat with" [(visible)]="askNew" [style]="{width: '50vw'}" [modal]='true'
     maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}" [dismissableMask]="true">
     <div class="row" style="height: 100px">
-        <div class="col-12 col-md-9 " style="padding-right: 5px;">
+        <div class="col-9 " style="padding-right: 5px;">
             <span class="p-input-icon-left col-12">
                 <i class="pi pi-search"></i>
                 <input (input)="checkMail()" type="text" pInputText placeholder="Type an Email" [(ngModel)]="mailId" />
@@ -81,7 +81,7 @@
                 {{newChatError}}
             </div>
         </div>
-        <div class="col-12 col-md-3" style="padding-left: 0px;">
+        <div class="col-3" style="padding-left: 0px;">
             <p-dropdown [options]="quickChatOptions" [(ngModel)]="mailId" (onChange)="checkMail()"
                 optionLabel="name" optionValue="email" placeholder="Quick Chat" (onHide)="checkMail()">
             </p-dropdown>

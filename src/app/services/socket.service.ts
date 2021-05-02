@@ -22,7 +22,8 @@ export class SocketService {
   public isDisconnected: boolean = false;
   public User: User;
   public isLoggedIn: boolean = false;
-
+  public NoticeContent = '';
+  public showNotice: boolean = false;
   public redirectUrl: string;
 
   constructor(
@@ -32,7 +33,7 @@ export class SocketService {
     private router: Router
   ) {
     socket.on('connect', () => {
-      // console.log('Realtime Connection Established');
+      console.log('Realtime Connection Established');
       if (this.isLoggedIn && this.isDisconnected) {
         this.socket.emit('verifyAuth', JSON.parse(this.cookieService.get('user')).token);
         // console.log('Verifying on reconnect')
@@ -55,7 +56,13 @@ export class SocketService {
     })
     socket.on('disconnect', () => {
       this.isDisconnected = true;
-      console.log('Disconnected')
+      console.log('Disconnected');
+      this.showNotice = false;
+      this.NoticeContent = '';
+    })
+    socket.on('showNotice', (notice: string) => {
+      this.showNotice = true;
+      this.NoticeContent = notice;
     })
     this.loginStatus.subscribe(data => {
       this.showError('Error', data.status);

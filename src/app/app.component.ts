@@ -71,16 +71,16 @@ export class AppComponent implements OnInit {
       this.modules = {
         ImageResize: {
           handleStyles: {
-             displaySize: true,
-             backgroundColor: "black",
-             border: "none",
-             color: "white",
+            displaySize: true,
+            backgroundColor: "black",
+            border: "none",
+            color: "white",
           },
           modules: ["Resize", "DisplaySize", "Toolbar"],
-       }
+        }
       }
     })
- 
+
     this.primengConfig.ripple = true;
 
     this.initSidebar();
@@ -104,17 +104,25 @@ export class AppComponent implements OnInit {
                   this.user.visibleSidebar = !this.user.visibleSidebar;
                   this.initSidebar();
                 }
-              }
-            ]
-          },
-          {
-            label: 'More',
-            items: [
+              },
               {
                 label: 'Settings',
                 icon: 'bi bi-gear',
                 command: () => {
                   this.user.askSettings = true;
+                  this.user.visibleSidebar = !this.user.visibleSidebar;
+                }
+              }
+            ]
+          },
+          {
+            label: 'About',
+            items: [
+              {
+                label: 'About Cipher Chat',
+                icon: 'bi bi-info-circle',
+                command: () => {
+                  this.user.showAbout = true;
                   this.user.visibleSidebar = !this.user.visibleSidebar;
                 }
               },
@@ -149,12 +157,19 @@ export class AppComponent implements OnInit {
           }
         ]
       },
-      // {
-      //   label: 'More',
-      //   items: [
-      //     { label: 'Settings', icon: 'bi bi-gear' },
-      //   ]
-      // }
+      {
+        label: 'About',
+        items: [
+          {
+            label: 'About Cipher Chat',
+            icon: 'bi bi-info-circle',
+            command: () => {
+              this.user.showAbout = true;
+              this.user.visibleSidebar = !this.user.visibleSidebar;
+            }
+          },
+        ]
+      }
     ];
   }
 

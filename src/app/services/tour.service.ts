@@ -24,7 +24,7 @@ export class TourService {
   steps: INgxbStepOption[] = [
     {
       anchorId: this.anchoIds[0],
-      content: 'Control the text visibility encryption. so that no one other than you can read your messages froms screen',
+      content: 'Control the text visibility encryption. so that no one other than you can read your messages from the screen by looking at it',
       title: 'Cipher Mode Switch',
       enableBackdrop: true
     },

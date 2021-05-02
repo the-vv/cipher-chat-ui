@@ -29,6 +29,7 @@ export class UserServiceService {
   vefiryOTPValue: string;
   verifyingOtp: boolean = false;
   verifyErroValue: string = '';
+  showAbout = false;
 
   constructor(
     private socket: SocketService,

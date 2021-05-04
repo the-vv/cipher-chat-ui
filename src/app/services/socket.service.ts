@@ -25,7 +25,8 @@ export class SocketService {
   public NoticeContent = '';
   public showNotice: boolean = false;
   public redirectUrl: string;
-  public loggedOut: Subject<void> = new Subject;
+  public loggedOut: Subject<void> = new Subject();
+  public onReconnect: Subject<void> = new Subject()
 
   constructor(
     public socket: Socket,
@@ -37,7 +38,8 @@ export class SocketService {
       console.log('Realtime Connection Established');
       if (this.isLoggedIn && this.isDisconnected) {
         this.socket.emit('verifyAuth', JSON.parse(this.cookieService.get('user')).token);
-        // console.log('Verifying on reconnect')
+        console.log('Verifying on reconnect')
+        this.onReconnect.next()
       }
     })
     this.messages = socket.fromEvent('setMessages');

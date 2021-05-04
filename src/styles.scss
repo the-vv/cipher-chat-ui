@@ -264,3 +264,34 @@ html {
 .p-dropdown .p-dropdown-trigger {
   width: 20px !important
 }
+
+.emoji-mart-dark .emoji-mart-category-label span {
+  background     : rgba(255, 255, 255, 0.089) !important;
+  border         : 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 15px !important;
+  color: white!important;
+}
+
+
+.emoji-mart-dark {
+  background     : rgba(0, 0, 0, 0.61) !important;
+  border         : 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 30px !important;
+  overflow-x: hidden !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.emoji-mart-scroll {
+  overflow-x: hidden !important;
+}
+
+.emoji-mart-dark .emoji-mart-search input {
+  background     : rgba(255, 255, 255, 0.1) !important;
+  border         : 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 15px !important;
+  margin-bottom: 3px !important;
+}
+
+.emoji-mart-anchor {
+  color: white!important;
+}

@@ -47,6 +47,10 @@ export class MessagesService {
       this.isMessageReaady = false;
       this.chatList = [];
     })
+    this.socket.onReconnect.subscribe(() => {
+      this.getMessages();
+      console.log('getting messages')
+    })
   }
 
   getComposedMessage(to: string): Promise<void> {

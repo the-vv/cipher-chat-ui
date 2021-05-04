@@ -191,12 +191,12 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     }
     this.sendingMessage = true;
     this.message.sendMessage(this.chat._id, this.messageString)
-    .then(() => {
-      this.sendingMessage = false;
-    })
-    .catch(() => {
-      this.sendingMessage = false;
-    });;
+      .then(() => {
+        this.sendingMessage = false;
+      })
+      .catch(() => {
+        this.sendingMessage = false;
+      });;
     this.messageString = '';
     this.needScroll2 = true;
     // this.message.addNewChatTo(); 
@@ -210,13 +210,16 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
     this.messageString = '';
     this.canScrollSmooth = false;
     this.needScroll = true;
-    if (changes.chat.currentValue != undefined) { 
+    if (changes.chat.currentValue != undefined) {
       this.currentUserId = this.socket.User._id;
       this.randomColor = changes.chat.currentValue.color;
       this.messages = changes.chat.currentValue.messages;
       this.needScroll2 = true;
-      // console.log(this.messages)
-      if(this.userService.userDetails.settings.newUser) {
+      this.media.askUpload = false;
+      this.message.showComposedViewer = false;
+      this.message.composedViewerContent = '';
+      this.toggleEmoji = false;
+      if (this.userService.userDetails.settings.newUser) {
         setTimeout(() => {
           this.tour.checkSecondTour()
         }, 1000);
@@ -230,6 +233,13 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
       }
       // console.log(changes.chat.currentValue);
     }
+    else {      
+    console.log('destroyed');
+    this.media.askUpload = false;
+    this.message.showComposedViewer = false;
+    this.message.composedViewerContent = '';
+    this.toggleEmoji = false;
+    }
   }
 
   isToday(d: any): boolean {
@@ -241,10 +251,15 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
   }
 
   toggleEmoji: boolean = false;
+  cursorPos = 0
   selectedEMoji(event: any) {
-    this.messageString += event.emoji.native;
-    this.toggleEmoji = false;
-    this.chatInputElament && this.chatInputElament.nativeElement.focus();
+    this.messageString =
+    this.messageString.slice(0, this.cursorPos) +
+    event.emoji.native +
+    this.messageString.slice(this.cursorPos)
+    this.cursorPos += 2
+    // this.toggleEmoji = true;
+    // this.chatInputElament && this.chatInputElament.nativeElement.focus();
   }
 
   addFile() {
@@ -289,12 +304,12 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
 
   compose() {
     this.message.getComposedMessage(this.chat._id)
-    .then(() => {
-      // console.log('composed send successfully');
-    })
-    .catch(() => {
-      // console.log('error sending compose')
-    })
+      .then(() => {
+        // console.log('composed send successfully');
+      })
+      .catch(() => {
+        // console.log('error sending compose')
+      })
   }
 
 }

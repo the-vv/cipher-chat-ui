@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Message } from '../models/message';
+import { User } from '../models/user';
 import { RestApiService } from './restApis.service';
 import { SocketService } from './socket.service';
 
@@ -49,7 +50,7 @@ export class MessagesService {
     })
     this.socket.onReconnect.subscribe(() => {
       this.getMessages();
-      console.log('getting messages')
+      // console.log('getting messages')
     })
   }
 
@@ -207,7 +208,13 @@ export class MessagesService {
         }
       }
       if (chatAlreadyExsts >= 0) {
-        this.chatList[i].messages.push(mess);
+        let found = false;
+        for (let j = 0; j < this.chatList[i].messages.length; j++) {
+          if(this.chatList[i].messages[j]._id == mess._id) { 
+            found = true;
+          }          
+        }
+        found || this.chatList[i].messages.push(mess);
       }
       else {
         clist = {
@@ -221,6 +228,7 @@ export class MessagesService {
         this.chatList.push(clist)
       }
     })
+    this.checkForDeletedMessages();
     this.sortChatList();
   }
 
@@ -365,4 +373,22 @@ export class MessagesService {
     })
   }
 
+  checkForDeletedMessages() {
+    for (let i = 0; i < this.chatList.length; i++) {
+      let tId = this.chatList[i]._id
+      let found = false;
+      this.newMessages.forEach((el: Message) => {
+        if((el.from as User)._id == tId || (el.to as User)._id == tId) {
+          found = true;
+        }
+      });
+      if(!found) {
+        console.log("Not Found", this.chatList[i]);
+        this.chatList = this.chatList.filter(val => {
+          return val._id != this.chatList[i]._id;
+        })
+      }
+    }
+  }
+ 
 }

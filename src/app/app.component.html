@@ -95,8 +95,8 @@
 
 
 <p-dialog header="About Cipher Chat" (onHide)="user.showAbout = false" [(visible)]="user.showAbout"
-    [style]="{width: '50vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}">
-    <div class="col-12" style="font-size: 1.2em; padding-left: 10px;">
+    [style]="{width: '30vw'}" [modal]='true' maskStyleClass="blur-bg-dark" [breakpoints]="{'780px': '95vw'}">
+    <div class="col-12" style="font-size: 0.9em; padding-left: 10px;">
         <div class="d-block text-truncate">
             Cipher Chat Web App
         </div>
@@ -117,7 +117,7 @@
         </div>
     </div>
     <ng-template pTemplate="footer">
-        <p-button [icon]="user.verifyButtonIcon" label="Close" styleClass="p-button-text text-light"
+        <p-button label="Close" styleClass="p-button-text text-light"
             (click)="user.showAbout = false">
         </p-button>
     </ng-template>

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Socket } from 'ngx-socket-io';
 import { MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Message } from '../models/message';
 import { User } from '../models/user';
 
@@ -25,6 +25,7 @@ export class SocketService {
   public NoticeContent = '';
   public showNotice: boolean = false;
   public redirectUrl: string;
+  public loggedOut: Subject<void> = new Subject;
 
   constructor(
     public socket: Socket,
@@ -102,6 +103,7 @@ export class SocketService {
     this.User = null
     this.isLoggedIn = false;
     this.socket.emit('logout', {});
+    this.loggedOut.next()
   }
 
   verifyAuth(token: string) {

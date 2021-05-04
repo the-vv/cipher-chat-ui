@@ -43,6 +43,10 @@ export class MessagesService {
         return el._id != id
       })
     }) 
+    this.socket.loggedOut.subscribe(() => {
+      this.isMessageReaady = false;
+      this.chatList = [];
+    })
   }
 
   getComposedMessage(to: string): Promise<void> {

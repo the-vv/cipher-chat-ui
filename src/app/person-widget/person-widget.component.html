@@ -58,7 +58,7 @@
                     </span>
                 </p>
             </div>
-            <div class="col-2 p-0 text-center">
+            <div class="col-2 p-0 text-end">
                 <i class="bi " *ngIf="userService.userDetails.email == chat.messages[chat.messages.length-1].from.email"
                     [ngClass]="chat.messages[chat.messages.length-1].read ? 'bi-check2-circle': 'bi-check2'"
                     style="font-size: 1em;"></i>

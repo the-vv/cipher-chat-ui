@@ -29,7 +29,7 @@
                 </h5>
                 <h5 class="p-0 m-0 text-truncate px-2" style="padding-right: 0px;" *ngIf="socket.User._id == chat._id">
                     <i class="bi bi-patch-check" *ngIf="userService.userDetails.settings.verified"
-                        style="color: rgb(252, 106, 106)" pTooltip="Verified Account" tooltipPosition="top"
+                        style="color: rgb(0, 217, 255)" pTooltip="Verified Account" tooltipPosition="top"
                         showDelay="500"></i>
                     <i class="bi bi-patch-exclamation" *ngIf="!userService.userDetails.settings.verified"
                         style="color: rgb(240, 125, 125)" pTooltip="Account not verified" tooltipPosition="top"
@@ -193,7 +193,7 @@
                 style="font-size: 1.4em;" class="p-button-rounded p-button-text p-button-plain ml-2 text-white"
                 (click)="toggleEmoji = !toggleEmoji; !toggleEmoji && this.chatInputElament.nativeElement.focus()"></button>
             <div class="emojiView" *ngIf="toggleEmoji" [style]="{ position: 'absolute', bottom: '50px', left: '5px' }">
-                <emoji-mart [isNative]="false" (emojiClick)="selectedEMoji($event)" [showPreview]="false"
+                <emoji-mart [isNative]="true" (emojiClick)="selectedEMoji($event)" [showPreview]="false"
                     [emojiTooltip]="false" set="facebook" (blur)="toggleEmoji = !toggleEmoji"></emoji-mart>
             </div>
         </div>

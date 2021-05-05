@@ -59,8 +59,10 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         else {
           this.mode = true;
         };
-      }
-      );
+      });
+    if(this.socket.isLoggedIn) {
+      this.router.navigate(['/'], {replaceUrl: true});
+    }
     this.socket.currentUser
       .subscribe(user => {
         if (user) {      

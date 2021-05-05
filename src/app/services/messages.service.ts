@@ -10,7 +10,7 @@ import { SocketService } from './socket.service';
 })
 export class MessagesService {
 
-  newMessages: any;
+  newMessages: Message[];
   isMessageReaady: boolean = false;
   chatList: any[] = [];
   searchedList: any[] = [];
@@ -104,7 +104,7 @@ export class MessagesService {
 
   getMessages() {
     this.socket.getMessages()
-      .then(mess => {
+      .then((mess: Message[]) => {
         this.newMessages = mess;
         this.isMessageReaady = true;
         this.addChatLists();
@@ -191,10 +191,10 @@ export class MessagesService {
   }
 
   addChatLists() {
-    this.newMessages.forEach((mess: any) => {
+    this.newMessages.forEach((mess: Message) => {
       let otherEndUser: any;
       let clist: any;
-      if (mess.from._id == this.socket.User._id) {
+      if ((mess.from as User)._id == this.socket.User._id) {
         otherEndUser = mess.to;
       } else {
         otherEndUser = mess.from;
@@ -232,10 +232,10 @@ export class MessagesService {
     this.sortChatList();
   }
 
-  pushChat(mess: any) {
+  pushChat(mess: Message) {
     let otherEndUser: any;
     let clist: any;
-    if (mess.from._id == this.socket.User._id) {
+    if ((mess.from as User)._id == this.socket.User._id) {
       otherEndUser = mess.to;
     } else {
       otherEndUser = mess.from;

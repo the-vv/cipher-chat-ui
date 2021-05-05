@@ -12,7 +12,7 @@ export class MediaService {
   cancelUpload: Subject<boolean> = new Subject();
   askUpload: boolean = false;
 
-  private url = environment.production ? '/upload' : 'http://localhost:3000/upload';
+  private url = environment.production ? '/api/upload' : 'http://localhost:3000/api/upload';
 
   public uploader: FileUploader = new FileUploader({
     url: this.url,

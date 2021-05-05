@@ -151,6 +151,7 @@ export class AllChatComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // console.log('chat destroyed')
     this.message.chatList = [];
+    this.message.isMessageReaady = false;
   }
 
 }

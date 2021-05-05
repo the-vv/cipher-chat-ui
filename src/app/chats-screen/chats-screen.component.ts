@@ -234,7 +234,7 @@ export class ChatsScreenComponent implements OnInit, OnChanges, AfterViewChecked
       // console.log(changes.chat.currentValue);
     }
     else {      
-    console.log('destroyed');
+    // console.log('destroyed');
     this.media.askUpload = false;
     this.message.showComposedViewer = false;
     this.message.composedViewerContent = '';
